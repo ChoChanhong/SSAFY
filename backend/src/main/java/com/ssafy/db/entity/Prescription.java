@@ -35,11 +35,11 @@ public class Prescription {
 
     @ManyToOne
     @JoinColumn(name="hospital_seq")
-    private User hospitalSeq;
+    private Hospital hospitalSeq;
 
     @ManyToOne
     @JoinColumn(name="pharm_seq")
-    private User pharmSeq;
+    private Pharm pharmSeq;
 
     @CreationTimestamp
     @Column(name = "REG_DTM", nullable = false)
