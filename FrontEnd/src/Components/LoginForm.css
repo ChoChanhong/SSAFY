@@ -1,0 +1,89 @@
+#loginbox {
+    border: solid 1px black;
+    width: 1000px;
+    height: 600px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    display: grid;
+    margin-left: auto;
+    margin-right: auto;
+    grid-template-columns: 1fr 1fr
+}
+
+.login{
+    width : 80%;
+    margin-top : 10px;
+    margin-bottom: 10px;
+    margin-left : auto; 
+    margin-right : auto; 
+    padding-top : 10px;
+    padding-bottom: 10px;
+    padding-left : 10px; 
+    padding-right : 10px; 
+    display: flex;
+    flex-direction: column;
+    
+}
+.info{
+    width : 100%;
+    margin-top : 10px;
+    margin-bottom: 10px;
+    margin-left : auto; 
+    margin-right : auto; 
+    border-left : solid 1px black;
+    display: flex;
+    flex-direction: column;
+}
+
+input{
+    width : 100%;
+    height : 30px;
+    font-size : 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+label{
+    font-size : 20px;
+}
+
+#loginbutton{
+    background-color : #5FD068;
+    width: 60%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left : auto;
+    margin-right : auto;
+}
+
+.title{
+    color : #5FD068;
+}
+
+.link{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left : auto;
+    margin-right : auto;
+}
+
+.logo{
+    border: solid 1px black;
+    width : 200px;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.buttonbox{
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.linkbutton{
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
