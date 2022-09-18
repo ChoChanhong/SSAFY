@@ -40,7 +40,7 @@ public class Hospital {
     @Column(name = "email", nullable = false)
     private String hospitalEmail;
 
-    @Column(name = "license", unique = true, nullable = false)
+    @Column(name = "license", nullable = false)
     private String hospitalLicense;
 
     @Column(name = "name", nullable = false)

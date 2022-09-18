@@ -50,6 +50,9 @@ public class User {
     @Column(name = "email", nullable = false)
     private String userEmail;
 
+    @Column(name = "wallet_addr", nullable = true)
+    private String userWalletAddress;
+
     @CreationTimestamp
     @Column(name = "REG_DTM", nullable = false)
     private LocalDateTime REG_DTM;
