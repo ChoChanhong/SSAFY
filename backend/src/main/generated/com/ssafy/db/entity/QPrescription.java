@@ -22,11 +22,11 @@ public class QPrescription extends EntityPathBase<Prescription> {
 
     public static final QPrescription prescription = new QPrescription("prescription");
 
-    public final QUser hospitalSeq;
+    public final QHospital hospitalSeq;
 
     public final DateTimePath<java.time.LocalDateTime> MOD_DTM = createDateTime("MOD_DTM", java.time.LocalDateTime.class);
 
-    public final QUser pharmSeq;
+    public final QPharm pharmSeq;
 
     public final NumberPath<Long> prescriptionSeq = createNumber("prescriptionSeq", Long.class);
 
@@ -52,8 +52,8 @@ public class QPrescription extends EntityPathBase<Prescription> {
 
     public QPrescription(Class<? extends Prescription> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.hospitalSeq = inits.isInitialized("hospitalSeq") ? new QUser(forProperty("hospitalSeq")) : null;
-        this.pharmSeq = inits.isInitialized("pharmSeq") ? new QUser(forProperty("pharmSeq")) : null;
+        this.hospitalSeq = inits.isInitialized("hospitalSeq") ? new QHospital(forProperty("hospitalSeq")) : null;
+        this.pharmSeq = inits.isInitialized("pharmSeq") ? new QPharm(forProperty("pharmSeq")) : null;
         this.userSeq = inits.isInitialized("userSeq") ? new QUser(forProperty("userSeq")) : null;
     }
 
