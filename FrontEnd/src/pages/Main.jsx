@@ -2,14 +2,15 @@ import React from "react"
 import { useMediaQuery } from "react-responsive"
 import { Link } from "react-router-dom"
 import BackGround from "../Components/BackGround"
+import MainCarousel from "../Components/MainCarousel"
 import "./Main.css"
 
 export default function Main(){
 
     const isPc = useMediaQuery ({
         query: "(min-width:768px)"
-      });
-      
+    });
+    
     return(
         <div id="webapp-containor">
             <div>
@@ -17,9 +18,9 @@ export default function Main(){
             </div>
             <div id="main">
                 <div>
-                    <img src="img/001.png" alt="로고"/>
+                    <img style={{height: 150}} src="img/001.png" alt="로고"/>
                 </div>
-                <div>슬라이드 화면</div>
+                <MainCarousel/>
                 <Link to="/login">시작하기</Link>
                 <Link to="/signup">회원가입</Link>
                 <div>
