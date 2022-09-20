@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import { Carousel } from "react-bootstrap";
 
 export default function MainCarousel() {
@@ -42,5 +42,5 @@ export default function MainCarousel() {
         </Carousel.Caption>
       </Carousel.Item> */}
     </Carousel>
-  )
+  );
 }
