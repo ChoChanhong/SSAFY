@@ -16,7 +16,9 @@ export default function Main(){
                 { isPc ? <BackGround/> : null }
             </div>
             <div id="main">
-                <div>로고</div>
+                <div>
+                    <img src="img/001.png" alt="로고"/>
+                </div>
                 <div>슬라이드 화면</div>
                 <Link to="/login">시작하기</Link>
                 <Link to="/signup">회원가입</Link>
