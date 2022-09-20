@@ -5,7 +5,7 @@ import "./Login.css"
 
 export function Login(){
     return(
-        <div>
+        <div id="login">
             <DocNavbar id = "Navbar"/>
             <LoginForm id = "LoginForm"/>
         </div>
