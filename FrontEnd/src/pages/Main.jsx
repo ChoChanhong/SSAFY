@@ -15,13 +15,14 @@ export default function Main() {
     <div id="webapp-containor">
       <div>{isPc ? <BackGround /> : null}</div>
       <div id="main">
-        <div>
-          <img style={{ height: 150 }} src="img/001.png" alt="로고" />
+        <div class="mb-5">
+          <img style={{ height: 100 }} src="img/001.png" alt="로고" />
         </div>
         <MainCarousel />
         <div class="mt-5">
           <Link to="/login">
             <Button
+              id="button"
               variant="success"
               size="lg"
               disabled={false}
