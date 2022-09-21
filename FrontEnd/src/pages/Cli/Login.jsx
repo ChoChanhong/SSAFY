@@ -2,7 +2,7 @@ import React from "react";
 import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
 import BackGround from "../../Components/BackGround";
-import { Button } from "react-bootstrap";
+import "./Button.css";
 
 export default function Login() {
   const isPc = useMediaQuery({
@@ -13,31 +13,40 @@ export default function Login() {
     <div id="webapp-containor">
       <div>{isPc ? <BackGround /> : null}</div>
       <div id="login">
-        <div>
+        <div style={{ marginTop: 100 }}>
           <Link to="/">
-            <img style={{ height: 200 }} src="img/001.png" alt="로고" />
+            <img style={{ height: 180 }} src="img/003.png" alt="로고" />
           </Link>
         </div>
-        <div>일반사용자 로그인</div>
+        <p class="fw-bold">일반사용자 로그인</p>
         <input placeholder="아이디를 입력해주세요." />
         <input placeholder="비밀번호를 입력해주세요." />
-        <Button id="button" variant="success" size="lg" disabled={false}>
-          로그인
-        </Button>
+        <div class="d-flex justify-content-center">
+          <button
+            id="greenbutton"
+            style={{ marginTop: 50, width: 300, height: 50 }}
+          >
+            로그인
+          </button>
+        </div>
+        <div class="d-flex justify-content-center">
+          <Link to="/signup">
+            <button
+              id="bluebutton"
+              style={{ marginTop: 10, width: 300, height: 50 }}
+            >
+              회원가입
+            </button>
+          </Link>
+        </div>
         <br />
-        <Link to="/signup">
-          <Button id="button" variant="primary" size="lg" disabled={false}>
-            회원가입
-          </Button>
-        </Link>
-        <br />
-        <div>
-          <span>아이디를 잊었다면?</span>
+        <div class="text-center mt-3">
+          <span style={{ marginRight: 30 }}>아이디를 잊었다면?</span>
           <Link to="">아이디 찾기</Link>
         </div>
         <div class="mt-5 text-center">
           <Link to="/doc/login">의사</Link>
-          <span>/</span>
+          <span>　/　</span>
           <Link to="/ph/login">약사</Link>
         </div>
       </div>
