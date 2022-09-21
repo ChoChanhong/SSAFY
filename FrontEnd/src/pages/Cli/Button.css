@@ -1,0 +1,17 @@
+.bluebutton {
+  text-decoration: none;
+  background-color: #5681EF;
+  height: 50;
+  width: 200;
+  border-radius: 10;
+  border-color: transparent;
+}
+
+.greenbutton {
+  text-decoration: none;
+  background-color: #5FD068;
+  height: 50;
+  width: 200;
+  border-radius: 10;
+  border-color: transparent;
+}
