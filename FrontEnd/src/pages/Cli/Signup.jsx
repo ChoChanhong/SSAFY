@@ -24,12 +24,12 @@ export default function Signup() {
           <img src="img/002.png" alt="로고" width={50} />
           <h2 class="fw-bold mt-3">회원가입</h2>
         </div>
-        <div class="mt-5 d-flex">
-          <div>
+        <div id="signuptabber" class="mt-5 d-flex">
+          <div class={step === 1 ? "signuptabSelected" : "signuptab"}>
             <span>Step01 회원가입</span>
             <div>___________</div>
           </div>
-          <div>
+          <div class={step === 2 ? "signuptabSelected" : "signuptab"}>
             <span>Step02 가입완료</span>
             <div>___________</div>
           </div>
