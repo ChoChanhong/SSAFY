@@ -37,7 +37,7 @@ export default function Login() {
         </div>
         <div class="mt-5 text-center">
           <Link to="/doc/login">의사</Link>
-          <span>//</span>
+          <span>/</span>
           <Link to="/ph/login">약사</Link>
         </div>
       </div>
