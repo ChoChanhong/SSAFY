@@ -5,6 +5,7 @@ import BackGround from "../Components/BackGround";
 import MainCarousel from "../Components/MainCarousel";
 import "./Main.css";
 import Button from "react-bootstrap/Button";
+import GreenButton from "../Components/GreenButton";
 
 export default function Main() {
   const isPc = useMediaQuery({
@@ -32,6 +33,7 @@ export default function Main() {
               시작하기
             </Button>
           </Link>
+          <GreenButton>시작하기</GreenButton>
           <br />
           <Link to="/signup">회원가입</Link>
           <div class="mt-3">
