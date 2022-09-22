@@ -22,13 +22,15 @@ export default function Main() {
         </div>
         <div style={{ marginTop: 100 }}>
           <Link to="/login">
-            <button id="greenbutton" style={{ width: 200, height: 50 }}>
+            <button id="greenbutton" style={{ width: 250, height: 50, borderRadius:50 }}>
               시작하기
             </button>
           </Link>
           <br />
           <div class="d-flex justify-content-center" style={{ marginTop: 80 }}>
-            <Link to="/signup">회원가입</Link>
+            <Link to="/signup">
+              회원가입
+            </Link>
           </div>
           <div class="mt-3 text-center">
             <Link to="/doc/login">의사</Link>　||　
