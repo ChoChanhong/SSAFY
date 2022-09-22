@@ -5,8 +5,9 @@
 }
 
 .signuptabSelected{
-  background-color: #5681EF;
-  color : white;
+  background-color: white;
+  color : #5681EF;
+  font-weight: bold;
   display: flex;
   flex-direction: column;
 }
