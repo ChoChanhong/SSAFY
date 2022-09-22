@@ -9,7 +9,7 @@ export default function SignTab2(props) {
   };
   return (
     <div class="text-center" style={{ marginTop: 180 }}>
-      <h1 style={{ fontWeight: "bold" }}>가입이 완료 되었습니다</h1>
+      <h2 style={{ fontWeight: "bold" }}>가입이 완료 되었습니다</h2>
       <h3 style={h3}>약쏙을 시작해보세요</h3>
       <div style={{ marginTop: 150 }}>
         <Link to="/login">
