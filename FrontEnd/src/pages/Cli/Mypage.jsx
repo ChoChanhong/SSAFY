@@ -2,9 +2,9 @@ import { React, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
 import BackGround from "../../Components/BackGround";
-import MyPerscription from "../../Components/MyPerscription";
-import CliMy from "../../Components/CliMy";
-import Reception from "../../Components/Reception";
+import MyPerscription from "../../Components/MyPage/MyPerscription"
+import CliMy from "../../Components/MyPage/CliMy"
+import Reception from "../../Components/MyPage/Reception"
 import "./Mypage.css";
 
 export default function Mypage() {

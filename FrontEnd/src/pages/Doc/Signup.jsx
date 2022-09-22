@@ -1,8 +1,8 @@
 import {React,useState} from "react"
 import DocNavbar from "../../Components/DocNavbar"
-import Signup1 from "../../Components/SignupTab1"
-import Signup2 from "../../Components/SignupTab2"
-import Signup3 from "../../Components/SignupTab3"
+import Signup1 from "../../Components/DocSignUp/SignupTab1"
+import Signup2 from "../../Components/DocSignUp/SignupTab2"
+import Signup3 from "../../Components/DocSignUp/SignupTab3"
 import "./Signup.css"
 
 export function Signup(){

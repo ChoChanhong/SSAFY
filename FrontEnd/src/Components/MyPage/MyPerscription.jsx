@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import RecentPer from "./RecentPer";
 import RegularPer from "./RegularPer";
-import Perlog from "./Perlog";
+import Perlog from "../Perlog";
 
 export default function MyPerscription() {
   const [tab, setTab] = useState(0);
