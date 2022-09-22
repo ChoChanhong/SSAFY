@@ -12,3 +12,14 @@
 #button{
     border-radius: 10px;
 }
+
+#greenbutton {
+    text-decoration: none;
+    color: white;
+    font-weight: 800;
+    background-color: #5FD068;
+    height: 50;
+    width: 200;
+    border-radius: 10px;
+    border-color: transparent;
+}
