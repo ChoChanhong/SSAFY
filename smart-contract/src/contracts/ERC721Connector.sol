@@ -5,11 +5,10 @@ import './ERC721Metadata.sol';
 import './ERC721Enumerable.sol';
 
 contract ERC721Connector is ERC721Metadata, ERC721Enumerable {
+    //커넥터 배포할 떄, 메타데이터 정보도 전달되게
 
-    // we deploy connector right away
-    // we want to carry the metadata info over
-
-    constructor(string memory name, string memory symbol)  ERC721Metadata(name, symbol) {
+    constructor(string memory name, string memory symbol)  
+    ERC721Metadata(name, symbol) {
         
     }
 
