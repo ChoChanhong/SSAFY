@@ -25,16 +25,19 @@ contract ERC721Enumerable is IERC721Enumerable, ERC721 {
 
     function _mint(address to, uint256 tokenId) internal override(ERC721) {
         super._mint(to, tokenId);
-        // 2 things! A. add tokens to the owner
-        // B. all tokens to our totalsuppy - to allTokens
+        //  add tokens to the owner 
+        // B. all tokens to our totalsuppy - to allTokens 
         _addTokensToAllTokenEnumeration(tokenId); 
         _addTokensToOwnerEnumeration(to, tokenId);
     }
 
+
     // add tokens to the _alltokens array and set the position of the tokens indexes
     function _addTokensToAllTokenEnumeration(uint256 tokenId) private {
+        // tokenId에 해당하는 토큰 가져옴
         _allTokensIndex[tokenId] = _allTokens.length;
         _allTokens.push(tokenId); 
+        // 토큰 추가할때 tokenID 의 위치와 그 위치의 길이도 같이 추적.
     }
 
     function _addTokensToOwnerEnumeration(address to, uint256 tokenId) private {
@@ -47,14 +50,13 @@ contract ERC721Enumerable is IERC721Enumerable, ERC721 {
         _ownedTokens[to].push(tokenId);   
     }
 
-    // two functions - one that returns tokenByIndex and 
-    // another one that returns tokenOfOwnerByIndex
+    // index 값에 맞는 tokenId 리턴 
     function tokenByIndex(uint256 index) public override view returns(uint256) {
         // make sure that the index is not out of bounds of the total supply 
         require(index < totalSupply(), 'global index is out of bounds!');
         return _allTokens[index];
     }
-
+    // 소유자가 가진 토큰중 index에 맞는 tokenId 리턴 
     function tokenOfOwnerByIndex(address owner, uint index) public override view returns(uint256) {
         require(index < balanceOf(owner),'owner index is out of bounds!');
         return _ownedTokens[owner][index];  

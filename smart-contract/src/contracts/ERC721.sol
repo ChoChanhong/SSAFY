@@ -66,7 +66,7 @@ contract ERC721 is ERC165, IERC721 {
         return owner;
     }
 
-
+    // 현재 가지고있는 토큰인지 확인
     function _exists(uint256 tokenId) internal view returns(bool){
         // setting the address of nft owner to check the mapping
         // of the address from tokenOwner at the tokenId 
