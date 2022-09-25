@@ -31,6 +31,11 @@ contract ERC721 is ERC165, IERC721 {
     // Mapping from token id to approved addresses
     mapping(uint256 => address) private _tokenApprovals; 
 
+    // mapping (uint256 => uint ) _blockTotokenid;
+
+    // mapping (address => uint[]) _addToblock;
+    // //의사 계정주소 => 환자 계정주소 환자 토큰ID
+    // mapping (address => mapping (address => uint)) _patientlistOfdotcor;
 
     // EXERCISE: 1. REGISTER THE INTERFACE FOR THE ERC721 contract so that it includes
     // the following functions: balanceOf, ownerOf, transferFrom
@@ -83,12 +88,14 @@ contract ERC721 is ERC165, IERC721 {
     // any type of mathematics can be held to dubious standards 
     // in SOLIDITY 
     function _mint(address to, uint256 tokenId) internal virtual {
-        // requires that the address isn't zero
+        // 지갑주소 검사
         require(to != address(0), 'ERC721: minting to the zero addres');
-        // requires that the token does not already exist
+        // 토큰이 있는지 검사
         require(!_exists(tokenId), 'ERC721: token already minted');
         // we are adding a new address with a token id for minting
-        _tokenOwner[tokenId] = to; 
+        _tokenOwner[tokenId] = to;
+        // _blockTotokenid[block.number] = tokenId;
+        // _addToblock[msg.sender].push(block.number);
         // keeping track of each address that is minting and adding one to the count
         _OwnedTokensCount[to].increment();  
        
@@ -121,7 +128,8 @@ contract ERC721 is ERC165, IERC721 {
         _OwnedTokensCount[_to].increment();
 
         _tokenOwner[_tokenId] = _to;
-
+        // _blockTotokenid[block.number] = _tokenId;
+        // _addToblock[_from].push(block.number);
         emit Transfer(_from, _to, _tokenId);
     }
 
@@ -136,6 +144,7 @@ contract ERC721 is ERC165, IERC721 {
     // 3. require that we cant approve sending tokens of the owner to the owner (current caller)
     // 4. update the map of the approval addresses
 
+    // 보내려는사람이 해당 tokenId 토큰을 가지고 있는지 확인
     function approve(address _to, uint256 tokenId) public {
         address owner = ownerOf(tokenId);
         require(_to != owner, 'Error - approval to current owner');
@@ -144,11 +153,15 @@ contract ERC721 is ERC165, IERC721 {
         emit Approval(owner, _to, tokenId);
     } 
 
+    
+    // 지정된 납부자가 주어진 토큰 ID를 전송할 수 있는지 여부를 반환한다.
     function isApprovedOrOwner(address spender, uint256 tokenId) internal view returns(bool) {
         require(_exists(tokenId), 'token does not exist');
         address owner = ownerOf(tokenId);
         return(spender == owner); 
     }
+
+    
 
 }
 

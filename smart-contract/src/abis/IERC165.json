@@ -30,20 +30,20 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n\ninterface IERC165 {\n    /// @notice Query if a contract implements an interface\n    /// @param interfaceID The interface identifier, as specified in ERC-165\n    /// @dev Interface identification is specified in ERC-165. This function\n    ///  uses less than 30,000 gas.\n    /// @return `true` if the contract implements `interfaceID` and\n    ///  `interfaceID` is not 0xffffffff, `false` otherwise\n    function supportsInterface(bytes4 interfaceID) external view returns (bool);\n}",
-  "sourcePath": "C:\\Users\\SSAFY\\Downloads\\nft-marketplace-solution\\src\\contracts\\interfaces\\IERC165.sol",
+  "sourcePath": "C:\\Users\\SSAFY\\Desktop\\특화 깃\\S07P22E205\\smart-contract\\src\\contracts\\interfaces\\IERC165.sol",
   "ast": {
     "absolutePath": "project:/src/contracts/interfaces/IERC165.sol",
     "exportedSymbols": {
       "IERC165": [
-        935
+        1280
       ]
     },
-    "id": 936,
+    "id": 1281,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 926,
+        "id": 1271,
         "literals": [
           "solidity",
           "^",
@@ -60,9 +60,9 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "fullyImplemented": false,
-        "id": 935,
+        "id": 1280,
         "linearizedBaseContracts": [
-          935
+          1280
         ],
         "name": "IERC165",
         "nameLocation": "67:7:9",
@@ -70,13 +70,13 @@
         "nodes": [
           {
             "documentation": {
-              "id": 927,
+              "id": 1272,
               "nodeType": "StructuredDocumentation",
               "src": "81:373:9",
               "text": "@notice Query if a contract implements an interface\n @param interfaceID The interface identifier, as specified in ERC-165\n @dev Interface identification is specified in ERC-165. This function\n  uses less than 30,000 gas.\n @return `true` if the contract implements `interfaceID` and\n  `interfaceID` is not 0xffffffff, `false` otherwise"
             },
             "functionSelector": "01ffc9a7",
-            "id": 934,
+            "id": 1279,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -84,17 +84,17 @@
             "nameLocation": "468:17:9",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 930,
+              "id": 1275,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 929,
+                  "id": 1274,
                   "mutability": "mutable",
                   "name": "interfaceID",
                   "nameLocation": "493:11:9",
                   "nodeType": "VariableDeclaration",
-                  "scope": 934,
+                  "scope": 1279,
                   "src": "486:18:9",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -103,7 +103,7 @@
                     "typeString": "bytes4"
                   },
                   "typeName": {
-                    "id": 928,
+                    "id": 1273,
                     "name": "bytes4",
                     "nodeType": "ElementaryTypeName",
                     "src": "486:6:9",
@@ -118,17 +118,17 @@
               "src": "485:20:9"
             },
             "returnParameters": {
-              "id": 933,
+              "id": 1278,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 932,
+                  "id": 1277,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 934,
+                  "scope": 1279,
                   "src": "529:4:9",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -137,7 +137,7 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 931,
+                    "id": 1276,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
                     "src": "529:4:9",
@@ -151,14 +151,14 @@
               ],
               "src": "528:6:9"
             },
-            "scope": 935,
+            "scope": 1280,
             "src": "459:76:9",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 936,
+        "scope": 1281,
         "src": "57:480:9",
         "usedErrors": []
       }
@@ -171,7 +171,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.9",
-  "updatedAt": "2022-09-21T06:05:32.679Z",
+  "updatedAt": "2022-09-25T17:56:23.904Z",
   "devdoc": {
     "kind": "dev",
     "methods": {

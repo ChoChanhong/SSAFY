@@ -15,9 +15,9 @@ contract PreScription is ERC721Connector {
         string dCode; // 질병코드
         string dispensingCount; // 조제 횟수 
         string prescriptionCount; // 처방횟수
-        uint period; // 투약기간 ? 몇일치인지.
-        uint pubDate; // 발행일
-        uint prepDate; // 조제일 
+        // uint period; // 투약기간 ? 몇일치인지.
+        // uint pubDate; // 발행일
+        // uint prepDate; // 조제일 
         
         }
         
@@ -25,13 +25,24 @@ contract PreScription is ERC721Connector {
          
    
    // 처방전 배열
-    preScription[] public PreScriptions;
-
+    preScription[] public preScriptions;
+    uint i = 0;
+    // preScription pp;
     
+   
+
+
     
     mapping (address => uint) _accountAuth;  // 계좌 권한 (1 환자, 2 의사, 3 약사)
     
     mapping(string => bool) _preScriptionsExists;
+
+    
+    mapping (uint256 => uint ) _blockTotokenid;
+
+    mapping (address => uint[]) _addToblock;
+    //의사 계정주소 => 환자 계정주소 환자 토큰ID
+    mapping (address => mapping (address => uint[])) _patientlistOfdotcor;
 
 
         // 환자
@@ -48,15 +59,25 @@ contract PreScription is ERC721Connector {
     }
 
     // 누가 민팅했는지 저장해야하나 ?
-
+    // 의사가 조회할수 있도록(자기가 발행한 토큰ID)
     mapping (address => uint256[]) _mintedTokens;
 
+  
+
+   
+    // 환자가 약사한테 보냈을 때 조회하려면  ????
+    
+    
     // 지금 로그인한 사람(msg.sender) 이 발행한 토큰 아이디 목록 가져오기
+
+    function setMintedTokens(uint _tokenId) public {
+        _mintedTokens[msg.sender].push(_tokenId);
+    }
     function getMintedTokens() public view returns (uint256[] memory){
         return _mintedTokens[msg.sender];
     }
 
-
+    
     // 존재하는 처방전인지 체크하기
     modifier prsExists( 
         string memory _userName, 
@@ -64,86 +85,113 @@ contract PreScription is ERC721Connector {
         string memory _pharName, 
         string memory _dCode, 
         string memory _dispensingCount, 
-        string memory _prescriptionCount, 
-        uint256 _period ,
-        uint256 _pubDate,
-        uint256 _prepDate 
+        string memory _prescriptionCount
+        // uint256 _period ,
+        // uint256 _pubDate,
+        // uint256 _prepDate 
         ) {
            bool check = false;
-           for (uint i = 0; i < PreScriptions.length; i++){
+           for (uint i = 0; i < preScriptions.length; i++){
             if(
-                keccak256(bytes(PreScriptions[i].userName)) == keccak256(bytes(_userName)) &&
-                keccak256(bytes(PreScriptions[i].hosName)) == keccak256(bytes(_hosName)) &&
-                keccak256(bytes(PreScriptions[i].pharName)) == keccak256(bytes(_pharName)) &&
-                keccak256(bytes(PreScriptions[i].dCode)) == keccak256(bytes(_dCode)) &&
-                keccak256(bytes(PreScriptions[i].dispensingCount)) == keccak256(bytes(_dispensingCount)) &&
-                keccak256(bytes(PreScriptions[i].prescriptionCount)) == keccak256(bytes(_prescriptionCount)) &&
-                PreScriptions[i].period == _period &&
-                PreScriptions[i].pubDate == _pubDate &&
-                PreScriptions[i].prepDate == _prepDate
+                keccak256(bytes(preScriptions[i].userName)) == keccak256(bytes(_userName)) &&
+                keccak256(bytes(preScriptions[i].hosName)) == keccak256(bytes(_hosName)) &&
+                keccak256(bytes(preScriptions[i].pharName)) == keccak256(bytes(_pharName)) &&
+                keccak256(bytes(preScriptions[i].dCode)) == keccak256(bytes(_dCode)) &&
+                keccak256(bytes(preScriptions[i].dispensingCount)) == keccak256(bytes(_dispensingCount)) &&
+                keccak256(bytes(preScriptions[i].prescriptionCount)) == keccak256(bytes(_prescriptionCount)) 
+                // PreScriptions[i].period == _period &&
+                // PreScriptions[i].pubDate == _pubDate &&
+                // PreScriptions[i].prepDate == _prepDate
             ) {
                 check =true;
             }
            } 
-           require(!check, "Error : already exists PreScription ");
+           require(!check, "Error : already exists preScription ");
            _;
         }
 
+        // 트랜스퍼 나누기 의사/ 약사/ 환자 기능별로
         function transferPreScription(address _from, address _to, uint _tokenId) public {
 
             // 토큰 전송하면서 다른 배열들도 다 값바꿔줘야함 ex) 소유자 토큰 인덱스 등등
             transferFrom(_from, _to, _tokenId);
-
+            
 
         }
 
-        // mapping(address => uint) Token;
-        // fucntion getAuth(address _address) public returns(uint){
-        //     return Token(address) 
-        // }
+        function transferTopatient(address _from, address _to, uint _tokenId) public {
+              
+              transferFrom(_from, _to, _tokenId);
 
-    
-    // 데이터 조회
-    // 환자는 자기꺼만 조회하게 
+            _patientlistOfdotcor[_from][_to].push(_tokenId);
 
-    // 처방확인.
-    
-    //  
+        }
 
-    
-    // 처방전 발급(민팅)
+       
+//    처방전 발급(민팅)
   function mint(
         string memory _userName, 
         string memory _hosName,
         string memory _pharName, 
         string memory _dCode, 
         string memory _dispensingCount, 
-        string  memory _prescriptionCount, 
-        uint _period, 
-        int _pubDate,
-        uint prepDate ) 
-        public prsExists( _userName, _hosName, _pharName, _dCode, _dispensingCount, _prescriptionCount, _period, _pubDate,
-       prepDate ){
-            preScription memory _preScription = preScription( _userName,  _hosName, _pharName, _dCode, _dispensingCount, _prescriptionCount, _period, _pubDate,
-        prepDate);
+        string  memory _prescriptionCount
+         ) 
+        public prsExists( _userName, _hosName, _pharName, _dCode, _dispensingCount, _prescriptionCount ){
+            preScription memory _preScription = preScription( _userName,  _hosName, _pharName, _dCode, _dispensingCount, _prescriptionCount);
 
         // require(!_preScriptionsExists[_preScription],
         // 'Error - preScription already exists');
         // this is deprecated - uint _id = KryptoBirdz.push(_kryptoBird);
-        PreScriptions.push(_preScription);
-        uint _id = PreScriptions.length - 1;
+        preScriptions.push(_preScription);
+        uint _id = preScriptions.length - 1;
 
+        _blockTotokenid[block.number] = _id;
+        _addToblock[msg.sender].push(block.number);
         // .push no longer returns the length but a ref to the added element
         _mint(msg.sender, _id);
-        _mintedTokens[msg.sender].push(_id);
+        //누가 발행한건지 저장(발행한 전체 처방전)
+        setMintedTokens(_id);
 
         // _preScriptionsExists[_preScription] = true;
 
     }
 
-    function Test(uint index) public returns(preScription memory) {
-        return PreScriptions[index];
+    function getPreScriptionByIndex(uint index) public returns(preScription memory) {
+        return preScriptions[index];
     }
+
+    //     function setPrsData(   
+    //     string memory _userName, 
+    //     string memory _hosName,
+    //     string memory _pharName, 
+    //     string memory _dCode, 
+    //     string memory _dispensingCount, 
+    //     string memory _prescriptionCount
+    //   ) 
+    //     public prsExists(_userName, _hosName, _pharName, _dCode, _dispensingCount, _prescriptionCount) {
+            
+    //         preScription memory prsData;
+            
+    //         prsData.userName = _userName;
+    //         prsData.hosName = _hosName;
+    //         prsData.pharName = _pharName;
+    //         prsData.dCode = _dCode;
+    //         prsData.dispensingCount = _dispensingCount;
+    //         prsData.prescriptionCount = _prescriptionCount;
+
+    //         PreScriptions.push(prsData);
+    //         // return prsData;
+
+    //     } 
+
+    //      function Test22() public returns (preScription memory){
+    //     return PreScriptions[0];
+    // }
+
+
+    
+
 
     constructor() ERC721Connector('PreScription','Script')
  {}

@@ -46,6 +46,8 @@ contract ERC721Enumerable is IERC721Enumerable, ERC721 {
         // 2. ownedTokensIndex tokenId set to address of 
         // ownedTokens position
         // 3. we want to execute the function with minting
+        
+        // 해당 tokenId의 토큰이 소유자의 몇번째 토큰인지 저장
         _ownedTokensIndex[tokenId] = _ownedTokens[to].length;
         _ownedTokens[to].push(tokenId);   
     }
@@ -60,6 +62,10 @@ contract ERC721Enumerable is IERC721Enumerable, ERC721 {
     function tokenOfOwnerByIndex(address owner, uint index) public override view returns(uint256) {
         require(index < balanceOf(owner),'owner index is out of bounds!');
         return _ownedTokens[owner][index];  
+    }
+    // 소유자가 가진 모든 토큰 Id 리턴
+    function alltokenOfOwner(address owner) public view returns(uint256[] memory){
+        return _ownedTokens[owner];
     }
 
     // return the total supply of the _allTokens array
