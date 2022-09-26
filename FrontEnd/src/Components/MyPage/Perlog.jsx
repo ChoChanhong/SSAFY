@@ -1,10 +1,10 @@
 import React from "react";
 
-export default function RegularPer() {
+export default function Perlog() {
   return (
     <div>
       <div className="myBox">
-        <div style={{ margin: 20 }}>정기 처방</div>
+        <div style={{ margin: 20 }}>처방 이력</div>
       </div>
     </div>
   );

@@ -1,11 +1,11 @@
 import { React, useState } from "react";
 import RecentPer from "./RecentPer";
 import RegularPer from "./RegularPer";
-import Perlog from "../Perlog";
+import Perlog from "./Perlog";
 import "./MyPerscription.css";
 
 export default function MyPerscription() {
-  const [tab, setTab] = useState(0);
+  const [tab, setTab] = useState('0');
   const tabs = [<RecentPer />, <RegularPer />, <Perlog />];
   function move(e) {
     console.log(e.target.id);
@@ -19,11 +19,11 @@ export default function MyPerscription() {
         <h2 class="fw-bold mt-3">My 처방</h2>
       </div>
       <div
-        id="signuptabbar"
+        id="myPerstabbar"
         style={{ marginTop: 50, fontWeight: "bold", fontSize: 20 }}
       >
         <span
-          className={tab === "0" ? "signuptabSelected" : "signuptab"}
+          className={tab === "0" ? "myPerstabSelected" : "myPerstab"}
           id="0"
           onClick={move}
           style={{ marginRight: 20 }}
@@ -31,7 +31,7 @@ export default function MyPerscription() {
           최근 처방
         </span>
         <span
-          className={tab === "1" ? "signuptabSelected" : "signuptab"}
+          className={tab === "1" ? "myPerstabSelected" : "myPerstab"}
           id="1"
           onClick={move}
           style={{ marginRight: 20 }}
@@ -39,7 +39,7 @@ export default function MyPerscription() {
           정기 처방
         </span>
         <span
-          className={tab === "2" ? "signuptabSelected" : "signuptab"}
+          className={tab === "2" ? "myPerstabSelected" : "smyPerstab"}
           id="2"
           onClick={move}
         >

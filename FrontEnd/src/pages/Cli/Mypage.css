@@ -1,10 +1,14 @@
-#bottom {
-    position:absolute;
-    bottom: 0px;
-    width: auto;
+#navbar {
+    position: fixed;
+    overflow: hidden;
+    bottom: 0;
+    width: 412px;
     height: 64px;
-    top: 780px;
     background-color: #5FD068;
     color: white;
     font-weight: bold;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: large;
 }
