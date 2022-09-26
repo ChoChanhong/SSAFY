@@ -17,7 +17,7 @@ export function Main(){
       } = useWeb3React();
     
     useEffect(()=>{
-        if(activate){}
+        if(active){activate(injected)}
         else{navigate('/login')}        
     },[]);
 

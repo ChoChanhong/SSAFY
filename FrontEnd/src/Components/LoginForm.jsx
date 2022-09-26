@@ -1,9 +1,22 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
+import { injected } from '../lib/Connectors';
+import { useWeb3React } from '@web3-react/core';
+import { useNavigate } from 'react-router-dom';
+
 import './LoginForm.css'
 
 export default function LoginForm(){
+
+    const navigate = useNavigate();
+    const {
+        account,
+        active,
+        error,
+        activate,
+        deactivate,
+      } = useWeb3React();
 
     const [id,setId] = useState('')
     const [password,setPass] = useState('')
@@ -17,6 +30,9 @@ export default function LoginForm(){
 
     function Send(){
         console.log(id,password)
+        //api 통해서 로그인 보내고 아이디 일치시
+        activate(injected)
+        navigate('/doc')
     }
 
     return(

@@ -1,7 +1,16 @@
 import React from "react"
+import {Link} from "react-router-dom"
+import DocNavbar from "../../Components/DocNavbar"
+import PerDetail from "../../Components/Generate/PerDetail"
 
 export function Log(){
     return(
-        <h1>처방전 조회</h1>
+        <div>
+            <DocNavbar/>
+            <div>
+                <PerDetail/>
+            </div>
+        </div>
+        
     )
 }
