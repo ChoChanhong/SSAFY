@@ -1,0 +1,18 @@
+#signuptabbar{
+    display : flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  
+.signuptabSelected{
+    color : #5681EF !important;
+    background-color: white !important;
+    font-weight: bold; 
+    display: flex;
+    flex-direction: column;
+  }
+  
+.signuptab{
+    display: flex;
+    flex-direction: column;
+  }
