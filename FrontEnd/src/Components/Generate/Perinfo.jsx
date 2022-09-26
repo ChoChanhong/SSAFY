@@ -12,7 +12,7 @@ export default function PerInfo(){
     let date = now.getDate()
     let day = year+'-'+month+'-'+date
 
-    const [dname,setDname] = useState('코로나') //질병분류기호
+    const [dname,setDname] = useState('') //질병분류기호
     const [Perlog,setPlog] = useState([]) //처방내역
     const [yaks,setYaks] = useState([])
 
@@ -50,9 +50,19 @@ export default function PerInfo(){
     
     function submit(){
         let ss = {
-            name : "원석",
+            doc : '',
+            //의사 지갑
+            cli : '',
+            //환자 지갑
+            ph : '',
+            //약사 지갑
             dname : dname,
-            perscription : Perlog, 
+            //질병코드
+            perscription : Perlog,
+            //처방내역
+            date : day,
+            //처방일
+
         }
         console.log(ss)
     }
