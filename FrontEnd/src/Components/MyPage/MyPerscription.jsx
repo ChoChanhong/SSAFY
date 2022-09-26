@@ -5,7 +5,7 @@ import Perlog from "./Perlog";
 import "./MyPerscription.css";
 
 export default function MyPerscription() {
-  const [tab, setTab] = useState(0);
+  const [tab, setTab] = useState('0');
   const tabs = [<RecentPer />, <RegularPer />, <Perlog />];
   function move(e) {
     console.log(e.target.id);

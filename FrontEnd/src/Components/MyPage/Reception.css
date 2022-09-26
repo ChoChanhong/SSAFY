@@ -1,0 +1,18 @@
+#receptiontabbar{
+    display : flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  
+.receptiontabSelected{
+    color : #5FD068 !important;
+    background-color: white !important;
+    font-weight: bold; 
+    display: flex;
+    flex-direction: column;
+  }
+  
+.receptiontab{
+    display: flex;
+    flex-direction: column;
+  }

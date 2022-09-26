@@ -2,13 +2,13 @@ import { React, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
 import BackGround from "../../Components/BackGround";
-import MyPerscription from "../../Components/MyPage/MyPerscription"
-import CliMy from "../../Components/MyPage/CliMy"
-import Reception from "../../Components/MyPage/Reception"
+import MyPerscription from "../../Components/MyPage/MyPerscription";
+import CliMy from "../../Components/MyPage/CliMy";
+import Reception from "../../Components/MyPage/Reception";
 import "./Mypage.css";
 
 export default function Mypage() {
-  const [tab, setTab] = useState(0);
+  const [tab, setTab] = useState('0');
   const tabs = [<MyPerscription />, <Reception />, <CliMy />];
   const isPc = useMediaQuery({
     query: "(min-width:768px)",
@@ -22,7 +22,7 @@ export default function Mypage() {
   return (
     <div id="webapp-containor">
       <div>{isPc ? <BackGround /> : null}</div>
-      <div >
+      <div>
         <div>{tabs[tab]}</div>
         <div id="bottom" class="d-flex justify-content-center">
           <span id="0" onClick={move}>
