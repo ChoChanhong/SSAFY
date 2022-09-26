@@ -3,16 +3,7 @@ import React from "react";
 export default function Perlog() {
   return (
     <div>
-      <div
-        style={{
-          marginTop: 20,
-          marginRight: 15,
-          marginLeft: 15,
-          height: "auto",
-          border: "solid #5FD068 ",
-          borderRadius: "30px",
-        }}
-      >
+      <div className="myBox">
         <div style={{ margin: 20 }}>처방 이력</div>
       </div>
     </div>

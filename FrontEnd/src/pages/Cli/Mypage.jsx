@@ -8,7 +8,7 @@ import Reception from "../../Components/MyPage/Reception";
 import "./Mypage.css";
 
 export default function Mypage() {
-  const [tab, setTab] = useState('0');
+  const [tab, setTab] = useState("0");
   const tabs = [<MyPerscription />, <Reception />, <CliMy />];
   const isPc = useMediaQuery({
     query: "(min-width:768px)",
@@ -20,23 +20,21 @@ export default function Mypage() {
   }
 
   return (
-    <div id="webapp-containor">
-      <div>{isPc ? <BackGround /> : null}</div>
-      <div>
-        <div>{tabs[tab]}</div>
-        <div id="bottom" class="d-flex justify-content-center">
-          <span id="0" onClick={move}>
-            My 처방
-          </span>
-          <span>|</span>
-          <span id="1" onClick={move}>
-            조제접수
-          </span>
-          <span>|</span>
-          <span id="2" onClick={move}>
-            마이페이지
-          </span>
-        </div>
+    <div id="webapp-containor" style={{heigth: "100%"}}>
+      {/* <div>{isPc ? <BackGround /> : null}</div> */}
+      <div>{tabs[tab]}</div>
+      <div id="navbar">
+        <span id="0" onClick={move}>
+          My 처방
+        </span>
+        <span>|</span>
+        <span id="1" onClick={move}>
+          조제접수
+        </span>
+        <span>|</span>
+        <span id="2" onClick={move}>
+          마이페이지
+        </span>
       </div>
     </div>
   );
