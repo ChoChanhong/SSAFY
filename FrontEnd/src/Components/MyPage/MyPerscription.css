@@ -1,18 +1,18 @@
-#signuptabbar{
+#myPerstabbar{
     display : flex;
     flex-direction: row;
     justify-content: space-around;
   }
   
-.signuptabSelected{
+.myPerstabSelected{
     color : #5FD068 !important;
-    /* background-color: white !important; */
+    background-color: white !important;
     font-weight: bold; 
     display: flex;
     flex-direction: column;
   }
   
-.signuptab{
+.myPerstab{
     display: flex;
     flex-direction: column;
   }

@@ -19,11 +19,11 @@ export default function MyPerscription() {
         <h2 class="fw-bold mt-3">My 처방</h2>
       </div>
       <div
-        id="signuptabbar"
+        id="myPerstabbar"
         style={{ marginTop: 50, fontWeight: "bold", fontSize: 20 }}
       >
         <span
-          className={tab === "0" ? "signuptabSelected" : "signuptab"}
+          className={tab === "0" ? "myPerstabSelected" : "myPerstab"}
           id="0"
           onClick={move}
           style={{ marginRight: 20 }}
@@ -31,7 +31,7 @@ export default function MyPerscription() {
           최근 처방
         </span>
         <span
-          className={tab === "1" ? "signuptabSelected" : "signuptab"}
+          className={tab === "1" ? "myPerstabSelected" : "myPerstab"}
           id="1"
           onClick={move}
           style={{ marginRight: 20 }}
@@ -39,7 +39,7 @@ export default function MyPerscription() {
           정기 처방
         </span>
         <span
-          className={tab === "2" ? "signuptabSelected" : "signuptab"}
+          className={tab === "2" ? "myPerstabSelected" : "smyPerstab"}
           id="2"
           onClick={move}
         >
