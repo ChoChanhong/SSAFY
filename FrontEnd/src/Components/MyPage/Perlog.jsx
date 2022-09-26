@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function RecentPer() {
+export default function Perlog() {
   return (
     <div>
       <div
@@ -13,7 +13,7 @@ export default function RecentPer() {
           borderRadius: "30px",
         }}
       >
-        <div style={{ margin: 20 }}>최근 처방</div>
+        <div style={{ margin: 20 }}>처방 이력</div>
       </div>
     </div>
   );
