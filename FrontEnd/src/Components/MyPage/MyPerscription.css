@@ -1,0 +1,56 @@
+#myPerstabbar{
+    display : flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  
+.myPerstabSelected{
+    color : #5681EF !important;
+    background-color: white !important;
+    font-weight: bold; 
+    display: flex;
+    flex-direction: column;
+  }
+  
+.myPerstab{
+    display: flex;
+    flex-direction: column;
+  }
+
+.myBox {
+  margin-top: 20px;
+  margin-right: 15px;
+  margin-left: 15px;
+  height: auto;
+  border: solid #5681EF;
+  border-radius: 20px;
+}
+
+#bluebutton {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  background-color: #5681EF;
+  height: 40px;
+  width: 150px;
+  border-radius: 30px;
+  border-color: transparent;
+}
+
+#greenbutton {
+  text-decoration: none;
+  color: white;
+  font-weight: 800;
+  background-color: #5FD068;
+  height: 50;
+  width: 200;
+  border-radius: 10px;
+  border-color: transparent;
+}
+
+#textbutton{
+  background-color: transparent;
+  border-color: transparent;
+  font-weight: bold;
+  font-size: large;
+}

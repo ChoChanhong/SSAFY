@@ -1,17 +1,18 @@
-#signuptabbar{
+#receptiontabbar{
     display : flex;
     flex-direction: row;
     justify-content: space-around;
-}
-
-.signuptabSelected{
-    background-color: white;
-    color : #5681EF;
+  }
+  
+.receptiontabSelected{
+    color : #5681EF !important;
+    background-color: white !important;
+    font-weight: bold; 
     display: flex;
     flex-direction: column;
-}
-
-.signuptab{
+  }
+  
+.receptiontab{
     display: flex;
     flex-direction: column;
-}
+  }

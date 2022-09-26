@@ -1,8 +1,10 @@
-import React from "react"
+import { React, useEffect } from "react"
 import { injected } from '../../lib/Connectors';
 import { useWeb3React } from '@web3-react/core';
+import { useNavigate } from 'react-router-dom';
 
 export function Main(){
+    const navigate = useNavigate();
     const {
         connector,
         library,
@@ -14,20 +16,15 @@ export function Main(){
         deactivate,
       } = useWeb3React();
     
-    const handdleConnect = () => {
-        if(active) {
-            deactivate();
-          }  
-        else{
-            activate(injected);
-        }
-      }
+    useEffect(()=>{
+        if(active){activate(injected)}
+        else{navigate('/login')}        
+    },[]);
 
     return(
         <div>
             <h1>약사 메인</h1>
             <div>
-                <button type="button" onClick={handdleConnect}>{active ? 'disconnect':'connect'}</button>
                 <p>Account: {account}</p>
                 <p>ChainId: {chainId}</p>
             </div>
