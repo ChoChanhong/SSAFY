@@ -7,7 +7,6 @@ export function Login() {
   return (
     <div id="login">
       <DocNavbar id="Navbar" />
-      <img src="img/001.png" alt="로고" />
       <LoginForm id="LoginForm" />
     </div>
   );
