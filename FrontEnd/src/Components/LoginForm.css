@@ -43,19 +43,19 @@
     margin-bottom: 10px;
 }
 
-.label{
-    font-weight: bold;
-    font-size : 15px;
-    margin-top: 15px;
-}
-
 #loginbutton{
+    border-color: transparent;
+    border-radius: 10px;
     background-color : #5FD068;
+    color: white;
     width: 100%;
-    margin-top: 50px;
+    height: 40px;
+    margin-top: 40px;
     margin-bottom: 10px;
     margin-left : auto;
     margin-right : auto;
+    font-weight: bold;
+    font-size: large;
 }
 
 .title{
@@ -64,31 +64,41 @@
 }
 
 .link{
-    margin-top: 10px;
+    margin-top: 15px;
     margin-bottom: 10px;
     margin-left : auto;
     margin-right : auto;
+    font-size: 15px;
+    color:darkgray;
+    font-weight: bold;
 }
 
-.logo{
+.logoImg{
     border: solid 1px black;
-    width : 200px;
-    height: 200px;
+    width : 400px;
+    height: 350px;
+    margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
 }
 
 .buttonbox{
-    margin-left: auto;
-    margin-right: auto;
+    margin-top: 5px;
     display: flex;
-    flex-direction: row;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .linkbutton{
+    border: solid #5FD068;
+    border-width: 2px;
+    background-color: transparent;
+    color: #5FD068;
     margin-top: 20px;
     margin-left: 10px;
     margin-right: 10px;
+    font-size: 15px;
+    padding: 5px 50px;
 }
 
 h1 {

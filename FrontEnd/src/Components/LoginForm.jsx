@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { injected } from "../lib/Connectors";
 import { useWeb3React } from "@web3-react/core";
 import { useNavigate } from "react-router-dom";
-import { TextField, FormLabel} from "@mui/joy";
+import { TextField, FormLabel } from "@mui/joy";
 
 import "./LoginForm.css";
 
@@ -37,14 +37,20 @@ export default function LoginForm() {
           약쏙(전자처방전)을 이용하기 위해서는 회원가입이 필요합니다
         </span>
         <div style={{ marginTop: 30 }}>
-          <FormLabel className="label">아이디</FormLabel>
+          <FormLabel style={{ marginBottom: 5, fontWeight: "bold" }}>
+            아이디
+          </FormLabel>
           <TextField
             class="a"
             className="logInput"
             placeholder="아이디를 입력해주세요."
             onChange={IdChange}
           />
-          <FormLabel className="label">비밀번호</FormLabel>
+          <FormLabel
+            style={{ marginTop: 10, marginBottom: 5, fontWeight: "bold" }}
+          >
+            비밀번호
+          </FormLabel>
           <TextField
             class="a"
             type="password"
@@ -60,13 +66,13 @@ export default function LoginForm() {
         </Link>
       </div>
       <div class="info">
-        <img class="logo" />
+        <img className="logoImg" src="img/001.png" alt="logo" />
         <div class="buttonbox">
-          <Link to="/doc/signup" class="linkbutton">
-            회원가입
+          <Link to="/doc/signup">
+            <button className="linkbutton">회원가입</button>
           </Link>
-          <Link to="/" class="linkbutton">
-            의사가이드
+          <Link to="/">
+            <button className="linkbutton">이용방법</button>
           </Link>
         </div>
       </div>
