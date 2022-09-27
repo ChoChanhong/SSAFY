@@ -1,0 +1,72 @@
+.signBox {
+  margin-top: 50px;
+  margin-left: 235px;
+  margin-right: 235px;
+}
+
+.textBox {
+  display: flex;
+}
+
+.termsBox {
+  border: solid 1px darkgray;
+  height: 400px;
+}
+
+.checkBox {
+  border: solid 1px darkgray;
+  text-align: center;
+  padding-top: 20px;
+  margin-top: 15px;
+  height: 70px;
+}
+
+.buttonBox {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  border: solid 1px #5681EF;
+  height: 40px;
+  width: 200px;
+  font-size: 15px;
+  font-weight: bold;
+  margin-right: 50px;
+  margin-left: 50px;
+}
+
+.titleBox {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: solid 2px #5681EF;
+}
+
+.title {
+  color:#5681EF;
+  font-weight: bold;
+}
+
+.infoBox {
+  height: 50px;
+  display: flex;
+  border-bottom: solid 1px lightgray;
+}
+
+.infoLabel {
+  background-color: lightgray;
+  height: 50px;
+  width: 200px;
+  font-weight: bold;
+  display: flex;
+  align-content: space-around;
+  padding-left: 10px;
+  padding-top: 13px;
+}
+
+input {
+  height: 30px;
+  margin-top: 10px;
+  margin-left: 10px;
+}

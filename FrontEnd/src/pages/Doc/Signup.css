@@ -1,17 +1,31 @@
 #signuptabbar{
     display : flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
+    margin-top: 50px;
 }
 
 .signuptabSelected{
-    background-color: white;
-    color : #5681EF;
+    background-color: #5681EF !important;
+    color : white !important;
     display: flex;
     flex-direction: column;
+    text-align: center;
+    border: solid 2px #5681EF;
+    border-radius: 20px;
+    padding: 0px 120px 0px 120px;
+    height: 60px;
+    font-weight: bold;
 }
 
 .signuptab{
     display: flex;
     flex-direction: column;
+    text-align: center;
+    border: solid 2px darkgray;
+    border-radius: 20px;
+    padding: 0px 120px 0px 120px;
+    height: 60px;
+    color: darkgray;
+    font-weight: bold;
 }
