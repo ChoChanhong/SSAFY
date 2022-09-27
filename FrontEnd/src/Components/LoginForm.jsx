@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { injected } from "../lib/Connectors";
 import { useWeb3React } from "@web3-react/core";
 import { useNavigate } from "react-router-dom";
+import { TextField, FormLabel} from "@mui/joy";
 
 import "./LoginForm.css";
 
@@ -32,11 +33,25 @@ export default function LoginForm() {
     <div id="loginbox">
       <div class="login">
         <h1 class="title">병원로그인</h1>
-        <p>약쏙(전자처방전)을 이용하기 위해서는 회원가입이 필요합니다</p>
-        <label>아이디</label>
-        <input onChange={IdChange} class="a" />
-        <label>비밀번호</label>
-        <input onChange={PasswordChange} type="password" class="a" />
+        <span style={{ fontSize: 15, marginTop: 10 }}>
+          약쏙(전자처방전)을 이용하기 위해서는 회원가입이 필요합니다
+        </span>
+        <div style={{ marginTop: 30 }}>
+          <FormLabel className="label">아이디</FormLabel>
+          <TextField
+            class="a"
+            className="logInput"
+            placeholder="아이디를 입력해주세요."
+            onChange={IdChange}
+          />
+          <FormLabel className="label">비밀번호</FormLabel>
+          <TextField
+            class="a"
+            type="password"
+            placeholder="비밀번호를 입력해주세요."
+            onChange={PasswordChange}
+          />
+        </div>
         <button onClick={Send} id="loginbutton">
           로그인
         </button>
