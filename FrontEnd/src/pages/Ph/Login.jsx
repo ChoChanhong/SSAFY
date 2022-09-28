@@ -29,9 +29,12 @@ export function Login() {
 
   return (
     <div>
-      <PhMainNav/>
+      <PhMainNav />
       <PhLoginForm />
-      <button onClick={login}>로그인</button>
+      <div class="text-center">
+        지갑로그인 : 이거 어디에 연결해야하지?? 
+        <button onClick={login}>로그인</button>
+      </div>
     </div>
   );
 }
