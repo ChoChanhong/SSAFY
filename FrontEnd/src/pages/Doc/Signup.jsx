@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import DocNavbar from "../../Components/DocNavbar";
+import DocMainNav from "../../Components/DocMainNav";
 import Signup1 from "../../Components/DocSignUp/SignupTab1";
 import Signup2 from "../../Components/DocSignUp/SignupTab2";
 import Signup3 from "../../Components/DocSignUp/SignupTab3";
@@ -15,7 +15,7 @@ export function Signup() {
 
   return (
     <div>
-      <DocNavbar id="Navbar" />
+      <DocMainNav id="Navbar" />
       <div id="signuptabbar">
         <div className={step === 1 ? "signuptabSelected" : "signuptab"}>
           <span style={{fontSize:"20px"}}>Step 01</span>

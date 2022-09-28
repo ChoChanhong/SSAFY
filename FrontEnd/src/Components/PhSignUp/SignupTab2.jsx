@@ -2,7 +2,7 @@ import { React, useState } from "react";
 import { Link } from "react-router-dom";
 import { Select } from "@mui/joy";
 import { Option } from "@mui/joy";
-import "./DocSignup.css";
+import "./PhSignup.css";
 
 export default function Signup2(props) {
   function Next() {
@@ -42,7 +42,7 @@ export default function Signup2(props) {
           바랍니다.
         </p>
         <div className="infoBox" style={{ borderTop: "solid 2px lightgray" }}>
-          <label className="infoLabel">약국명</label>
+          <label className="infoLabel">병원명</label>
           <input style={{ width: 500 }} />
           <label className="infoLabel" style={{ marginLeft: 20 }}>
             요양기관번호
@@ -50,7 +50,7 @@ export default function Signup2(props) {
           <input style={{ width: 500 }} />
         </div>
         <div className="infoBox">
-          <label className="infoLabel">대표약사성명</label>
+          <label className="infoLabel">대표원장성명</label>
           <input style={{ width: 500 }} />
           <label className="infoLabel" style={{ marginLeft: 20 }}>
             면허번호
@@ -96,12 +96,8 @@ export default function Signup2(props) {
           className="infoBox"
           style={{ borderBottom: "solid 2px lightgray" }}
         >
-          <label className="infoLabel">약국 연락처</label>
-          <input style={{ width: 500 }} />
-          <label className="infoLabel" style={{ marginLeft: 20 }}>
-            사업자 등록번호
-          </label>
-          <input style={{ width: 500 }} />
+          <label className="infoLabel">병원 연락처</label>
+          <input style={{ width: 300 }} />
         </div>
       </div>
       <div className="buttonBox" style={{ marginTop: 100 }}>

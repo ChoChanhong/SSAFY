@@ -1,7 +1,7 @@
 import { borderLeft } from "@mui/system";
 import { React, useState } from "react";
 import { Link } from "react-router-dom";
-import "./DocSignup.css";
+import "./PhSignup.css";
 
 export default function Signup3() {
   return (
@@ -14,7 +14,7 @@ export default function Signup3() {
             className="button"
             style={{
               borderColor: "transparent",
-              backgroundColor: "#5FD068",
+              backgroundColor: "#00ADEF",
               width: 400,
               height: 50,
               fontSize: 25,

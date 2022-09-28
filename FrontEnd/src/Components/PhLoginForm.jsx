@@ -6,9 +6,9 @@ import { useWeb3React } from "@web3-react/core";
 import { useNavigate } from "react-router-dom";
 import { TextField, FormLabel } from "@mui/joy";
 
-import "./LoginForm.css";
+import "./PhLoginForm.css";
 
-export default function LoginForm() {
+export default function PhLoginForm() {
   const navigate = useNavigate();
   const { account, active, error, activate, deactivate } = useWeb3React();
 
@@ -32,7 +32,9 @@ export default function LoginForm() {
   return (
     <div id="loginbox">
       <div class="login">
-        <h1 className="loginTitle">병원로그인</h1>
+        <h1 className="loginTitle" style={{ color: "#00ADEF" }}>
+          약국로그인
+        </h1>
         <span style={{ fontSize: 15, marginTop: 10 }}>
           약쏙(전자처방전)을 이용하기 위해서는 회원가입이 필요합니다
         </span>
@@ -68,7 +70,7 @@ export default function LoginForm() {
       <div class="info">
         <img className="logoImg" src="img/001.png" alt="logo" />
         <div class="buttonbox">
-          <Link to="/doc/signup">
+          <Link to="/ph/signup">
             <button className="linkbutton">회원가입</button>
           </Link>
           <Link to="/">
