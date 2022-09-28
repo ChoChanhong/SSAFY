@@ -2,6 +2,7 @@ import { React, useState } from "react";
 import { Link } from "react-router-dom";
 import { Select } from "@mui/joy";
 import { Option } from "@mui/joy";
+import "./DocSignup.css";
 
 export default function Signup2(props) {
   function Next() {
@@ -12,9 +13,9 @@ export default function Signup2(props) {
     <div className="signBox">
       <div className="titleBox">
         <h3 className="title">회원가입</h3>
-        <div style={{ color: "red", marginTop: 15 }}>
+        {/* <div style={{ color: "red", marginTop: 15 }}>
           ※<span style={{ color: "black" }}> 필수 입력 항목입니다.</span>
-        </div>
+        </div> */}
       </div>
       <div>
         <div
@@ -22,7 +23,8 @@ export default function Signup2(props) {
           style={{ borderBottom: "solid 1px lightgray" }}
         >
           <label className="infoLabel">아이디</label>
-          <input />
+          <input placeholder="아이디를 입력해주세요." />
+          <button id="checkButton">중복체크</button>
         </div>
         <div
           className="infoBox"
@@ -81,8 +83,13 @@ export default function Signup2(props) {
             주소(도로명)
           </label>
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <input />
-            <input />
+            <div>
+              <input />
+              <button id="checkButton" style={{ width: 150 }}>
+                우편번호찾기
+              </button>
+            </div>
+            <input style={{ width: 800 }} />
           </div>
         </div>
         <div
@@ -90,7 +97,7 @@ export default function Signup2(props) {
           style={{ borderBottom: "solid 2px lightgray" }}
         >
           <label className="infoLabel">병원 연락처</label>
-          <input />
+          <input style={{ width: 300 }} />
         </div>
       </div>
       <div className="buttonBox" style={{ marginTop: 100 }}>

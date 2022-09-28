@@ -32,7 +32,7 @@ export default function LoginForm() {
   return (
     <div id="loginbox">
       <div class="login">
-        <h1 class="title">병원로그인</h1>
+        <h1 className="loginTitle">병원로그인</h1>
         <span style={{ fontSize: 15, marginTop: 10 }}>
           약쏙(전자처방전)을 이용하기 위해서는 회원가입이 필요합니다
         </span>

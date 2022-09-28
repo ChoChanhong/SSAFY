@@ -58,8 +58,8 @@
     font-size: large;
 }
 
-.title{
-    color : #5FD068;
+.loginTitle{
+    color : #5FD068 !important;
     margin-top: 10px;
 }
 
