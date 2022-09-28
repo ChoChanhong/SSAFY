@@ -51,11 +51,11 @@
 .infoBox {
   height: 50px;
   display: flex;
-  border-bottom: solid 1px lightgray;
+  border-bottom: solid 1px #EEEEEE;
 }
 
 .infoLabel {
-  background-color: lightgray;
+  background-color: #EEEEEE;
   height: 50px;
   width: 200px;
   font-weight: bold;
