@@ -82,3 +82,14 @@ div > input {
   border-color: transparent;
   font-weight: bold;
 }
+
+.successTitle {
+  font-size: 70px;
+  font-weight: bold;
+}
+
+.subTitle {
+  font-size: 50px;
+  font-weight: bold;
+  color:#5681EF;
+}
