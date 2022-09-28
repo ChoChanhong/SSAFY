@@ -70,7 +70,7 @@ export default function PhLoginForm() {
       <div class="info">
         <img className="logoImg" src="img/001.png" alt="logo" />
         <div class="buttonbox">
-          <Link to="/doc/signup">
+          <Link to="/ph/signup">
             <button className="linkbutton">회원가입</button>
           </Link>
           <Link to="/">
