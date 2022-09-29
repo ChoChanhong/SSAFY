@@ -1,22 +1,21 @@
 import { React, useState } from "react";
 import { Link } from "react-router-dom";
-import { Select } from "@mui/joy";
+import { Modal, Select } from "@mui/joy";
 import { Option } from "@mui/joy";
-import DaumPostCode from 'react-daum-postcode';
+import DaumPostCode from "react-daum-postcode";
 import "./DocSignup.css";
 
 export default function Signup2(props) {
-
-  const [show,setShow] = useState(false)
-  const [address,setAddress] = useState('')
-  const [account,setAccount] = useState('')
+  const [show, setShow] = useState(false);
+  const [address, setAddress] = useState("");
+  const [account, setAccount] = useState("");
 
   function Next() {
     props.setStep(3);
   }
 
-  function changeShow(){
-    setShow(true)
+  function changeShow() {
+    setShow(true);
   }
   const getAccount = async () => {
     try {
@@ -32,24 +31,25 @@ export default function Signup2(props) {
     } catch (error) {
       console.error(error);
     }
-  }
-  
+  };
+
   const handleComplete = (data) => {
     let fullAddress = data.address;
-    let extraAddress = '';
-    if (data.addressType === 'R') {
-        if (data.bname !== '') {
-            extraAddress += data.bname;
-        }
-        if (data.buildingName !== '') {
-            extraAddress += (extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName);
-        }
-        fullAddress += (extraAddress !== '' ? ` (${extraAddress})` : '');
+    let extraAddress = "";
+    if (data.addressType === "R") {
+      if (data.bname !== "") {
+        extraAddress += data.bname;
+      }
+      if (data.buildingName !== "") {
+        extraAddress +=
+          extraAddress !== "" ? `, ${data.buildingName}` : data.buildingName;
+      }
+      fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
-    console.log(fullAddress)
-    setAddress(fullAddress)
+    console.log(fullAddress);
+    setAddress(fullAddress);
     //fullAddress -> 전체 주소반환
-  }
+  };
 
   return (
     <div className="signBox" style={{ marginTop: 25 }}>
@@ -84,7 +84,7 @@ export default function Signup2(props) {
           바랍니다.
         </p>
         <div className="infoBox" style={{ borderTop: "solid 2px lightgray" }}>
-          <label className="infoLabel">약국명</label>
+          <label className="infoLabel">병원명</label>
           <input style={{ width: 500 }} />
           <label className="infoLabel" style={{ marginLeft: 20 }}>
             요양기관번호
@@ -92,7 +92,7 @@ export default function Signup2(props) {
           <input style={{ width: 500 }} />
         </div>
         <div className="infoBox">
-          <label className="infoLabel">대표약사성명</label>
+          <label className="infoLabel">대표원장성명</label>
           <input style={{ width: 500 }} />
           <label className="infoLabel" style={{ marginLeft: 20 }}>
             면허번호
@@ -126,23 +126,33 @@ export default function Signup2(props) {
           </label>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div>
-              <input readOnly value={address}/>
-              <button id="checkButton" onClick = {changeShow} style={{ width: 150 }}>
+              <button
+                id="checkButton"
+                onClick={changeShow}
+                style={{ width: 150 }}
+              >
                 우편번호찾기
               </button>
+              <input disabled placeholder="우편번호찾기로 주소를 입력하세요." readOnly value={address} style={{ width: 700 }} />
             </div>
-            <input style={{ width: 800 }} />
+            <input
+              style={{ width: 500, marginLeft: 175 }}
+              placeholder="상세주소를 입력해주세요."
+            />
+          </div>
+          <div className="adressBox">
+            {show ? (
+              <DaumPostCode onComplete={handleComplete} className="post-code" />
+            ) : (
+              ""
+            )}
           </div>
         </div>
         <div
           className="infoBox"
           style={{ borderBottom: "solid 1px lightgray" }}
         >
-          <label className="infoLabel">약국 연락처</label>
-          <input style={{ width: 500 }} />
-          <label className="infoLabel" style={{ marginLeft: 20 }}>
-            사업자 등록번호
-          </label>
+          <label className="infoLabel">병원 연락처</label>
           <input style={{ width: 500 }} />
         </div>
         <div
@@ -150,8 +160,10 @@ export default function Signup2(props) {
           style={{ borderBottom: "solid 2px lightgray" }}
         >
           <label className="infoLabel">지갑 등록</label>
-          <input readOnly value={account}/>
-          <button id="checkButton" onClick={getAccount}>지갑연결</button>
+          <input readOnly value={account} />
+          <button id="checkButton" onClick={getAccount}>
+            지갑연결
+          </button>
         </div>
       </div>
       <div className="buttonBox" style={{ marginTop: 30 }}>
@@ -171,9 +183,13 @@ export default function Signup2(props) {
           가입신청
         </button>
       </div>
-      <div>
-        {show ? <DaumPostCode onComplete={handleComplete} className="post-code"/> : ''}
-      </div>
+      {/* <div className="adressBox">
+        {show ? (
+          <DaumPostCode onComplete={handleComplete} className="post-code" />
+        ) : (
+          ""
+        )}
+      </div> */}
     </div>
   );
 }

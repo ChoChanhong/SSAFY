@@ -68,7 +68,7 @@ export default function LoginForm() {
             onChange={PasswordChange}
           />
         </div>
-        <button onClick={Send} id="docloginbutton">
+        <button onClick={Send} id="docloginbutton" style={{height: 50}}>
           로그인
         </button>
         <Link to="/" class="link">

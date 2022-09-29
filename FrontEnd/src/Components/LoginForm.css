@@ -90,10 +90,10 @@
 }
 
 .linkbutton{
-    border: solid #5FD068;
+    border: solid #5FD068 !important;
     border-width: 2px;
     background-color: transparent;
-    color: #5FD068;
+    color: #5FD068 !important;
     margin-top: 20px;
     margin-left: 10px;
     margin-right: 10px;
