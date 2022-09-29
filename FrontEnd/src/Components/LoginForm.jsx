@@ -1,34 +1,48 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import { injected } from "../lib/Connectors";
-import { useWeb3React } from "@web3-react/core";
 import { useNavigate } from "react-router-dom";
 import { TextField, FormLabel } from "@mui/joy";
+import { Link } from 'react-router-dom';
 
 import "./LoginForm.css";
 
 export default function LoginForm() {
-  const navigate = useNavigate();
-  const { account, active, error, activate, deactivate } = useWeb3React();
 
-  const [id, setId] = useState("");
-  const [password, setPass] = useState("");
+    const navigate = useNavigate();
+    const [id, setId] = useState("");
+    const [password, setPass] = useState("");
+    const localStorage = window.localStorage
+    const URL = 'https://j7e205.p.ssafy.io/api/hospitals/login'
 
-  function IdChange(e) {
+    function IdChange(e) {
     setId(e.target.value);
   }
-  function PasswordChange(e) {
+    function PasswordChange(e) {
     setPass(e.target.value);
   }
+    
 
-  function Send() {
-    console.log(id, password);
-    //api 통해서 로그인 보내고 아이디 일치시
-    activate(injected);
-    navigate("/doc");
-  }
+    function setAuthorizationToken(token){
+        if(token){
+            axios.defaults.headers.common[
+                "Authorization"
+              ] = `Bearer ${token}`;
+        }else{
+            delete axios.defaults.headers.common["Authorization"];
+        }
+    }
 
+    function Send(){
+        console.log(id,password)
+        axios.post(URL,{ "userId" : id , "userPassword" : password })
+        .then(
+            function(res){
+                localStorage.setItem('login-token', res.data.accessToken)
+                setAuthorizationToken(localStorage.getItem('login-token'))
+            }
+        )
+
+    }
   return (
     <div id="loginbox">
       <div class="login">
@@ -57,25 +71,17 @@ export default function LoginForm() {
             placeholder="비밀번호를 입력해주세요."
             onChange={PasswordChange}
           />
+                <button onClick={Send} id = "loginbutton">로그인</button>
+                <Link to="/" class = "link" >아이디/비밀번호 찾기</Link>
+            </div>
+            <div class = "info">
+                <img class = "logo"/>
+                <div class = "buttonbox">
+                    <Link to="/doc/signup" class = "linkbutton">회원가입</Link>
+                    <Link to="/" class = "linkbutton">의사가이드</Link>
+                </div>
+            </div>
         </div>
-        <button onClick={Send} id="loginbutton">
-          로그인
-        </button>
-        <Link to="/" class="link">
-          아이디/비밀번호 찾기
-        </Link>
-      </div>
-      <div class="info">
-        <img className="logoImg" src="img/001.png" alt="logo" />
-        <div class="buttonbox">
-          <Link to="/doc/signup">
-            <button className="linkbutton">회원가입</button>
-          </Link>
-          <Link to="/">
-            <button className="linkbutton">이용방법</button>
-          </Link>
-        </div>
-      </div>
     </div>
-  );
-}
+        )
+    }
