@@ -93,3 +93,8 @@ div > input {
   font-weight: bold;
   color:#5681EF;
 }
+
+.addressBox {
+  position: absolute;
+  display: flex;
+}

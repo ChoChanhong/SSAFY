@@ -98,6 +98,10 @@ export default function Signup2(props) {
         >
           <label className="infoLabel">병원 연락처</label>
           <input style={{ width: 300 }} />
+          <label className="infoLabel" style={{ marginLeft: 20 }}>
+            사업자 등록번호
+          </label>
+          <input style={{ width: 500 }} />
         </div>
       </div>
       <div className="buttonBox" style={{ marginTop: 100 }}>
