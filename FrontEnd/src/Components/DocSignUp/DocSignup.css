@@ -27,8 +27,8 @@
   justify-content: center;
 }
 
-.button {
-  border: solid 1px #5681EF;
+.docbutton {
+  border: solid 1px #5681EF !important;
   height: 40px;
   width: 200px;
   font-size: 15px;

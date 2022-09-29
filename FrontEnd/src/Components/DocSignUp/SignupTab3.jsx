@@ -27,9 +27,10 @@ export default function Signup3() {
       <div style={{ marginTop: 40 }}>
         <Link to="">
           <button
-            className="button"
+            className="docbutton"
             style={{
               borderColor: "transparent",
+              backgroundColor: "#5681EF",
               width: 400,
               height: 50,
               fontSize: 25,
