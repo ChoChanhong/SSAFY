@@ -43,7 +43,7 @@
     margin-bottom: 10px;
 }
 
-#loginbutton{
+#docloginbutton{
     border-color: transparent;
     border-radius: 10px;
     background-color : #5FD068;
@@ -58,7 +58,7 @@
     font-size: large;
 }
 
-.loginTitle{
+.docloginTitle{
     color : #5FD068 !important;
     margin-top: 10px;
 }

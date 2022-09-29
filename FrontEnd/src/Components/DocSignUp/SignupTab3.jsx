@@ -11,13 +11,14 @@ export default function Signup3() {
       <div style={{ marginTop: 80 }}>
         <Link to="/doc/login">
           <button
-            className="button"
+            className="docbutton"
             style={{
               borderColor: "transparent",
               backgroundColor: "#5FD068",
               width: 400,
               height: 50,
               fontSize: 25,
+              color:"white",
             }}
           >
             로그인
@@ -34,6 +35,7 @@ export default function Signup3() {
               width: 400,
               height: 50,
               fontSize: 25,
+              color: "white",
             }}
           >
             의사 가이드

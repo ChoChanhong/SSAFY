@@ -40,7 +40,7 @@ export default function LoginForm() {
   return (
     <div id="loginbox">
       <div class="login">
-        <h1 className="loginTitle" style={{ Color: "#5FD068" }}>
+        <h1 className="docloginTitle" style={{ Color: "#5FD068" }}>
           병원로그인
         </h1>
         <span style={{ fontSize: 15, marginTop: 10 }}>
@@ -68,7 +68,7 @@ export default function LoginForm() {
             onChange={PasswordChange}
           />
         </div>
-        <button onClick={Send} id="loginbutton">
+        <button onClick={Send} id="docloginbutton">
           로그인
         </button>
         <Link to="/" class="link">

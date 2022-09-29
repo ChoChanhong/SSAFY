@@ -28,7 +28,7 @@
 }
 
 .docbutton {
-  border: solid 1px #5681EF !important;
+  border: solid 1px #5681EF;
   height: 40px;
   width: 200px;
   font-size: 15px;
