@@ -90,19 +90,49 @@ public class PatientController {
 		return ResponseEntity.status(401).body(UserLoginPostRes.of(401, "Invalid Password", null));
 	}
 
+//	@GetMapping("/me")
+//	@ApiOperation(value = "환자 본인 정보 조회", notes = "로그인한 환자의 정보를 응답한다.")
+//    @ApiResponses({
+//        @ApiResponse(code = 200, message = "성공"),
+//        @ApiResponse(code = 401, message = "인증 실패"),
+//        @ApiResponse(code = 404, message = "사용자 없음"),
+//        @ApiResponse(code = 500, message = "서버 오류")
+//    })
+//	public ResponseEntity<?> getPatientInfo(@ApiIgnore Authentication authentication) {
+//		/**
+// 		 * 요청 헤더 액세스 토큰이 포함된 경우에만 실행되는 인증 처리이후, 리턴되는 인증 정보 객체(authentication) 통해서 요청한 유저 식별.
+// 		 * 액세스 토큰이 없이 요청하는 경우, 403 에러({"error": "Forbidden", "message": "Access Denied"}) 발생.
+// 		 */
+//		if (authentication == null) {
+//			return new ResponseEntity<>("토큰이 없습니다", HttpStatus.valueOf(403));
+//		}
+//		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
+//		String userId = userDetails.getUsername();
+//		long userSeq = userService.getUserByUserId(userId).getUserSeq();
+//
+//		PatientInfo patientInfo = patientService.getPatientInfo(userSeq);
+//
+//		System.out.println(patientInfo.getPatient().getPatientRRN());
+//
+//		if (patientInfo != null) {
+//			return new ResponseEntity<PatientInfo>(patientInfo, HttpStatus.valueOf(200));
+//		}
+//		return new ResponseEntity<>("잘못된 요청입니다", HttpStatus.valueOf(400));
+//	}
+
 	@GetMapping("/me")
-	@ApiOperation(value = "환자 본인 정보 조회", notes = "로그인한 환자의 정보를 응답한다.")
-    @ApiResponses({
-        @ApiResponse(code = 200, message = "성공"),
-        @ApiResponse(code = 401, message = "인증 실패"),
-        @ApiResponse(code = 404, message = "사용자 없음"),
-        @ApiResponse(code = 500, message = "서버 오류")
-    })
+	@ApiOperation(value = "환자 정보 조회", notes = "로그인한 환자의 정보를 응답한다.")
+	@ApiResponses({
+			@ApiResponse(code = 200, message = "성공"),
+			@ApiResponse(code = 401, message = "인증 실패"),
+			@ApiResponse(code = 404, message = "사용자 없음"),
+			@ApiResponse(code = 500, message = "서버 오류")
+	})
 	public ResponseEntity<?> getPatientInfo(@ApiIgnore Authentication authentication) {
 		/**
- 		 * 요청 헤더 액세스 토큰이 포함된 경우에만 실행되는 인증 처리이후, 리턴되는 인증 정보 객체(authentication) 통해서 요청한 유저 식별.
- 		 * 액세스 토큰이 없이 요청하는 경우, 403 에러({"error": "Forbidden", "message": "Access Denied"}) 발생.
- 		 */
+		 * 요청 헤더 액세스 토큰이 포함된 경우에만 실행되는 인증 처리이후, 리턴되는 인증 정보 객체(authentication) 통해서 요청한 유저 식별.
+		 * 액세스 토큰이 없이 요청하는 경우, 403 에러({"error": "Forbidden", "message": "Access Denied"}) 발생.
+		 */
 		if (authentication == null) {
 			return new ResponseEntity<>("토큰이 없습니다", HttpStatus.valueOf(403));
 		}
@@ -132,7 +162,7 @@ public class PatientController {
 			@ApiResponse(code = 500, message = "서버 오류")
 	})
 	public ResponseEntity<?> updatePatientInfo(@ApiIgnore Authentication authentication,
-											@RequestBody @ApiParam(value="회원가입 정보", required = true) CreatePatientPostReq updatePatientInfo) {
+											@RequestBody @ApiParam(value="환자 정보 수정", required = true) CreatePatientPostReq updatePatientInfo) {
 
 		if (authentication == null) {
 			return new ResponseEntity<>("토큰이 없습니다", HttpStatus.valueOf(403));
@@ -160,7 +190,7 @@ public class PatientController {
 			@ApiResponse(code = 404, message = "사용자 없음"),
 			@ApiResponse(code = 500, message = "서버 오류")
 	})
-	public ResponseEntity<?> deleteUser(@ApiIgnore Authentication authentication) {
+	public ResponseEntity<?> deletePatient(@ApiIgnore Authentication authentication) {
 
 		if (authentication == null) {
 			return new ResponseEntity<>("토큰이 없습니다", HttpStatus.valueOf(403));
