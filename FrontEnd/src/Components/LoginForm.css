@@ -27,9 +27,9 @@
 .info{
     width : 100%;
     margin-top : 10px;
-    margin-bottom: 10px;
     margin-left : auto; 
     margin-right : auto; 
+    margin-bottom: 10px;
     border-left : solid 1px darkgray;
     display: flex;
     flex-direction: column;
