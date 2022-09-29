@@ -1,10 +1,10 @@
-#signuptabbar{
+#clisignuptabbar{
   display : flex;
   flex-direction: row;
   justify-content: space-around;
 }
 
-.signuptabSelected{
+.clisignuptabSelected{
   color : #5681EF !important;
   background-color: white !important;
   font-weight: bold; 
@@ -12,12 +12,12 @@
   flex-direction: column;
 }
 
-.signuptab{
+.clisignuptab{
   display: flex;
   flex-direction: column;
 }
 
-.button{
+.clibutton{
   background-color: #5681EF;
   color:white;
 }

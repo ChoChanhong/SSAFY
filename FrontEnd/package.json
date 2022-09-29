@@ -21,8 +21,6 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
-    "react-native-paper": "^4.12.4",
-    "react-native-vector-icons": "^9.2.0",
     "react-responsive": "^9.0.0-beta.10",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.3.0",
