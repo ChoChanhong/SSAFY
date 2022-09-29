@@ -10,7 +10,7 @@ export default function Signup2(props) {
   }
 
   return (
-    <div className="signBox">
+    <div className="signBox" style={{ marginTop: 25 }}>
       <div className="titleBox">
         <h3 className="title">회원가입</h3>
         {/* <div style={{ color: "red", marginTop: 15 }}>
@@ -94,7 +94,7 @@ export default function Signup2(props) {
         </div>
         <div
           className="infoBox"
-          style={{ borderBottom: "solid 2px lightgray" }}
+          style={{ borderBottom: "solid 1px lightgray" }}
         >
           <label className="infoLabel">약국 연락처</label>
           <input style={{ width: 500 }} />
@@ -103,17 +103,28 @@ export default function Signup2(props) {
           </label>
           <input style={{ width: 500 }} />
         </div>
+        <div
+          className="infoBox"
+          style={{ borderBottom: "solid 2px lightgray" }}
+        >
+          <label className="infoLabel">지갑 등록</label>
+          <button id="checkButton">지갑연결</button>
+        </div>
       </div>
-      <div className="buttonBox" style={{ marginTop: 100 }}>
+      <div className="buttonBox" style={{ marginTop: 30 }}>
         <Link to="/">
           <button
-            className="button"
+            className="docbutton"
             style={{ color: "#5681EF", backgroundColor: "transparent" }}
           >
             취소
           </button>
         </Link>
-        <button className="button" onClick={Next}>
+        <button
+          className="docbutton"
+          style={{ color: "#5681EF", backgroundColor: "transparent" }}
+          onClick={Next}
+        >
           가입신청
         </button>
       </div>

@@ -36,11 +36,11 @@ export default function Signup1(props) {
       </div>
       <div className="buttonBox">
         <Link to="/">
-          <button className="button" style={{ color: "#5681EF", backgroundColor: "transparent" }}>
+          <button className="docbutton" style={{ color: "#5681EF", backgroundColor: "transparent" }}>
             동의안함
           </button>
         </Link>
-        <button className="button" onClick={Next}>
+        <button className="docbutton" style={{color:"#5681EF", backgroundColor:"transparent"}} onClick={Next}>
           다음으로
         </button>
       </div>

@@ -8,7 +8,8 @@ export default function SignTab1(props) {
   const [id, setID] = useState("");
   const [password, setPass] = useState("");
   const [passconfirm, SetPassCon] = useState("");
-  const buttonStyle = {
+
+  const blueStyle = {
     textDecoration: "none",
     color: "white",
     fontWeight: "bold",
@@ -18,6 +19,17 @@ export default function SignTab1(props) {
     borderRadius: 10,
     borderColor: "transparent",
   };
+  const greenStyle = {
+    textDecoration: "none",
+    color: "white",
+    fontWeight: "bold",
+    backgroundColor: "#5FD068",
+    height: 50,
+    width: 200,
+    borderRadius: 10,
+    borderColor: "transparent",
+  };
+
   function Next() {
     if (password === passconfirm) {
       if (check) {
@@ -74,7 +86,7 @@ export default function SignTab1(props) {
           type="password"
         />
       </div>
-      <div style={{marginTop: 10}}>
+      <div style={{ marginTop: 10 }}>
         <strong>약관</strong>
         <AspectRatio variant="outlined">
           <Typography level="inherit" fontWeight="lg">
@@ -83,14 +95,13 @@ export default function SignTab1(props) {
         </AspectRatio>
       </div>
       <div class="mt-3 d-flex justify-content-center">
-        <Checkbox
-          size="sm"
-          onChange={changeCheck}
-          label="약관에 동의합니다."
-        />
+        <Checkbox size="sm" onChange={changeCheck} label="약관에 동의합니다." />
       </div>
-      <div class="mt-5 d-flex justify-content-center">
-        <button onClick={Next} style={buttonStyle}>
+      <div class="mt-3 d-flex justify-content-center">
+        <button style={greenStyle}>지갑연결</button>
+      </div>
+      <div class="mt-3 d-flex justify-content-center">
+        <button onClick={Next} style={blueStyle}>
           다음 단계
         </button>
       </div>
