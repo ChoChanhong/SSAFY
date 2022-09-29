@@ -43,45 +43,53 @@ export default function LoginForm() {
         )
 
     }
-  return (
-    <div id="loginbox">
-      <div class="login">
-        <h1 className="loginTitle">병원로그인</h1>
-        <span style={{ fontSize: 15, marginTop: 10 }}>
-          약쏙(전자처방전)을 이용하기 위해서는 회원가입이 필요합니다
-        </span>
-        <div style={{ marginTop: 30 }}>
-          <FormLabel style={{ marginBottom: 5, fontWeight: "bold" }}>
-            아이디
-          </FormLabel>
-          <TextField
-            class="a"
-            className="logInput"
-            placeholder="아이디를 입력해주세요."
-            onChange={IdChange}
-          />
-          <FormLabel
-            style={{ marginTop: 10, marginBottom: 5, fontWeight: "bold" }}
-          >
-            비밀번호
-          </FormLabel>
-          <TextField
-            class="a"
-            type="password"
-            placeholder="비밀번호를 입력해주세요."
-            onChange={PasswordChange}
-          />
-                <button onClick={Send} id = "loginbutton">로그인</button>
-                <Link to="/" class = "link" >아이디/비밀번호 찾기</Link>
+    return (
+        <div id="loginbox">
+          <div class="login">
+            <h1 className="loginTitle">병원로그인</h1>
+            <span style={{ fontSize: 15, marginTop: 10 }}>
+              약쏙(전자처방전)을 이용하기 위해서는 회원가입이 필요합니다
+            </span>
+            <div style={{ marginTop: 30 }}>
+              <FormLabel style={{ marginBottom: 5, fontWeight: "bold" }}>
+                아이디
+              </FormLabel>
+              <TextField
+                class="a"
+                className="logInput"
+                placeholder="아이디를 입력해주세요."
+                onChange={IdChange}
+              />
+              <FormLabel
+                style={{ marginTop: 10, marginBottom: 5, fontWeight: "bold" }}
+              >
+                비밀번호
+              </FormLabel>
+              <TextField
+                class="a"
+                type="password"
+                placeholder="비밀번호를 입력해주세요."
+                onChange={PasswordChange}
+              />
             </div>
-            <div class = "info">
-                <img class = "logo"/>
-                <div class = "buttonbox">
-                    <Link to="/doc/signup" class = "linkbutton">회원가입</Link>
-                    <Link to="/" class = "linkbutton">의사가이드</Link>
-                </div>
+            <button onClick={Send} id="loginbutton">
+              로그인
+            </button>
+            <Link to="/" class="link">
+              아이디/비밀번호 찾기
+            </Link>
+          </div>
+          <div class="info">
+            <img className="logoImg" src="img/001.png" alt="logo" />
+            <div class="buttonbox">
+              <Link to="/doc/signup">
+                <button className="linkbutton">회원가입</button>
+              </Link>
+              <Link to="/">
+                <button className="linkbutton">이용방법</button>
+              </Link>
             </div>
+          </div>
         </div>
-    </div>
-        )
+      );
     }
