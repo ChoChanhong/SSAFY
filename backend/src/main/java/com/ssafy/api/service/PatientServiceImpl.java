@@ -26,20 +26,6 @@ public class PatientServiceImpl implements PatientService {
 	
 	@Autowired
 	PasswordEncoder passwordEncoder;
-	
-//	@Override
-//	public  createUser(UserRegisterPostReq userRegisterInfo) {
-//		User user = new User();
-//
-//		user.setUserId(userRegisterInfo.getUserId());
-//		user.setUserPassword(passwordEncoder.encode(userRegisterInfo.getUserPassword())); // 보안을 위해서 유저 패스워드 암호화 하여 디비에 저장
-//		user.setUserName(userRegisterInfo.getUserName());
-//		user.setUserRRN(userRegisterInfo.getUserRRN());
-//		user.setUserTel(userRegisterInfo.getUserTel());
-//		user.setUserEmail(userRegisterInfo.getUserEmail());
-//
-//		return userRepository.save(user);
-//	}
 
 	@Override
 	public PatientInfo createPatient(CreatePatientPostReq createPatientPostReq) {
@@ -75,31 +61,7 @@ public class PatientServiceImpl implements PatientService {
 		return patientInfo;
 	}
 
-	//	// 회원 정보 수정
-//	@Override
-//	public User updateUserInfo(String userId, UserRegisterPostReq updateInfo) {
-//		Optional<User> updatedUser = userRepository.findByUserId(userId);
-//
-//		if (updatedUser.isPresent()) {
-//			updatedUser.get().setUserId(updateInfo.getUserId());
-//
-//			if (userRepository.countByUserId(updateInfo.getUserId()) != 0) {
-//				if (!updatedUser.get().getUserId().equals(updateInfo.getUserId())) {
-//					return null;
-//				}
-//			}
-//			updatedUser.get().setUserId(updateInfo.getUserId());
-//			updatedUser.get().setUserPassword(passwordEncoder.encode(updateInfo.getUserPassword()));
-//			updatedUser.get().setUserName(updateInfo.getUserName());
-//			updatedUser.get().setUserRRN(updateInfo.getUserRRN());
-//			updatedUser.get().setUserTel(updateInfo.getUserTel());
-//			updatedUser.get().setUserEmail(updateInfo.getUserEmail());
-//
-//		}
-//		userRepository.save(updatedUser.get());
-//		return updatedUser.get();
-//	}
-
+	// 회원 정보 수정
 	@Override
 	public PatientInfo updatePatient(long userSeq, CreatePatientPostReq updatePatientPostReq) {
 //		Optional<PatientInfo> updatePatientInfo = PatientInfo
@@ -108,15 +70,15 @@ public class PatientServiceImpl implements PatientService {
 //		User user = new User();
 //		Patient patient = new Patient();
 
-		updatedUser.get().setUserId(updatePatientPostReq.getPatientId());
+//		updatedUser.get().setUserId(updatePatientPostReq.getPatientId());
 		updatedUser.get().setUserPassword(passwordEncoder.encode(updatePatientPostReq.getPatientPassword())); // 보안을 위해서 유저 패스워드 암호화 하여 디비에 저장
 		updatedUser.get().setUserName(updatePatientPostReq.getPatientName());
 		updatedUser.get().setUserEmail(updatePatientPostReq.getPatientEmail());
-		updatedUser.get().setUserIdx(0);
+//		updatedUser.get().setUserIdx(0);
 
 		long updatedUserSeq = userRepository.save(updatedUser.get()).getUserSeq();
 
-		updatedPatient.get().setPatientUserSeq(userSeq);
+//		updatedPatient.get().setPatientUserSeq(userSeq);
 		updatedPatient.get().setPatientRRN(updatePatientPostReq.getPatientRRN());
 
 		long updatedPatientSeq = patientRepository.save(updatedPatient.get()).getPatientSeq();
