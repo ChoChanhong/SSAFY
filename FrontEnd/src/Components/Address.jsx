@@ -1,7 +1,7 @@
 import REACT, { useState } from 'react';
 import DaumPostCode from 'react-daum-postcode';
 
-export default function Order() {
+export default function Address() {
     const handleComplete = (data) => {
         let fullAddress = data.address;
         let extraAddress = '';
@@ -17,11 +17,5 @@ export default function Order() {
         console.log(fullAddress)
         //fullAddress -> 전체 주소반환
     }
-    return (
-        <div>
-            <div>dddddd</div>
-            <DaumPostCode onComplete={handleComplete} className="post-code" />
-            <div>ddddd</div>
-        </div>
-    );
+    return (<DaumPostCode onComplete={handleComplete} className="post-code" />);
 }

@@ -2,11 +2,53 @@ import { React, useState } from "react";
 import { Link } from "react-router-dom";
 import { Select } from "@mui/joy";
 import { Option } from "@mui/joy";
+import DaumPostCode from 'react-daum-postcode';
 import "./DocSignup.css";
 
 export default function Signup2(props) {
+
+  const [show,setShow] = useState(false)
+  const [address,setAddress] = useState('')
+  const [account,setAccount] = useState('')
+
   function Next() {
     props.setStep(3);
+  }
+
+  function changeShow(){
+    setShow(true)
+  }
+  const getAccount = async () => {
+    try {
+      if (window.ethereum) {
+        const accounts = await window.ethereum.request({
+          method: "eth_requestAccounts",
+        });
+
+        setAccount(accounts[0]);
+      } else {
+        alert("Install Metamask!");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  
+  const handleComplete = (data) => {
+    let fullAddress = data.address;
+    let extraAddress = '';
+    if (data.addressType === 'R') {
+        if (data.bname !== '') {
+            extraAddress += data.bname;
+        }
+        if (data.buildingName !== '') {
+            extraAddress += (extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName);
+        }
+        fullAddress += (extraAddress !== '' ? ` (${extraAddress})` : '');
+    }
+    console.log(fullAddress)
+    setAddress(fullAddress)
+    //fullAddress -> 전체 주소반환
   }
 
   return (
@@ -84,8 +126,8 @@ export default function Signup2(props) {
           </label>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div>
-              <input />
-              <button id="checkButton" style={{ width: 150 }}>
+              <input readOnly value={address}/>
+              <button id="checkButton" onClick = {changeShow} style={{ width: 150 }}>
                 우편번호찾기
               </button>
             </div>
@@ -108,7 +150,8 @@ export default function Signup2(props) {
           style={{ borderBottom: "solid 2px lightgray" }}
         >
           <label className="infoLabel">지갑 등록</label>
-          <button id="checkButton">지갑연결</button>
+          <input readOnly value={account}/>
+          <button id="checkButton" onClick={getAccount}>지갑연결</button>
         </div>
       </div>
       <div className="buttonBox" style={{ marginTop: 30 }}>
@@ -127,6 +170,9 @@ export default function Signup2(props) {
         >
           가입신청
         </button>
+      </div>
+      <div>
+        {show ? <DaumPostCode onComplete={handleComplete} className="post-code"/> : ''}
       </div>
     </div>
   );
