@@ -9,6 +9,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@metamask/detect-provider": "^1.2.0",
     "@mui/joy": "^5.0.0-alpha.46",
     "@mui/material": "^5.10.6",
     "@react-navigation/bottom-tabs": "^6.4.0",
@@ -25,12 +26,15 @@
     "react-dom": "^18.2.0",
     "react-native-paper": "^4.12.4",
     "react-native-vector-icons": "^9.2.0",
+    "react-redux": "^8.0.4",
     "react-responsive": "^9.0.0-beta.10",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "redux-promise": "^0.6.0",
+    "redux-thunk": "^2.4.1",
     "web-vitals": "^2.1.4",
-    "web3": "1.0.0-beta.55"
+    "web3": "^1.0.0-beta.55"
   },
   "scripts": {
     "start": "react-scripts start",

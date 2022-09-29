@@ -1,25 +1,25 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
-import { injected } from '../lib/Connectors';
-import { useWeb3React } from '@web3-react/core';
-import { useNavigate } from 'react-router-dom';
 
 import './LoginForm.css'
 
 export default function LoginForm(){
 
-    const navigate = useNavigate();
-    const {
-        account,
-        active,
-        error,
-        activate,
-        deactivate,
-      } = useWeb3React();
-
     const [id,setId] = useState('')
     const [password,setPass] = useState('')
+    const localStorage = window.localStorage
+    const URL = 'https://j7e205.p.ssafy.io/api/hospitals/login'
+
+    function setAuthorizationToken(token){
+        if(token){
+            axios.defaults.headers.common[
+                "Authorization"
+              ] = `Bearer ${token}`;
+        }else{
+            delete axios.defaults.headers.common["Authorization"];
+        }
+    }
 
     function IdChange(e){
         setId(e.target.value)
@@ -28,11 +28,17 @@ export default function LoginForm(){
         setPass(e.target.value)
     }
 
+
     function Send(){
         console.log(id,password)
-        //api 통해서 로그인 보내고 아이디 일치시
-        activate(injected)
-        navigate('/doc')
+        axios.post(URL,{ "userId" : id , "userPassword" : password })
+        .then(
+            function(res){
+                localStorage.setItem('login-token', res.data.accessToken)
+                setAuthorizationToken(localStorage.getItem('login-token'))
+            }
+        )
+
     }
 
     return(

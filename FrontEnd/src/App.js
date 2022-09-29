@@ -1,6 +1,6 @@
+import {React, useState, useEffect} from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-
 //공통
 import Main from './pages/Main';
 import {Intro as ServiceInfo} from './pages/Intro';
@@ -25,6 +25,7 @@ import Order from './pages/Ph/Order';
 
 
 function App() {
+
   return (
     <Routes>
       {/*공통*/}
