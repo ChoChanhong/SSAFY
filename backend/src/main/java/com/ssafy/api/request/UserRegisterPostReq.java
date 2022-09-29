@@ -33,13 +33,9 @@ public class UserRegisterPostReq {
 	@ApiModelProperty(name = "회원 이름", example = "김싸피")
 	String userName;
 
-	@ApiModelProperty(name = "회원 주민등록번호", example = "000000-0000000")
-	String userRRN;
-
-	@ApiModelProperty(name = "회원 전화번호", example = "010-0000-0000")
-	String userTel;
-
 	@ApiModelProperty(name = "회원 이메일", example = "ssafy@ssafy.com")
 	String userEmail;
 
+	@ApiModelProperty(name = "회원 전화번호", example = "010-0000-0000")
+	String userTel;
 }
