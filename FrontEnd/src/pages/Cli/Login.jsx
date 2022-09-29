@@ -10,6 +10,29 @@ export default function Login() {
     query: "(min-width:768px)",
   });
 
+  const blueStyle = {
+    textDecoration: "none",
+    color: "white",
+    fontWeight: "bold",
+    backgroundColor: "#5681EF",
+    height: 50,
+    width: 250,
+    borderRadius: 10,
+    borderColor: "transparent",
+  };
+
+  const greenStyle = {
+    textDecoration: "none",
+    color: "white",
+    fontWeight: "bold",
+    fontSize: "20px",
+    backgroundColor: "#5FD068",
+    height: 50,
+    width: 250,
+    borderRadius: 10,
+    borderColor: "transparent",
+  };
+
   return (
     <div id="webapp-containor">
       <div>{isPc ? <BackGround /> : null}</div>
@@ -20,21 +43,22 @@ export default function Login() {
           </Link>
         </div>
         <p class="fw-bold mt-3">일반사용자 로그인</p>
-        <TextField placeholder="아이디를 입력해주세요."/>
-        <TextField style={{ marginTop: 10 }} placeholder="비밀번호를 입력해주세요."/>
-        <div class="d-flex justify-content-center">
+        <TextField placeholder="아이디를 입력해주세요." />
+        <TextField
+          style={{ marginTop: 10 }}
+          placeholder="비밀번호를 입력해주세요."
+        />
+        <div class="mt-5 d-flex justify-content-center">
           <button
-            id="greenbutton"
-            style={{ marginTop: 50, width: 300, height: 50 }}
+            style={greenStyle}
           >
             로그인
           </button>
         </div>
-        <div class="d-flex justify-content-center">
+        <div class="mt-2 d-flex justify-content-center">
           <Link to="/signup">
             <button
-              id="bluebutton"
-              style={{ marginTop: 10, width: 300, height: 50 }}
+              style={blueStyle}
             >
               회원가입
             </button>
