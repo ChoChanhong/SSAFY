@@ -24,15 +24,15 @@ export default function Signup() {
           <img src="img/002.png" alt="로고" width={50} />
           <h2 class="fw-bold mt-3">회원가입</h2>
         </div>
-        <div id="signuptabber" class="mt-5 d-flex justify-content-center">
+        <div id="clisignuptabber" class="mt-5 d-flex justify-content-center">
           <div
-            className={step === 1 ? "signuptabSelected" : "signuptab"}
+            className={step === 1 ? "clisignuptabSelected" : "clisignuptab"}
             style={{ marginRight: 30 }}
           >
             <span style={{ marginLeft: 15 }}>Step01 회원가입</span>
             <div>______________________</div>
           </div>
-          <div className={step === 2 ? "signuptabSelected" : "signuptab"}>
+          <div className={step === 2 ? "clisignuptabSelected" : "clisignuptab"}>
             <span style={{ marginLeft: 15 }}>Step02 가입완료</span>
             <div>______________________</div>
           </div>
