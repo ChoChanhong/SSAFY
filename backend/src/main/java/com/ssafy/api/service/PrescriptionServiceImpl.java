@@ -76,6 +76,29 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 			return prescriptionInfo;
 	}
 
+	@Override
+	public Prescription updatePrescriptionPharm(long prescriptionSeq, long pharmUserSeq) {
+		Prescription prescription = prescriptionRepository.findPrescriptionByPrescriptionSeq(prescriptionSeq).get();
+
+		prescription.setPharmUserSeq(pharmUserSeq);
+
+		long seq = prescriptionRepository.save(prescription).getPrescriptionSeq();
+
+		return prescriptionRepository.findPrescriptionByPrescriptionSeq(seq).get();
+	}
+
+	@Override
+	public Prescription updatePrescriptionCompletion(long prescriptionSeq) {
+		Prescription prescription = prescriptionRepository.findPrescriptionByPrescriptionSeq(prescriptionSeq).get();
+
+		prescription.setCompletion(true);
+
+		long seq = prescriptionRepository.save(prescription).getPrescriptionSeq();
+
+		return prescriptionRepository.findPrescriptionByPrescriptionSeq(seq).get();
+	}
+
+
 	// 처방전 리스트 조회(환자)
 	@Override
 	public List<Prescription> getPatientPrescriptionList(long patientUserSeq) {
