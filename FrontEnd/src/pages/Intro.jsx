@@ -1,8 +1,43 @@
-import React from "react"
+import { React, useState } from "react";
+import { useMediaQuery } from "react-responsive";
+import BackGround from "../Components/BackGround";
+import ServiceInfo from "../Components/ServiceInfo";
+import UserGuide from "../Components/UserGuide";
+import "./Intro.css";
 
+export function Intro() {
+  const [step, setStep] = useState(1);
+  const tab = {
+    1: <ServiceInfo setStep={setStep} />,
+    2: <UserGuide setStep={setStep} />,
+  };
 
-export function Intro(){
-    return(
-        <h1>서비스소개</h1>
-    )
+  const isPc = useMediaQuery({
+    query: "(min-width:768px)",
+  });
+
+  return (
+    <div id="webapp-containor">
+      <div>{isPc ? <BackGround /> : null}</div>
+      <div id="main">
+        <div class="mb-5">
+          <img style={{ height: 100 }} src="img/001.png" alt="로고" />
+        </div>
+        <div id="introTabber" class="mt-5 d-flex justify-content-center">
+          <div
+            className={step === 1 ? "introTabSelected" : "introTab"}
+            style={{ marginRight: 30 }}
+          >
+            <span style={{ marginLeft: 15 }}>서비스 소개</span>
+            <div>______________________</div>
+          </div>
+          <div className={step === 2 ? "introTabSelected" : "introTab"}>
+            <span style={{ marginLeft: 15 }}>이용가이드</span>
+            <div>______________________</div>
+          </div>
+        </div>
+        {tab[step]}
+      </div>
+    </div>
+  );
 }
