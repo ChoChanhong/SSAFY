@@ -1,7 +1,7 @@
 import Web3 from 'web3';
 
 
-    const nftAbi = [
+    const nftAbi =[
       {
         "inputs": [],
         "stateMutability": "nonpayable",
@@ -180,14 +180,29 @@ import Web3 from 'web3';
             "type": "string"
           },
           {
-            "internalType": "string",
+            "internalType": "uint256",
             "name": "dispensingCount",
-            "type": "string"
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "prescriptionCount",
+            "type": "uint256"
           },
           {
             "internalType": "string",
-            "name": "prescriptionCount",
+            "name": "howtoTake",
             "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "pubDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "prepDate",
+            "type": "uint256"
           }
         ],
         "stateMutability": "view",
@@ -318,6 +333,157 @@ import Web3 from 'web3';
             "type": "address"
           }
         ],
+        "name": "getAllPrescription",
+        "outputs": [
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "userName",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "hosName",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "pharName",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "dCode",
+                "type": "string"
+              },
+              {
+                "internalType": "string[]",
+                "name": "dName",
+                "type": "string[]"
+              },
+              {
+                "internalType": "uint256[]",
+                "name": "dosage",
+                "type": "uint256[]"
+              },
+              {
+                "internalType": "uint256[]",
+                "name": "doseNum",
+                "type": "uint256[]"
+              },
+              {
+                "internalType": "uint256[]",
+                "name": "dosePeriod",
+                "type": "uint256[]"
+              },
+              {
+                "internalType": "uint256",
+                "name": "dispensingCount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "prescriptionCount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "string",
+                "name": "howtoTake",
+                "type": "string"
+              },
+              {
+                "internalType": "uint256",
+                "name": "pubDate",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "prepDate",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct PreScription.preScription[]",
+            "name": "",
+            "type": "tuple[]"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_address",
+            "type": "address"
+          }
+        ],
+        "name": "getAllTokensOwned",
+        "outputs": [
+          {
+            "internalType": "uint256[]",
+            "name": "",
+            "type": "uint256[]"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function",
+        "constant": true
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_from",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "_to",
+            "type": "address"
+          }
+        ],
+        "name": "getPatiantListFromAccount",
+        "outputs": [
+          {
+            "internalType": "uint256[]",
+            "name": "",
+            "type": "uint256[]"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function",
+        "constant": true
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_tokenId",
+            "type": "uint256"
+          }
+        ],
+        "name": "getOfferCountOfToken",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function",
+        "constant": true
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_address",
+            "type": "address"
+          }
+        ],
         "name": "setPatientAuth",
         "outputs": [],
         "stateMutability": "nonpayable",
@@ -380,6 +546,26 @@ import Web3 from 'web3';
         "inputs": [
           {
             "internalType": "address",
+            "name": "_address",
+            "type": "address"
+          }
+        ],
+        "name": "getBalanceOf",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function",
+        "constant": true
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
             "name": "_from",
             "type": "address"
           },
@@ -402,34 +588,122 @@ import Web3 from 'web3';
       {
         "inputs": [
           {
-            "internalType": "string",
-            "name": "_userName",
-            "type": "string"
+            "internalType": "address",
+            "name": "_from",
+            "type": "address"
           },
           {
-            "internalType": "string",
-            "name": "_hosName",
-            "type": "string"
+            "internalType": "address",
+            "name": "_to",
+            "type": "address"
           },
           {
-            "internalType": "string",
-            "name": "_pharName",
-            "type": "string"
+            "internalType": "uint256",
+            "name": "_tokenId",
+            "type": "uint256"
+          }
+        ],
+        "name": "transferDoctorToPatient",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_from",
+            "type": "address"
           },
           {
-            "internalType": "string",
-            "name": "_dCode",
-            "type": "string"
+            "internalType": "address",
+            "name": "_to",
+            "type": "address"
           },
           {
-            "internalType": "string",
-            "name": "_dispensingCount",
-            "type": "string"
-          },
+            "internalType": "uint256",
+            "name": "_tokenId",
+            "type": "uint256"
+          }
+        ],
+        "name": "transferPharmacyToPatient",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
           {
-            "internalType": "string",
-            "name": "_prescriptionCount",
-            "type": "string"
+            "components": [
+              {
+                "internalType": "string",
+                "name": "userName",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "hosName",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "pharName",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "dCode",
+                "type": "string"
+              },
+              {
+                "internalType": "string[]",
+                "name": "dName",
+                "type": "string[]"
+              },
+              {
+                "internalType": "uint256[]",
+                "name": "dosage",
+                "type": "uint256[]"
+              },
+              {
+                "internalType": "uint256[]",
+                "name": "doseNum",
+                "type": "uint256[]"
+              },
+              {
+                "internalType": "uint256[]",
+                "name": "dosePeriod",
+                "type": "uint256[]"
+              },
+              {
+                "internalType": "uint256",
+                "name": "dispensingCount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "prescriptionCount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "string",
+                "name": "howtoTake",
+                "type": "string"
+              },
+              {
+                "internalType": "uint256",
+                "name": "pubDate",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "prepDate",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct PreScription.preScription",
+            "name": "_preScription",
+            "type": "tuple"
           }
         ],
         "name": "mint",
@@ -470,14 +744,49 @@ import Web3 from 'web3';
                 "type": "string"
               },
               {
-                "internalType": "string",
+                "internalType": "string[]",
+                "name": "dName",
+                "type": "string[]"
+              },
+              {
+                "internalType": "uint256[]",
+                "name": "dosage",
+                "type": "uint256[]"
+              },
+              {
+                "internalType": "uint256[]",
+                "name": "doseNum",
+                "type": "uint256[]"
+              },
+              {
+                "internalType": "uint256[]",
+                "name": "dosePeriod",
+                "type": "uint256[]"
+              },
+              {
+                "internalType": "uint256",
                 "name": "dispensingCount",
-                "type": "string"
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "prescriptionCount",
+                "type": "uint256"
               },
               {
                 "internalType": "string",
-                "name": "prescriptionCount",
+                "name": "howtoTake",
                 "type": "string"
+              },
+              {
+                "internalType": "uint256",
+                "name": "pubDate",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "prepDate",
+                "type": "uint256"
               }
             ],
             "internalType": "struct PreScription.preScription",
@@ -490,6 +799,9 @@ import Web3 from 'web3';
       }
     ];
 
-    export const nftCA = 'contract Address 넣어야함 ';
+    export const nftCA = '0x3f881e0E5F6f711953Ff3F99eB87ac29F36d2BFb';
 
-    export const web3 = new Web3(window.ethereum);
+    // export const web3 = new Web3(window.ethereum);
+    export const abi = nftAbi;
+
+    // export const nftContract = web3.eth.Contract(nftAbi, nftCA);
