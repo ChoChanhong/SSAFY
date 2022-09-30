@@ -6,10 +6,9 @@
 }
 
 #logo{
-    border: solid 5px black;
-    width : 20px;
-    height: 20px;
-    margin-top: auto;
+    width : 100px;
+    height: 100px;
+    margin-top: start;
     margin-bottom: auto;
     margin-left: auto;
     margin-right: auto;
@@ -17,4 +16,18 @@
 
 #logoImg {
     height: 100px;
+}
+
+#menu {
+    width: 700px;
+    color: white;
+    margin-left: 55%;
+    margin-top: 30px;
+    margin-right: 10px;
+}
+
+#text {
+    margin-right: 20px;
+    color: white;
+    font-size: 25px;
 }
