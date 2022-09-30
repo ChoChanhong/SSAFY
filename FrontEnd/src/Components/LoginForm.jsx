@@ -68,7 +68,7 @@ export default function LoginForm() {
             onChange={PasswordChange}
           />
         </div>
-        <button onClick={Send} id="docloginbutton" style={{height: 50}}>
+        <button onClick={Send} id="docloginbutton" style={{ height: 50 }}>
           로그인
         </button>
         <Link to="/" class="link">
@@ -81,7 +81,7 @@ export default function LoginForm() {
           <Link to="/doc/signup">
             <button className="linkbutton">회원가입</button>
           </Link>
-          <Link to="/">
+          <Link to="/serviceinfo">
             <button className="linkbutton">이용방법</button>
           </Link>
         </div>
