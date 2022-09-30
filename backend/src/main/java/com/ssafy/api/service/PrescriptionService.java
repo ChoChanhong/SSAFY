@@ -20,4 +20,7 @@ public interface PrescriptionService {
 
     // 처방전 리스트 조회(병원)
     List<Prescription> getHospitalPrescriptionList(long userSeq);
+
+    // 처방전 리스트 조회(약국)
+    List<Prescription> getPharmPrescriptionList(long pharmUserSeq);
 }

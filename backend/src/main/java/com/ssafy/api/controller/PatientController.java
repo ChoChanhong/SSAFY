@@ -206,13 +206,11 @@ public class PatientController {
 
 		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
 		String userId = userDetails.getUsername();
-		long userSeq = userService.getUserByUserId(userId).getUserSeq();
-
-//		PatientInfo patientInfo = patientService.getPatientInfo(userSeq);
+		long patientUserSeq = userService.getUserByUserId(userId).getUserSeq();
 
 		// 처방전 리스트 목록
 		ArrayList<Prescription> prescriptions = new ArrayList<>();
-		prescriptions.addAll(prescriptionService.getPatientPrescriptionList(userSeq));
+		prescriptions.addAll(prescriptionService.getPatientPrescriptionList(patientUserSeq));
 
 		if (prescriptions.isEmpty()) {
 			return new ResponseEntity<>("처방전 없음", HttpStatus.valueOf(400));

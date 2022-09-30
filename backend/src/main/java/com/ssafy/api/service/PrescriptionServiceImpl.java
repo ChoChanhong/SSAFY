@@ -78,21 +78,24 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
 	// 처방전 리스트 조회(환자)
 	@Override
-	public List<Prescription> getPatientPrescriptionList(long userSeq) {
+	public List<Prescription> getPatientPrescriptionList(long patientUserSeq) {
 
-		return prescriptionRepository.findAllByPatientUserSeq(userSeq);
+		return prescriptionRepository.findAllByPatientUserSeq(patientUserSeq);
 	}
 
 
 	// 처방전 리스트 조회(병원)
 	@Override
-	public List<Prescription> getHospitalPrescriptionList(long userSeq) {
+	public List<Prescription> getHospitalPrescriptionList(long hospitalUserSeq) {
 
-		return prescriptionRepository.findAllByHospitalUserSeq(userSeq);
+		return prescriptionRepository.findAllByHospitalUserSeq(hospitalUserSeq);
 	}
 
+	// 처방전 리스트 조회(약국)
+	@Override
+	public List<Prescription> getPharmPrescriptionList(long pharmUserSeq) {
 
+		return prescriptionRepository.findAllByPharmUserSeq(pharmUserSeq);
+	}
 
-
-	// 약국이 처방전 리스트 조회
 }
