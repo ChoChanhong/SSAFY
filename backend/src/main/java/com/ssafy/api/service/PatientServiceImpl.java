@@ -90,8 +90,14 @@ public class PatientServiceImpl implements PatientService {
 		return patientInfo;
 	}
 
+	@Override
+	public void deletePatient(long userSeq) {
+		userRepository.delete(userRepository.findUserByUserSeq(userSeq).get());
+		patientRepository.delete(patientRepository.findPatientByPatientUserSeq(userSeq).get());
+	}
 
-//	@Override
+
+	//	@Override
 //	public User getUserByUserId(String userId) {
 //		// 디비에 유저 정보 조회 (userId 를 통한 조회).
 //		User user = userRepository.findByUserId(userId).get();
@@ -118,8 +124,18 @@ public class PatientServiceImpl implements PatientService {
 //
 //
 	@Override
-	public void deletePatient(long userSeq) {
-		userRepository.delete(userRepository.findUserByUserSeq(userSeq).get());
-		patientRepository.delete(patientRepository.findPatientByPatientUserSeq(userSeq).get());
+	public PatientInfo searchPatient(String patientName, String patientRRN) {
+
+		// 주민등록번호로 검색
+		Patient patient = patientRepository.findPatientByPatientRRN(patientRRN).get();
+
+		// 이름 체크
+		User user = userRepository.findUserByUserSeq(patient.getPatientUserSeq()).get();
+		if (patientName.equals(user.getUserName())) {
+			return new PatientInfo(user, patient);
+		}
+
+		return null;
 	}
+
 }

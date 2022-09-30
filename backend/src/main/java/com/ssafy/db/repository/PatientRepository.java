@@ -16,6 +16,8 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
     Optional<Patient> findPatientByPatientSeq(long patientSeq);
 
     Optional<Patient> findPatientByPatientUserSeq(long patientUserSeq);
+
+    Optional<Patient> findPatientByPatientRRN(String patientRRN);
 //
 //    int countByUserId(String userId);
 //

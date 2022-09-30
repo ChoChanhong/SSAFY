@@ -2,9 +2,11 @@ package com.ssafy.api.controller;
 
 import com.ssafy.api.request.CreateHospitalPostReq;
 import com.ssafy.api.request.CreatePatientPostReq;
+import com.ssafy.api.request.SearchPatientPostReq;
 import com.ssafy.api.request.UserLoginPostReq;
 import com.ssafy.api.response.UserLoginPostRes;
 import com.ssafy.api.service.HospitalService;
+import com.ssafy.api.service.PatientService;
 import com.ssafy.api.service.PrescriptionService;
 import com.ssafy.api.service.UserService;
 import com.ssafy.common.auth.SsafyUserDetails;
@@ -43,7 +45,11 @@ public class HospitalController {
 	HospitalService hospitalService;
 
 	@Autowired
+	PatientService patientService;
+
+	@Autowired
 	PrescriptionService prescriptionService;
+
 
 
 	@Autowired
@@ -62,9 +68,9 @@ public class HospitalController {
 	public ResponseEntity<?> register(
 			@RequestBody @ApiParam(value="회원가입 정보", required = true) CreateHospitalPostReq createHospitalPostReq) {
 
-        hospitalService.createHospital(createHospitalPostReq);
+		hospitalService.createHospital(createHospitalPostReq);
 
-        return new ResponseEntity<>(createHospitalPostReq.getHospitalId() + "의 회원가입이 완료되었습니다", HttpStatus.valueOf(200));
+		return new ResponseEntity<>(createHospitalPostReq.getHospitalId() + "의 회원가입이 완료되었습니다", HttpStatus.valueOf(200));
 //
 //		String hospitalId = createHospitalPostReq.getHospitalId();
 //		String hospitalCRN = createHospitalPostReq.getHospitalCRN();
@@ -118,33 +124,33 @@ public class HospitalController {
 		return ResponseEntity.status(401).body(UserLoginPostRes.of(401, "Invalid Password", null));
 	}
 
-@GetMapping("/me")
-@ApiOperation(value = "병원 정보 조회", notes = "로그인한 병원의 정보를 응답한다.")
-@ApiResponses({
-		@ApiResponse(code = 200, message = "성공"),
-		@ApiResponse(code = 401, message = "인증 실패"),
-		@ApiResponse(code = 404, message = "사용자 없음"),
-		@ApiResponse(code = 500, message = "서버 오류")
-})
-public ResponseEntity<?> getPatientInfo(@ApiIgnore Authentication authentication) {
-	/**
-	 * 요청 헤더 액세스 토큰이 포함된 경우에만 실행되는 인증 처리이후, 리턴되는 인증 정보 객체(authentication) 통해서 요청한 유저 식별.
-	 * 액세스 토큰이 없이 요청하는 경우, 403 에러({"error": "Forbidden", "message": "Access Denied"}) 발생.
-	 */
-	if (authentication == null) {
-		return new ResponseEntity<>("토큰이 없습니다", HttpStatus.valueOf(403));
-	}
-	SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
-	String userId = userDetails.getUsername();
-	long userSeq = userService.getUserByUserId(userId).getUserSeq();
+	@GetMapping("/me")
+	@ApiOperation(value = "병원 정보 조회", notes = "로그인한 병원의 정보를 응답한다.")
+	@ApiResponses({
+			@ApiResponse(code = 200, message = "성공"),
+			@ApiResponse(code = 401, message = "인증 실패"),
+			@ApiResponse(code = 404, message = "사용자 없음"),
+			@ApiResponse(code = 500, message = "서버 오류")
+	})
+	public ResponseEntity<?> getPatientInfo(@ApiIgnore Authentication authentication) {
+		/**
+		 * 요청 헤더 액세스 토큰이 포함된 경우에만 실행되는 인증 처리이후, 리턴되는 인증 정보 객체(authentication) 통해서 요청한 유저 식별.
+		 * 액세스 토큰이 없이 요청하는 경우, 403 에러({"error": "Forbidden", "message": "Access Denied"}) 발생.
+		 */
+		if (authentication == null) {
+			return new ResponseEntity<>("토큰이 없습니다", HttpStatus.valueOf(403));
+		}
+		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
+		String userId = userDetails.getUsername();
+		long userSeq = userService.getUserByUserId(userId).getUserSeq();
 
-	HospitalInfo hospitalInfo = hospitalService.getHospitalInfo(userSeq);
+		HospitalInfo hospitalInfo = hospitalService.getHospitalInfo(userSeq);
 
-	if (hospitalInfo != null) {
-		return new ResponseEntity<HospitalInfo>(hospitalInfo, HttpStatus.valueOf(200));
+		if (hospitalInfo != null) {
+			return new ResponseEntity<HospitalInfo>(hospitalInfo, HttpStatus.valueOf(200));
+		}
+		return new ResponseEntity<>("잘못된 요청입니다", HttpStatus.valueOf(400));
 	}
-	return new ResponseEntity<>("잘못된 요청입니다", HttpStatus.valueOf(400));
-}
 
 
 	/**
@@ -248,5 +254,31 @@ public ResponseEntity<?> getPatientInfo(@ApiIgnore Authentication authentication
 
 		return new ResponseEntity<List<PrescriptionInfo>>(prescriptionInfos, HttpStatus.valueOf(200));
 
+	}
+
+
+
+	/**
+	 *  이름과 주민등록번호를 통해 환자 검색
+	 */
+	@GetMapping("/search")
+	@ApiOperation(value = "환자 검색", notes = "로그인한 병원의 정보를 응답한다.")
+	@ApiResponses({
+			@ApiResponse(code = 200, message = "성공"),
+			@ApiResponse(code = 401, message = "인증 실패"),
+			@ApiResponse(code = 404, message = "사용자 없음"),
+			@ApiResponse(code = 500, message = "서버 오류")
+	})
+	public ResponseEntity<?> searchPatient(
+			@ApiIgnore Authentication authentication,
+			@RequestBody @ApiParam(value="병원 정보 수정", required = true) SearchPatientPostReq searchPatientPostReq) {
+
+			PatientInfo patientInfo = patientService.searchPatient(searchPatientPostReq.getPatientName(), searchPatientPostReq.getPatientRRN());
+
+			if (patientInfo != null) {
+				return new ResponseEntity<PatientInfo>(patientInfo, HttpStatus.valueOf(200));
+			}
+
+		return new ResponseEntity<>("환자를 검색할 수 없습니다.", HttpStatus.valueOf(400));
 	}
 }
