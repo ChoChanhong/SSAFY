@@ -1,6 +1,5 @@
 package com.ssafy.common.customObject;
 
-import com.ssafy.db.entity.Hospital;
 import com.ssafy.db.entity.Pharm;
 import com.ssafy.db.entity.User;
 import lombok.AllArgsConstructor;
