@@ -235,6 +235,35 @@ public class 	PharmController {
 		}
 
 		return new ResponseEntity<List<PrescriptionInfo>>(prescriptionInfos, HttpStatus.valueOf(200));
+	}
 
+
+	// 약국 리스트 조회
+	@GetMapping("/list")
+	@ApiOperation(value = "약국 리스트 조회", notes = "약국의 리스트를 조회한다.")
+	@ApiResponses({
+			@ApiResponse(code = 200, message = "성공"),
+			@ApiResponse(code = 401, message = "인증 실패"),
+			@ApiResponse(code = 404, message = "사용자 없음"),
+			@ApiResponse(code = 500, message = "서버 오류")
+	})	public ResponseEntity<?> getPharmList() {
+
+		// 약국 리스트 목록
+		ArrayList<Pharm> pharms = new ArrayList<>();
+		pharms.addAll(pharmService.getPharmList());
+
+		if (pharms.isEmpty()) {
+			return new ResponseEntity<>("약국 없음", HttpStatus.valueOf(400));
+		}
+
+		// 처방전 내용 복원
+		ArrayList<PharmInfo> pharmInfos = new ArrayList<>();
+		for ( Pharm p: pharms ) {
+			// 약국 정보
+			PharmInfo pharmInfo = pharmService.getPharmInfo(p.getPharmUserSeq());
+			pharmInfos.add(pharmInfo);
+		}
+
+		return new ResponseEntity<List<PharmInfo>>(pharmInfos, HttpStatus.valueOf(200));
 	}
 }
