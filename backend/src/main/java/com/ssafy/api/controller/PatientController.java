@@ -214,6 +214,10 @@ public class PatientController {
 		ArrayList<Prescription> prescriptions = new ArrayList<>();
 		prescriptions.addAll(prescriptionService.getPatientPrescriptionList(userSeq));
 
+		if (prescriptions.isEmpty()) {
+			return new ResponseEntity<>("처방전 없음", HttpStatus.valueOf(400));
+		}
+
 		// 처방전 내용 복원
 		ArrayList<PrescriptionInfo> prescriptionInfos = new ArrayList<>();
 		for ( Prescription p: prescriptions ) {
@@ -222,10 +226,6 @@ public class PatientController {
 				prescriptionInfos.add(prescriptionInfo);
 		}
 
-
-		if (prescriptionInfos.isEmpty()) {
-			return new ResponseEntity<>("처방전 없음", HttpStatus.valueOf(400));
-		}
 		return new ResponseEntity<List<PrescriptionInfo>>(prescriptionInfos, HttpStatus.valueOf(200));
 
 	}

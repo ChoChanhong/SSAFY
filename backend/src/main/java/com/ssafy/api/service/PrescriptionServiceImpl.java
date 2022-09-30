@@ -76,7 +76,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 			return prescriptionInfo;
 	}
 
-	// 환자가 처방전 리스트 조회
+	// 처방전 리스트 조회(환자)
 	@Override
 	public List<Prescription> getPatientPrescriptionList(long userSeq) {
 
@@ -84,12 +84,12 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 	}
 
 
+	// 처방전 리스트 조회(병원)
+	@Override
+	public List<Prescription> getHospitalPrescriptionList(long userSeq) {
 
-
-
-
-	// 병원이 처방전 리스트 조회
-
+		return prescriptionRepository.findAllByHospitalUserSeq(userSeq);
+	}
 
 
 
