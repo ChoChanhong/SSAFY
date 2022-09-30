@@ -123,38 +123,6 @@ public class HospitalServiceImpl implements HospitalService {
 		return hospitalInfo;
 	}
 
-
-
-
-//	// 약국 정보 수정
-//	@Override
-//	public Hospital updateHospitalInfo(String hospitalId, CreateHospitalPostReq hospitalUpdatePostReq) {
-//		Optional<Hospital> updatedHospital = hospitalRepository.findByHospitalId(hospitalId);
-//
-//		if (updatedHospital.isPresent()) {
-//			updatedHospital.get().setHospitalId(hospitalUpdatePostReq.getHospitalId());
-//
-//			// 아이디, 비밀번호, 이메일, 면허번호, 이름, 주소, 전화번호, 사업자등록번호
-//			updatedHospital.get().setHospitalId(hospitalUpdatePostReq.getHospitalId());
-//			updatedHospital.get().setHospitalPassword(passwordEncoder.encode(hospitalUpdatePostReq.getHospitalPassword()));
-//			updatedHospital.get().setHospitalEmail(hospitalUpdatePostReq.getHospitalEmail());
-//			updatedHospital.get().setHospitalLicense(hospitalUpdatePostReq.getHospitalLicense());
-//			updatedHospital.get().setHospitalName(hospitalUpdatePostReq.getHospitalName());
-//			updatedHospital.get().setHospitalAddr(hospitalUpdatePostReq.getHospitalAddr());
-//			updatedHospital.get().setHospitalTel(hospitalUpdatePostReq.getHospitalTel());
-//			updatedHospital.get().setHospitalCRN(hospitalUpdatePostReq.getHospitalCRN());
-//		}
-//
-//		hospitalRepository.save(updatedHospital.get());
-//
-//		return updatedHospital.get();
-//	}
-//
-//	@Override
-//	public void deleteHospital(Hospital hospital) {
-//		hospitalRepository.delete(hospital);
-//	}
-
 	@Override
 	public void deleteHospital(long userSeq) {
 		userRepository.delete(userRepository.findUserByUserSeq(userSeq).get());
