@@ -1,0 +1,33 @@
+#line {
+  background-color: #f5f5f5;
+  width: 350px;
+  height: 350px;
+}
+
+#name {
+  border-top: solid 5px #5FD068;
+  background-color: #e0e0e0;
+  height: 50px;
+  font-weight: bold;
+}
+
+#genBox {
+  display: flex;
+  margin-top: 20px;
+}
+
+#genLabel {
+  font-weight: bold;
+  margin-top: 13px;
+  margin-left: 30px;
+  margin-right: 10px;
+}
+
+#genInput {
+  margin-left: 25px;
+  width: 200px;
+}
+
+#genLog {
+  margin-top: 10px;
+}
