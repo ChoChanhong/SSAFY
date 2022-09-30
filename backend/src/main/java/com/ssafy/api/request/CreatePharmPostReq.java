@@ -19,7 +19,7 @@ public class CreatePharmPostReq {
 	@ApiModelProperty(name = "약국 비밀번호", example="phafy")
 	String pharmPassword;
 
-	@ApiModelProperty(name = "약국 이름", example = "철이 정형외과")
+	@ApiModelProperty(name = "약국 이름", example = "철이네 약국")
 	String pharmName;
 
 	@ApiModelProperty(name = "약국 이메일", example = "phafy@ssafy.com")

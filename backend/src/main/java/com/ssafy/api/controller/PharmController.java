@@ -71,123 +71,123 @@ public class 	PharmController {
 //		return new ResponseEntity<>("잘못된 요청입니다", HttpStatus.valueOf(400));
 	}
 
-//
-//	/**
-//	 * 약국 로그인
-//	 */
-//	@PostMapping("/login")
-//	@ApiOperation(value = "로그인", notes = "<strong>아이디와 패스워드</strong>를 통해 로그인 한다.")
-//	@ApiResponses({
-//			@ApiResponse(code = 200, message = "성공", response = UserLoginPostRes.class),
-//			@ApiResponse(code = 401, message = "인증 실패", response = BaseResponseBody.class),
-//			@ApiResponse(code = 404, message = "사용자 없음", response = BaseResponseBody.class),
-//			@ApiResponse(code = 500, message = "서버 오류", response = BaseResponseBody.class)
-//	})
-//	public ResponseEntity<UserLoginPostRes> login(@RequestBody @ApiParam(value="로그인 정보", required = true) UserLoginPostReq loginInfo) {
-//		String hospitalId = loginInfo.getUserId();
-//		String hospitalPassword = loginInfo.getUserPassword();
-//
-//		User user = userService.getUserByUserId(hospitalId);
-//		// 로그인 요청한 유저로부터 입력된 패스워드 와 디비에 저장된 유저의 암호화된 패스워드가 같은지 확인.(유효한 패스워드인지 여부 확인)
-//		if(passwordEncoder.matches(hospitalPassword, user.getUserPassword()) && user.getUserIdx() == 2) {
-//			// 유효한 패스워드가 맞는 경우, 로그인 성공으로 응답.(액세스 토큰을 포함하여 응답값 전달)
-//			return ResponseEntity.ok(UserLoginPostRes.of(200, "Success", JwtTokenUtil.getToken(hospitalId)));
-//		}
-//		// 유효하지 않는 패스워드인 경우, 로그인 실패로 응답.
-//		return ResponseEntity.status(401).body(UserLoginPostRes.of(401, "Invalid Password", null));
-//	}
-//
-//	@GetMapping("/me")
-//	@ApiOperation(value = "약국 정보 조회", notes = "로그인한 약국의 정보를 응답한다.")
-//	@ApiResponses({
-//			@ApiResponse(code = 200, message = "성공"),
-//			@ApiResponse(code = 401, message = "인증 실패"),
-//			@ApiResponse(code = 404, message = "사용자 없음"),
-//			@ApiResponse(code = 500, message = "서버 오류")
-//	})
-//	public ResponseEntity<?> getPatientInfo(@ApiIgnore Authentication authentication) {
-//		/**
-//		 * 요청 헤더 액세스 토큰이 포함된 경우에만 실행되는 인증 처리이후, 리턴되는 인증 정보 객체(authentication) 통해서 요청한 유저 식별.
-//		 * 액세스 토큰이 없이 요청하는 경우, 403 에러({"error": "Forbidden", "message": "Access Denied"}) 발생.
-//		 */
-//		if (authentication == null) {
-//			return new ResponseEntity<>("토큰이 없습니다", HttpStatus.valueOf(403));
-//		}
-//		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
-//		String userId = userDetails.getUsername();
-//		long userSeq = userService.getUserByUserId(userId).getUserSeq();
-//
-//		PharmInfo pharmInfo = pharmService.getPharmInfo(userSeq);
-//
-//		if (pharmInfo != null) {
-//			return new ResponseEntity<PharmInfo>(pharmInfo, HttpStatus.valueOf(200));
-//		}
-//		return new ResponseEntity<>("잘못된 요청입니다", HttpStatus.valueOf(400));
-//	}
-//
-//
-//	/**
-//	 * 약국 정보 수정
-//	 */
-//	@PutMapping(value="me")
-//	@ApiOperation(value = "약국 정보 수정", notes = "로그인한 약국의 정보를 수정한다.")
-//	@ApiResponses({
-//			@ApiResponse(code = 200, message = "성공"),
-//			@ApiResponse(code = 400, message = "잘못된 요청"),
-//			@ApiResponse(code = 401, message = "인증 실패"),
-//			@ApiResponse(code = 403, message = "토큰 없음"),
-//			@ApiResponse(code = 404, message = "바디 정보 오류"),
-//			@ApiResponse(code = 405, message = "무결성 오류"),
-//			@ApiResponse(code = 500, message = "서버 오류")
-//	})
-//	public ResponseEntity<?> updatePatientInfo(@ApiIgnore Authentication authentication,
-//											   @RequestBody @ApiParam(value="약국 정보 수정", required = true) CreatePharmPostReq updatePharmPostReq) {
-//
-//		if (authentication == null) {
-//			return new ResponseEntity<>("토큰이 없습니다", HttpStatus.valueOf(403));
-//		}
-//		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
-//		String userId = userDetails.getUsername();
-//		long userSeq = userDetails.getUser().getUserSeq();
-//
-//		// id 변경 금지
-//		if (userId.equals(updatePharmPostReq.getPharmId())) {
-//			PharmInfo pharmInfo = pharmService.updatePharm(userSeq, updatePharmPostReq);
-//			if (pharmInfo == null)
-//				return new ResponseEntity<>("무결성 오류입니다", HttpStatus.valueOf(405));
-//			return new ResponseEntity<>(pharmInfo, HttpStatus.valueOf(200));
-//		}
-//		return new ResponseEntity<>("잘못된 요청입니다", HttpStatus.valueOf(400));
-//	}
-//
-//	/**
-//	 * 약국 정보 삭제
-//	 */
-//	@DeleteMapping(value="me")
-//	@ApiOperation(value = "약국 탈퇴", notes = "로그인한 약국의 탈퇴를 처리한다")
-//	@ApiResponses({
-//			@ApiResponse(code = 200, message = "성공"),
-//			@ApiResponse(code = 401, message = "인증 실패"),
-//			@ApiResponse(code = 403, message = "토큰 없음"),
-//			@ApiResponse(code = 404, message = "사용자 없음"),
-//			@ApiResponse(code = 500, message = "서버 오류")
-//	})
-//	public ResponseEntity<?> deletePharm(@ApiIgnore Authentication authentication) {
-//
-//		if (authentication == null) {
-//			return new ResponseEntity<>("토큰이 없습니다", HttpStatus.valueOf(403));
-//		}
-//
-//		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
-//		String userId = userDetails.getUsername();
-//		User user = userService.getUserByUserId(userId);
-//		long userSeq = userService.getUserByUserId(userId).getUserSeq();
-//
-//		if (user == null) {
-//			return new ResponseEntity<>(userId + "의 병원 정보가 없습니다", HttpStatus.valueOf(404));
-//		}
-//		pharmService.deletePharm(userSeq);
-//		return new ResponseEntity<>(userId + "의 병원 정보가 삭제되었습니다", HttpStatus.valueOf(200));
-//	}
+
+	/**
+	 * 약국 로그인
+	 */
+	@PostMapping("/login")
+	@ApiOperation(value = "로그인", notes = "<strong>아이디와 패스워드</strong>를 통해 로그인 한다.")
+	@ApiResponses({
+			@ApiResponse(code = 200, message = "성공", response = UserLoginPostRes.class),
+			@ApiResponse(code = 401, message = "인증 실패", response = BaseResponseBody.class),
+			@ApiResponse(code = 404, message = "사용자 없음", response = BaseResponseBody.class),
+			@ApiResponse(code = 500, message = "서버 오류", response = BaseResponseBody.class)
+	})
+	public ResponseEntity<UserLoginPostRes> login(@RequestBody @ApiParam(value="로그인 정보", required = true) UserLoginPostReq loginInfo) {
+		String hospitalId = loginInfo.getUserId();
+		String hospitalPassword = loginInfo.getUserPassword();
+
+		User user = userService.getUserByUserId(hospitalId);
+		// 로그인 요청한 유저로부터 입력된 패스워드 와 디비에 저장된 유저의 암호화된 패스워드가 같은지 확인.(유효한 패스워드인지 여부 확인)
+		if(passwordEncoder.matches(hospitalPassword, user.getUserPassword()) && user.getUserIdx() == 2) {
+			// 유효한 패스워드가 맞는 경우, 로그인 성공으로 응답.(액세스 토큰을 포함하여 응답값 전달)
+			return ResponseEntity.ok(UserLoginPostRes.of(200, "Success", JwtTokenUtil.getToken(hospitalId)));
+		}
+		// 유효하지 않는 패스워드인 경우, 로그인 실패로 응답.
+		return ResponseEntity.status(401).body(UserLoginPostRes.of(401, "Invalid Password", null));
+	}
+
+	@GetMapping("/me")
+	@ApiOperation(value = "약국 정보 조회", notes = "로그인한 약국의 정보를 응답한다.")
+	@ApiResponses({
+			@ApiResponse(code = 200, message = "성공"),
+			@ApiResponse(code = 401, message = "인증 실패"),
+			@ApiResponse(code = 404, message = "사용자 없음"),
+			@ApiResponse(code = 500, message = "서버 오류")
+	})
+	public ResponseEntity<?> getPatientInfo(@ApiIgnore Authentication authentication) {
+		/**
+		 * 요청 헤더 액세스 토큰이 포함된 경우에만 실행되는 인증 처리이후, 리턴되는 인증 정보 객체(authentication) 통해서 요청한 유저 식별.
+		 * 액세스 토큰이 없이 요청하는 경우, 403 에러({"error": "Forbidden", "message": "Access Denied"}) 발생.
+		 */
+		if (authentication == null) {
+			return new ResponseEntity<>("토큰이 없습니다", HttpStatus.valueOf(403));
+		}
+		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
+		String userId = userDetails.getUsername();
+		long userSeq = userService.getUserByUserId(userId).getUserSeq();
+
+		PharmInfo pharmInfo = pharmService.getPharmInfo(userSeq);
+
+		if (pharmInfo != null) {
+			return new ResponseEntity<PharmInfo>(pharmInfo, HttpStatus.valueOf(200));
+		}
+		return new ResponseEntity<>("잘못된 요청입니다", HttpStatus.valueOf(400));
+	}
+
+
+	/**
+	 * 약국 정보 수정
+	 */
+	@PutMapping(value="me")
+	@ApiOperation(value = "약국 정보 수정", notes = "로그인한 약국의 정보를 수정한다.")
+	@ApiResponses({
+			@ApiResponse(code = 200, message = "성공"),
+			@ApiResponse(code = 400, message = "잘못된 요청"),
+			@ApiResponse(code = 401, message = "인증 실패"),
+			@ApiResponse(code = 403, message = "토큰 없음"),
+			@ApiResponse(code = 404, message = "바디 정보 오류"),
+			@ApiResponse(code = 405, message = "무결성 오류"),
+			@ApiResponse(code = 500, message = "서버 오류")
+	})
+	public ResponseEntity<?> updatePatientInfo(@ApiIgnore Authentication authentication,
+											   @RequestBody @ApiParam(value="약국 정보 수정", required = true) CreatePharmPostReq updatePharmPostReq) {
+
+		if (authentication == null) {
+			return new ResponseEntity<>("토큰이 없습니다", HttpStatus.valueOf(403));
+		}
+		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
+		String userId = userDetails.getUsername();
+		long userSeq = userDetails.getUser().getUserSeq();
+
+		// id 변경 금지
+		if (userId.equals(updatePharmPostReq.getPharmId())) {
+			PharmInfo pharmInfo = pharmService.updatePharm(userSeq, updatePharmPostReq);
+			if (pharmInfo == null)
+				return new ResponseEntity<>("무결성 오류입니다", HttpStatus.valueOf(405));
+			return new ResponseEntity<>(pharmInfo, HttpStatus.valueOf(200));
+		}
+		return new ResponseEntity<>("잘못된 요청입니다", HttpStatus.valueOf(400));
+	}
+
+	/**
+	 * 약국 정보 삭제
+	 */
+	@DeleteMapping(value="me")
+	@ApiOperation(value = "약국 탈퇴", notes = "로그인한 약국의 탈퇴를 처리한다")
+	@ApiResponses({
+			@ApiResponse(code = 200, message = "성공"),
+			@ApiResponse(code = 401, message = "인증 실패"),
+			@ApiResponse(code = 403, message = "토큰 없음"),
+			@ApiResponse(code = 404, message = "사용자 없음"),
+			@ApiResponse(code = 500, message = "서버 오류")
+	})
+	public ResponseEntity<?> deletePharm(@ApiIgnore Authentication authentication) {
+
+		if (authentication == null) {
+			return new ResponseEntity<>("토큰이 없습니다", HttpStatus.valueOf(403));
+		}
+
+		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
+		String userId = userDetails.getUsername();
+		User user = userService.getUserByUserId(userId);
+		long userSeq = userService.getUserByUserId(userId).getUserSeq();
+
+		if (user == null) {
+			return new ResponseEntity<>(userId + "의 약국 정보가 없습니다", HttpStatus.valueOf(404));
+		}
+		pharmService.deletePharm(userSeq);
+		return new ResponseEntity<>(userId + "의 약국 정보가 삭제되었습니다", HttpStatus.valueOf(200));
+	}
 
 }

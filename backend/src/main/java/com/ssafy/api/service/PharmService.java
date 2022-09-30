@@ -9,10 +9,10 @@ import com.ssafy.db.entity.Pharm;
 public interface PharmService {
     PharmInfo createPharm(CreatePharmPostReq createPharmPostReq);
 
-//    PharmInfo getPharmInfo(long userSeq);
-//
-//// 회원 정보 수정
-//    PharmInfo updatePharm(long userSeq, CreatePharmPostReq updatePharmPostReq);
-//
-//    void deletePharm(long userSeq);
+    PharmInfo getPharmInfo(long userSeq);
+
+// 회원 정보 수정
+    PharmInfo updatePharm(long userSeq, CreatePharmPostReq updatePharmPostReq);
+
+    void deletePharm(long userSeq);
 }
