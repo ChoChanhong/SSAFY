@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { TextField, FormLabel } from "@mui/joy";
 import { Link } from "react-router-dom";
+import IMG from "../assets/images/003.png";
 
 import "./LoginForm.css";
 
@@ -76,12 +77,12 @@ export default function LoginForm() {
         </Link>
       </div>
       <div class="info">
-        <img className="logoImg" src="img/001.png" alt="logo" />
+        <img className="logoImg" src={IMG} alt="logo" />
         <div class="buttonbox">
           <Link to="/doc/signup">
             <button className="linkbutton">회원가입</button>
           </Link>
-          <Link to="/serviceinfo">
+          <Link to="/doc/serviceinfo">
             <button className="linkbutton">이용방법</button>
           </Link>
         </div>
