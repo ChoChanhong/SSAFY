@@ -1,6 +1,7 @@
 package com.ssafy.api.controller;
 
 import com.ssafy.api.request.CreatePatientPostReq;
+import com.ssafy.api.request.CreateUserWalletPostReq;
 import com.ssafy.api.request.UserLoginPostReq;
 import com.ssafy.api.request.UserRegisterPostReq;
 import com.ssafy.api.response.UserLoginPostRes;

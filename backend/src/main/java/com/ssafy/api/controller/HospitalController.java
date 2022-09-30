@@ -85,20 +85,6 @@ public class HospitalController {
 //		return new ResponseEntity<>("잘못된 요청입니다", HttpStatus.valueOf(400));
 	}
 
-
-
-
-//	// 병원 아이디 중복 체크
-//	@GetMapping("me/{hospitalId}")
-//	@ApiResponses({
-//			@ApiResponse(code = 200, message = "성공"),
-//			@ApiResponse(code = 500, message = "서버 오류")
-//	})
-//	@ApiOperation(value = "아이디 중복 체크", notes = "중복이면 true, 없다면 false")
-//	public ResponseEntity<Boolean> checkId(@PathVariable("hospitalId") String hospitalId) {
-//		return new ResponseEntity<Boolean>(hospitalService.checkIdDuplicated(hospitalId), HttpStatus.OK);
-//	}
-
 	/**
 	 * 병원 로그인
 	 */
