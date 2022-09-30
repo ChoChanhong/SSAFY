@@ -10,7 +10,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@ApiModel("PatientRegisterPostRequest")
+@ApiModel("CreatePatientPostReq")
 public class CreatePatientPostReq {
 
 	@ApiModelProperty(name="환자 아이디", example="ssafy")

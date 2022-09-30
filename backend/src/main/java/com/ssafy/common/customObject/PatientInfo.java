@@ -11,11 +11,4 @@ import lombok.*;
 public class PatientInfo {
     User user;
     Patient patient;
-
-//    String patientId;
-//    String patientPassword;
-//    String patientName;
-//    String patientEmail;
-//    String patientRRN;
-//    String patientWalletAddr;
 }
