@@ -48,7 +48,7 @@ export default function PerInfo(){
     }
 
     // 조제 asdasdasd
-    
+    // create
 
     let now = new Date();
     let year = now.getFullYear()
