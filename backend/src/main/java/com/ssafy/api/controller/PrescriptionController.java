@@ -93,8 +93,6 @@ public class PrescriptionController {
 	}
 
 
-
-
 	/**
 	 * 처방전 사용 완료
 	 */

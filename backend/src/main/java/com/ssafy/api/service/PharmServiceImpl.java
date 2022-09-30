@@ -1,8 +1,12 @@
 package com.ssafy.api.service;
 
 import com.ssafy.api.request.CreatePharmPostReq;
+import com.ssafy.common.customObject.HospitalInfo;
+import com.ssafy.common.customObject.PatientInfo;
 import com.ssafy.common.customObject.PharmInfo;
+import com.ssafy.common.customObject.PrescriptionInfo;
 import com.ssafy.db.entity.Pharm;
+import com.ssafy.db.entity.Prescription;
 import com.ssafy.db.entity.User;
 import com.ssafy.db.repository.PharmRepository;
 import com.ssafy.db.repository.UserRepository;
@@ -10,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -125,6 +130,12 @@ public class PharmServiceImpl implements PharmService {
 	public void deletePharm(long userSeq) {
 		userRepository.delete(userRepository.findUserByUserSeq(userSeq).get());
 		pharmRepository.delete(pharmRepository.findPharmByPharmUserSeq(userSeq).get());
+	}
+
+	@Override
+	public List<Pharm> getPharmList() {
+
+		return pharmRepository.findAll();
 	}
 
 }

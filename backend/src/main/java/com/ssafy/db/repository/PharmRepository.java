@@ -6,6 +6,7 @@ import com.ssafy.db.entity.Pharm;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -18,6 +19,8 @@ public interface PharmRepository extends JpaRepository<Pharm, Long> {
 //        Optional<Pharm> findByPharmId(String pharmId);
     Optional<Pharm> findPharmByPharmSeq(long pharmSeq);
     Optional<Pharm> findPharmByPharmUserSeq(long pharmUserSeq);
+
+    List<Pharm> findAll();
 
 //    Optional<Pharm> findHospitalByHospitalSeq(long hospitalSeq);
 //    Optional<Pharm> findHospitalByHospitalUserSeq(long hospitalUserSeq);
