@@ -228,11 +228,11 @@ public ResponseEntity<?> getPatientInfo(@ApiIgnore Authentication authentication
 
 		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
 		String userId = userDetails.getUsername();
-		long userSeq = userService.getUserByUserId(userId).getUserSeq();
+		long hospitalUserSeq = userService.getUserByUserId(userId).getUserSeq();
 
 		// 처방전 리스트 목록
 		ArrayList<Prescription> prescriptions = new ArrayList<>();
-		prescriptions.addAll(prescriptionService.getHospitalPrescriptionList(userSeq));
+		prescriptions.addAll(prescriptionService.getHospitalPrescriptionList(hospitalUserSeq));
 
 		if (prescriptions.isEmpty()) {
 			return new ResponseEntity<>("처방전 없음", HttpStatus.valueOf(400));
@@ -245,8 +245,6 @@ public ResponseEntity<?> getPatientInfo(@ApiIgnore Authentication authentication
 			PrescriptionInfo prescriptionInfo = prescriptionService.getPrescriptionInfo(p);
 			prescriptionInfos.add(prescriptionInfo);
 		}
-
-
 
 		return new ResponseEntity<List<PrescriptionInfo>>(prescriptionInfos, HttpStatus.valueOf(200));
 
