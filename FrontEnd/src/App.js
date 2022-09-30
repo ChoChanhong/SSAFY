@@ -37,7 +37,7 @@ function App() {
       <Route path="/perscription" element={<Perscription />} />
       <Route path="/perdetail" element={<Perdetail />} />
       {/*의사*/}
-      <Route path="/doc" elemetn={<DocLogin />} />
+      <Route path="/doc" element={<DocLogin />} />
       <Route path="/doc/signup" element={<DocSignup />} />
       <Route path="/doc/log" element={<DocLog />} />
       <Route path="/doc/generate" element={<Generate />} />
