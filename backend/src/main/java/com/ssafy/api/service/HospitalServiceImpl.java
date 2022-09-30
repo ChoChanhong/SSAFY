@@ -128,4 +128,17 @@ public class HospitalServiceImpl implements HospitalService {
 		userRepository.delete(userRepository.findUserByUserSeq(userSeq).get());
 		hospitalRepository.delete(hospitalRepository.findHospitalByHospitalUserSeq(userSeq).get());
 	}
+
+
+
+
+	// 아이디로 seq 검색
+	@Override
+	public long findSeqbyId(String hospitalId) {
+
+		long userSeq = userRepository.findByUserId(hospitalId).get().getUserSeq();
+
+
+		return userSeq;
+	}
 }

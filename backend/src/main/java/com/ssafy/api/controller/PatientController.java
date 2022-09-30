@@ -5,11 +5,16 @@ import com.ssafy.api.request.UserLoginPostReq;
 import com.ssafy.api.request.UserRegisterPostReq;
 import com.ssafy.api.response.UserLoginPostRes;
 import com.ssafy.api.service.PatientService;
+import com.ssafy.api.service.PrescriptionService;
 import com.ssafy.api.service.UserService;
 import com.ssafy.common.auth.SsafyUserDetails;
+import com.ssafy.common.customObject.HospitalInfo;
 import com.ssafy.common.customObject.PatientInfo;
+import com.ssafy.common.customObject.PharmInfo;
+import com.ssafy.common.customObject.PrescriptionInfo;
 import com.ssafy.common.model.response.BaseResponseBody;
 import com.ssafy.common.util.JwtTokenUtil;
+import com.ssafy.db.entity.Prescription;
 import com.ssafy.db.entity.User;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +24,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 환자 관련 API 요청 처리를 위한 컨트롤러 정의.
@@ -33,6 +41,9 @@ public class PatientController {
 
 	@Autowired
 	PatientService patientService;
+
+	@Autowired
+	PrescriptionService prescriptionService;
 
 	@Autowired
 	PasswordEncoder passwordEncoder;
@@ -89,36 +100,6 @@ public class PatientController {
 		// 유효하지 않는 패스워드인 경우, 로그인 실패로 응답.
 		return ResponseEntity.status(401).body(UserLoginPostRes.of(401, "Invalid Password", null));
 	}
-
-//	@GetMapping("/me")
-//	@ApiOperation(value = "환자 본인 정보 조회", notes = "로그인한 환자의 정보를 응답한다.")
-//    @ApiResponses({
-//        @ApiResponse(code = 200, message = "성공"),
-//        @ApiResponse(code = 401, message = "인증 실패"),
-//        @ApiResponse(code = 404, message = "사용자 없음"),
-//        @ApiResponse(code = 500, message = "서버 오류")
-//    })
-//	public ResponseEntity<?> getPatientInfo(@ApiIgnore Authentication authentication) {
-//		/**
-// 		 * 요청 헤더 액세스 토큰이 포함된 경우에만 실행되는 인증 처리이후, 리턴되는 인증 정보 객체(authentication) 통해서 요청한 유저 식별.
-// 		 * 액세스 토큰이 없이 요청하는 경우, 403 에러({"error": "Forbidden", "message": "Access Denied"}) 발생.
-// 		 */
-//		if (authentication == null) {
-//			return new ResponseEntity<>("토큰이 없습니다", HttpStatus.valueOf(403));
-//		}
-//		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
-//		String userId = userDetails.getUsername();
-//		long userSeq = userService.getUserByUserId(userId).getUserSeq();
-//
-//		PatientInfo patientInfo = patientService.getPatientInfo(userSeq);
-//
-//		System.out.println(patientInfo.getPatient().getPatientRRN());
-//
-//		if (patientInfo != null) {
-//			return new ResponseEntity<PatientInfo>(patientInfo, HttpStatus.valueOf(200));
-//		}
-//		return new ResponseEntity<>("잘못된 요청입니다", HttpStatus.valueOf(400));
-//	}
 
 	@GetMapping("/me")
 	@ApiOperation(value = "환자 정보 조회", notes = "로그인한 환자의 정보를 응답한다.")
@@ -206,6 +187,47 @@ public class PatientController {
 		}
 		patientService.deletePatient(userSeq);
 		return new ResponseEntity<>(userId + "의 회원 정보가 삭제되었습니다", HttpStatus.valueOf(200));
+	}
+
+
+	@GetMapping("/prescriptionList")
+	@ApiOperation(value = "환자 처방전 조회", notes = "로그인한 환자의 처방전 정보를 응답한다.")
+	@ApiResponses({
+			@ApiResponse(code = 200, message = "성공"),
+			@ApiResponse(code = 401, message = "인증 실패"),
+			@ApiResponse(code = 404, message = "사용자 없음"),
+			@ApiResponse(code = 500, message = "서버 오류")
+	})
+	public ResponseEntity<?> getPrescriptionList(@ApiIgnore Authentication authentication) {
+		/**
+		 * 요청 헤더 액세스 토큰이 포함된 경우에만 실행되는 인증 처리이후, 리턴되는 인증 정보 객체(authentication) 통해서 요청한 유저 식별.
+		 * 액세스 토큰이 없이 요청하는 경우, 403 에러({"error": "Forbidden", "message": "Access Denied"}) 발생.
+		 */
+
+		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
+		String userId = userDetails.getUsername();
+		long userSeq = userService.getUserByUserId(userId).getUserSeq();
+
+//		PatientInfo patientInfo = patientService.getPatientInfo(userSeq);
+
+		// 처방전 리스트 목록
+		ArrayList<Prescription> prescriptions = new ArrayList<>();
+		prescriptions.addAll(prescriptionService.getPatientPrescriptionList(userSeq));
+
+		// 처방전 내용 복원
+		ArrayList<PrescriptionInfo> prescriptionInfos = new ArrayList<>();
+		for ( Prescription p: prescriptions ) {
+			 	// 환자 정보
+				PrescriptionInfo prescriptionInfo = prescriptionService.getPrescriptionInfo(p);
+				prescriptionInfos.add(prescriptionInfo);
+		}
+
+
+		if (prescriptionInfos.isEmpty()) {
+			return new ResponseEntity<>("처방전 없음", HttpStatus.valueOf(400));
+		}
+		return new ResponseEntity<List<PrescriptionInfo>>(prescriptionInfos, HttpStatus.valueOf(200));
+
 	}
 
 }

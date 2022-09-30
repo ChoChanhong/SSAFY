@@ -25,6 +25,9 @@ public interface HospitalService {
 
 	void deleteHospital(long userSeq);
 
+    // 아이디로 seq 검색
+    long findSeqbyId(String hospitalId);
+
 //	boolean checkIdDuplicated(String hospitalId); // 아이디 중복검사
 //
 //	boolean checkCRNDuplicated(String hospitalCRN); // 사업자등록번호 중복검사

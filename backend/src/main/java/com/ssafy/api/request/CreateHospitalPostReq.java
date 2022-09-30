@@ -10,7 +10,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@ApiModel("HospitalRegisterPostRequest")
+@ApiModel("CreateHospitalPostReq")
 public class CreateHospitalPostReq {
 	// 아이디, 비밀번호, 이메일, 면허번호, 이름, 주소, 전화번호, 사업자등록번호
 	@ApiModelProperty(name = "병원 아이디", example="hosfy")
