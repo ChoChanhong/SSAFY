@@ -11,7 +11,13 @@ export default function Generate() {
       <div>
         <DocNavbar />
       </div>
-      <div style={{ display: "flex", justifyContent: "space-evenly", margin: "50px 50px 0px 50px" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-start",
+          margin: "30px 50px 0px 50px",
+        }}
+      >
         <CliInfo />
         <PerInfo />
         <PerDetail />
