@@ -4,11 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.ssafy.api.request.UserRegisterPostReq;
 import com.ssafy.db.entity.User;
 import com.ssafy.db.repository.UserRepository;
-
-import java.util.Optional;
 //import com.ssafy.db.repository.UserRepositorySupport;
 
 /**
@@ -30,49 +27,48 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 
-//	// userID 중복 체크
-//	@Override
-//	public boolean checkIdDuplicated(String userId) {
-//		if (userRepository.countByUserId(userId) == 0) {
-//			return true;
-//		}
-//		return false;
-//	}
-//
-//	// userRRN 중복 체크
-//	@Override
-//	public boolean checkRRNDuplicated(String userRRN) {
-//		if (userRepository.countByUserRRN(userRRN) == 0) {
-//			return true;
-//		}
-//		return false;
-//	}
-//
-//	// 회원 정보 수정
-//	@Override
-//	public User updateUserInfo(String userId, UserRegisterPostReq updateInfo) {
-//		Optional<User> updatedUser = userRepository.findByUserId(userId);
-//
-//		if (updatedUser.isPresent()) {
-//			updatedUser.get().setUserId(updateInfo.getUserId());
-//
-//			if (userRepository.countByUserId(updateInfo.getUserId()) != 0) {
-//				if (!updatedUser.get().getUserId().equals(updateInfo.getUserId())) {
-//					return null;
-//				}
-//			}
-//			updatedUser.get().setUserId(updateInfo.getUserId());
-//			updatedUser.get().setUserPassword(passwordEncoder.encode(updateInfo.getUserPassword()));
-//			updatedUser.get().setUserName(updateInfo.getUserName());
-//			updatedUser.get().setUserRRN(updateInfo.getUserRRN());
-//			updatedUser.get().setUserTel(updateInfo.getUserTel());
-//			updatedUser.get().setUserEmail(updateInfo.getUserEmail());
-//
-//		}
-//		userRepository.save(updatedUser.get());
-//		return updatedUser.get();
-//	}
-//
-//	@Override
-//	public void deleteUser(User user) { userRepository.delete(user); }
+
+	@Override
+	public User createWallet(long Seq, String walletAddr) {
+		User user = userRepository.findUserByUserSeq(Seq).get();
+
+		user.setUserWalletAddress(walletAddr);
+
+		long userSeq = userRepository.save(user).getUserSeq();
+
+		return userRepository.findUserByUserSeq(userSeq).get();
+	}
+
+
+
+
+	/*
+		@Override
+	public PatientInfo updatePatient(long userSeq, CreatePatientPostReq updatePatientPostReq) {
+//		Optional<PatientInfo> updatePatientInfo = PatientInfo
+		Optional<User> updatedUser = userRepository.findUserByUserSeq(userSeq);
+		Optional<Patient> updatedPatient = patientRepository.findPatientByPatientUserSeq(userSeq);
+//		User user = new User();
+//		Patient patient = new Patient();
+
+//		updatedUser.get().setUserId(updatePatientPostReq.getPatientId());
+		updatedUser.get().setUserPassword(passwordEncoder.encode(updatePatientPostReq.getPatientPassword())); // 보안을 위해서 유저 패스워드 암호화 하여 디비에 저장
+		updatedUser.get().setUserName(updatePatientPostReq.getPatientName());
+		updatedUser.get().setUserEmail(updatePatientPostReq.getPatientEmail());
+//		updatedUser.get().setUserIdx(0);
+
+		long updatedUserSeq = userRepository.save(updatedUser.get()).getUserSeq();
+
+//		updatedPatient.get().setPatientUserSeq(userSeq);
+		updatedPatient.get().setPatientRRN(updatePatientPostReq.getPatientRRN());
+
+		long updatedPatientSeq = patientRepository.save(updatedPatient.get()).getPatientSeq();
+
+		PatientInfo patientInfo = new PatientInfo();
+		patientInfo.setUser(userRepository.findUserByUserSeq(userSeq).get());
+		patientInfo.setPatient(patientRepository.findPatientByPatientSeq(updatedPatientSeq).get());
+
+		return patientInfo;
+	}
+	 */
 }
