@@ -7,7 +7,7 @@ export default function MainCarousel() {
       <Carousel.Item>
         <img
           className="d-block"
-          style={{ height: 200 }}
+          style={{ height: 200, width: 150 }}
           src="img/001.png"
           alt="First slide"
         />
@@ -18,7 +18,7 @@ export default function MainCarousel() {
       <Carousel.Item>
         <img
           className="d-block"
-          style={{ height: 200 }}
+          style={{ height: 200, width: 150 }}
           src="img/002.png"
           alt="Second slide"
         />
