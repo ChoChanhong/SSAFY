@@ -11,11 +11,11 @@ import Perdetail from "./pages/Cli/Perdetail";
 import Perscription from "./pages/Cli/Perscription";
 import Signup from "./pages/Cli/Signup";
 //의사
-import { Main as DocMain } from "./pages/Doc/Main";
 import { Login as DocLogin } from "./pages/Doc/Login";
 import { Signup as DocSignup } from "./pages/Doc/Signup";
 import { Log as DocLog } from "./pages/Doc/Log";
 import Generate from "./pages/Doc/Generate";
+import { Mypage as DocMypage } from "./pages/Doc/Mypage";
 import { ServiceInfo as DocInfo } from "./pages/Doc/ServiceInfo";
 //약사
 import { Main as PhMain } from "./pages/Ph/Main";
@@ -37,11 +37,11 @@ function App() {
       <Route path="/perscription" element={<Perscription />} />
       <Route path="/perdetail" element={<Perdetail />} />
       {/*의사*/}
-      <Route path="/doc" element={<DocMain />} />
-      <Route path="/doc/login" element={<DocLogin />} />
+      <Route path="/doc" elemetn={<DocLogin />} />
       <Route path="/doc/signup" element={<DocSignup />} />
       <Route path="/doc/log" element={<DocLog />} />
       <Route path="/doc/generate" element={<Generate />} />
+      <Route path="/doc/my" element={<DocMypage />} />
       <Route path="/doc/serviceinfo" element={<DocInfo />} />
       {/*약사*/}
       <Route path="/ph" element={<PhMain />} />
