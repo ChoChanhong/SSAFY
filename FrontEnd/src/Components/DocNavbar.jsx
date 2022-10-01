@@ -13,17 +13,17 @@ export default function DocNavbar() {
   };
 
   return (
-    <div id="nav">
+    <div id="docnav">
       <div style={{ display: "flex" }}>
         <img src={Logo} alt="로고" style={logo} />
-        <div id="menu">
-          <Link to="/doc/generate" id="text">
+        <div id="docmenu">
+          <Link to="/doc/generate" id="doctext">
             처방전 생성
           </Link>
-          <Link to="/doc/log" id="text">
+          <Link to="/doc/log" id="doctext">
             처방전 조회
           </Link>
-          <Link to="/doc/my" id="text">
+          <Link to="/doc/my" id="doctext">
             마이페이지
           </Link>
         </div>
