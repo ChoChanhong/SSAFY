@@ -6,7 +6,25 @@ module.exports = {
     port: 7545,            // Standard Ethereum port (default: none)
     network_id: "*",       // Any network (default: none)
     },
+    // 싸피 네트워크 연결 
+    // SSAFY : {
+    //   provider: () => new PrivateKeyProvider(privateKey, `http://20.196.209.2:8545`),
+    //   // host: "20.196.209.2",
+    //   // port: 8545,
+    //   network_id: "*",
+
+    //얘는 패키지제이슨에 넣어야함
+/*"truffle-privatekey-provider": "^1.5.0", */
+    // }
   },
+
+  // networks: {
+  //   development: {
+  //   host: "127.0.0.1",     // Localhost (default: none)
+  //   port: 7545,            // Standard Ethereum port (default: none)
+  //   network_id: "*",       // Any network (default: none)
+  //   },
+  // },
 
   contracts_directory: './src/contracts/',
   contracts_build_directory: './src/abis',

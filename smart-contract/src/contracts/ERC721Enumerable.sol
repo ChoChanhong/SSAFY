@@ -31,7 +31,18 @@ contract ERC721Enumerable is IERC721Enumerable, ERC721 {
         _addTokensToOwnerEnumeration(to, tokenId);
     }
 
-
+    function transferPrs(address _from, address _to, uint _tokenId) public {
+        
+        transferFrom(_from, _to, _tokenId);
+        uint id = _ownedTokensIndex[_tokenId];
+        for(uint i = id ; i < _ownedTokens[_from].length -1; i++ ){
+            _ownedTokens[_from][i] = _ownedTokens[_from][i+1];
+            _ownedTokensIndex[_ownedTokens[_from][i]]--;
+        }
+        _ownedTokens[_from].pop();
+       
+        _addTokensToOwnerEnumeration(_to, _tokenId);
+    }
     // add tokens to the _alltokens array and set the position of the tokens indexes
     function _addTokensToAllTokenEnumeration(uint256 tokenId) private {
         // tokenId에 해당하는 토큰 가져옴
