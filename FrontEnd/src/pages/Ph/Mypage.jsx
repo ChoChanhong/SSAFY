@@ -1,7 +1,8 @@
-import { React, useEffect, useState } from "react"
+import { React, useEffect, useState } from "react";
+import PhNavbar from "../../Components/PhNavbar";
 
-export function Mypage(){
-    const [account, setAccount] = useState('');
+export function Mypage() {
+  const [account, setAccount] = useState("");
 
   const getAccount = async () => {
     try {
@@ -19,35 +20,33 @@ export function Mypage(){
     }
   };
 
+  // const navigate = useNavigate();
+  // const {
+  //     connector,
+  //     library,
+  //     chainId,
+  //     account,
+  //     active,
+  //     error,
+  //     activate,
+  //     deactivate,
+  //   } = useWeb3React();
 
+  // useEffect(()=>{
+  //     if(active){activate(injected)}
+  //     else{navigate('/login')}
+  // },[]);
 
-    // const navigate = useNavigate();
-    // const {
-    //     connector,
-    //     library,
-    //     chainId,
-    //     account,
-    //     active,
-    //     error,
-    //     activate,
-    //     deactivate,
-    //   } = useWeb3React();
-    
-    // useEffect(()=>{
-    //     if(active){activate(injected)}
-    //     else{navigate('/login')}        
-    // },[]);
-
-    return(
-        <div>
-            <h1>약사 메인</h1>
-            <div>
-                <div>{account}</div>
-                <button onClick={getAccount}>dd</button>
-                {/* <p>Account: {account}</p>
+  return (
+    <div>
+      <PhNavbar />
+      <h1>약사 마이페이지</h1>
+      <div>
+        <div>{account}</div>
+        <button onClick={getAccount}>dd</button>
+        {/* <p>Account: {account}</p>
                 <p>ChainId: {chainId}</p> */}
-            </div>
-        </div>
-        
-    )
+      </div>
+    </div>
+  );
 }
