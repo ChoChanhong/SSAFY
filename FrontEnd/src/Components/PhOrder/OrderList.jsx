@@ -4,13 +4,9 @@ import "./OrderList.css";
 export default function OrderList() {
   return (
     <div>
-      <div>
-        <h3>접수 리스트</h3>
-      </div>
       <div id="orderline">
         <div
           id="ordername"
-          class="mt-3"
           style={{ display: "flex", justifyContent: "space-around" }}
         >
           <p id="orderLog">병원</p>
