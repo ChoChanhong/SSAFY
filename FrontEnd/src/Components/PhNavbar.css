@@ -1,8 +1,8 @@
-#nav{
-  background-color: #00ADEF;
+#phnav{
+  background-color: #00ADEF !important;
   text-align: center;
   border: solid 1px balck;
-  height: 50px;
+  height: 100px;
 }
 
 #logo{
