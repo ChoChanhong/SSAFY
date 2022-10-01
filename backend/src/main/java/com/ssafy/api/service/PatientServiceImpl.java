@@ -20,10 +20,10 @@ import java.util.Optional;
 public class PatientServiceImpl implements PatientService {
 	@Autowired
 	UserRepository userRepository;
-	
+
 	@Autowired
 	PatientRepository patientRepository;
-	
+
 	@Autowired
 	PasswordEncoder passwordEncoder;
 
@@ -45,18 +45,29 @@ public class PatientServiceImpl implements PatientService {
 
 		long patientSeq = patientRepository.save(patient).getPatientSeq();
 
-		PatientInfo patientInfo = new PatientInfo();
-		patientInfo.setUser(userRepository.findUserByUserSeq(userSeq).get());
-		patientInfo.setPatient(patientRepository.findPatientByPatientSeq(patientSeq).get());
+		// patientInfo
+		User inputU = userRepository.findUserByUserSeq(userSeq).get();
+		Patient inputP = patientRepository.findPatientByPatientUserSeq(userSeq).get();
+
+		PatientInfo patientInfo = new PatientInfo(
+				inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserEmail(),
+				inputU.getUserEmail(), inputU.getUserIdx(), inputU.getUserWalletAddress(), inputU.getREG_DTM(), inputU.getMOD_DTM(),
+				inputP.getPatientSeq(), inputP.getPatientUserSeq(), inputP.getPatientRRN(), inputP.getREG_DTM(), inputP.getMOD_DTM());
 
 		return patientInfo;
 	}
 
 	@Override
 	public PatientInfo getPatientInfo(long userSeq) {
+
+		// patientInfo
+		User inputU = userRepository.findUserByUserSeq(userSeq).get();
+		Patient inputP = patientRepository.findPatientByPatientUserSeq(userSeq).get();
+
 		PatientInfo patientInfo = new PatientInfo(
-				userRepository.findUserByUserSeq(userSeq).get(),
-				patientRepository.findPatientByPatientUserSeq(userSeq).get() );
+				inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserEmail(),
+				inputU.getUserEmail(), inputU.getUserIdx(), inputU.getUserWalletAddress(), inputU.getREG_DTM(), inputU.getMOD_DTM(),
+				inputP.getPatientSeq(), inputP.getPatientUserSeq(), inputP.getPatientRRN(), inputP.getREG_DTM(), inputP.getMOD_DTM());
 
 		return patientInfo;
 	}
@@ -83,9 +94,14 @@ public class PatientServiceImpl implements PatientService {
 
 		long updatedPatientSeq = patientRepository.save(updatedPatient.get()).getPatientSeq();
 
-		PatientInfo patientInfo = new PatientInfo();
-		patientInfo.setUser(userRepository.findUserByUserSeq(userSeq).get());
-		patientInfo.setPatient(patientRepository.findPatientByPatientSeq(updatedPatientSeq).get());
+		// patientInfo
+		User inputU = userRepository.findUserByUserSeq(userSeq).get();
+		Patient inputP = patientRepository.findPatientByPatientUserSeq(userSeq).get();
+
+		PatientInfo patientInfo = new PatientInfo(
+				inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserEmail(),
+				inputU.getUserEmail(), inputU.getUserIdx(), inputU.getUserWalletAddress(), inputU.getREG_DTM(), inputU.getMOD_DTM(),
+				inputP.getPatientSeq(), inputP.getPatientUserSeq(), inputP.getPatientRRN(), inputP.getREG_DTM(), inputP.getMOD_DTM());
 
 		return patientInfo;
 	}
@@ -127,15 +143,22 @@ public class PatientServiceImpl implements PatientService {
 	public PatientInfo searchPatient(String patientName, String patientRRN) {
 
 		// 주민등록번호로 검색
-		Patient patient = patientRepository.findPatientByPatientRRN(patientRRN).get();
+		Patient inputP = patientRepository.findPatientByPatientRRN(patientRRN).get();
 
 		// 이름 체크
-		User user = userRepository.findUserByUserSeq(patient.getPatientUserSeq()).get();
-		if (patientName.equals(user.getUserName())) {
-			return new PatientInfo(user, patient);
+		User inputU = userRepository.findUserByUserSeq(inputP.getPatientUserSeq()).get();
+		if (patientName.equals(inputU.getUserName())) {
+
+			// patientInfo
+
+			PatientInfo patientInfo = new PatientInfo(
+					inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserEmail(),
+					inputU.getUserEmail(), inputU.getUserIdx(), inputU.getUserWalletAddress(), inputU.getREG_DTM(), inputU.getMOD_DTM(),
+					inputP.getPatientSeq(), inputP.getPatientUserSeq(), inputP.getPatientRRN(), inputP.getREG_DTM(), inputP.getMOD_DTM());
+
+			return patientInfo;
 		}
 
 		return null;
 	}
-
 }

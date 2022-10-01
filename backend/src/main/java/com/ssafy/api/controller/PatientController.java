@@ -124,7 +124,7 @@ public class PatientController {
 
 		PatientInfo patientInfo = patientService.getPatientInfo(userSeq);
 
-		System.out.println(patientInfo.getPatient().getPatientRRN());
+		System.out.println(patientInfo.getPatientRRN());
 
 		if (patientInfo != null) {
 			return new ResponseEntity<PatientInfo>(patientInfo, HttpStatus.valueOf(200));

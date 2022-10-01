@@ -49,7 +49,7 @@ public class PrescriptionController {
 			long userSeq = userDetails.getUser().getUserSeq();
 			HospitalInfo hospitalInfo = hospitalService.getHospitalInfo(userSeq);
 
-			if (hospitalInfo.getUser().getUserIdx() != 1) {
+			if (hospitalInfo.getUserIdx() != 1) {
 				return new ResponseEntity<>("처방전 생성 권한이 없습니다.", HttpStatus.valueOf(401));
 			}
 
