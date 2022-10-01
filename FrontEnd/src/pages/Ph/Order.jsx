@@ -33,7 +33,7 @@ export default function Order() {
       <div
         style={{
           display: "flex",
-          justifyContent: "flex-start",
+          justifyContent: "space-evenly",
           margin: "30px 50px 0px 50px",
         }}
       >

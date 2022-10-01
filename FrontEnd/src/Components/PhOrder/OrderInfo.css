@@ -1,33 +1,47 @@
-#orderline {
+#orderinfoline {
   background-color: #f5f5f5;
   width: 350px;
-  height: 350px;
+  height: 700px;
 }
 
-#ordername {
-  border-top: solid 5px #5FD068;
+#orderinfoname {
+  border-top: solid 5px #00ADEF;
   background-color: #e0e0e0;
   height: 50px;
   font-weight: bold;
 }
 
-#orderBox {
+#orderinfoBox {
   display: flex;
   margin-top: 20px;
 }
 
-#orderLabel {
+#orderinfoLabel {
   font-weight: bold;
   margin-top: 13px;
   margin-left: 30px;
   margin-right: 10px;
 }
 
-#orderInput {
+#orderinfoInput {
   margin-left: 25px;
   width: 200px;
 }
 
-#orderLog {
+#orderinfoLog {
   margin-top: 10px;
+}
+
+#orderinfoButton {
+  color: white;
+  border-radius: 10px;
+  border-color: transparent;
+  background-color: #00ADEF;
+  width: 200px;
+  height: 50px;
+}
+
+#orderinfoText {
+  margin-top: 10px;
+  margin-left: 30px;
 }
