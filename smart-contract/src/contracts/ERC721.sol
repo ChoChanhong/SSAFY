@@ -123,10 +123,11 @@ contract ERC721 is ERC165, IERC721 {
     function _transferFrom(address _from, address _to, uint256 _tokenId) internal {
         require(_to != address(0), 'Error - ERC721 Transfer to the zero address');
         require(ownerOf(_tokenId) == _from, 'Trying to transfer a token the address does not own!');
-
+        
+        
         _OwnedTokensCount[_from].decrement();
         _OwnedTokensCount[_to].increment();
-
+       
         _tokenOwner[_tokenId] = _to;
         // _blockTotokenid[block.number] = _tokenId;
         // _addToblock[_from].push(block.number);

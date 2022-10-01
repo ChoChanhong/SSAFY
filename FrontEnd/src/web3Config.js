@@ -329,11 +329,34 @@ import Web3 from 'web3';
         "inputs": [
           {
             "internalType": "address",
+            "name": "_from",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "_to",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_tokenId",
+            "type": "uint256"
+          }
+        ],
+        "name": "transferPrs",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
             "name": "_address",
             "type": "address"
           }
         ],
-        "name": "getAllPrescription",
+        "name": "getAllListFromAccount",
         "outputs": [
           {
             "components": [
@@ -408,8 +431,9 @@ import Web3 from 'web3';
             "type": "tuple[]"
           }
         ],
-        "stateMutability": "nonpayable",
-        "type": "function"
+        "stateMutability": "view",
+        "type": "function",
+        "constant": true
       },
       {
         "inputs": [
@@ -444,12 +468,79 @@ import Web3 from 'web3';
             "type": "address"
           }
         ],
-        "name": "getPatiantListFromAccount",
+        "name": "getPatientListFromAccount",
         "outputs": [
           {
-            "internalType": "uint256[]",
+            "components": [
+              {
+                "internalType": "string",
+                "name": "userName",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "hosName",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "pharName",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "dCode",
+                "type": "string"
+              },
+              {
+                "internalType": "string[]",
+                "name": "dName",
+                "type": "string[]"
+              },
+              {
+                "internalType": "uint256[]",
+                "name": "dosage",
+                "type": "uint256[]"
+              },
+              {
+                "internalType": "uint256[]",
+                "name": "doseNum",
+                "type": "uint256[]"
+              },
+              {
+                "internalType": "uint256[]",
+                "name": "dosePeriod",
+                "type": "uint256[]"
+              },
+              {
+                "internalType": "uint256",
+                "name": "dispensingCount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "prescriptionCount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "string",
+                "name": "howtoTake",
+                "type": "string"
+              },
+              {
+                "internalType": "uint256",
+                "name": "pubDate",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "prepDate",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct PreScription.preScription[]",
             "name": "",
-            "type": "uint256[]"
+            "type": "tuple[]"
           }
         ],
         "stateMutability": "view",
@@ -799,7 +890,7 @@ import Web3 from 'web3';
       }
     ];
 
-    export const nftCA = '0x3f881e0E5F6f711953Ff3F99eB87ac29F36d2BFb';
+    export const nftCA = '0x17DC9db6B87C2F84d5928393b4Ba8ecc3c89CBA2';
 
     // export const web3 = new Web3(window.ethereum);
     export const abi = nftAbi;
