@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from "react"
 
-export function Main(){
+export function Mypage(){
     const [account, setAccount] = useState('');
 
   const getAccount = async () => {

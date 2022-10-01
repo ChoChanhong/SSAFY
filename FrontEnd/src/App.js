@@ -18,11 +18,12 @@ import Generate from "./pages/Doc/Generate";
 import { Mypage as DocMypage } from "./pages/Doc/Mypage";
 import { ServiceInfo as DocInfo } from "./pages/Doc/ServiceInfo";
 //약사
-import { Main as PhMain } from "./pages/Ph/Main";
+import { Mypage as PhMypage } from "./pages/Ph/Mypage";
 import { Login as PhLogin } from "./pages/Ph/Login";
 import { Signup as PhSignup } from "./pages/Ph/Signup";
 import { Log as PhLog } from "./pages/Ph/Log";
 import Order from "./pages/Ph/Order";
+import { ServiceInfo as PhInfo } from "./pages/Ph/ServiceInfo";
 
 function App() {
   return (
@@ -44,11 +45,12 @@ function App() {
       <Route path="/doc/my" element={<DocMypage />} />
       <Route path="/doc/serviceinfo" element={<DocInfo />} />
       {/*약사*/}
-      <Route path="/ph" element={<PhMain />} />
-      <Route path="/ph/login" element={<PhLogin />} />
+      <Route path="/ph" element={<PhLogin />} />
       <Route path="/ph/signup" element={<PhSignup />} />
       <Route path="/ph/log" element={<PhLog />} />
       <Route path="/ph/order" element={<Order />} />
+      <Route path="/ph/my" element={<PhMypage />} />
+      <Route path="/ph/serviceinfo" element={<PhInfo />} />
     </Routes>
   );
 }

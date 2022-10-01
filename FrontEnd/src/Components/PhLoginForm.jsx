@@ -73,7 +73,7 @@ export default function PhLoginForm() {
           <Link to="/ph/signup">
             <button className="linkbutton">회원가입</button>
           </Link>
-          <Link to="/">
+          <Link to="/ph/serviceinfo">
             <button className="linkbutton">이용방법</button>
           </Link>
         </div>
