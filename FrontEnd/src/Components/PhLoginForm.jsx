@@ -30,9 +30,9 @@ export default function PhLoginForm() {
   }
 
   return (
-    <div id="loginbox">
-      <div class="login">
-        <h1 className="loginTitle" style={{ color: "#00ADEF" }}>
+    <div id="phloginbox">
+      <div class="phlogin">
+        <h1 className="phloginTitle" style={{ color: "#00ADEF" }}>
           약국로그인
         </h1>
         <span style={{ fontSize: 15, marginTop: 10 }}>
@@ -44,7 +44,7 @@ export default function PhLoginForm() {
           </FormLabel>
           <TextField
             class="a"
-            className="logInput"
+            className="phlogInput"
             placeholder="아이디를 입력해주세요."
             onChange={IdChange}
           />
@@ -60,21 +60,21 @@ export default function PhLoginForm() {
             onChange={PasswordChange}
           />
         </div>
-        <button onClick={Send} id="loginbutton">
+        <button onClick={Send} id="phloginbutton">
           로그인
         </button>
-        <Link to="/" class="link">
+        <Link to="/" className="phlink">
           아이디/비밀번호 찾기
         </Link>
       </div>
-      <div class="info">
-        <img className="logoImg" src="img/001.png" alt="logo" />
-        <div class="buttonbox">
+      <div class="phinfo">
+        <img className="phlogoImg" src="img/001.png" alt="logo" />
+        <div class="phbuttonbox">
           <Link to="/ph/signup">
-            <button className="linkbutton">회원가입</button>
+            <button className="phlinkbutton">회원가입</button>
           </Link>
-          <Link to="/">
-            <button className="linkbutton">이용방법</button>
+          <Link to="/ph/serviceinfo">
+            <button className="phlinkbutton">이용방법</button>
           </Link>
         </div>
       </div>

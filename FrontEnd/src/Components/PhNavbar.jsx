@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./DocNavbar.css";
 import Logo from "../assets/images/002.png";
+import "./PhNavbar.css";
 
-export default function DocNavbar() {
+export default function PhNavbar() {
   const logo = {
     height: "90px",
     width: "90px",
@@ -13,17 +13,17 @@ export default function DocNavbar() {
   };
 
   return (
-    <div id="docnav">
+    <div id="phnav">
       <div style={{ display: "flex" }}>
         <img src={Logo} alt="로고" style={logo} />
-        <div id="docmenu">
-          <Link to="/doc/generate" id="doctext">
-            처방전 생성
+        <div id="phmenu">
+          <Link to="/ph/order" id="phtext">
+            조제접수 조회
           </Link>
-          <Link to="/doc/log" id="doctext">
-            처방전 조회
+          <Link to="/ph/log" id="phtext">
+            조제 이력
           </Link>
-          <Link to="/doc/my" id="doctext">
+          <Link to="/ph/my" id="phtext">
             마이페이지
           </Link>
         </div>

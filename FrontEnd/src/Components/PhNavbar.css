@@ -1,16 +1,33 @@
-#nav{
-  background-color: #00ADEF;
+#phnav{
+  background-color: #00ADEF !important;
   text-align: center;
   border: solid 1px balck;
-  height: 50px;
+  height: 100px;
 }
 
-#logo{
-  border: solid 5px black;
-  width : 20px;
-  height: 20px;
-  margin-top: auto;
+#phlogo{
+  width : 100px;
+  height: 100px;
+  margin-top: start;
   margin-bottom: auto;
   margin-left: auto;
   margin-right: auto;
+}
+
+#phlogoImg {
+  height: 100px;
+}
+
+#phmenu {
+  width: 700px;
+  color: white;
+  margin-left: 55%;
+  margin-top: 30px;
+  margin-right: 10px;
+}
+
+#phtext {
+  margin-right: 20px;
+  color: white;
+  font-size: 25px;
 }

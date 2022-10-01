@@ -1,11 +1,11 @@
-#nav{
+#docnav{
     background-color: #5FD068 !important;
     text-align: center;
     border: solid 1px balck;
     height: 100px !important;
 }
 
-#logo{
+#doclogo{
     width : 100px;
     height: 100px;
     margin-top: start;
@@ -14,11 +14,11 @@
     margin-right: auto;
 }
 
-#logoImg {
+#doclogoImg {
     height: 100px;
 }
 
-#menu {
+#docmenu {
     width: 700px;
     color: white;
     margin-left: 55%;
@@ -26,7 +26,7 @@
     margin-right: 10px;
 }
 
-#text {
+#doctext {
     margin-right: 20px;
     color: white;
     font-size: 25px;
