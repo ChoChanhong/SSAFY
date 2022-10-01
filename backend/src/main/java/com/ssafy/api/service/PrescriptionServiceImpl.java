@@ -5,7 +5,7 @@ import com.ssafy.common.customObject.HospitalInfo;
 import com.ssafy.common.customObject.PatientInfo;
 import com.ssafy.common.customObject.PharmInfo;
 import com.ssafy.common.customObject.PrescriptionInfo;
-import com.ssafy.db.entity.Prescription;
+import com.ssafy.db.entity.*;
 import com.ssafy.db.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,26 +50,55 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
 	@Override
 	public PrescriptionInfo getPrescriptionInfo(Prescription prescription) {
-					// 환자 정보
+//					// 환자 정보
+//			PatientInfo patientInfo = new PatientInfo(
+//					userRepository.findUserByUserSeq(prescription.getPatientUserSeq()).get(),
+//					patientRepository.findPatientByPatientUserSeq(prescription.getPatientUserSeq()).get()
+//					);
+
+			// patientInfo
+			User inputPU = userRepository.findUserByUserSeq(prescription.getPatientUserSeq()).get();
+			Patient inputP = patientRepository.findPatientByPatientUserSeq(prescription.getPatientUserSeq()).get();
+
 			PatientInfo patientInfo = new PatientInfo(
-					userRepository.findUserByUserSeq(prescription.getPatientUserSeq()).get(),
-					patientRepository.findPatientByPatientUserSeq(prescription.getPatientUserSeq()).get()
-					);
-			// 병원 정보
+					inputPU.getUserSeq(), inputPU.getUserId(), inputPU.getUserPassword(), inputPU.getUserEmail(),
+					inputPU.getUserEmail(), inputPU.getUserIdx(), inputPU.getUserWalletAddress(), inputPU.getREG_DTM(), inputPU.getMOD_DTM(),
+					inputP.getPatientSeq(), inputP.getPatientUserSeq(), inputP.getPatientRRN(), inputP.getREG_DTM(), inputP.getMOD_DTM());
+
+//			// 병원 정보
+//			HospitalInfo hospitalInfo = new HospitalInfo(
+//					userRepository.findUserByUserSeq(prescription.getHospitalUserSeq()).get(),
+//					hospitalRepository.findHospitalByHospitalUserSeq(prescription.getHospitalUserSeq()).get()
+//			);
+			// hospitalInfo
+			User inputU = userRepository.findUserByUserSeq(prescription.getHospitalUserSeq()).get();
+			Hospital inputH = hospitalRepository.findHospitalByHospitalUserSeq(prescription.getHospitalUserSeq()).get();
+
 			HospitalInfo hospitalInfo = new HospitalInfo(
-					userRepository.findUserByUserSeq(prescription.getHospitalUserSeq()).get(),
-					hospitalRepository.findHospitalByHospitalUserSeq(prescription.getHospitalUserSeq()).get()
-			);
+					inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserEmail(),
+					inputU.getUserEmail(), inputU.getUserIdx(), inputU.getUserWalletAddress(), inputU.getREG_DTM(), inputU.getMOD_DTM(),
+					inputH.getHospitalSeq(), inputH.getHospitalUserSeq(), inputH.getHospitalLicense(), inputH.getHospitalAddr(),
+					inputH.getHospitalTel(), inputH.getHospitalCRN(), inputH.getREG_DTM(), inputH.getMOD_DTM());
+
 			// 약국정보
 			if (prescription.getPharmUserSeq() == 0) {
 				PrescriptionInfo prescriptionInfo = new PrescriptionInfo(patientInfo, hospitalInfo, null, prescription);
 				return prescriptionInfo;
 			}
 			// 약국이 있으면 약국정보까지
+//			PharmInfo pharmInfo = new PharmInfo(
+//					userRepository.findUserByUserSeq(prescription.getPharmUserSeq()).get(),
+//					pharmRepository.findPharmByPharmUserSeq(prescription.getPharmUserSeq()).get()
+//			);
+			// pharmInfo
+			User inputMU = userRepository.findUserByUserSeq(prescription.getPharmUserSeq()).get();
+			Pharm inputM = pharmRepository.findPharmByPharmUserSeq(prescription.getPharmUserSeq()).get();
+
 			PharmInfo pharmInfo = new PharmInfo(
-					userRepository.findUserByUserSeq(prescription.getPharmUserSeq()).get(),
-					pharmRepository.findPharmByPharmUserSeq(prescription.getPharmUserSeq()).get()
-			);
+					inputMU.getUserSeq(), inputMU.getUserId(), inputMU.getUserPassword(), inputMU.getUserEmail(),
+					inputMU.getUserEmail(), inputMU.getUserIdx(), inputMU.getUserWalletAddress(), inputMU.getREG_DTM(), inputU.getMOD_DTM(),
+					inputM.getPharmSeq(), inputM.getPharmUserSeq(), inputM.getPharmLicense(), inputM.getPharmAddr(),
+					inputM.getPharmTel(), inputM.getPharmCRN(), inputM.getREG_DTM(), inputM.getMOD_DTM());
 
 			PrescriptionInfo prescriptionInfo = new PrescriptionInfo(patientInfo, hospitalInfo, pharmInfo, prescription);
 

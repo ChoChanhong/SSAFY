@@ -2,7 +2,9 @@ package com.ssafy.api.service;
 
 import com.ssafy.api.request.CreateHospitalPostReq;
 import com.ssafy.common.customObject.HospitalInfo;
+import com.ssafy.common.customObject.PatientInfo;
 import com.ssafy.db.entity.Hospital;
+import com.ssafy.db.entity.Patient;
 import com.ssafy.db.entity.User;
 import com.ssafy.db.repository.HospitalRepository;
 import com.ssafy.db.repository.UserRepository;
@@ -49,21 +51,33 @@ public class HospitalServiceImpl implements HospitalService {
 
 		long hospitalSeq = hospitalRepository.save(hospital).getHospitalSeq();
 
+		// hospitalInfo
+		User inputU = userRepository.findUserByUserSeq(userSeq).get();
+		Hospital inputH = hospitalRepository.findHospitalByHospitalUserSeq(userSeq).get();
+
 		HospitalInfo hospitalInfo = new HospitalInfo(
-				userRepository.findUserByUserSeq(userSeq).get(),
-				hospitalRepository.findHospitalByHospitalUserSeq(userSeq).get()
-		);
+				inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserEmail(),
+				inputU.getUserEmail(), inputU.getUserIdx(), inputU.getUserWalletAddress(), inputU.getREG_DTM(), inputU.getMOD_DTM(),
+				inputH.getHospitalSeq(), inputH.getHospitalUserSeq(), inputH.getHospitalLicense(), inputH.getHospitalAddr(),
+				inputH.getHospitalTel(), inputH.getHospitalCRN(), inputH.getREG_DTM(), inputH.getMOD_DTM());
 
 		return hospitalInfo;
 	}
 
 	@Override
 	public HospitalInfo getHospitalInfo(long userSeq) {
-		HospitalInfo hospitalInfo = new HospitalInfo(
-				userRepository.findUserByUserSeq(userSeq).get(),
-				hospitalRepository.findHospitalByHospitalUserSeq(userSeq).get());
 
-		return hospitalInfo;
+		// hospitalInfo
+		User inputU = userRepository.findUserByUserSeq(userSeq).get();
+		Hospital inputH = hospitalRepository.findHospitalByHospitalUserSeq(userSeq).get();
+
+		HospitalInfo hospitalInfo = new HospitalInfo(
+				inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserEmail(),
+				inputU.getUserEmail(), inputU.getUserIdx(), inputU.getUserWalletAddress(), inputU.getREG_DTM(), inputU.getMOD_DTM(),
+				inputH.getHospitalSeq(), inputH.getHospitalUserSeq(), inputH.getHospitalLicense(), inputH.getHospitalAddr(),
+				inputH.getHospitalTel(), inputH.getHospitalCRN(), inputH.getREG_DTM(), inputH.getMOD_DTM());
+
+		return  hospitalInfo;
 	}
 //
 //	// 아이디 중복 검사
@@ -115,10 +129,15 @@ public class HospitalServiceImpl implements HospitalService {
 		long updatedHospitalSeq = hospitalRepository.save(updatedHospital.get()).getHospitalSeq();
 //		long updatedPatientSeq = patientRepository.save(updatedPatient.get()).getPatientSeq();
 
+		// hospitalInfo
+		User inputU = userRepository.findUserByUserSeq(userSeq).get();
+		Hospital inputH = hospitalRepository.findHospitalByHospitalUserSeq(userSeq).get();
+
 		HospitalInfo hospitalInfo = new HospitalInfo(
-				userRepository.findUserByUserSeq(userSeq).get(),
-				hospitalRepository.findHospitalByHospitalUserSeq(userSeq).get()
-		);
+				inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserEmail(),
+				inputU.getUserEmail(), inputU.getUserIdx(), inputU.getUserWalletAddress(), inputU.getREG_DTM(), inputU.getMOD_DTM(),
+				inputH.getHospitalSeq(), inputH.getHospitalUserSeq(), inputH.getHospitalLicense(), inputH.getHospitalAddr(),
+				inputH.getHospitalTel(), inputH.getHospitalCRN(), inputH.getREG_DTM(), inputH.getMOD_DTM());
 
 		return hospitalInfo;
 	}

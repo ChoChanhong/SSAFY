@@ -5,6 +5,7 @@ import com.ssafy.common.customObject.HospitalInfo;
 import com.ssafy.common.customObject.PatientInfo;
 import com.ssafy.common.customObject.PharmInfo;
 import com.ssafy.common.customObject.PrescriptionInfo;
+import com.ssafy.db.entity.Hospital;
 import com.ssafy.db.entity.Pharm;
 import com.ssafy.db.entity.Prescription;
 import com.ssafy.db.entity.User;
@@ -53,20 +54,30 @@ public class PharmServiceImpl implements PharmService {
 
 		long pharmSeq = pharmRepository.save(pharm).getPharmSeq();
 
+		// pharmInfo
+		User inputU = userRepository.findUserByUserSeq(userSeq).get();
+		Pharm inputM = pharmRepository.findPharmByPharmUserSeq(userSeq).get();
+
 		PharmInfo pharmInfo = new PharmInfo(
-				userRepository.findUserByUserSeq(userSeq).get(),
-				pharmRepository.findPharmByPharmUserSeq(userSeq).get()
-		);
+				inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserEmail(),
+				inputU.getUserEmail(), inputU.getUserIdx(), inputU.getUserWalletAddress(), inputU.getREG_DTM(), inputU.getMOD_DTM(),
+				inputM.getPharmSeq(), inputM.getPharmUserSeq(), inputM.getPharmLicense(), inputM.getPharmAddr(),
+				inputM.getPharmTel(), inputM.getPharmCRN(), inputM.getREG_DTM(), inputM.getMOD_DTM());
 
 		return pharmInfo;
 	}
 
 	@Override
 	public PharmInfo getPharmInfo(long userSeq) {
+		// pharmInfo
+		User inputU = userRepository.findUserByUserSeq(userSeq).get();
+		Pharm inputM = pharmRepository.findPharmByPharmUserSeq(userSeq).get();
+
 		PharmInfo pharmInfo = new PharmInfo(
-				userRepository.findUserByUserSeq(userSeq).get(),
-				pharmRepository.findPharmByPharmUserSeq(userSeq).get()
-		);
+				inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserEmail(),
+				inputU.getUserEmail(), inputU.getUserIdx(), inputU.getUserWalletAddress(), inputU.getREG_DTM(), inputU.getMOD_DTM(),
+				inputM.getPharmSeq(), inputM.getPharmUserSeq(), inputM.getPharmLicense(), inputM.getPharmAddr(),
+				inputM.getPharmTel(), inputM.getPharmCRN(), inputM.getREG_DTM(), inputM.getMOD_DTM());
 
 		return pharmInfo;
 	}
@@ -118,10 +129,15 @@ public class PharmServiceImpl implements PharmService {
 
 		long updatedPharmSeq = pharmRepository.save(updatedPharm.get()).getPharmSeq();
 
+		// pharmInfo
+		User inputU = userRepository.findUserByUserSeq(userSeq).get();
+		Pharm inputM = pharmRepository.findPharmByPharmUserSeq(userSeq).get();
+
 		PharmInfo pharmInfo = new PharmInfo(
-				userRepository.findUserByUserSeq(userSeq).get(),
-				pharmRepository.findPharmByPharmUserSeq(userSeq).get()
-		);
+				inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserEmail(),
+				inputU.getUserEmail(), inputU.getUserIdx(), inputU.getUserWalletAddress(), inputU.getREG_DTM(), inputU.getMOD_DTM(),
+				inputM.getPharmSeq(), inputM.getPharmUserSeq(), inputM.getPharmLicense(), inputM.getPharmAddr(),
+				inputM.getPharmTel(), inputM.getPharmCRN(), inputM.getREG_DTM(), inputM.getMOD_DTM());
 
 		return pharmInfo;
 	}

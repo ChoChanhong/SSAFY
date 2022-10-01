@@ -36,7 +36,7 @@ import java.util.List;
 @Api(value = "약국 API", tags = {"Pharm"})
 @RestController
 @RequestMapping("/pharms")
-public class 	PharmController {
+public class PharmController {
 
 	@Autowired  // 의존성 주입
 	UserService userService;
