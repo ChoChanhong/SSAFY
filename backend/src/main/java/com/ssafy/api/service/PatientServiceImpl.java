@@ -50,7 +50,7 @@ public class PatientServiceImpl implements PatientService {
 		Patient inputP = patientRepository.findPatientByPatientUserSeq(userSeq).get();
 
 		PatientInfo patientInfo = new PatientInfo(
-				inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserEmail(),
+				inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserName(),
 				inputU.getUserEmail(), inputU.getUserIdx(), inputU.getUserWalletAddress(), inputU.getREG_DTM(), inputU.getMOD_DTM(),
 				inputP.getPatientSeq(), inputP.getPatientUserSeq(), inputP.getPatientRRN(), inputP.getREG_DTM(), inputP.getMOD_DTM());
 
@@ -65,7 +65,7 @@ public class PatientServiceImpl implements PatientService {
 		Patient inputP = patientRepository.findPatientByPatientUserSeq(userSeq).get();
 
 		PatientInfo patientInfo = new PatientInfo(
-				inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserEmail(),
+				inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserName(),
 				inputU.getUserEmail(), inputU.getUserIdx(), inputU.getUserWalletAddress(), inputU.getREG_DTM(), inputU.getMOD_DTM(),
 				inputP.getPatientSeq(), inputP.getPatientUserSeq(), inputP.getPatientRRN(), inputP.getREG_DTM(), inputP.getMOD_DTM());
 
@@ -99,7 +99,7 @@ public class PatientServiceImpl implements PatientService {
 		Patient inputP = patientRepository.findPatientByPatientUserSeq(userSeq).get();
 
 		PatientInfo patientInfo = new PatientInfo(
-				inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserEmail(),
+				inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserName(),
 				inputU.getUserEmail(), inputU.getUserIdx(), inputU.getUserWalletAddress(), inputU.getREG_DTM(), inputU.getMOD_DTM(),
 				inputP.getPatientSeq(), inputP.getPatientUserSeq(), inputP.getPatientRRN(), inputP.getREG_DTM(), inputP.getMOD_DTM());
 
@@ -152,7 +152,7 @@ public class PatientServiceImpl implements PatientService {
 			// patientInfo
 
 			PatientInfo patientInfo = new PatientInfo(
-					inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserEmail(),
+					inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserName(),
 					inputU.getUserEmail(), inputU.getUserIdx(), inputU.getUserWalletAddress(), inputU.getREG_DTM(), inputU.getMOD_DTM(),
 					inputP.getPatientSeq(), inputP.getPatientUserSeq(), inputP.getPatientRRN(), inputP.getREG_DTM(), inputP.getMOD_DTM());
 

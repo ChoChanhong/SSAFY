@@ -59,7 +59,7 @@ public class PharmServiceImpl implements PharmService {
 		Pharm inputM = pharmRepository.findPharmByPharmUserSeq(userSeq).get();
 
 		PharmInfo pharmInfo = new PharmInfo(
-				inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserEmail(),
+				inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserName(),
 				inputU.getUserEmail(), inputU.getUserIdx(), inputU.getUserWalletAddress(), inputU.getREG_DTM(), inputU.getMOD_DTM(),
 				inputM.getPharmSeq(), inputM.getPharmUserSeq(), inputM.getPharmLicense(), inputM.getPharmAddr(),
 				inputM.getPharmTel(), inputM.getPharmCRN(), inputM.getREG_DTM(), inputM.getMOD_DTM());
@@ -74,7 +74,7 @@ public class PharmServiceImpl implements PharmService {
 		Pharm inputM = pharmRepository.findPharmByPharmUserSeq(userSeq).get();
 
 		PharmInfo pharmInfo = new PharmInfo(
-				inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserEmail(),
+				inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserName(),
 				inputU.getUserEmail(), inputU.getUserIdx(), inputU.getUserWalletAddress(), inputU.getREG_DTM(), inputU.getMOD_DTM(),
 				inputM.getPharmSeq(), inputM.getPharmUserSeq(), inputM.getPharmLicense(), inputM.getPharmAddr(),
 				inputM.getPharmTel(), inputM.getPharmCRN(), inputM.getREG_DTM(), inputM.getMOD_DTM());
@@ -134,7 +134,7 @@ public class PharmServiceImpl implements PharmService {
 		Pharm inputM = pharmRepository.findPharmByPharmUserSeq(userSeq).get();
 
 		PharmInfo pharmInfo = new PharmInfo(
-				inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserEmail(),
+				inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserName(),
 				inputU.getUserEmail(), inputU.getUserIdx(), inputU.getUserWalletAddress(), inputU.getREG_DTM(), inputU.getMOD_DTM(),
 				inputM.getPharmSeq(), inputM.getPharmUserSeq(), inputM.getPharmLicense(), inputM.getPharmAddr(),
 				inputM.getPharmTel(), inputM.getPharmCRN(), inputM.getREG_DTM(), inputM.getMOD_DTM());

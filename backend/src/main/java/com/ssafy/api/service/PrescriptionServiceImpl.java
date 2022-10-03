@@ -61,7 +61,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 			Patient inputP = patientRepository.findPatientByPatientUserSeq(prescription.getPatientUserSeq()).get();
 
 			PatientInfo patientInfo = new PatientInfo(
-					inputPU.getUserSeq(), inputPU.getUserId(), inputPU.getUserPassword(), inputPU.getUserEmail(),
+					inputPU.getUserSeq(), inputPU.getUserId(), inputPU.getUserPassword(), inputPU.getUserName(),
 					inputPU.getUserEmail(), inputPU.getUserIdx(), inputPU.getUserWalletAddress(), inputPU.getREG_DTM(), inputPU.getMOD_DTM(),
 					inputP.getPatientSeq(), inputP.getPatientUserSeq(), inputP.getPatientRRN(), inputP.getREG_DTM(), inputP.getMOD_DTM());
 
@@ -75,7 +75,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 			Hospital inputH = hospitalRepository.findHospitalByHospitalUserSeq(prescription.getHospitalUserSeq()).get();
 
 			HospitalInfo hospitalInfo = new HospitalInfo(
-					inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserEmail(),
+					inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserName(),
 					inputU.getUserEmail(), inputU.getUserIdx(), inputU.getUserWalletAddress(), inputU.getREG_DTM(), inputU.getMOD_DTM(),
 					inputH.getHospitalSeq(), inputH.getHospitalUserSeq(), inputH.getHospitalLicense(), inputH.getHospitalAddr(),
 					inputH.getHospitalTel(), inputH.getHospitalCRN(), inputH.getREG_DTM(), inputH.getMOD_DTM());
@@ -95,7 +95,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 			Pharm inputM = pharmRepository.findPharmByPharmUserSeq(prescription.getPharmUserSeq()).get();
 
 			PharmInfo pharmInfo = new PharmInfo(
-					inputMU.getUserSeq(), inputMU.getUserId(), inputMU.getUserPassword(), inputMU.getUserEmail(),
+					inputMU.getUserSeq(), inputMU.getUserId(), inputMU.getUserPassword(), inputMU.getUserName(),
 					inputMU.getUserEmail(), inputMU.getUserIdx(), inputMU.getUserWalletAddress(), inputMU.getREG_DTM(), inputU.getMOD_DTM(),
 					inputM.getPharmSeq(), inputM.getPharmUserSeq(), inputM.getPharmLicense(), inputM.getPharmAddr(),
 					inputM.getPharmTel(), inputM.getPharmCRN(), inputM.getREG_DTM(), inputM.getMOD_DTM());
