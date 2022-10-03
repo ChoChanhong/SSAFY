@@ -3,6 +3,7 @@ import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
 import BackGround from "../Components/BackGround";
 import MainCarousel from "../Components/MainCarousel";
+import Logo from "../assets/images/001.png";
 import "./Main.css";
 
 export default function Main() {
@@ -15,12 +16,12 @@ export default function Main() {
       <div>{isPc ? <BackGround /> : null}</div>
       <div id="main">
         <div class="mb-5">
-          <img style={{ height: 100 }} src="img/001.png" alt="로고" />
+          <img style={{ height: 100 }} src={Logo} alt="로고" />
         </div>
-        <div style={{ marginTop: 100 }}>
+        <div style={{ marginTop: 20 }}>
           <MainCarousel />
         </div>
-        <div style={{ marginTop: 100 }}>
+        <div style={{ marginTop: 50 }}>
           <Link to="/login">
             <button
               id="greenbutton"
@@ -30,7 +31,7 @@ export default function Main() {
             </button>
           </Link>
           <br />
-          <div class="d-flex justify-content-center" style={{ marginTop: 80 }}>
+          <div class="d-flex justify-content-center" style={{ marginTop: 50 }}>
             <Link to="/signup">회원가입</Link>
           </div>
           <div class="mt-3 text-center">

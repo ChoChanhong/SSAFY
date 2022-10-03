@@ -1,5 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Carousel } from "react-bootstrap";
+import MainIMG from "../assets/images/004.jpg";
+import GuideIMG from "../assets/images/005.jpg";
 
 export default function MainCarousel() {
   return (
@@ -7,40 +10,21 @@ export default function MainCarousel() {
       <Carousel.Item>
         <img
           className="d-block"
-          style={{ height: 200, width: 150 }}
-          src="img/001.png"
+          style={{ height: 400, width: 420 }}
+          src={MainIMG}
           alt="First slide"
         />
-        <Carousel.Caption>
-          <h3 style={{ color: "black" }}>사용자가이드</h3>
-        </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
-        <img
-          className="d-block"
-          style={{ height: 200, width: 150 }}
-          src="img/002.png"
-          alt="Second slide"
-        />
-
-        <Carousel.Caption>
-          <h3 style={{ color: "black" }}>사용자가이드</h3>
-        </Carousel.Caption>
+        <Link to="/serviceinfo">
+          <img
+            className="d-block"
+            style={{ height: 400, width: 420 }}
+            src={GuideIMG}
+            alt="Second slide"
+          />
+        </Link>
       </Carousel.Item>
-      {/* <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src="holder.js/800x400?text=Third slide&bg=20232a"
-          alt="Third slide"
-        />
-
-        <Carousel.Caption>
-          <h3>Third slide label</h3>
-          <p>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-          </p>
-        </Carousel.Caption>
-      </Carousel.Item> */}
     </Carousel>
   );
 }
