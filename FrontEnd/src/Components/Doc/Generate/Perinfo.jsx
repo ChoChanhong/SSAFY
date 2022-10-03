@@ -219,76 +219,112 @@ export default function PerInfo() {
   }
 
   return (
-    <div>
-      <div id="Pername">
-        <p style={{ marginTop: 10, marginLeft: 10 }}>처방 정보</p>
+    <div id="Per">
+      <div>
+        <div id="Pername">
+          <p style={{ marginTop: 10, marginLeft: 10 }}>처방 정보</p>
+        </div>
+        <div id="Perline">
+          <div>
+            <label id="PerLabel">기관명</label>
+            <input id="PerInput" readOnly />
+          </div>
+          <div>
+            <label id="PerLabel">담당의사</label>
+            <input id="PerInput" style={{ width: 185 }} readOnly />
+          </div>
+          <div>
+            <label id="PerLabel">처방일</label>
+            <input id="PerInput" readOnly value={day} />
+          </div>
+          <div>
+            <label id="PerLabel">질병분류기호</label>
+            <input id="PerInput" style={{ width: 170, marginLeft: 10 }} />
+          </div>
+          <div>
+            <div>
+              <label id="PerLabel">약품명</label>
+              <input id="PerInput" ref={mname} />
+            </div>
+            <div>
+              <label id="PerLabel">1회 투약량</label>
+              <input
+                id="PerInput"
+                style={{ width: 80 }}
+                ref={inj_q}
+                defaultValue={1}
+                type="number"
+                min="1"
+              />
+            </div>
+            <div>
+              <label id="PerLabel">1일 투약횟수</label>
+              <input
+                id="PerInput"
+                style={{ width: 80 }}
+                ref={inj_t}
+                defaultValue={1}
+                type="number"
+                min="1"
+              />
+            </div>
+            <div>
+              <label id="PerLabel">총 투약일수</label>
+              <input
+                id="PerInput"
+                style={{ width: 80 }}
+                ref={inj_d}
+                defaultValue={1}
+                type="number"
+                min="1"
+                max="14"
+              />
+            </div>
+            <div>
+              <label id="PerLabel">처방횟수</label>
+              <input
+                id="PerInput"
+                style={{ width: 80 }}
+                ref={pernumber}
+                defaultValue={1}
+                type="number"
+                min="1"
+              />
+            </div>
+            <div>
+              <label id="PerLabel">용 법</label>
+              <input id="PerInput" ref={useage} />
+            </div>
+            <button id="Addbutton" onClick={Add}>
+              내용 업로드
+            </button>
+          </div>
+        </div>
       </div>
-      <div id="Perline">
-        <div>
-          <label id="PerLabel">기관명</label>
-          <input id="PerInput" readOnly />
+      <div>
+        <div id="Pername">
+          <p style={{ marginTop: 10, marginLeft: 10 }}>처방 내역</p>
         </div>
-        <div>
-          <label id="PerLabel">담당의사</label>
-          <input id="PerInput" readOnly />
-        </div>
-        <div>
-          <label id="PerLabel">질병분류기호</label>
-          <input id="PerInput" />
-        </div>
-        <div>
-          <label id="PerLabel">처방내역</label>
-          {Perlog}
-          <div>--------</div>
-          {yaks}
-          <div>--------</div>
-        </div>
-        <div>
+        <div id="Perline">
           <div>
-            <label id="PerLabel">처방생성</label>
-            <label id="PerLabel">약품명</label>
-            <input ref={mname} />
+            <label id="PerLabel">처방내역</label>
+            <div>
+              {Perlog}
+              <div>--------</div>
+              {yaks}
+              <div>--------</div>
+            </div>
           </div>
-          <div>
-            <label id="PerLabel">1회 투약량</label>
-            <input ref={inj_q} defaultValue={1} type="number" min="1" />
+          <div style={{ textAlign: "center", marginTop: 20 }}>
+            <button id="Genbutton" onClick={submit}>
+              처방하기
+            </button>
+            <div>
+              <button onClick={Mint}> 민팅테스트</button>
+            </div>
+            {/* <button onClick={componentDidMount}> 마운트</button> */}
+            {/* <button onClick={loadWeb3}> 지갑로드</button> */}
           </div>
-          <div>
-            <label id="PerLabel">1일 투약횟수</label>
-            <input ref={inj_t} defaultValue={1} type="number" min="1" />
-          </div>
-          <div>
-            <label id="PerLabel">총 투약일수</label>
-            <input
-              ref={inj_d}
-              defaultValue={1}
-              type="number"
-              min="1"
-              max="14"
-            />
-          </div>
-          <div>
-            <label id="PerLabel">처방횟수</label>
-            <input ref={pernumber} defaultValue={1} type="number" min="1" />
-          </div>
-          <div>
-            <label id="PerLabel">용 법</label>
-            <input ref={useage} />
-          </div>
-          <button onClick={Add}>추가</button>
-        </div>
-        <div>
-          <label id="PerLabel">처방일</label>
-          <input readOnly value={day} />
-        </div>
-
-        <div style={{ textAlign: "center", marginTop: 20 }}>
-          <button id="Genbutton" onClick={submit}>
-            처방하기
-          </button>
-          <button onClick={Mint}> 민팅테스트</button>
-          {/* <button onClick={componentDidMount}> 마운트</button> */}
-          {/* <button onClick={loadWeb3}> 지갑로드</button> */}
         </div>
       </div>
     </div>
