@@ -1,6 +1,6 @@
 import React from "react";
 
-import DocMnNav from "../../Components/DocMainNav";
+import DocMainNav from "../../Components/Doc/DocMainNav";
 import LoginForm from "../../Components/Doc/LoginForm";
 
 import "./Login.css";

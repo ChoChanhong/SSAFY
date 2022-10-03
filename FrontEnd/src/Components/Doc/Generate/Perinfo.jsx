@@ -77,7 +77,7 @@ export default function PerInfo(){
         const contract = new web3.eth.Contract(abi, nftCA)
         // 현재 소유한 토큰 아이디 가져옴.
         const tokenId = contract.methods.alltokenOfOwner.call();
-        const {e} = await contract.methods.transferDoctorToPatient('의사주소', '환자주소', tokenId);
+        const {e1} = await contract.methods.transferDoctorToPatient('의사주소', '환자주소', tokenId);
     }
     // 환자가 약사한테 전송
     const Transfer2 = async(e) => {
@@ -87,7 +87,7 @@ export default function PerInfo(){
         const contract = new web3.eth.Contract(abi, nftCA);
         // 현재 소유한 토큰 아이디 가져옴.
         const tokenId = contract.methods.alltokenOfOwner.call();
-        const {e} = await contract.methos.transferPreScription("환자주소", "약사주소", "토큰아이디");
+        const {e1} = await contract.methos.transferPreScription("환자주소", "약사주소", "토큰아이디");
 
     }
 
@@ -101,7 +101,7 @@ export default function PerInfo(){
         const contract = new web3.eth.Contract(abi, nftCA);
         // 현재 소유한 토큰 아이디 가져옴.
         const tokenId = contract.methods.alltokenOfOwner.call();
-        const {e} = await contract.methos.transferPharmacyToPatient( myAccount , "환자주소", '토큰아이디');
+        const {e1} = await contract.methos.transferPharmacyToPatient( myAccount , "환자주소", '토큰아이디');
         
     }
     // 처방전 전체 조회

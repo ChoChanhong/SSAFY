@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import PerDetail from "../../Components/Generate/PerDetail";
+import PerDetail from "../../Components/Doc/Generate/PerDetail";
 import PhNavbar from "../../Components/PhNavbar";
 import OrderInfo from "../../Components/PhOrder/OrderInfo";
 import OrderList from "../../Components/PhOrder/OrderList";

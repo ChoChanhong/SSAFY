@@ -1,5 +1,5 @@
 import React from "react";
-import DocMainNav from "../../Components/DocMainNav";
+import DocMainNav from "../../Components/Doc/DocMainNav";
 
 export function ServiceInfo() {
   return (
