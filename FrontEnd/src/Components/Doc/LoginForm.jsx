@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { TextField, FormLabel } from "@mui/joy";
 import { Link } from "react-router-dom";
-import IMG from "../assets/images/003.png";
+import IMG from "../../assets/images/003.png";
 
 import "./LoginForm.css";
 
@@ -21,22 +21,17 @@ export default function LoginForm() {
     setPass(e.target.value);
   }
 
-  function setAuthorizationToken(token) {
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    } else {
-      delete axios.defaults.headers.common["Authorization"];
-    }
-  }
-
   function Send() {
     console.log(id, password);
     axios
-      .post(URL, { userId: id, userPassword: password })
+      .post(URL, {userId: id, userPassword: password})
       .then(function (res) {
         localStorage.setItem("login-token", res.data.accessToken);
-        setAuthorizationToken(localStorage.getItem("login-token"));
-      });
+        navigate('my')
+      })
+      .catch(function (err){
+      })
+    
   }
   return (
     <div id="loginbox">

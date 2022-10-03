@@ -8,8 +8,8 @@ import "./Intro.css";
 export function Intro() {
   const [step, setStep] = useState(1);
   const tab = {
-    1: <ServiceInfo setStep={setStep} />,
-    2: <UserGuide setStep={setStep} />,
+    1: <ServiceInfo/>,
+    2: <UserGuide/>,
   };
 
   const isPc = useMediaQuery({
@@ -28,11 +28,11 @@ export function Intro() {
             className={step === 1 ? "introTabSelected" : "introTab"}
             style={{ marginRight: 30 }}
           >
-            <span style={{ marginLeft: 15 }}>서비스 소개</span>
+            <span style={{ marginLeft: 15 }} onClick={()=>{setStep(1)}}>서비스 소개</span>
             <div>______________________</div>
           </div>
           <div className={step === 2 ? "introTabSelected" : "introTab"}>
-            <span style={{ marginLeft: 15 }}>이용가이드</span>
+            <span style={{ marginLeft: 15 }} onClick={()=>{setStep(2)}}>이용가이드</span>
             <div>______________________</div>
           </div>
         </div>

@@ -1,6 +1,8 @@
 import React from "react";
-import DocMainNav from "../../Components/DocMainNav";
-import LoginForm from "../../Components/LoginForm";
+
+import DocMnNav from "../../Components/DocMainNav";
+import LoginForm from "../../Components/Doc/LoginForm";
+
 import "./Login.css";
 
 export function Login() {

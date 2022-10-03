@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import DocNavbar from "../../Components/DocNavbar";
-import CliInfo from "../../Components/Generate/CliInfo";
-import PerInfo from "../../Components/Generate/Perinfo";
-import PerDetail from "../../Components/Generate/PerDetail";
+import DocNavbar from "../../Components/Doc/DocNavbar";
+import CliInfo from "../../Components/Doc/Generate/CliInfo";
+import PerInfo from "../../Components/Doc/Generate/Perinfo";
+import PerDetail from "../../Components/Doc/Generate/PerDetail";
 
 export default function Generate() {
   return (

@@ -1,7 +1,7 @@
 import React from "react"
 import {Link} from "react-router-dom"
-import DocNavbar from "../../Components/DocNavbar"
-import PerDetail from "../../Components/Generate/PerDetail"
+import DocNavbar from "../../Components/Doc/DocNavbar"
+import PerDetail from "../../Components/Doc/Generate/PerDetail"
 
 export function Log(){
     return(

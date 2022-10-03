@@ -1,13 +1,36 @@
 import { minWidth } from "@mui/system";
 import {React, useState, useRef, useEffect} from "react";
 import Yak from './Yak'
+import { useNavigate } from "react-router-dom";
+import setAuthorizationToken from '../../../utils/AuthorizationToken'
 // import { nftContract, web3 } from "../../web3Config";
-import {abi, nftCA} from "../../web3Config";
+import {abi, nftCA} from "../../../web3Config";
 import Web3 from "web3";
+import axios from "axios";
 // import detectEthereumProvider from "@metamask/detect-provider";
 
 
 export default function PerInfo(){
+
+    const navigate = useNavigate();
+    const URL = "https://j7e205.p.ssafy.io/api/hospitals/me";
+    const localStorage = window.localStorage;
+    const [info,setInfo] = useState('')    
+
+    useEffect(()=>{
+      const token = localStorage.getItem("login-token")
+      setAuthorizationToken(token)
+      axios
+      .get(URL)
+      .then(function(res){
+        console.log(res.data)
+        setInfo(res.data)
+      })
+      .catch(function(err){
+        alert('올바른 접근 방식이 아닙니다.')
+        navigate('/doc/')
+      })
+    },[])
 
     async function componentDidMount() {
         await this.loadWeb3();
@@ -116,6 +139,7 @@ export default function PerInfo(){
     let date = now.getDate()
     let day = year+'-'+month+'-'+date
 
+    const [docname,setDocname] = useState('')//의사이름
     const [dname,setDname] = useState('') //질병분류기호
     const [Perlog,setPlog] = useState([]) //처방내역
     const [yaks,setYaks] = useState([])
@@ -180,15 +204,15 @@ export default function PerInfo(){
             <div>
                 <div>
                     <label>기관명</label>
-                    <input readOnly/>
+                    <input value={info ? info.userName : ''} readOnly/>
                 </div>
                 <div>
                     <label>담당의사</label>
-                    <input readOnly/>
+                    <input onChange={(e)=>setDocname(e.target.value)}/>
                 </div>
                 <div>
                     <label>질병분류기호</label>
-                    <input/>
+                    <input onChange={(e)=>setDname(e.target.value)}/>
                 </div>
                 <div>
                     <label>처방내역</label>
