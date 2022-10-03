@@ -10,9 +10,11 @@ export default function DocMainNav() {
   };
 
   return (
-    <div id="nav">
+    <div id="docnav">
       <div>
-        <img style={logo} src={LogoIMG} alt="로고" />
+        <Link to="/doc">
+          <img style={logo} src={LogoIMG} alt="로고" />
+        </Link>
       </div>
     </div>
   );

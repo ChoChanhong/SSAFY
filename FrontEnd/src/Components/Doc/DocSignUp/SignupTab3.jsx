@@ -26,7 +26,7 @@ export default function Signup3() {
         </Link>
       </div>
       <div style={{ marginTop: 40 }}>
-        <Link to="">
+        <Link to="/doc/serviceinfo">
           <button
             className="docbutton"
             style={{
