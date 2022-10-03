@@ -38,6 +38,7 @@ public class HospitalServiceImpl implements HospitalService {
 		user.setUserPassword(passwordEncoder.encode(createHospitalPostReq.getHospitalPassword())); // 보안을 위해서 유저 패스워드 암호화 하여 디비에 저장
 		user.setUserName(createHospitalPostReq.getHospitalName());
 		user.setUserEmail(createHospitalPostReq.getHospitalEmail());
+		user.setUserWalletAddress(createHospitalPostReq.getHospitalWalletAddr());
 		user.setUserIdx(1);
 
 		long userSeq = userRepository.save(user).getUserSeq();
@@ -147,8 +148,6 @@ public class HospitalServiceImpl implements HospitalService {
 		userRepository.delete(userRepository.findUserByUserSeq(userSeq).get());
 		hospitalRepository.delete(hospitalRepository.findHospitalByHospitalUserSeq(userSeq).get());
 	}
-
-
 
 
 	// 아이디로 seq 검색

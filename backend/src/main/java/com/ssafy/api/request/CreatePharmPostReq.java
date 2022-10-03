@@ -36,4 +36,7 @@ public class CreatePharmPostReq {
 
 	@ApiModelProperty(name = "약국 사업자등록번호", example = "000-00-00000")  // CRN: Company Registration Number, 사업자등록번호
 	String pharmCRN;
+
+	@ApiModelProperty(name="약국 지갑 주소 아이디", example="cccccccccccccccccccccc")
+	String pharmWalletAddr;
 }

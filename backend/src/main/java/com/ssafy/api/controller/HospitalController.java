@@ -247,11 +247,12 @@ public class HospitalController {
 	/**
 	 *  이름과 주민등록번호를 통해 환자 검색
 	 */
-	@GetMapping("/search")
+	@PostMapping("/search")
 	@ApiOperation(value = "환자 검색", notes = "로그인한 병원의 정보를 응답한다.")
 	@ApiResponses({
 			@ApiResponse(code = 200, message = "성공"),
 			@ApiResponse(code = 401, message = "인증 실패"),
+			@ApiResponse(code = 401, message = "환자 없음"),
 			@ApiResponse(code = 404, message = "사용자 없음"),
 			@ApiResponse(code = 500, message = "서버 오류")
 	})
@@ -265,6 +266,6 @@ public class HospitalController {
 				return new ResponseEntity<PatientInfo>(patientInfo, HttpStatus.valueOf(200));
 			}
 
-		return new ResponseEntity<>("환자를 검색할 수 없습니다.", HttpStatus.valueOf(400));
+		return new ResponseEntity<>("환자를 검색할 수 없습니다.", HttpStatus.valueOf(402));
 	}
 }

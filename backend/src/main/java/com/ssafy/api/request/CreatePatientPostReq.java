@@ -25,9 +25,9 @@ public class CreatePatientPostReq {
 	@ApiModelProperty(name = "환자 이메일", example = "ssafy@ssafy.com")
 	String patientEmail;
 
-	@ApiModelProperty(name = "회원 전화번호", example = "010-0000-0000")
-	String patientTel;
-
 	@ApiModelProperty(name = "환자 주민등록번호", example = "000000-0000000")
 	String patientRRN;
+
+	@ApiModelProperty(name="회원 지갑 주소 아이디", example="aaaaaaaaaaaaaaaaaaaaa")
+	String patientWalletAddr;
 }
