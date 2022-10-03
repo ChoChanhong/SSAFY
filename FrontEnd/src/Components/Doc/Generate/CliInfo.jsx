@@ -1,16 +1,40 @@
-import { React, useState } from "react";
+import axios from "axios";
+import setAuthorizationToken from '../../../utils/AuthorizationToken'
+import { React, useEffect, useState } from "react";
 import "./Cliinfo.css";
 
 export default function CliInfo() {
-  const [Snum, setSnum] = useState("");
-  const info = { name: "", phone: "", address: "", wallet: "" };
+  const [Snum, setSnum] = useState(""); //환자이름
+  const [name, setName] = useState(''); //환자주소
+  const [email, setEmail] = useState(''); //환자주소
+  const [wallet, setWallet] = useState(''); //환자주소
+  
+  const URL = "https://j7e205.p.ssafy.io/api/hospitals/search";
+  const token = localStorage.getItem("login-token")
+  
   function numberCheck(e) {
     const a = e.target.value.replace(/^(\d{6})(\d{7})$/, `$1-$2`);
     setSnum(a);
     if (Snum.length === 14) {
       console.log(Snum);
-      //axios로 환자정보 받아옴
     }
+  }
+
+  function search(){
+    console.log(name,Snum)
+    setAuthorizationToken(token)
+    axios
+    .post(URL,{ patientName : name, patientRRN : Snum })
+    .then(function(res){
+      console.log(res.data)
+      setEmail(res.data.userEmail)
+      setWallet(res.data.userWalletAddress)
+
+    })
+    .catch(function(err){
+      alert('환자를 찾을 수 없습니다')
+    }
+  )
   }
 
   return (
@@ -21,24 +45,27 @@ export default function CliInfo() {
         </div>
         <div id="genBox">
           <label id="genLabel">환자명</label>
-          <input id="genInput" value={info.name} readOnly />
+          <input id="genInput" value = {name} onChange={(e)=>{setName(e.target.value)}}/>
         </div>
         <div id="genBox">
           <label id="genLabel">주민번호</label>
           <input style={{ width: 200 }} value={Snum} onChange={numberCheck} />
         </div>
         <div id="genBox">
-          <label id="genLabel">전화번호</label>
-          <input style={{ width: 200 }} value={info.phone} readOnly />
+          <label id="genLabel">이메일</label>
+          <input style={{ width: 200 }} value={email} readOnly />
         </div>
         <div id="genBox">
-          <label id="genLabel">주소</label>
+          <label id="genLabel">지갑</label>
           <input
             id="genInput"
             style={{ marginLeft: 41 }}
-            value={info.address}
+            value={wallet}
             readOnly
           />
+        </div>
+        <div>
+          <button onClick={search}>조회</button>
         </div>
       </div>
       <div>

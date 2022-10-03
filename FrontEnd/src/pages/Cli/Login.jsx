@@ -1,14 +1,42 @@
 import { TextField } from "@mui/joy";
-import React from "react";
+import {React, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
 import BackGround from "../../Components/BackGround";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./Button.css";
 
 export default function Login() {
   const isPc = useMediaQuery({
     query: "(min-width:768px)",
   });
+
+  const navigate = useNavigate();
+  const URL = "https://j7e205.p.ssafy.io/api/patients/login";
+  const [id,setId] = useState('')
+  const [password,setPassword] = useState('')
+
+
+  function send(){
+    console.log(id,password)
+    axios.post(URL,{
+      userId: id,
+      userPassword: password
+    })
+    .then(function (res) {
+      localStorage.setItem("login-token", res.data.accessToken);
+      navigate('../my')
+    })
+    .catch(function(err){
+      if(err.response.status === 401 || err.response.status === 404){
+        alert("아이디 혹은 비밀번호가 틀렸습니다.");
+      }
+      else{
+          alert(err);
+      }
+    })
+  }
 
   const blueStyle = {
     textDecoration: "none",
@@ -43,13 +71,14 @@ export default function Login() {
           </Link>
         </div>
         <p class="fw-bold mt-3">일반사용자 로그인</p>
-        <TextField placeholder="아이디를 입력해주세요." />
-        <TextField
+        <TextField onChange = {(e)=>{setId(e.target.value)}} placeholder="아이디를 입력해주세요." />
+        <TextField type = 'password' onChange = {(e)=>{setPassword(e.target.value)}}
           style={{ marginTop: 10 }}
           placeholder="비밀번호를 입력해주세요."
         />
         <div class="mt-5 d-flex justify-content-center">
           <button
+            onClick={send}
             style={greenStyle}
           >
             로그인

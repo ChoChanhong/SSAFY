@@ -27,29 +27,30 @@ import Order from "./pages/Ph/Order";
 function App() {
   return (
     <Routes>
-      {/*공통*/}
-      <Route path="/" element={<Main />} />
-      <Route path="/serviceinfo" element={<ServiceInfo />} />
-      {/*환자*/}
-      <Route path="/my" element={<Mypage />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/perscription" element={<Perscription />} />
-      <Route path="/perdetail" element={<Perdetail />} />
-      {/*의사*/}
-      <Route path="/doc" element={<DocLogin />} />
-      <Route path="/doc/signup" element={<DocSignup />} />
-      <Route path="/doc/log" element={<DocLog />} />
-      <Route path="/doc/generate" element={<Generate />} />
-      <Route path="/doc/my" element={<DocMypage />} />
-      <Route path="/doc/serviceinfo" element={<DocInfo />} />
-      {/*약사*/}
-      <Route path="/ph" element={<PhMain />} />
-      <Route path="/ph/login" element={<PhLogin />} />
-      <Route path="/ph/signup" element={<PhSignup />} />
-      <Route path="/ph/log" element={<PhLog />} />
-      <Route path="/ph/order" element={<Order />} />
+        {/*공통*/}
+        <Route path="/" element={<Main />} />
+        <Route path="/serviceinfo" element={<ServiceInfo />} />
+        {/*환자*/}
+        <Route path="/my" element={<Mypage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/perscription" element={<Perscription />} />
+        <Route path="/perdetail" element={<Perdetail />} />
+        {/*의사*/}
+        <Route path="/doc" element={<DocLogin />} />
+        <Route path="/doc/signup" element={<DocSignup />} />
+        <Route path="/doc/log" element={<DocLog />} />
+        <Route path="/doc/generate" element={<Generate />} />
+        <Route path="/doc/my" element={<DocMypage />} />
+        <Route path="/doc/serviceinfo" element={<DocInfo />} />
+        {/*약사*/}
+        <Route path="/ph" element={<PhMain />} />
+        <Route path="/ph/login" element={<PhLogin />} />
+        <Route path="/ph/signup" element={<PhSignup />} />
+        <Route path="/ph/log" element={<PhLog />} />
+        <Route path="/ph/order" element={<Order />} />
     </Routes>
+    
   );
 }
 

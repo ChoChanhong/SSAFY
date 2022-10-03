@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./DocNavbar.css";
-import Logo from "../assets/images/002.png";
+import Logo from "../../assets/images/002.png";
 
 export default function DocNavbar() {
   const logo = {

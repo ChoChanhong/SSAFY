@@ -5,11 +5,39 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 
+//Redux
+import { createStore } from 'redux'
+import {Provider, useSelector, useDispatch} from 'react-redux'
+ 
+
+function reducer(currentState,action){
+
+  const localStorage = window.localStorage
+
+  if(currentState === undefined){
+    return {
+      loginToken : ''
+    }
+  }
+  const newState = {...currentState}
+  if (action.type === 'LOGOUT'){
+    newState.loginToken = ''
+  }
+  else if(action.type === 'LOGIN'){
+    newState.loginToken = localStorage.getItem('login-token')
+  }
+  return newState
+}
+
+const store = createStore(reducer)
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  
-  <BrowserRouter>
+  <Provider store={store}>
+    <BrowserRouter>
       <App />
-  </BrowserRouter>
+    </BrowserRouter>
+  </Provider>
 );
 reportWebVitals();

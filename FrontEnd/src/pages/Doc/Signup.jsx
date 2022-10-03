@@ -1,8 +1,8 @@
 import { React, useState } from "react";
-import DocMainNav from "../../Components/DocMainNav";
-import Signup1 from "../../Components/DocSignUp/SignupTab1";
-import Signup2 from "../../Components/DocSignUp/SignupTab2";
-import Signup3 from "../../Components/DocSignUp/SignupTab3";
+import DocMainNav from "../../Components/Doc/DocMainNav";
+import Signup1 from "../../Components/Doc/DocSignUp/SignupTab1";
+import Signup2 from "../../Components/Doc/DocSignUp/SignupTab2";
+import Signup3 from "../../Components/Doc/DocSignUp/SignupTab3";
 import "./Signup.css";
 
 export function Signup() {
