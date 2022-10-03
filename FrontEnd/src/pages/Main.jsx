@@ -35,7 +35,7 @@ export default function Main() {
           </div>
           <div class="mt-3 text-center">
             <Link to="/doc">의사</Link>　||　
-            <Link to="/ph/login">약사</Link>
+            <Link to="/ph">약사</Link>
           </div>
         </div>
       </div>

@@ -27,20 +27,27 @@ export default function Signup1(props) {
       <div className="termsBox">이용약관 내용</div>
       <div className="checkBox">
         <Checkbox
-          label="이용약관에 동의하면 클릭해주세요."
+          label="이용약관에 동의하면 여기를 <클릭>해주세요."
           color="neutral"
           size="md"
-          variant="outline"
+          variant="outlined"
           onChange={changeCheck}
         />
       </div>
       <div className="buttonBox">
         <Link to="/">
-          <button className="docbutton" style={{ color: "#5681EF", backgroundColor: "transparent" }}>
+          <button
+            className="docbutton"
+            style={{ color: "#5681EF", backgroundColor: "transparent" }}
+          >
             동의안함
           </button>
         </Link>
-        <button className="docbutton" style={{color:"#5681EF", backgroundColor:"transparent"}} onClick={Next}>
+        <button
+          className="docbutton"
+          style={{ color: "#5681EF", backgroundColor: "transparent" }}
+          onClick={Next}
+        >
           다음으로
         </button>
       </div>
