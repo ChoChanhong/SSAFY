@@ -42,6 +42,7 @@ public class PharmServiceImpl implements PharmService {
 		user.setUserPassword(passwordEncoder.encode(createPharmPostReq.getPharmPassword())); // 보안을 위해서 유저 패스워드 암호화 하여 디비에 저장
 		user.setUserName(createPharmPostReq.getPharmName());
 		user.setUserEmail(createPharmPostReq.getPharmEmail());
+		user.setUserWalletAddress(createPharmPostReq.getPharmWalletAddr());
 		user.setUserIdx(2);
 
 		long userSeq = userRepository.save(user).getUserSeq();
@@ -117,6 +118,7 @@ public class PharmServiceImpl implements PharmService {
 		updatedUser.get().setUserPassword(passwordEncoder.encode(updatePharmPostReq.getPharmPassword())); // 보안을 위해서 유저 패스워드 암호화 하여 디비에 저장
 		updatedUser.get().setUserName(updatePharmPostReq.getPharmName());
 		updatedUser.get().setUserEmail(updatePharmPostReq.getPharmEmail());
+		updatedUser.get().setUserWalletAddress(updatePharmPostReq.getPharmWalletAddr());
 //		updatedUser.get().setUserIdx(1);
 
 		long updatedUserSeq = userRepository.save(updatedUser.get()).getUserSeq();

@@ -36,4 +36,7 @@ public class CreateHospitalPostReq {
 
 	@ApiModelProperty(name = "병원 사업자등록번호", example = "000-00-00000")  // CRN: Company Registration Number, 사업자등록번호
 	String hospitalCRN;
+
+	@ApiModelProperty(name="병원 지갑 주소 아이디", example="bbbbbbbbbbbbbbbbbbbbbb")
+	String hospitalWalletAddr;
 }

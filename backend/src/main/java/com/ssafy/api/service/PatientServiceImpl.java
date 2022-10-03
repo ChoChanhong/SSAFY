@@ -36,6 +36,7 @@ public class PatientServiceImpl implements PatientService {
 		user.setUserPassword(passwordEncoder.encode(createPatientPostReq.getPatientPassword())); // 보안을 위해서 유저 패스워드 암호화 하여 디비에 저장
 		user.setUserName(createPatientPostReq.getPatientName());
 		user.setUserEmail(createPatientPostReq.getPatientEmail());
+		user.setUserWalletAddress(createPatientPostReq.getPatientWalletAddr());
 		user.setUserIdx(0);
 
 		long userSeq = userRepository.save(user).getUserSeq();
@@ -85,6 +86,7 @@ public class PatientServiceImpl implements PatientService {
 		updatedUser.get().setUserPassword(passwordEncoder.encode(updatePatientPostReq.getPatientPassword())); // 보안을 위해서 유저 패스워드 암호화 하여 디비에 저장
 		updatedUser.get().setUserName(updatePatientPostReq.getPatientName());
 		updatedUser.get().setUserEmail(updatePatientPostReq.getPatientEmail());
+		updatedUser.get().setUserWalletAddress(updatePatientPostReq.getPatientWalletAddr());
 //		updatedUser.get().setUserIdx(0);
 
 		long updatedUserSeq = userRepository.save(updatedUser.get()).getUserSeq();
