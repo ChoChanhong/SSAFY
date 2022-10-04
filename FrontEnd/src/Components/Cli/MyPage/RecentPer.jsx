@@ -6,8 +6,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import React, { useState, useEffect } from "react";
 import "./MyPerscription.css";
-import {abi, nftCA} from "../../../web3Config";
-
+import { abi, nftCA } from "../../../web3Config";
 
 export default function RecentPer() {
 
@@ -21,8 +20,8 @@ export default function RecentPer() {
 
   const web3 = new Web3(window.ethereum);
   const contract = new web3.eth.Contract(abi, nftCA);
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     getAccount();
     // checkList();
   }, []);
@@ -65,18 +64,23 @@ export default function RecentPer() {
     console.log(list);
 
   }
-    
-
-             
-        
-
-         
-
 
   const getContract = async () => {
-    
-    const data = {userName : "Test1", hosName : "Test2",pharName : "Test2",dCode : "aaa",dName : ['bb', 'cc'],dosage : [1, 2], doseNum : [2 , 2],dosePeriod : [2 , 2], dispensingCount : 1, prescriptionCount : 1, howtoTake : "asddasda",pubDate : 123123123,prepDate : 23123123}
-
+    const data = {
+      userName: "Test1",
+      hosName: "Test2",
+      pharName: "Test2",
+      dCode: "aaa",
+      dName: ["bb", "cc"],
+      dosage: [1, 2],
+      doseNum: [2, 2],
+      dosePeriod: [2, 2],
+      dispensingCount: 1,
+      prescriptionCount: 1,
+      howtoTake: "asddasda",
+      pubDate: 123123123,
+      prepDate: 23123123,
+    };
 
     const web3 = new Web3(window.ethereum);
     const accounts = await window.ethereum.request({
@@ -87,63 +91,63 @@ export default function RecentPer() {
 
     console.log(contract._jsonInterface);
 
+    const count = await contract.methods
+      .getMintedTokens()
+      .call()
+      .then((id) => console.log("Token: ", id));
 
-    const count = await contract.methods.getMintedTokens().call()
-        .then(id=>console.log("Token: ",id));
-
-    const prsList = await contract.methods.getPreScriptionByIndex(0).call()
-        .then(id=>console.log("List: ",id));
-
-    
-          
-  }
+    const prsList = await contract.methods
+      .getPreScriptionByIndex(0)
+      .call()
+      .then((id) => console.log("List: ", id));
+  };
 
 
-  async function balanceOf (e){
+  async function balanceOf(e) {
     e.preventDefault();
 
     const web3 = new Web3(window.ethereum);
     const contract = new web3.eth.Contract(abi, nftCA);
 
-    const bof = await contract.methods.balanceOf('0xC78Bf04D11874042A6fcfC2B8D66b297C24D5c4B')
-                                        .call();
+    const bof = await contract.methods
+      .balanceOf("0xC78Bf04D11874042A6fcfC2B8D66b297C24D5c4B")
+      .call();
     console.log(bof);
 
-    const totalSupply = await contract.methods.totalSupply().call()
+    const totalSupply = await contract.methods.totalSupply().call();
     console.log(totalSupply);
 
-
-    const toobi = await contract.methods.tokenOfOwnerByIndex('0xC78Bf04D11874042A6fcfC2B8D66b297C24D5c4B', 0)
-                                        .call();
+    const toobi = await contract.methods
+      .tokenOfOwnerByIndex("0xC78Bf04D11874042A6fcfC2B8D66b297C24D5c4B", 0)
+      .call();
     console.log(toobi);
 
   }
 
-  async function alltokenOfOwner(e){
+  async function alltokenOfOwner(e) {
     e.preventDefault();
 
     const web3 = new Web3(window.ethereum);
-    const contract = new web3.eth.Contract(abi, nftCA)
+    const contract = new web3.eth.Contract(abi, nftCA);
 
     const alltoOwn = await contract.methods.alltokenOfOwner('0x8A63F16AcED00b39edb79c9bec9731abC9Bad61b')
                                             .call();
     console.log(alltoOwn.length);
     console.log(alltoOwn);
   }
-  
-  async function getBalanceOf(e){
+
+  async function getBalanceOf(e) {
     e.preventDefault();
 
     const web3 = new Web3(window.ethereum);
-    const contract = new web3.eth.Contract(abi, nftCA)
+    const contract = new web3.eth.Contract(abi, nftCA);
 
-    const getB = await contract.methods.getBalanceOf('0xC78Bf04D11874042A6fcfC2B8D66b297C24D5c4B')
-                                            .call();
+    const getB = await contract.methods
+      .getBalanceOf("0xC78Bf04D11874042A6fcfC2B8D66b297C24D5c4B")
+      .call();
 
     console.log(getB);
   }
-
-
 
   return (
     <div>

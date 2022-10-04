@@ -2,12 +2,38 @@ import { React, useState } from "react";
 import { Link } from "react-router-dom";
 import { Select } from "@mui/joy";
 import { Option } from "@mui/joy";
+import DaumPostCode from "react-daum-postcode";
 import "./PhSignup.css";
 
 export default function Signup2(props) {
+  const [show, setShow] = useState(false);
+  const [address, setAddress] = useState("");
+
   function Next() {
     props.setStep(3);
   }
+
+  function changeShow() {
+    setShow(true);
+  }
+
+  const handleComplete = (data) => {
+    let fullAddress = data.address;
+    let extraAddress = "";
+    if (data.addressType === "R") {
+      if (data.bname !== "") {
+        extraAddress += data.bname;
+      }
+      if (data.buildingName !== "") {
+        extraAddress +=
+          extraAddress !== "" ? `, ${data.buildingName}` : data.buildingName;
+      }
+      fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
+    }
+    console.log(fullAddress);
+    setAddress(fullAddress);
+    //fullAddress -> 전체 주소반환
+  };
 
   return (
     <div className="signBox">
@@ -84,12 +110,37 @@ export default function Signup2(props) {
           </label>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div>
-              <input />
-              <button id="checkButton" style={{ width: 150 }}>
+              <button
+                id="checkButton"
+                onClick={changeShow}
+                style={{ width: 150 }}
+              >
                 우편번호찾기
               </button>
+              <input
+                disabled
+                placeholder="우편번호찾기로 주소를 입력하세요."
+                readOnly
+                value={address}
+                style={{ width: 700 }}
+              />
             </div>
-            <input style={{ width: 800 }} />
+            <div>
+              <input
+                style={{ width: 500, marginLeft: 175 }}
+                placeholder="상세주소를 입력해주세요."
+              />
+            </div>
+            <div className="adressBox">
+              {show ? (
+                <DaumPostCode
+                  onComplete={handleComplete}
+                  className="post-code"
+                />
+              ) : (
+                ""
+              )}
+            </div>
           </div>
         </div>
         <div
@@ -103,8 +154,18 @@ export default function Signup2(props) {
           </label>
           <input style={{ width: 500 }} />
         </div>
+        <div
+          className="infoBox"
+          style={{ borderBottom: "solid 2px lightgray" }}
+        >
+          <label className="infoLabel">지갑 등록</label>
+          <input readOnly value={""} />
+          <button id="checkButton" onClick={""}>
+            지갑연결
+          </button>
+        </div>
       </div>
-      <div className="buttonBox" style={{ marginTop: 100 }}>
+      <div className="buttonBox" style={{ marginTop: 50}}>
         <Link to="/">
           <button
             className="button"

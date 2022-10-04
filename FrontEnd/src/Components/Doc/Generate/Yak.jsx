@@ -9,13 +9,12 @@ export default function PerInfo(props){
     }
 
     return (
-    <div>
-        <span>{props.info.mname}</span>
-        <span>{props.info.inj_q}</span>
-        <span>{props.info.inj_t}</span>
-        <span>{props.info.inj_d}</span>
-        <span>{props.info.pernumber}</span>
-        <span>{props.info.usage}</span>
+    <div >
+        <div>약품명 : {props.info.dName}</div>
+        <div>1회 투약량 : {props.info.dosage}</div>
+        <div>1일 투약횟수 : {props.info.doseNum}</div>
+        <div>총 투약일수 : {props.info.dosePeriod}</div>
+        <div>용법 :{props.info.howtoTake}</div>
         <button onClick={D}>삭제</button>
     </div>)
 }

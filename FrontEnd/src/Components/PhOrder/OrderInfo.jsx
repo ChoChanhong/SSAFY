@@ -1,6 +1,5 @@
 import React from "react";
 import "./OrderInfo.css";
-import { Textarea } from "@mui/joy";
 
 export default function OrderInfo() {
   return (

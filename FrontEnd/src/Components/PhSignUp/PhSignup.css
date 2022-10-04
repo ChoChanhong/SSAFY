@@ -28,7 +28,9 @@
 }
 
 .button {
-  border: solid 1px #5681EF;
+  color: #5681EF;
+  border: solid 1px #5681EF !important;
+  background-color: transparent;
   height: 40px;
   width: 200px;
   font-size: 15px;
@@ -92,4 +94,24 @@ div > input {
   font-size: 50px;
   font-weight: bold;
   color:#5681EF;
+}
+
+.loginbutton {
+  color: white;
+  font-weight: bold;
+  border-color: transparent;
+  background-color: #00ADEF;
+  width: 400px;
+  height: 50px;
+  font-size: 25px;
+}
+
+.guidebutton {
+  color: white;
+  font-weight: bold;
+  border-color: transparent;
+  background-color: #5681EF;
+  width: 400px;
+  height: 50px;
+  font-size: 25px;
 }

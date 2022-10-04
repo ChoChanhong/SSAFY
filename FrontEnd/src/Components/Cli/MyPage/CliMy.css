@@ -1,18 +1,34 @@
-#cliMytabbar{
-    display : flex;
-    flex-direction: row;
-    justify-content: space-around;
-  }
-  
-.cliMytabSelected{
-    color : #5681EF !important;
-    background-color: white !important;
-    font-weight: bold; 
-    display: flex;
-    flex-direction: column;
-  }
-  
-.cliMystab{
-    display: flex;
-    flex-direction: column;
-  }
+.cliinfoBox {
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  margin: 30px 50px;
+}
+
+#cliHead{
+  font-size: 20px;
+  font-weight: bold !important;
+  margin-bottom: 30px; 
+}
+
+#cliLogout{
+  margin-top: 30px;
+  width: 150px;
+  height: 50px;
+  border-radius: 50px;
+  color: red;
+  border: solid red;
+  background-color: transparent;
+  font-weight: bold;
+}
+
+#cliout {
+  margin-top: 30px;
+  width: 150px;
+  height: 50px;
+  border-radius: 50px;
+  color: white;
+  border: solid red;
+  background-color: red;
+  font-weight: bold;
+}

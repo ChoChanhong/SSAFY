@@ -5,6 +5,7 @@ import { injected } from "../lib/Connectors";
 import { useWeb3React } from "@web3-react/core";
 import { useNavigate } from "react-router-dom";
 import { TextField, FormLabel } from "@mui/joy";
+import IMG from "../assets/images/004.jpg";
 
 import "./PhLoginForm.css";
 
@@ -14,6 +15,11 @@ export default function PhLoginForm() {
 
   const [id, setId] = useState("");
   const [password, setPass] = useState("");
+  const onKeyPress = (e) => {
+    if (e.key === "Enter") {
+      Send();
+    }
+  };
 
   function IdChange(e) {
     setId(e.target.value);
@@ -58,6 +64,7 @@ export default function PhLoginForm() {
             type="password"
             placeholder="비밀번호를 입력해주세요."
             onChange={PasswordChange}
+            onKeyPress={onKeyPress}
           />
         </div>
         <button onClick={Send} id="phloginbutton">
@@ -68,7 +75,7 @@ export default function PhLoginForm() {
         </Link>
       </div>
       <div class="phinfo">
-        <img className="phlogoImg" src="img/001.png" alt="logo" />
+        <img className="logoImg" src={IMG} alt="logo" />
         <div class="phbuttonbox">
           <Link to="/ph/signup">
             <button className="phlinkbutton">회원가입</button>

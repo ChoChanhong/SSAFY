@@ -15,7 +15,7 @@ export default function Main() {
     <div id="webapp-containor">
       <div>{isPc ? <BackGround /> : null}</div>
       <div id="main">
-        <div class="mb-5">
+        <div className="mb-5">
           <img style={{ height: 100 }} src={Logo} alt="로고" />
         </div>
         <div style={{ marginTop: 20 }}>
@@ -31,12 +31,12 @@ export default function Main() {
             </button>
           </Link>
           <br />
-          <div class="d-flex justify-content-center" style={{ marginTop: 50 }}>
+          <div className="d-flex justify-content-center" style={{ marginTop: 50 }}>
             <Link to="/signup">회원가입</Link>
           </div>
-          <div class="mt-3 text-center">
-            <Link to="/doc">의사</Link>　||　
-            <Link to="/ph">약사</Link>
+          <div className="mt-3 text-center">
+            <Link to="/doc/">의사</Link>　||　
+            <Link to="/ph/">약사</Link>
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@ import { React, useState } from "react";
 import RecentPer from "./RecentPer";
 import RegularPer from "./RegularPer";
 import Perlog from "./Perlog";
+import Logo from "../../../assets/images/002.png";
 import "./MyPerscription.css";
 
 export default function MyPerscription() {
@@ -15,7 +16,7 @@ export default function MyPerscription() {
   return (
     <div style={{ width: 390, textAlign: "center" }}>
       <div class="mt-3 d-flex justify-content-center">
-        <img src="img/002.png" alt="로고" width={50} />
+        <img src={Logo} alt="로고" width={50} />
         <h2 class="fw-bold mt-3">My 처방</h2>
       </div>
       <div
