@@ -4,6 +4,7 @@ import "./App.css";
 //공통
 import Main from "./pages/Main";
 import { Intro as ServiceInfo } from "./pages/Intro";
+import NotFoundPage from "./pages/NotFoundPage";
 //환자
 import Login from "./pages/Cli/Login";
 import Mypage from "./pages/Cli/Mypage";
@@ -31,6 +32,7 @@ function App() {
       {/*공통*/}
       <Route path="/" element={<Main />} />
       <Route path="/serviceinfo" element={<ServiceInfo />} />
+      <Route path="/*" element={<NotFoundPage />} />
       {/*환자*/}
       <Route path="/my" element={<Mypage />} />
       <Route path="/login" element={<Login />} />
