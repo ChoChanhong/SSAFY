@@ -8,6 +8,7 @@ export default function SignTab1(props) {
   const [id, setID] = useState("");
   const [password, setPass] = useState("");
   const [passconfirm, SetPassCon] = useState("");
+  const [account, setAccount] = useState('')
 
   const blueStyle = {
     textDecoration: "none",
@@ -42,6 +43,23 @@ export default function SignTab1(props) {
       alert("비밀번호가 일치하지 않습니다");
     }
   }
+
+  const getAccount = async () => {
+    try {
+      if (window.ethereum) {
+        const accounts = await window.ethereum.request({
+          method: "eth_requestAccounts",
+        });
+
+        setAccount(accounts[0]);
+      } else {
+        alert("Install Metamask!");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   function changeCheck(e) {
     console.log(e.target.checked);
     setCheck(e.target.checked);
@@ -67,6 +85,10 @@ export default function SignTab1(props) {
       <div style={{ marginTop: 20 }}>
         <strong>이름</strong>
         <TextField placeholder="이름을 입력해주세요" onChange={changeName} />
+        <div style={{ marginTop: 15 }}>
+          <strong>지갑주소</strong>
+          <TextField value={account} readOnly/>
+        </div>
         <div style={{ marginTop: 15 }}>
           <strong>이메일 @</strong>
           <TextField placeholder="이메일을 입력해주세요" onChange={changeID} />
@@ -98,7 +120,7 @@ export default function SignTab1(props) {
         <Checkbox size="sm" onChange={changeCheck} label="약관에 동의합니다." />
       </div>
       <div class="mt-3 d-flex justify-content-center">
-        <button style={greenStyle}>지갑연결</button>
+        <button onClick={getAccount} style={greenStyle}>지갑연결</button>
       </div>
       <div class="mt-3 d-flex justify-content-center">
         <button onClick={Next} style={blueStyle}>

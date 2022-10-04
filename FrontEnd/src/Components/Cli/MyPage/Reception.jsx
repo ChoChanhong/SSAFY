@@ -1,10 +1,12 @@
 import { React, useState } from "react";
 import Logo from "../../../assets/images/002.png";
+import ReceptionConfirm from './ReceptionConfirm';
+import ReceptionOrder from './ReceptionOrder';
 import "./Reception.css";
 
 export default function Reception() {
   const [tab, setTab] = useState("0");
-  const tabs = [];
+  const tabs = [<ReceptionOrder/>,<ReceptionConfirm/>];
   function move(e) {
     console.log(e.target.id);
     setTab(e.target.id);
