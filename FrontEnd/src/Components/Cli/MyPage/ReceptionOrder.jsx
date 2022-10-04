@@ -19,7 +19,10 @@ export default function ReceptionOrder() {
         .then(
             function(res){
                 console.log(res.data)
-                setList(res.data.map((x,idx)=><Yakgook click={click} data={x} idx={idx}/>))
+                setList(res.data.map((x,idx)=><div>
+                                                <Yakgook click={click} data={x} idx={idx}/>    
+                                                { state===''? <button onClick={()=>click(idx)}>조제접수</button> : ''}
+                                                </div>))
             }
             
         )
@@ -35,8 +38,7 @@ export default function ReceptionOrder() {
     }
 
     function reserve(){
-        //selected 된 컴포넌트를 가지고 이동
-        navigate()
+
     }
 
     return(
