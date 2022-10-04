@@ -188,11 +188,6 @@ const nftAbi =[
         "type": "uint256"
       },
       {
-        "internalType": "string",
-        "name": "howtoTake",
-        "type": "string"
-      },
-      {
         "internalType": "uint256",
         "name": "pubDate",
         "type": "uint256"
@@ -409,9 +404,9 @@ const nftAbi =[
             "type": "uint256"
           },
           {
-            "internalType": "string",
+            "internalType": "string[]",
             "name": "howtoTake",
-            "type": "string"
+            "type": "string[]"
           },
           {
             "internalType": "uint256",
@@ -521,9 +516,9 @@ const nftAbi =[
             "type": "uint256"
           },
           {
-            "internalType": "string",
+            "internalType": "string[]",
             "name": "howtoTake",
-            "type": "string"
+            "type": "string[]"
           },
           {
             "internalType": "uint256",
@@ -775,9 +770,9 @@ const nftAbi =[
             "type": "uint256"
           },
           {
-            "internalType": "string",
+            "internalType": "string[]",
             "name": "howtoTake",
-            "type": "string"
+            "type": "string[]"
           },
           {
             "internalType": "uint256",
@@ -863,9 +858,9 @@ const nftAbi =[
             "type": "uint256"
           },
           {
-            "internalType": "string",
+            "internalType": "string[]",
             "name": "howtoTake",
-            "type": "string"
+            "type": "string[]"
           },
           {
             "internalType": "uint256",
@@ -883,14 +878,15 @@ const nftAbi =[
         "type": "tuple"
       }
     ],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
   }
 ];
 
 
 
-    export const nftCA = '0xB0C3A5718A51ACEa5D12e48024947ECB310b1c0D';
+    export const nftCA = '0x356176a14c8F86ec248ACe0C1F822698cdAdE6e8';
 
     // export const web3 = new Web3(window.ethereum);
     export const abi = nftAbi;

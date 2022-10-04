@@ -86,9 +86,9 @@ contract PreScription is ERC721Connector {
             return _offerCountOfTokenId[_tokenId];
         }
 
-        function getRegularPreScription(address _address) public view returns(preScription[] memory) {
-            return _regularPrescription[_address];
-        }
+        // function getRegularPreScription(address _address) public view returns(preScription[] memory) {
+        //     return _regularPrescription[_address];
+        // }
        
 
 
@@ -106,9 +106,9 @@ contract PreScription is ERC721Connector {
         _accountAuth[_address] = 3;
     }
         //해당 주소의 권한 반환
-        function getAuthOfAccount(address _address) public view returns(uint){
-            return _accountAuth[_address];
-        }
+        // function getAuthOfAccount(address _address) public view returns(uint){
+        //     return _accountAuth[_address];
+        // }
         // function getAllPrescription(address _address) public view returns(preScription[] memory){
         //     preScription[] memory prs;
         //     for(uint i = 0; i < _allTokensOwned[_address].length; i++){
@@ -156,41 +156,28 @@ contract PreScription is ERC721Connector {
     modifier prsExists( 
         string memory _userName, 
         string memory _hosName,
-        string memory _pharName, 
-        string memory _dCode
-        // string[] memory _dName, //약 이름
-
-        // uint[] memory _dosage, // 투약량
-        // uint[] memory _doseNum, // 투약 횟수
-        // uint[] memory _dosePeriod, //총 투약일
-        // uint _dispensingCount, // 조제 횟수 
-        // uint _prescriptionCount, // 처방횟수
-        // // uint period; // 투약기간 ? 몇일치인지.
-        // string memory _howtoTake, // 복용방법
-        // uint _pubDate // 발행일
-        // uint _prepDate // 조제일
-        // uint256 _pubDate
-        // uint256 _prepDate 
+        string memory _dCode,
+        string[] memory _dName, //약 이름
+        uint _pubDate // 발행일
+  
         ) {
            bool check = false;
            for (uint i = 0; i < preScriptions.length; i++){
-            if(
+                uint cnt = 0; 
+                for(uint j = 0; j < preScriptions[i].dName.length; j++){
+                    if(
+                         keccak256(bytes(preScriptions[i].dName[j])) == keccak256(bytes(_dName[j])) 
+                    ){
+                           cnt++;
+                    }
+                }
+            if(preScriptions[i].dName.length == _dName.length && 
+                    cnt == preScriptions[i].dName.length && 
+                    preScriptions[i].pubDate == _pubDate &&
                 keccak256(bytes(preScriptions[i].userName)) == keccak256(bytes(_userName)) &&
                 keccak256(bytes(preScriptions[i].hosName)) == keccak256(bytes(_hosName)) &&
-                // keccak256(bytes(preScriptions[i].pharName)) == keccak256(bytes(_pharName)) &&
                 keccak256(bytes(preScriptions[i].dCode)) == keccak256(bytes(_dCode))
-                // for(uint j = 0; j < preScriptions[i].dName.length; j++){
-                //     if(
-                //          keccak256(bytes(preScriptions[j].dName)) == keccak256(bytes(_dName[j])) 
-                //     )
-                // }
-                // preScriptions[i].dispensingCount == _dispensingCount &&
-                // preScriptions[i].prescriptionCount == _prescriptionCount
-                // keccak256(bytes(preScriptions[i].dispensingCount)) == keccak256(bytes(_dispensingCount)) &&
-                // keccak256(bytes(preScriptions[i].prescriptionCount)) == keccak256(bytes(_prescriptionCount)) 
-                // PreScriptions[i].period == _period &&
-                // PreScriptions[i].pubDate == _pubDate &&
-                // PreScriptions[i].prepDate == _prepDate
+           
             ) {
                 check =true;
             }
@@ -198,30 +185,30 @@ contract PreScription is ERC721Connector {
            require(!check, "Error : already exists preScription ");
            _;
         }
-        // 약 종류, 처방일 같은지 체크
-         modifier prsnmExists(string[] memory _dName, uint256 _pubDate) {
-            bool check = false;
-           for (uint i = 0; i < preScriptions.length; i++){
-            uint cnt = 0;
-                for(uint j = 0; j < preScriptions[i].dName.length; j++){
-                    if(
-                         keccak256(bytes(preScriptions[i].dName[j])) == keccak256(bytes(_dName[j])) 
+        // // 약 종류, 처방일 같은지 체크
+        //  modifier prsnmExists(string[] memory _dName, uint256 _pubDate) {
+        //     bool check = false;
+        //    for (uint i = 0; i < preScriptions.length; i++){
+        //     uint cnt = 0; 
+        //         for(uint j = 0; j < preScriptions[i].dName.length; j++){
+        //             if(
+        //                  keccak256(bytes(preScriptions[i].dName[j])) == keccak256(bytes(_dName[j])) 
                       
-                    ){
-                           cnt++;
-                    }
-                }
+        //             ){
+        //                    cnt++;
+        //             }
+        //         }
          
-                if( preScriptions[i].dName.length == _dName.length && 
-                    cnt == preScriptions[i].dName.length && 
-                    preScriptions[i].pubDate == _pubDate )
-             {
-                check =true;
-            }
-           } 
-           require(!check, "Error : already exists preScription ");
-           _;
-         }
+        //         if( preScriptions[i].dName.length == _dName.length && 
+        //             cnt == preScriptions[i].dName.length && 
+        //             preScriptions[i].pubDate == _pubDate )
+        //      {
+        //         check =true;
+        //     }
+        //    } 
+        //    require(!check, "Error : already exists preScription ");
+        //    _;
+        //  }
         //  주소가 가진 토큰갯수 반환
         function getBalanceOf(address _address) public view returns(uint256) {
             return balanceOf(_address);
@@ -247,13 +234,13 @@ contract PreScription is ERC721Connector {
               transferPrs(_from, _to, _tokenId);
             _allTokensOwned[_to].push(_tokenId);
             _allListFromAccount[_to].push(preScriptions[_tokenId]);
-            preScription memory prs = preScriptions[_tokenId];
+        //     preScription memory prs = preScriptions[_tokenId];
 
-            // 처방 횟수가 1보다 크면 정기처방처방전 리스트에 추가.
-              if(prs.prescriptionCount > 1){
-            _regularPrescription[_to].push(prs);
-        }
-            // _patientListFromAccount[_from][_to].push(_tokenId);
+        //     // 처방 횟수가 1보다 크면 정기처방처방전 리스트에 추가.
+        //       if(prs.prescriptionCount > 1){
+        //     _regularPrescription[_to].push(prs);
+        // }
+        //     // _patientListFromAccount[_from][_to].push(_tokenId);
             _patientListFromAccount[_from][_to].push(preScriptions[_tokenId]);
 
         }
@@ -272,8 +259,7 @@ contract PreScription is ERC721Connector {
    
         preScription memory _preScription
          ) 
-        public prsExists ( _preScription.userName, _preScription.hosName, _preScription.pharName, _preScription.dCode ) 
-               prsnmExists(_preScription.dName, _preScription.pubDate){
+        public prsExists ( _preScription.userName, _preScription.hosName,  _preScription.dCode, _preScription.dName, _preScription.pubDate ) {
             require(_accountAuth[msg.sender] == 2, 'You do not have permission');
           
         preScriptions.push(_preScription);

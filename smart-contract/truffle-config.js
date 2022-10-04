@@ -1,3 +1,7 @@
+// const PrivateKeyProvider = require("truffle-privatekey-provider")
+
+// const privateKey = '0xf1f965c0320bf3b41bb065be17bffe9fabc3e56afedec7d4a27e23b3e1cfd096';
+
 module.exports = {
 
   networks: {
@@ -6,12 +10,13 @@ module.exports = {
     port: 7545,            // Standard Ethereum port (default: none)
     network_id: "*",       // Any network (default: none)
     },
+  // },
     // 싸피 네트워크 연결 
-    // SSAFY : {
-    //   provider: () => new PrivateKeyProvider(privateKey, `http://20.196.209.2:8545`),
-    //   // host: "20.196.209.2",
-    //   // port: 8545,
-    //   network_id: "*",
+    // ssafy : {
+      // provider: () => new PrivateKeyProvider(privateKey, `http://20.196.209.2:8545`),
+      // host: "20.196.209.2",
+      // port: 8545,
+      // network_id: "*",
 
     //얘는 패키지제이슨에 넣어야함
 /*"truffle-privatekey-provider": "^1.5.0", */
@@ -20,10 +25,14 @@ module.exports = {
 
   // networks: {
   //   development: {
-  //   host: "127.0.0.1",     // Localhost (default: none)
-  //   port: 7545,            // Standard Ethereum port (default: none)
+  //   host: "43.201.35.88",     // Localhost (default: none)
+  //   port: 8545,            // Standard Ethereum port (default: none)
   //   network_id: "*",       // Any network (default: none)
   //   },
+  // ssafy : {
+    // provider: () => new PrivateKeyProvider(privateKey, `http://20.196.209.2:8545`),
+    // network_id: "*",
+// }
   // },
 
   contracts_directory: './src/contracts/',
