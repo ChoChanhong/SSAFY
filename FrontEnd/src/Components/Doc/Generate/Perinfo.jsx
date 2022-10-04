@@ -123,17 +123,18 @@ export default function PerInfo(props) {
 
 
     const prescription = {
-      userName : props.name,
-      hosName : info.userName,
+      userName : String(props.name),
+      hosName : String(info.userName),
       pharName: "",
-      dCode : dCode.current.value,
-      dName : Perlog.map((x) => x.dName),
+      dCode : String(dCode.current.value),
+      dName : Perlog.map((x) => String(x.dName)),
       dosage : Perlog.map(((x) => parseInt(x.dosage))),
       doseNum : Perlog.map((x) => parseInt(x.doseNum)),
       dosePeriod : Perlog.map((x) => parseInt(x.dosePeriod)),
       dispensingCount : Perlog.map((x) => 0),
       prescriptionCount : parseInt(prescriptionCount.current.value),
-      howtoTake : Perlog.map((x) => x.howtoTake),
+      // howtoTake : Perlog.map((x) => String(x.howtoTake)),
+      howtoTake : Perlog.map((x) => String(x.howtoTake)),
       pubDate : 123,
       prepDate : 123,
 
@@ -160,12 +161,10 @@ export default function PerInfo(props) {
       .mint(prescription)
       .send({ from: myAccount });
     console.log(" 처방전 발급 됐음");
-    const totalSupply = await contract.methods.totalSupply().call();
-    const prsList = await contract.methods.getPreScriptionByIndex(0).call();
-    console.log("1111111111111111111111111111111111111111111");
-    console.log(prescription);
-    console.log(totalSupply);
-    console.log(prsList);
+    //환자 주소 넣어줘야함
+    //  await contract.methods.transferDoctorToPatient(myAccount, 환자주소, 0)
+    //  .send({ from : myAccount})
+   
     
   }
 
