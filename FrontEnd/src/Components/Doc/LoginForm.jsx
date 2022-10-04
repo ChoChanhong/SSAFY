@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { TextField, FormLabel } from "@mui/joy";
 import { Link } from "react-router-dom";
-import IMG from "../../assets/images/003.png";
+import IMG from "../../assets/images/004.jpg";
 
 import "./LoginForm.css";
 
