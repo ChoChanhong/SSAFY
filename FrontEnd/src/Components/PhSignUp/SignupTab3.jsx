@@ -9,7 +9,7 @@ export default function Signup3() {
       <p className="successTitle">가입이 완료 되었습니다</p>
       <p className="subTitle">약쏙을 시작해 보세요</p>
       <div style={{ marginTop: 80 }}>
-        <Link to="/doc/login">
+        <Link to="/ph">
           <button className="loginbutton">로그인</button>
         </Link>
       </div>
