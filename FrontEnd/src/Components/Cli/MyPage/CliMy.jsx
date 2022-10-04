@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import setAuthorizationToken from '../../../utils/AuthorizationToken'
+import Logo from "../../../assets/images/002.png";
 import axios from "axios";        
 
 import "./CliMy.css";
@@ -39,8 +40,8 @@ export default function CliMy() {
   return (
     <div style={{ width: 390, textAlign: "center" }}>
       <div class="mt-3 d-flex justify-content-center">
-        <img src="img/002.png" alt="로고" width={50} />
-        <h2 class="fw-bold">마이페이지</h2>
+        <img src={Logo} alt="로고" width={50} />
+        <h2 class="fw-bold mt-3">마이페이지</h2>
       </div>
       <div style={{ fontWeight: "bold", marginTop: 60 }}>
         <span style={{color:"#5FD068", fontWeight:"bold", fontSize:"30px"}}>{info ? info.userName : ''}님</span>, 안녕하세요!
