@@ -16,64 +16,49 @@ export default function PerInfo() {
   const localStorage = window.localStorage;
   const [info, setInfo] = useState("");
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem("login-token");
-  //   setAuthorizationToken(token);
-  //   axios
-  //     .get(URL)
-  //     .then(function (res) {
-  //       console.log(res.data);
-  //       setInfo(res.data);
-  //     })
-  //     .catch(function (err) {
-  //       alert("올바른 접근 방식이 아닙니다.");
-  //       navigate("/doc/");
-  //     });
-  // }, []);
+  useEffect(() => {
+    const token = localStorage.getItem("login-token");
+    setAuthorizationToken(token);
+    axios
+      .get(URL)
+      .then(function (res) {
+        console.log(res.data);
+        setInfo(res.data);
+      })
+      .catch(function (err) {
+        alert("올바른 접근 방식이 아닙니다.");
+        navigate("/doc/");
+      });
+  }, []);
 
-  async function componentDidMount() {
-    await this.loadWeb3();
-    await this.loadBlockchainData();
-  }
 
-  // async function loadWeb3() {
-  //     const provider = await detectEthereumProvider();
-
-  //     if(provider) {
-  //         console.log('ethereum wallet is connected')
-  //         window.web3 = new Web3(provider)
-  //     } else {
-  //         // no ethereum provider
-  //         console.log('no ethereum wallet detected')
-  //     }
-  // }
   const Mint = async (e) => {
     e.preventDefault();
     console.log(1111);
     const data = {
-      userName: "Test2",
-      hosName: "Test3",
-      pharName: "Test2",
+      userName: "Test102",
+      hosName: "Test0",
+      pharName: "Test0",
       dCode: "aaa",
-      dName: ["bb", "cc"],
+      dName: ["bb", "rr"],
       dosage: [1, 2],
       doseNum: [2, 2],
       dosePeriod: [2, 2],
       dispensingCount: 1,
       prescriptionCount: 1,
       howtoTake: "asddasda",
-      pubDate: 123123123,
-      prepDate: 23123123,
+      pubDate: 12322123,
+      prepDate: 231355,
     };
     console.log(data);
     const web3 = new Web3(window.ethereum);
     const contract = new web3.eth.Contract(abi, nftCA);
     console.log(contract);
-    const { ee } = await contract.methods
+    await contract.methods
       .setDoctorAuth("0x4aDD641353eDc52325Cce4198b60AE17B8037f54")
       .send({ from: "0x4aDD641353eDc52325Cce4198b60AE17B8037f54" });
     console.log("222222222222222222222222222222222");
-    const { event } = await contract.methods
+    await contract.methods
       .mint(data)
       .send({ from: "0x4aDD641353eDc52325Cce4198b60AE17B8037f54" });
     console.log(" 처방전 발급 11111111");
@@ -84,6 +69,7 @@ export default function PerInfo() {
     console.log(totalSupply);
     console.log(prsList);
   };
+  //aaaa
   //의사가 환자한테 전송 할때
   // const Transfer = async (e) => {
   //   e.preventDefault();
@@ -170,24 +156,27 @@ export default function PerInfo() {
   const [Perlog, setPlog] = useState([]); //처방내역
   const [yaks, setYaks] = useState([]);
 
-  const mname = useRef();
-  const inj_q = useRef();
-  const inj_t = useRef();
-  const inj_d = useRef();
-  const pernumber = useRef();
-  const useage = useRef();
+  const dCode = useRef();
+  const dName = useRef();
+  const dosage = useRef();
+  const doseNum = useRef();
+  const dosePeriod = useRef();
+  const prescriptionCount = useRef();
+  const howtoTake = useRef();
 
   function Add() {
     let tmp = Perlog;
     tmp.push({
       key: Perlog.length,
-      mname: mname.current.value,
-      inj_q: inj_q.current.value,
-      inj_t: inj_t.current.value,
-      inj_d: inj_d.current.value,
-      pernumber: pernumber.current.value,
-      useage: useage.current.value,
+      dCode: dCode.current.value,
+      dName: dName.current.value,
+      dosage: dosage.current.value,
+      doseNum: doseNum.current.value,
+      dosePeriod: dosePeriod.current.value,
+      prescriptionCount: prescriptionCount.current.value,
+      howtoTake: howtoTake.current.value,
     });
+    console.log("tmp :" + tmp);
     setPlog(tmp);
     setYaks(Perlog.map((log) => <Yak info={log} Delete={Delete} />));
   }
@@ -200,22 +189,55 @@ export default function PerInfo() {
   }
   // const mint = web3.asdasd.contarc
 
-  function submit() {
-    let ss = {
-      doc: "",
-      //의사 지갑
-      cli: "",
-      //환자 지갑
-      ph: "",
-      //약사 지갑
-      dname: dname,
-      //질병코드
-      perscription: Perlog,
-      //처방내역
-      date: day,
-      //처방일
-    };
-    console.log(ss);
+ async function submit() {
+
+
+    const prescription = {
+      userName : "aa",
+      hosName : "bb",
+      pharName: "cc",
+      dCode : "wwwww",
+      dName : Perlog.map((x) => x.dName),
+      dosage : Perlog.map(((x) => parseInt(x.dosage))),
+      doseNum : Perlog.map((x) => parseInt(x.doseNum)),
+      dosePeriod : Perlog.map((x) => parseInt(x.dosePeriod)),
+      dispensingCount : 0,
+      // 얘가 안읽어와짐
+      prescriptionCount : 0,
+      howtoTake : Perlog.map((x) => x.howtoTake),
+      pubDate : 123,
+      prepDate : 123,
+
+    }
+    
+   
+    console.log('--------------------------------')
+    console.log(prescription);
+    // console.log(ss);
+   
+    // e.preventDefault();
+    const web3 = new Web3(window.ethereum);
+    const contract = new web3.eth.Contract(abi, nftCA);
+    const account = await web3.eth.requestAccounts();
+    const myAccount = account[0];
+    // let d = prescription;
+    console.log(contract);
+    console.log(myAccount);
+    await contract.methods
+      .setDoctorAuth(myAccount)
+      .send({ from: myAccount });
+    console.log("222222222222222222222222222222222");
+     await contract.methods
+      .mint(prescription)
+      .send({ from: myAccount });
+    console.log(" 처방전 발급 됐음");
+    const totalSupply = await contract.methods.totalSupply().call();
+    const prsList = await contract.methods.getPreScriptionByIndex(0).call();
+    console.log("1111111111111111111111111111111111111111111");
+    console.log(prescription);
+    console.log(totalSupply);
+    console.log(prsList);
+    
   }
 
   return (
@@ -239,19 +261,19 @@ export default function PerInfo() {
           </div>
           <div>
             <label id="PerLabel">질병분류기호</label>
-            <input id="PerInput" style={{ width: 170, marginLeft: 10 }} />
+            <input id="PerInput" ref={dCode} style={{ width: 170, marginLeft: 10 }} />
           </div>
           <div>
             <div>
               <label id="PerLabel">약품명</label>
-              <input id="PerInput" ref={mname} />
+              <input id="PerInput" ref={dName} />
             </div>
             <div>
               <label id="PerLabel">1회 투약량</label>
               <input
                 id="PerInput"
                 style={{ width: 80 }}
-                ref={inj_q}
+                ref={dosage}
                 defaultValue={1}
                 type="number"
                 min="1"
@@ -262,7 +284,7 @@ export default function PerInfo() {
               <input
                 id="PerInput"
                 style={{ width: 80 }}
-                ref={inj_t}
+                ref={doseNum}
                 defaultValue={1}
                 type="number"
                 min="1"
@@ -273,7 +295,7 @@ export default function PerInfo() {
               <input
                 id="PerInput"
                 style={{ width: 80 }}
-                ref={inj_d}
+                ref={dosePeriod}
                 defaultValue={1}
                 type="number"
                 min="1"
@@ -285,7 +307,7 @@ export default function PerInfo() {
               <input
                 id="PerInput"
                 style={{ width: 80 }}
-                ref={pernumber}
+                ref={prescriptionCount}
                 defaultValue={1}
                 type="number"
                 min="1"
@@ -293,7 +315,7 @@ export default function PerInfo() {
             </div>
             <div>
               <label id="PerLabel">용 법</label>
-              <input id="PerInput" ref={useage} />
+              <input id="PerInput" ref={howtoTake} />
             </div>
             <button id="Addbutton" onClick={Add}>
               내용 업로드
@@ -320,10 +342,9 @@ export default function PerInfo() {
               처방하기
             </button>
             <div>
-              <button onClick={Mint}> 민팅테스트</button>
+              {/* <button onClick={Mint}> 민팅테스트</button> */}
             </div>
-            {/* <button onClick={componentDidMount}> 마운트</button> */}
-            {/* <button onClick={loadWeb3}> 지갑로드</button> */}
+          
           </div>
         </div>
       </div>
