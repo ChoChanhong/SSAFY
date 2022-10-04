@@ -3,7 +3,7 @@ import setAuthorizationToken from '../../../utils/AuthorizationToken'
 import { React, useEffect, useState } from "react";
 import "./Cliinfo.css";
 
-export default function CliInfo() {
+export default function CliInfo(props) {
   const [Snum, setSnum] = useState(""); //환자이름
   const [name, setName] = useState(''); //환자주소
   const [email, setEmail] = useState(''); //환자주소
@@ -29,6 +29,7 @@ export default function CliInfo() {
       console.log(res.data)
       setEmail(res.data.userEmail)
       setWallet(res.data.userWalletAddress)
+      props.changeName(name)
 
     })
     .catch(function(err){
