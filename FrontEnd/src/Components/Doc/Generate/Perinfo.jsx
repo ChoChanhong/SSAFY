@@ -85,77 +85,77 @@ export default function PerInfo() {
     console.log(prsList);
   };
   //의사가 환자한테 전송 할때
-  const Transfer = async (e) => {
-    e.preventDefault();
-    console.log(" 처방전 전송 의사 -> 환자 ");
-    const web3 = new Web3(window.ethereum);
-    const contract = new web3.eth.Contract(abi, nftCA);
-    // 현재 소유한 토큰 아이디 가져옴.
-    const tokenId = contract.methods.alltokenOfOwner.call();
-    const { e1 } = await contract.methods.transferDoctorToPatient(
-      "의사주소",
-      "환자주소",
-      tokenId
-    );
-  };
-  // 환자가 약사한테 전송
-  const Transfer2 = async (e) => {
-    e.preventDefault();
-    console.log(" 처방전 전송 환자 -> 약사");
-    const web3 = new Web3(window.ethereum);
-    const contract = new web3.eth.Contract(abi, nftCA);
-    // 현재 소유한 토큰 아이디 가져옴.
-    const tokenId = contract.methods.alltokenOfOwner.call();
-    const { e1 } = await contract.methos.transferPreScription(
-      "환자주소",
-      "약사주소",
-      "토큰아이디"
-    );
-  };
+  // const Transfer = async (e) => {
+  //   e.preventDefault();
+  //   console.log(" 처방전 전송 의사 -> 환자 ");
+  //   const web3 = new Web3(window.ethereum);
+  //   const contract = new web3.eth.Contract(abi, nftCA);
+  //   // 현재 소유한 토큰 아이디 가져옴.
+  //   const tokenId = contract.methods.alltokenOfOwner.call();
+  //   const { e1 } = await contract.methods.transferDoctorToPatient(
+  //     "의사주소",
+  //     "환자주소",
+  //     tokenId
+  //   );
+  // };
+  // // 환자가 약사한테 전송
+  // const Transfer2 = async (e) => {
+  //   e.preventDefault();
+  //   console.log(" 처방전 전송 환자 -> 약사");
+  //   const web3 = new Web3(window.ethereum);
+  //   const contract = new web3.eth.Contract(abi, nftCA);
+  //   // 현재 소유한 토큰 아이디 가져옴.
+  //   const tokenId = contract.methods.alltokenOfOwner.call();
+  //   const { e1 } = await contract.methos.transferPreScription(
+  //     "환자주소",
+  //     "약사주소",
+  //     "토큰아이디"
+  //   );
+  // };
 
-  // 약사가 환자한테
-  const Transfer3 = async (e) => {
-    e.preventDefault();
-    console.log(" 처방전 전송 약사 -> 환자");
-    const web3 = new Web3(window.ethereum);
-    const account = await web3.eth.requestAccounts();
-    const myAccount = account[0];
-    const contract = new web3.eth.Contract(abi, nftCA);
-    // 현재 소유한 토큰 아이디 가져옴.
-    const tokenId = contract.methods.alltokenOfOwner.call();
-    const { e1 } = await contract.methos.transferPharmacyToPatient(
-      myAccount,
-      "환자주소",
-      "토큰아이디"
-    );
-  };
-  // 처방전 전체 조회
-  const Search = async (e) => {
-    e.preventDefault();
-    console.log("조회할거임");
-    const web3 = new Web3(window.ethereum);
-    const account = await web3.eth.requestAccounts();
-    const myAccount = account[0];
-    const contract = new web3.eth.Contract(abi, nftCA);
-    // 매개변수로 넘겨준 주소를 거쳐간 모든 처방전 조회
-    // 처방전 형식의 배열 리턴
-    const list = contract.methods.getAllListFromAccount(myAccount).call();
-  };
+  // // 약사가 환자한테
+  // const Transfer3 = async (e) => {
+  //   e.preventDefault();
+  //   console.log(" 처방전 전송 약사 -> 환자");
+  //   const web3 = new Web3(window.ethereum);
+  //   const account = await web3.eth.requestAccounts();
+  //   const myAccount = account[0];
+  //   const contract = new web3.eth.Contract(abi, nftCA);
+  //   // 현재 소유한 토큰 아이디 가져옴.
+  //   const tokenId = contract.methods.alltokenOfOwner.call();
+  //   const { e1 } = await contract.methos.transferPharmacyToPatient(
+  //     myAccount,
+  //     "환자주소",
+  //     "토큰아이디"
+  //   );
+  // };
+  // // 처방전 전체 조회
+  // const Search = async (e) => {
+  //   e.preventDefault();
+  //   console.log("조회할거임");
+  //   const web3 = new Web3(window.ethereum);
+  //   const account = await web3.eth.requestAccounts();
+  //   const myAccount = account[0];
+  //   const contract = new web3.eth.Contract(abi, nftCA);
+  //   // 매개변수로 넘겨준 주소를 거쳐간 모든 처방전 조회
+  //   // 처방전 형식의 배열 리턴
+  //   const list = contract.methods.getAllListFromAccount(myAccount).call();
+  // };
 
-  // 조건부 조회
-  const Search2 = async (e) => {
-    e.preventDefault();
-    console.log("조건부 조회할거임");
-    const web3 = new Web3(window.ethereum);
-    const account = await web3.eth.requestAccounts();
-    const myAccount = account[0];
-    const contract = new web3.eth.Contract(abi, nftCA);
-    // 현재주소 가 조회할 주소로 보낸 처방전만 검색
-    // 처방전 형식의 배열 리턴
-    const list = contract.methods
-      .getPatientListFromAccount("현재주소", "조회할 주소")
-      .call();
-  };
+  // // 조건부 조회
+  // const Search2 = async (e) => {
+  //   e.preventDefault();
+  //   console.log("조건부 조회할거임");
+  //   const web3 = new Web3(window.ethereum);
+  //   const account = await web3.eth.requestAccounts();
+  //   const myAccount = account[0];
+  //   const contract = new web3.eth.Contract(abi, nftCA);
+  //   // 현재주소 가 조회할 주소로 보낸 처방전만 검색
+  //   // 처방전 형식의 배열 리턴
+  //   const list = contract.methods
+  //     .getPatientListFromAccount("현재주소", "조회할 주소")
+  //     .call();
+  // };
   // 조제 asdasdasd
   // create aaaa
 
