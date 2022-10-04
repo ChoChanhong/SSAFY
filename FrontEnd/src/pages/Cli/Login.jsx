@@ -17,6 +17,11 @@ export default function Login() {
   const URL = "https://j7e205.p.ssafy.io/api/patients/login";
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
+  const onKeyPress = (e) => {
+    if (e.key === "Enter") {
+      send();
+    }
+  };
 
   function send() {
     console.log(id, password);
@@ -84,6 +89,7 @@ export default function Login() {
           }}
           style={{ marginTop: 10 }}
           placeholder="비밀번호를 입력해주세요."
+          onKeyPress={onKeyPress}
         />
         <div class="mt-5 d-flex justify-content-center">
           <button onClick={send} style={greenStyle}>
