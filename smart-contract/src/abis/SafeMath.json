@@ -10,7 +10,7 @@
   "sourceMap": "60:2132:14:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
   "deployedSourceMap": "60:2132:14:-:0;;;;;;;;",
   "source": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\nlibrary SafeMath {\r\n\r\n        /*\r\n        SafeMath Exercise!\r\n        Build the remaining airthmetic safeMath libary to provide further security\r\n        for our smart contracts.\r\n        1. Write an internally visible multiply function which ensures no remaining\r\n        multiplication overflow and using the r = x * y equation.\r\n        2. Solidity only automatically asserts when dividing by 0.\r\n        Write an interally visible divide function which requires that y is \r\n        always greater than zero within the r = x / y equation.\r\n        3. Write a modulo function which requires that y does not equal zero\r\n        under any circumstance. Return the modulo of the equation from r = x % y        \r\n        Good luck! \r\n        */\r\n\r\n\r\n    // build functions to perform safe math operations that would\r\n    // otherwise replace intuitive preventative measure\r\n\r\n    // function add r = x + y\r\n    function add(uint256 x, uint256 y) internal pure returns(uint256) {\r\n        uint256 r = x + y;\r\n            require(r >= x, 'SafeMath: Addition overflow');\r\n        return r;\r\n    }\r\n\r\n    // function subtract r = x - y\r\n        function sub(uint256 x, uint256 y) internal pure returns(uint256) {\r\n        require(y <= x, 'SafeMath: subtraction overflow');\r\n        uint256 r = x - y;\r\n        return r;\r\n    }\r\n\r\n    // function multiply r = x * y\r\n        function mul(uint256 x, uint256 y) internal pure returns(uint256) {\r\n            // gas optimization\r\n            if(x == 0) {\r\n                return 0;\r\n            }\r\n\r\n            uint256 r = x * y;\r\n            require(r / x == y, 'SafeMath: multiplication overflow');\r\n            return r;\r\n        }\r\n\r\n    // function divide r = x / y\r\n        function divide(uint256 x, uint256 y) internal pure returns(uint) {\r\n            require(y > 0, 'SafeMath: division by zero');\r\n            uint256 r = x / y;\r\n            return r;  \r\n        }\r\n\r\n    // gas spending remains untouched \r\n\r\n        function mod(uint256 x, uint256 y) internal pure returns(uint) {\r\n            require(y != 0, 'Safemath: modulo by zero');\r\n            return x % y;\r\n        }\r\n}",
-  "sourcePath": "C:\\Users\\SSAFY\\Desktop\\GitClone2\\S07P22E205\\smart-contract\\src\\contracts\\libraries\\SafeMath.sol",
+  "sourcePath": "C:\\Users\\SSAFY\\S07P22E205\\smart-contract\\src\\contracts\\libraries\\SafeMath.sol",
   "ast": {
     "absolutePath": "project:/src/contracts/libraries/SafeMath.sol",
     "exportedSymbols": {
@@ -1730,8 +1730,8 @@
     "version": "0.8.17+commit.8df45f5f.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.4.9",
-  "updatedAt": "2022-10-01T18:08:02.537Z",
+  "schemaVersion": "3.4.10",
+  "updatedAt": "2022-10-04T07:06:54.355Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

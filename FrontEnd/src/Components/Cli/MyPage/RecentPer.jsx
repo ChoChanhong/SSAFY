@@ -9,15 +9,21 @@ import "./MyPerscription.css";
 import { abi, nftCA } from "../../../web3Config";
 
 export default function RecentPer() {
-  const [hosNamed, setHosName] = useState("");
+
   const [account, setAccount] = useState("");
+  const [hosNamed, setHosName] = useState(""); // 병원이름
+
+  const [pubDated, setPubDate] = useState(""); // 처방일
+  const [dispensingCount, setDispensingCount] = useState("") // 처방횟수
+  const [list, setList] = useState([]);
+  const [accountList, setAccountList] = useState([]);
 
   const web3 = new Web3(window.ethereum);
   const contract = new web3.eth.Contract(abi, nftCA);
 
   useEffect(() => {
     getAccount();
-    checkList();
+    // checkList();
   }, []);
 
   const getAccount = async () => {
@@ -28,9 +34,9 @@ export default function RecentPer() {
         });
 
         setAccount(accounts[0]);
-        const list = await contract.methods
-          .getAllListFromAccount(account)
-          .call();
+
+        const accountList = await contract.methods.getAllListFromAccount('0x8A63F16AcED00b39edb79c9bec9731abC9Bad61b').call();
+        console.log(accountList);
       } else {
         alert("Install Metamask!");
       }
@@ -39,19 +45,24 @@ export default function RecentPer() {
     }
   };
 
-  async function checkList() {
+  // 눌렀을때 
+  async function checkList(){
     const web3 = new Web3(window.ethereum);
     const contract = new web3.eth.Contract(abi, nftCA);
 
-    // 매개변수로 넘겨준 주소를 거쳐간 모든 처방전 조회
-    // 처방전 형식의 배열 리턴
-    const list = await contract.methods
-      .getAllListFromAccount("0xC78Bf04D11874042A6fcfC2B8D66b297C24D5c4B")
-      .call();
+    const account = await web3.eth.requestAccounts();
+    const myAccount = account[0];
 
+
+
+      // 매개변수로 넘겨준 주소를 거쳐간 모든 처방전 조회
+      // 처방전 형식의 배열 리턴
+    const list = await contract.methods.getAllListFromAccount(myAccount).call();
+  
     setHosName(list[0].hosname);
 
-    console.log(list[0].hosname);
+    console.log(list);
+
   }
 
   const getContract = async () => {
@@ -91,31 +102,6 @@ export default function RecentPer() {
       .then((id) => console.log("List: ", id));
   };
 
-  async function tttt(e) {
-    e.preventDefault();
-
-    const web3 = new Web3(window.ethereum);
-    const contract = new web3.eth.Contract(abi, nftCA);
-
-    const tttt = await contract.methods.preScriptions(1).call();
-    console.log(tttt.hosName);
-  }
-
-  async function transferTopatient(e) {
-    e.preventDefault();
-
-    const web3 = new Web3(window.ethereum);
-    const contract = new web3.eth.Contract(abi, nftCA);
-
-    const tf = await contract.methods
-      .transferTopatient(
-        "0x8A63F16AcED00b39edb79c9bec9731abC9Bad61b",
-        "0xC78Bf04D11874042A6fcfC2B8D66b297C24D5c4B",
-        0
-      )
-      .send({ from: "0x8A63F16AcED00b39edb79c9bec9731abC9Bad61b" });
-    console.log(tf);
-  }
 
   async function balanceOf(e) {
     e.preventDefault();
@@ -136,12 +122,6 @@ export default function RecentPer() {
       .call();
     console.log(toobi);
 
-    // const tokens = [];
-    // for (let i = 0; i < bof; i++) {
-    //   let toobi = await contract.methods.tokenOfOwnerByIndex('0xC78Bf04D11874042A6fcfC2B8D66b297C24D5c4B', i).call()
-    //   console.log(toobi);
-    //   tokens.push(toobi);
-    // }
   }
 
   async function alltokenOfOwner(e) {
@@ -150,9 +130,8 @@ export default function RecentPer() {
     const web3 = new Web3(window.ethereum);
     const contract = new web3.eth.Contract(abi, nftCA);
 
-    const alltoOwn = await contract.methods
-      .alltokenOfOwner("0xC78Bf04D11874042A6fcfC2B8D66b297C24D5c4B")
-      .call();
+    const alltoOwn = await contract.methods.alltokenOfOwner('0x8A63F16AcED00b39edb79c9bec9731abC9Bad61b')
+                                            .call();
     console.log(alltoOwn.length);
     console.log(alltoOwn);
   }
@@ -173,7 +152,18 @@ export default function RecentPer() {
   return (
     <div>
       <div className="myBox">
-        <div style={{ margin: 20 }}>최근 처방</div>
+        <div style={{ margin: 20 }}>
+        <input readOnly value={ account ? account : '...' } />
+          <div>
+            <span>병원명: {hosNamed}</span>
+          </div>
+          <div>
+            <span>처방일: {pubDated}</span>            
+          </div>
+          <div>
+            <span>처방 횟수: {pubDated}</span>            
+          </div>
+        </div>
         <div style={{ border: "solid" }}>처방내역</div>
         <div style={{ marginTop: 30 }}>
           <button id="bluebutton" style={{ height: "100" }}>
@@ -197,12 +187,10 @@ export default function RecentPer() {
           </button>
         </div>
       </div>
-      <button onClick={getContract}> 테스트</button>
-      <button onClick={transferTopatient}> transferTopatient </button>
-      <button onClick={balanceOf}> balanceOf </button>
-      <button onClick={alltokenOfOwner}> alltokenOfOwner </button>
-      <button onClick={getBalanceOf}> getBalanceOf </button>
-      <button onClick={tttt}> tttt </button>
+          <button onClick={checkList} > 테스트</button>
+          <button onClick={balanceOf} > balanceOf </button>
+          <button onClick={alltokenOfOwner} > alltokenOfOwner </button>
+          <button onClick={getBalanceOf} > getBalanceOf </button>
     </div>
   );
 }
