@@ -3,6 +3,7 @@ import { useMediaQuery } from "react-responsive";
 import BackGround from "../Components/BackGround";
 import ServiceInfo from "../Components/ServiceInfo";
 import UserGuide from "../Components/UserGuide";
+import Logo from "../assets/images/001.png"
 import "./Intro.css";
 
 export function Intro() {
@@ -21,7 +22,7 @@ export function Intro() {
       <div>{isPc ? <BackGround /> : null}</div>
       <div id="main">
         <div class="mb-5">
-          <img style={{ height: 100 }} src="img/001.png" alt="로고" />
+          <img style={{ height: 100 }} src={Logo} alt="로고" />
         </div>
         <div id="introTabber" class="mt-5 d-flex justify-content-center">
           <div
