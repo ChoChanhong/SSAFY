@@ -17,7 +17,7 @@ export default function Order() {
         style={{
           display: "flex",
           justifyContent: "space-evenly",
-          margin: "30px 50px 0px 50px",
+          margin: "30px 50px 10px 50px",
         }}
       >
         <OrderList />
