@@ -15,6 +15,11 @@ export default function PhLoginForm() {
 
   const [id, setId] = useState("");
   const [password, setPass] = useState("");
+  const onKeyPress = (e) => {
+    if (e.key === "Enter") {
+      Send();
+    }
+  };
 
   function IdChange(e) {
     setId(e.target.value);
@@ -59,6 +64,7 @@ export default function PhLoginForm() {
             type="password"
             placeholder="비밀번호를 입력해주세요."
             onChange={PasswordChange}
+            onKeyPress={onKeyPress}
           />
         </div>
         <button onClick={Send} id="phloginbutton">

@@ -1,4 +1,5 @@
 import { React, useState } from "react";
+import Logo from "../../../assets/images/002.png";
 import "./Reception.css";
 
 export default function Reception() {
@@ -12,7 +13,7 @@ export default function Reception() {
   return (
     <div style={{ width: 390, textAlign: "center" }}>
       <div class="mt-3 d-flex justify-content-center">
-        <img src="img/002.png" alt="로고" width={50} />
+        <img src={Logo} alt="로고" width={50} />
         <h2 class="fw-bold mt-3">조제 접수</h2>
       </div>
       <div

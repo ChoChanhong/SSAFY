@@ -28,7 +28,7 @@ export default function SignTab2(props) {
         </Link>
       </div>
       <div>
-        <Link to="">
+        <Link to="/serviceinfo">
           <button
             class="mt-3"
             style={{

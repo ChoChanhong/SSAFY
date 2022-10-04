@@ -35,8 +35,8 @@ export default function Main() {
             <Link to="/signup">회원가입</Link>
           </div>
           <div class="mt-3 text-center">
-            <Link to="/doc">의사</Link>　||　
-            <Link to="/ph">약사</Link>
+            <Link to="/doc/">의사</Link>　||　
+            <Link to="/ph/">약사</Link>
           </div>
         </div>
       </div>

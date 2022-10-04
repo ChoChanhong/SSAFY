@@ -13,6 +13,11 @@ export default function LoginForm() {
   const [password, setPass] = useState("");
   const localStorage = window.localStorage;
   const URL = "https://j7e205.p.ssafy.io/api/hospitals/login";
+  const onKeyPress = (e) => {
+    if (e.key === "Enter") {
+      Send();
+    }
+  };
 
   function IdChange(e) {
     setId(e.target.value);
@@ -24,14 +29,12 @@ export default function LoginForm() {
   function Send() {
     console.log(id, password);
     axios
-      .post(URL, {userId: id, userPassword: password})
+      .post(URL, { userId: id, userPassword: password })
       .then(function (res) {
         localStorage.setItem("login-token", res.data.accessToken);
-        navigate('my')
+        navigate("my");
       })
-      .catch(function (err){
-      })
-    
+      .catch(function (err) {});
   }
   return (
     <div id="loginbox">
@@ -62,6 +65,7 @@ export default function LoginForm() {
             type="password"
             placeholder="비밀번호를 입력해주세요."
             onChange={PasswordChange}
+            onKeyPress={onKeyPress}
           />
         </div>
         <button onClick={Send} id="docloginbutton" style={{ height: 50 }}>
