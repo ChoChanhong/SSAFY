@@ -27,10 +27,10 @@ export default function Signup1(props) {
       <div className="termsBox">이용약관 내용</div>
       <div className="checkBox">
         <Checkbox
-          label="이용약관에 동의하면 클릭해주세요."
+          label="이용약관에 동의하면 여기를 <클릭>해주세요."
           color="neutral"
           size="md"
-          variant="outline"
+          variant="outlined"
           onChange={changeCheck}
         />
       </div>

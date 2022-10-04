@@ -133,7 +133,13 @@ export default function Signup2(props) {
               >
                 우편번호찾기
               </button>
-              <input disabled placeholder="우편번호찾기로 주소를 입력하세요." readOnly value={address} style={{ width: 700 }} />
+              <input
+                disabled
+                placeholder="우편번호찾기로 주소를 입력하세요."
+                readOnly
+                value={address}
+                style={{ width: 700 }}
+              />
             </div>
             <input
               style={{ width: 500, marginLeft: 175 }}
