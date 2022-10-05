@@ -32,7 +32,7 @@ export default function OrderInfo() {
           <label id="orderinfoLabel">처방 변경/수정/대체내용</label>
           <textarea name="" id="orderinfoText" cols="35" rows="8"></textarea>
         </div>
-        <div class="mt-3 text-center">
+        <div className="mt-3 text-center">
           <button id="orderinfoButton">조제 등록</button>
         </div>
       </div>

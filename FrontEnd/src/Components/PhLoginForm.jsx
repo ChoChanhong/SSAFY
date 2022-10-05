@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { injected } from "../lib/Connectors";
-import { useWeb3React } from "@web3-react/core";
 import { useNavigate } from "react-router-dom";
 import { TextField, FormLabel } from "@mui/joy";
 import IMG from "../assets/images/004.jpg";
@@ -11,10 +9,10 @@ import "./PhLoginForm.css";
 
 export default function PhLoginForm() {
   const navigate = useNavigate();
-  const { account, active, error, activate, deactivate } = useWeb3React();
-
   const [id, setId] = useState("");
   const [password, setPass] = useState("");
+  const localStorage = window.localStorage;
+  const URL = "https://j7e205.p.ssafy.io/api/pharms/login";
   const onKeyPress = (e) => {
     if (e.key === "Enter") {
       Send();
@@ -30,14 +28,18 @@ export default function PhLoginForm() {
 
   function Send() {
     console.log(id, password);
-    //api 통해서 로그인 보내고 아이디 일치시
-    activate(injected);
-    navigate("/doc");
+    axios
+      .post(URL, { userId: id, userPassword: password })
+      .then(function (res) {
+        localStorage.setItem("login-token", res.data.accessToken);
+        navigate("my");
+      })
+      .catch(function (err) {});
   }
 
   return (
     <div id="phloginbox">
-      <div class="phlogin">
+      <div className="phlogin">
         <h1 className="phloginTitle" style={{ color: "#00ADEF" }}>
           약국로그인
         </h1>
@@ -49,8 +51,7 @@ export default function PhLoginForm() {
             아이디
           </FormLabel>
           <TextField
-            class="a"
-            className="phlogInput"
+            className="a phlogInput"
             placeholder="아이디를 입력해주세요."
             onChange={IdChange}
           />
@@ -60,7 +61,7 @@ export default function PhLoginForm() {
             비밀번호
           </FormLabel>
           <TextField
-            class="a"
+            className="a"
             type="password"
             placeholder="비밀번호를 입력해주세요."
             onChange={PasswordChange}
@@ -74,9 +75,9 @@ export default function PhLoginForm() {
           아이디/비밀번호 찾기
         </Link>
       </div>
-      <div class="phinfo">
+      <div className="phinfo">
         <img className="logoImg" src={IMG} alt="logo" />
-        <div class="phbuttonbox">
+        <div className="phbuttonbox">
           <Link to="/ph/signup">
             <button className="phlinkbutton">회원가입</button>
           </Link>

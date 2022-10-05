@@ -16,7 +16,7 @@ export default function PhLogFind() {
           <label id="phlogLabel">생년월일</label>
           <input id="phlogInput" />
         </div>
-        <div class="mt-3 text-center">
+        <div className="mt-3 text-center">
           <button id="phlogButton">
             {" "}
             <FontAwesomeIcon
@@ -27,7 +27,7 @@ export default function PhLogFind() {
           </button>
         </div>
       </div>
-      <div id="phlogline" class="mt-3" style={{height: 500}}>
+      <div id="phlogline" className="mt-3" style={{height: 500}}>
         <div id="phlogname">
           <div
             id="ordername"

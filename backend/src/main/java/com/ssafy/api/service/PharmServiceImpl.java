@@ -43,7 +43,9 @@ public class PharmServiceImpl implements PharmService {
 		long userSeq = userRepository.save(user).getUserSeq();
 
 		pharm.setPharmUserSeq(userSeq);
+		pharm.setPharmPharmacist(createPharmPostReq.getPharmPharmacist());
 		pharm.setPharmLicense(createPharmPostReq.getPharmLicense());
+		pharm.setPharmCode(createPharmPostReq.getPharmCode());
 		pharm.setPharmAddr(createPharmPostReq.getPharmAddr());
 		pharm.setPharmTel(createPharmPostReq.getPharmTel());
 		pharm.setPharmCRN(createPharmPostReq.getPharmCRN());
@@ -57,8 +59,8 @@ public class PharmServiceImpl implements PharmService {
 		PharmInfo pharmInfo = new PharmInfo(
 				inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserName(),
 				inputU.getUserEmail(), inputU.getUserIdx(), inputU.getUserWalletAddress(), inputU.getREG_DTM(), inputU.getMOD_DTM(),
-				inputM.getPharmSeq(), inputM.getPharmUserSeq(), inputM.getPharmLicense(), inputM.getPharmAddr(),
-				inputM.getPharmTel(), inputM.getPharmCRN(), inputM.getREG_DTM(), inputM.getMOD_DTM());
+				inputM.getPharmSeq(), inputM.getPharmUserSeq(), inputM.getPharmPharmacist(),inputM.getPharmLicense(), inputM.getPharmCode(),
+				inputM.getPharmAddr(), inputM.getPharmTel(), inputM.getPharmCRN(), inputM.getREG_DTM(), inputM.getMOD_DTM());
 
 		return pharmInfo;
 	}
@@ -86,8 +88,8 @@ public class PharmServiceImpl implements PharmService {
 		PharmInfo pharmInfo = new PharmInfo(
 				inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserName(),
 				inputU.getUserEmail(), inputU.getUserIdx(), inputU.getUserWalletAddress(), inputU.getREG_DTM(), inputU.getMOD_DTM(),
-				inputM.getPharmSeq(), inputM.getPharmUserSeq(), inputM.getPharmLicense(), inputM.getPharmAddr(),
-				inputM.getPharmTel(), inputM.getPharmCRN(), inputM.getREG_DTM(), inputM.getMOD_DTM());
+				inputM.getPharmSeq(), inputM.getPharmUserSeq(), inputM.getPharmPharmacist(),inputM.getPharmLicense(), inputM.getPharmCode(),
+				inputM.getPharmAddr(), inputM.getPharmTel(), inputM.getPharmCRN(), inputM.getREG_DTM(), inputM.getMOD_DTM());
 
 		return pharmInfo;
 	}
@@ -105,8 +107,9 @@ public class PharmServiceImpl implements PharmService {
 
 		long updatedUserSeq = userRepository.save(updatedUser.get()).getUserSeq();
 
-
+		updatedPharm.get().setPharmPharmacist(updatePharmPostReq.getPharmPharmacist());
 		updatedPharm.get().setPharmLicense(updatePharmPostReq.getPharmLicense());
+		updatedPharm.get().setPharmCode(updatePharmPostReq.getPharmCode());
 		updatedPharm.get().setPharmAddr(updatePharmPostReq.getPharmAddr());
 		updatedPharm.get().setPharmTel(updatePharmPostReq.getPharmTel());
 		updatedPharm.get().setPharmCRN(updatePharmPostReq.getPharmCRN());
@@ -120,8 +123,8 @@ public class PharmServiceImpl implements PharmService {
 		PharmInfo pharmInfo = new PharmInfo(
 				inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserName(),
 				inputU.getUserEmail(), inputU.getUserIdx(), inputU.getUserWalletAddress(), inputU.getREG_DTM(), inputU.getMOD_DTM(),
-				inputM.getPharmSeq(), inputM.getPharmUserSeq(), inputM.getPharmLicense(), inputM.getPharmAddr(),
-				inputM.getPharmTel(), inputM.getPharmCRN(), inputM.getREG_DTM(), inputM.getMOD_DTM());
+				inputM.getPharmSeq(), inputM.getPharmUserSeq(), inputM.getPharmPharmacist(),inputM.getPharmLicense(), inputM.getPharmCode(),
+				inputM.getPharmAddr(), inputM.getPharmTel(), inputM.getPharmCRN(), inputM.getREG_DTM(), inputM.getMOD_DTM());
 
 		return pharmInfo;
 	}
