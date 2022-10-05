@@ -886,7 +886,7 @@ const nftAbi =[
 
 
 
-    export const nftCA = '0x356176a14c8F86ec248ACe0C1F822698cdAdE6e8';
+    export const nftCA = '0x0c324fD5727f71536f095a5f0A78fC72568865D2';
 
     // export const web3 = new Web3(window.ethereum);
     export const abi = nftAbi;
