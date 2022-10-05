@@ -21,13 +21,29 @@ export default function ReceptionOrder() {
       console.log(res.data,'data');
       setList(
         res.data.map((x, idx) => (
-          <div>
-            <Yakgook click={click} data={x} idx={idx} />
-            {state === "" ? (
-              <button onClick={() => click(idx)}>조제접수</button>
-            ) : (
-              "처방전"
-            )}
+          <div
+            style={{
+              borderBottom: "solid 1px darkgray",
+              margin: "0px 20px 20px 20px",
+            }}
+          >
+            <div
+              style={{
+                textAlign: "start",
+                marginLeft: "25px",
+              }}
+            >
+              <Yakgook click={click} data={x} idx={idx} />
+              {state === "" ? (
+                <div style={{ margin: "15px 0px 15px 150px" }}>
+                  <button id="bluebutton" onClick={() => click(idx)}>
+                    조제접수
+                  </button>
+                </div>
+              ) : (
+                <div style={{margin: "10px 0px ", marginLeft: "100px" }}>[ 처방전 목록 ]</div>
+              )}
+            </div>
           </div>
         ))
       );
@@ -76,7 +92,7 @@ export default function ReceptionOrder() {
   }
 
   return (
-    <div>
+    <div style={{ marginTop: 20 }}>
       {state === "" ? list : list[state]}
       {state === "" ? (
         ""
