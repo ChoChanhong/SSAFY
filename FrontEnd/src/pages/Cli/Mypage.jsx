@@ -15,7 +15,7 @@ export default function Mypage() {
   const navigate = useNavigate();
   const localStorage = window.localStorage
   const [tab, setTab] = useState("0");
-  const tabs = [<MyPerscription />, <Reception />, <CliMy />];
+  const tabs = [<MyPerscription directMove={directMove}/>, <Reception />, <CliMy />];
   const isPc = useMediaQuery({
     query: "(min-width:768px)",
   });
@@ -35,6 +35,9 @@ export default function Mypage() {
       })
   },[])
 
+  function directMove(){
+    setTab('1')
+  }
 
   function move(e) {
     console.log(e.target.id);

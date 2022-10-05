@@ -86,6 +86,14 @@ public class PatientServiceImpl implements PatientService {
 		return false;
 	}
 
+	@Override
+	public boolean existsByPatientUserSeq(long patientUserSeq) {
+		if (patientRepository.existsByPatientUserSeq((patientUserSeq))) {
+			return true; // 존재
+		}
+		return false;
+	}
+
 	// 회원 정보 수정
 	@Override
 	public PatientInfo updatePatient(long userSeq, CreatePatientPostReq updatePatientPostReq) {

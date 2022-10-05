@@ -39,7 +39,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 		prescription.setPatientUserSeq(createPrescriptionPostReq.getPatientUserSeq());
 //		prescription.setHospitalUserSeq(createPrescriptionPostReq.getHospitalUserSeq());
 		prescription.setHospitalUserSeq(hospitalUserSeq);
-		prescription.setTokenId(createPrescriptionPostReq.getTokenId());
+		prescription.setTokenId(Long.parseLong(createPrescriptionPostReq.getTokenId()));
 		prescription.setCompletion(false);
 
 		long prescriptionSeq = prescriptionRepository.save(prescription).getPrescriptionSeq();
