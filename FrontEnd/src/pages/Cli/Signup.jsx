@@ -1,8 +1,8 @@
 import { React, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import BackGround from "../../Components/BackGround";
-import SignTab1 from "../../Components/SignTab1";
-import SignTab2 from "../../Components/SignTab2";
+import SignTab1 from "../../Components/Cli/Signup/SignTab1";
+import SignTab2 from "../../Components/Cli/Signup/SignTab2";
 import Logo from "../../assets/images/002.png";
 import "./Signup.css";
 

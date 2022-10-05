@@ -29,7 +29,9 @@ export default function CliInfo(props) {
       console.log(res.data)
       setEmail(res.data.userEmail)
       setWallet(res.data.userWalletAddress)
+      props.changeUserSeq(res.data.userSeq)
       props.changeName(name)
+      props.changeWallet(wallet)
 
     })
     .catch(function(err){

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { TextField, FormLabel } from "@mui/joy";
@@ -34,8 +34,15 @@ export default function LoginForm() {
         localStorage.setItem("login-token", res.data.accessToken);
         navigate("my");
       })
-      .catch(function (err) {});
+      .catch(function (err) {
+        if (err.response.status === 401 || err.response.status === 404) {
+          alert("아이디 혹은 비밀번호가 틀렸습니다.");
+        } else {
+          alert(err);
+        }
+      });
   }
+
   return (
     <div id="loginbox">
       <div className="login">
