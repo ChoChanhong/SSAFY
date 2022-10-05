@@ -4,35 +4,30 @@ import { abi, nftCA } from "../../../web3Config";
 
 
 
-export default function Perlog() {
+export default function Perlog(props) {
 
-  const [list, setList] = useState([]);
-
+  const list = props.list.map((yak)=><div>
+                                        <div>{yak[1]}</div>
+                                        <div>발행일 :{yak.pubDate}</div>
+                                        <div>{yak.prescriptionCount === '1' ? '단기' : '정기' }</div>
+                                        <button>상세내역</button>
+                                      </div>)
 
   useEffect(() => {
-    getList();
+    console.log(props.list,'처방이력페이지')
+    console.log(props.list[0][1])
   }, []);
 
-  // 현재 내 지갑의 주소를 거쳐간 모든 처방전 출력
-  async function getList(){
-    const web3 = new Web3(window.ethereum);
-    const contract = new web3.eth.Contract(abi, nftCA);
-    const account = await web3.eth.requestAccounts();
-    const myAccount = account[0];
-
-        // 리스트 형태로 출력하는데 이거 크기가 동적인데 어떻게 저장?
-    const allList = await contract.methods.getAllListFromAccount(myAccount).call();
-    setList(allList);
 
 
-    console.log(allList);
-  }
 
   return (
     <div>
       <div className="myBox">
         <div style={{ margin: 20 }}>처방 이력</div>
-        
+        <div>
+          {list}
+        </div>
       </div>
     </div>
   );
