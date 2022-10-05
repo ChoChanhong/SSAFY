@@ -56,13 +56,7 @@ export default function PhLoginForm() {
           <FormLabel style={{ marginBottom: 5, fontWeight: "bold" }}>
             아이디
           </FormLabel>
-          <TextField      .catch(function (err) {
-        if (err.response.status === 401 || err.response.status === 404) {
-          alert("아이디 혹은 비밀번호가 틀렸습니다.");
-        } else {
-          alert(err);
-        }
-      });
+          <TextField      
             className="a phlogInput"
             placeholder="아이디를 입력해주세요."
             onChange={IdChange}
