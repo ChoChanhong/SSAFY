@@ -16,11 +16,11 @@ export default function RecentPer(props) {
   useEffect(() => {
     if (recent) {
       const tmp = recent.dName.map((x, idx) => (
-        <div>
+        <div style={{ display: "flex", justifyContent: "space-around" }}>
           <span>{x}</span>
-          <span>{recent.dosage[idx]}</span>
-          <span>{recent.doseNum[idx]}</span>
-          <span>{recent.dosePeriod[idx]}</span>
+          <span>{recent.dosage[idx]}mg</span>
+          <span>{recent.doseNum[idx]}회</span>
+          <span>{recent.dosePeriod[idx]}일</span>
           <span>{recent.howtoTake[idx]}</span>
         </div>
       ));
@@ -34,19 +34,19 @@ export default function RecentPer(props) {
       <div className="myBox">
         <div style={{ margin: 20, textAlign: "start" }}>
           <div style={{ marginBottom: 5 }}>
-            <span>병원명 : {recent ? recent.hosName : ""}</span>
+            <span>병원명 :　{recent ? recent.hosName : ""}</span>
           </div>
           <div style={{ marginBottom: 5 }}>
-            <span>처방일 : {recent ? recent.pubDate : ""}</span>
+            <span>처방일 :　{recent ? recent.pubDate : ""}</span>
           </div>
           <div style={{ marginBottom: 5 }}>
             <span>
-              처방 횟수 : {recent ? recent.dispensingCount : ""}　/　
+              처방 횟수 :　{recent ? recent.dispensingCount : ""}　/　
               {recent ? recent.prescriptionCount : ""}
             </span>
           </div>
           <div style={{ marginBottom: 5 }}>
-            <span>질병코드 : {recent ? recent.dCode : ""}</span>
+            <span>질병코드 :　{recent ? recent.dCode : ""}</span>
           </div>
         </div>
         <div
@@ -57,8 +57,17 @@ export default function RecentPer(props) {
             height: 300,
           }}
         >
-          <div style={{ margin: 10 }}>처방내용</div>
-          <div>약이름 투약량 투약횟수 투약일 복용방법</div>
+          <div style={{ margin: 10 }}>[ 처방내용 ]</div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              margin: "2px 10px 2px 10px",
+            }}
+          >
+            <p>약이름</p> <p>투약량</p> <p>투약횟수</p> <p>투약일</p>{" "}
+            <p>복용방법</p>
+          </div>
           <div>{recent ? yak : ""}</div>
         </div>
         <div style={{ marginTop: 30 }}>
