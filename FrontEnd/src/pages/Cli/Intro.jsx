@@ -1,5 +1,6 @@
 import { React, useState } from "react";
 import { useMediaQuery } from "react-responsive";
+import { Link } from "react-router-dom";
 import BackGround from "../../Components/BackGround";
 import ServiceInfo from "../../Components/Cli/ServiceInfo";
 import UserGuide from "../../Components/Cli/UserGuide";
@@ -22,7 +23,9 @@ export function Intro() {
       <div>{isPc ? <BackGround /> : null}</div>
       <div id="main">
         <div>
-          <img style={{ height: 100 }} src={Logo} alt="로고" />
+          <Link to="/">
+            <img style={{ height: 100 }} src={Logo} alt="로고" />
+          </Link>
         </div>
         <div id="introTabber" class="mt-3 d-flex justify-content-center">
           <div
