@@ -57,7 +57,7 @@ export default function Signup2(props) {
           style={{ borderBottom: "solid 2px lightgray" }}
         >
           <label className="infoLabel">비밀번호</label>
-          <input style={{ width: 500 }} />
+          <input style={{ width: "500px" }} />
           <label className="infoLabel" style={{ marginLeft: 20 }}>
             비밀번호 재확인
           </label>
