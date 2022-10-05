@@ -1,6 +1,6 @@
-// const PrivateKeyProvider = require("truffle-privatekey-provider")
+const PrivateKeyProvider = require("truffle-privatekey-provider")
 
-// const privateKey = '0xf1f965c0320bf3b41bb065be17bffe9fabc3e56afedec7d4a27e23b3e1cfd096';
+const privateKey = '0x02b4cfdf1d39c7633610078338f12350ebe2793fb3d4bc261e84b46ca58eb727';
 
 module.exports = {
 
@@ -12,15 +12,15 @@ module.exports = {
     },
   // },
     // 싸피 네트워크 연결 
-    // ssafy : {
-      // provider: () => new PrivateKeyProvider(privateKey, `http://20.196.209.2:8545`),
-      // host: "20.196.209.2",
-      // port: 8545,
-      // network_id: "*",
+    ssafy : {
+      provider: () => new PrivateKeyProvider(privateKey, `http://20.196.209.2:8545`),
+      host: "20.196.209.2",
+      port: 8545,
+      network_id: "*",
 
     //얘는 패키지제이슨에 넣어야함
 /*"truffle-privatekey-provider": "^1.5.0", */
-    // }
+    }
   },
 
   // networks: {
