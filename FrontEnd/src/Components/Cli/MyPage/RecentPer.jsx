@@ -9,49 +9,73 @@ import "./MyPerscription.css";
 import { abi, nftCA } from "../../../web3Config";
 
 export default function RecentPer(props) {
-
-  const recent = props.list[props.list.length-1]//가장최근처방
+  const recent = props.list[props.list.length - 1]; //가장최근처방
   //최근처방의 약 리스트
-  const [yak,setYak] = useState('')
-  useEffect(()=>{
-    if(recent){
-      const tmp = recent.dName.map((x,idx)=>
-                                        <div>
-                                        <span>{x}</span>
-                                        <span>{recent.dosage[idx]}</span>
-                                        <span>{recent.doseNum[idx]}</span>
-                                        <span>{recent.dosePeriod[idx]}</span>
-                                        <span>{recent.howtoTake[idx]}</span>
-                                        </div>)
-      setYak(tmp)
-      console.log(tmp,'tmp')
-    } 
-  },[recent])
+  const [yak, setYak] = useState("");
+
+  useEffect(() => {
+    if (recent) {
+      const tmp = recent.dName.map((x, idx) => (
+        <div style={{ display: "flex", justifyContent: "space-around" }}>
+          <span>{x}</span>
+          <span>{recent.dosage[idx]}mg</span>
+          <span>{recent.doseNum[idx]}회</span>
+          <span>{recent.dosePeriod[idx]}일</span>
+          <span>{recent.howtoTake[idx]}</span>
+        </div>
+      ));
+      setYak(tmp);
+      console.log(tmp, "tmp");
+    }
+  }, [recent]);
 
   return (
     <div>
       <div className="myBox">
-        <div style={{ margin: 20 }}>
-          <div>
-            <span>병원명 : {recent ? recent.hosName : ''}</span>
+        <div style={{ margin: 20, textAlign: "start" }}>
+          <div style={{ marginBottom: 5 }}>
+            <span>병원명 :　{recent ? recent.hosName : ""}</span>
           </div>
-          <div>
-            <span>처방일 : {recent ? recent.pubDate : ''}</span>            
+          <div style={{ marginBottom: 5 }}>
+            <span>처방일 :　{recent ? recent.pubDate : ""}</span>
           </div>
-          <div>
-            <span>처방 횟수 : {recent ? recent.dispensingCount : ''}/{recent ? recent.prescriptionCount : ''}</span>            
+          <div style={{ marginBottom: 5 }}>
+            <span>
+              처방 횟수 :　{recent ? recent.dispensingCount : ""}　/　
+              {recent ? recent.prescriptionCount : ""}
+            </span>
           </div>
-          <div>
-            <span>질병코드 : {recent ? recent.dCode : ''}</span>          
+          <div style={{ marginBottom: 5 }}>
+            <span>질병코드 :　{recent ? recent.dCode : ""}</span>
           </div>
         </div>
-        <div style={{ border: "solid" }}>
-          <div>처방내용</div>
-          <div>약이름 투약량 투약횟수 투약일 복용방법</div>
-          <div>{recent ? yak : ''}</div>
+        <div
+          style={{
+            margin: "10px 10px 10px 10px",
+            border: "solid 1px black",
+            width: 330,
+            height: 300,
+          }}
+        >
+          <div style={{ margin: 10 }}>[ 처방내용 ]</div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              margin: "2px 10px 2px 10px",
+            }}
+          >
+            <p>약이름</p> <p>투약량</p> <p>투약횟수</p> <p>투약일</p>{" "}
+            <p>복용방법</p>
+          </div>
+          <div>{recent ? yak : ""}</div>
         </div>
         <div style={{ marginTop: 30 }}>
-          <button id="bluebutton" style={{ height: "100" }} onClick={props.directMove}>
+          <button
+            id="bluebutton"
+            style={{ height: "100" }}
+            onClick={props.directMove}
+          >
             조제접수
           </button>
         </div>
