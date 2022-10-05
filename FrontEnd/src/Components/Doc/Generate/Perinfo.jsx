@@ -41,43 +41,7 @@ export default function PerInfo(props) {
   }, []);
 
 
-  // const Mint = async (e) => {
-  //   e.preventDefault();
-  //   console.log(1111);
-  //   const data = {
-  //     userName: "Test102",
-  //     hosName: "Test0",
-  //     pharName: "Test0",
-  //     dCode: "aaa",
-  //     dName: ["bb", "rr"],
-  //     dosage: [1, 2],
-  //     doseNum: [2, 2],
-  //     dosePeriod: [2, 2],
-  //     dispensingCount: 1,
-  //     prescriptionCount: 1,
-  //     howtoTake: "asddasda",
-  //     pubDate: 12322123,
-  //     prepDate: 231355,
-  //   };
-  //   console.log(data);
-  //   const web3 = new Web3(window.ethereum);
-  //   const contract = new web3.eth.Contract(abi, nftCA);
-  //   console.log(contract);
-  //   await contract.methods
-  //     .setDoctorAuth("0x3da6f4d42Ffee30D50fE6FDC869C1Cb59B7210f7")
-  //     .send({ from: "0x3da6f4d42Ffee30D50fE6FDC869C1Cb59B7210f7" });
-  //   console.log("222222222222222222222222222222222");
-  //   await contract.methods
-  //     .mint(data)
-  //     .send({ from: "0x3da6f4d42Ffee30D50fE6FDC869C1Cb59B7210f7" });
-  //   console.log(" 처방전 발급 11111111");
-  //   const totalSupply = await contract.methods.totalSupply().call();
-  //   const prsList = await contract.methods.getPreScriptionByIndex(0).call();
-  //   console.log("1111111111111111111111111111111111111111111");
-  //   console.log(data);
-  //   console.log(totalSupply);
-  //   console.log(prsList);
-  // };
+  
 
   
 
@@ -161,10 +125,10 @@ export default function PerInfo(props) {
       .mint(prescription)
       .send({ from: myAccount });
     console.log(" 처방전 발급 됐음");
-    //환자 주소 넣어줘야함
-     await contract.methods.transferDoctorToPatient(myAccount, "0x4feC718B4fB4931d645f2F3E144560e26c2980a7", 0)
-     .send({ from : myAccount})
-    console.log("처방전 전송 완료")
+    // 전송 환자 주소 넣어줘야함
+    //  await contract.methods.transferDoctorToPatient(myAccount, "0x4feC718B4fB4931d645f2F3E144560e26c2980a7", 0)
+    //  .send({ from : myAccount})
+    // console.log("처방전 전송 완료")
     
   }
 
