@@ -15,11 +15,11 @@ export default function PhLoginForm() {
 
   const [id, setId] = useState("");
   const [password, setPass] = useState("");
-  const onKeyPress = (e) => {
-    if (e.key === "Enter") {
-      Send();
-    }
-  };
+  // const onKeyPress = (e) => {
+  //   if (e.key === "Enter") {
+  //     Send();
+  //   }
+  // };
 
   function IdChange(e) {
     setId(e.target.value);
@@ -28,12 +28,12 @@ export default function PhLoginForm() {
     setPass(e.target.value);
   }
 
-  function Send() {
-    console.log(id, password);
-    //api 통해서 로그인 보내고 아이디 일치시
-    activate(injected);
-    navigate("/doc");
-  }
+  // function Send() {
+  //   console.log(id, password);
+  //   //api 통해서 로그인 보내고 아이디 일치시
+  //   // activate(injected);
+  //   navigate("/doc");
+  // }
 
   return (
     <div id="phloginbox">
@@ -64,12 +64,12 @@ export default function PhLoginForm() {
             type="password"
             placeholder="비밀번호를 입력해주세요."
             onChange={PasswordChange}
-            onKeyPress={onKeyPress}
+            // onKeyPress={onKeyPress}
           />
         </div>
-        <button onClick={Send} id="phloginbutton">
+        {/* <button onClick={Send} id="phloginbutton">
           로그인
-        </button>
+        </button> */}
         <Link to="/" className="phlink">
           아이디/비밀번호 찾기
         </Link>
