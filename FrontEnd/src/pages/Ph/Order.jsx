@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React } from "react";
 import PhNavbar from "../../Components/PhNavbar";
 import OrderInfo from "../../Components/PhOrder/OrderInfo";
 import PhDetail from "../../Components/PhOrder/PhDetail";
@@ -7,9 +7,6 @@ import OrderList from "../../Components/PhOrder/OrderList";
 export default function Order() {
   return (
     <div>
-      {/* <div>dddddd</div>
-            <DaumPostCode onComplete={handleComplete} className="post-code" />
-            <div>ddddd</div> */}
       <div>
         <PhNavbar />
       </div>
