@@ -30,7 +30,6 @@ export default function MyPerscription(props) {
     const list = await contract.methods.getAllListFromAccount(myAccount).call();                                      
     console.log(list);
     setList(list)
-    
   }
 
 
