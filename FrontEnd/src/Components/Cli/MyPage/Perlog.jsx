@@ -7,6 +7,7 @@ export default function Perlog(props) {
     <div
       style={{
         borderBottom: "solid 2px #5681EF",
+        borderRadius: "20px",
         display: "flex",
         justifyContent: "space-between",
       }}
