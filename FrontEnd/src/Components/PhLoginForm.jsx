@@ -37,7 +37,7 @@ export default function PhLoginForm() {
 
   return (
     <div id="phloginbox">
-      <div class="phlogin">
+      <div className="phlogin">
         <h1 className="phloginTitle" style={{ color: "#00ADEF" }}>
           약국로그인
         </h1>
@@ -74,9 +74,9 @@ export default function PhLoginForm() {
           아이디/비밀번호 찾기
         </Link>
       </div>
-      <div class="phinfo">
+      <div className="phinfo">
         <img className="logoImg" src={IMG} alt="logo" />
-        <div class="phbuttonbox">
+        <div className="phbuttonbox">
           <Link to="/ph/signup">
             <button className="phlinkbutton">회원가입</button>
           </Link>
