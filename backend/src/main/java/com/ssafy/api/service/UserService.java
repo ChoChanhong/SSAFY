@@ -1,7 +1,6 @@
 package com.ssafy.api.service;
 
-import com.ssafy.api.request.UserRegisterPostReq;
-import com.ssafy.api.request.UserUpdatePasswordPostReq;
+
 import com.ssafy.db.entity.User;
 
 /**
@@ -14,4 +13,6 @@ public interface UserService {
     User createWallet(long Seq, String walletAddr);
 
 
+    // 아이디 중복 검사
+    boolean existsByUserId(String userId);
 }

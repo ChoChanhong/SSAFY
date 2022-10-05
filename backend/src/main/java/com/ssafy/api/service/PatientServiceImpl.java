@@ -11,7 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-//import com.ssafy.db.repository.UserRepositorySupport;
 
 /**
  *	환자 관련 비즈니스 로직 처리를 위한 서비스 구현 정의.
@@ -44,11 +43,11 @@ public class PatientServiceImpl implements PatientService {
 		patient.setPatientUserSeq(userSeq);
 		patient.setPatientRRN(createPatientPostReq.getPatientRRN());
 
-		long patientSeq = patientRepository.save(patient).getPatientSeq();
+		long patientUserSeq = patientRepository.save(patient).getPatientUserSeq();
 
 		// patientInfo
 		User inputU = userRepository.findUserByUserSeq(userSeq).get();
-		Patient inputP = patientRepository.findPatientByPatientUserSeq(userSeq).get();
+		Patient inputP = patientRepository.findPatientByPatientUserSeq(patientUserSeq).get();
 
 		PatientInfo patientInfo = new PatientInfo(
 				inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserName(),
@@ -73,32 +72,41 @@ public class PatientServiceImpl implements PatientService {
 		return patientInfo;
 	}
 
+	@Override
+	public Patient getPatient(long patientUserSeq) {
+		return patientRepository.findPatientByPatientUserSeq(patientUserSeq).get();
+	}
+
+	// RRN 중복 검사
+	@Override
+	public boolean existsByPatientRRN(String patientRRN) {
+		if (patientRepository.existsByPatientRRN((patientRRN))) {
+			return true; // 존재
+		}
+		return false;
+	}
+
 	// 회원 정보 수정
 	@Override
 	public PatientInfo updatePatient(long userSeq, CreatePatientPostReq updatePatientPostReq) {
-//		Optional<PatientInfo> updatePatientInfo = PatientInfo
+
 		Optional<User> updatedUser = userRepository.findUserByUserSeq(userSeq);
 		Optional<Patient> updatedPatient = patientRepository.findPatientByPatientUserSeq(userSeq);
-//		User user = new User();
-//		Patient patient = new Patient();
 
-//		updatedUser.get().setUserId(updatePatientPostReq.getPatientId());
 		updatedUser.get().setUserPassword(passwordEncoder.encode(updatePatientPostReq.getPatientPassword())); // 보안을 위해서 유저 패스워드 암호화 하여 디비에 저장
 		updatedUser.get().setUserName(updatePatientPostReq.getPatientName());
 		updatedUser.get().setUserEmail(updatePatientPostReq.getPatientEmail());
 		updatedUser.get().setUserWalletAddress(updatePatientPostReq.getPatientWalletAddr());
-//		updatedUser.get().setUserIdx(0);
 
 		long updatedUserSeq = userRepository.save(updatedUser.get()).getUserSeq();
 
-//		updatedPatient.get().setPatientUserSeq(userSeq);
 		updatedPatient.get().setPatientRRN(updatePatientPostReq.getPatientRRN());
 
-		long updatedPatientSeq = patientRepository.save(updatedPatient.get()).getPatientSeq();
+		long updatedPatientUserSeq = patientRepository.save(updatedPatient.get()).getPatientUserSeq();
 
 		// patientInfo
-		User inputU = userRepository.findUserByUserSeq(userSeq).get();
-		Patient inputP = patientRepository.findPatientByPatientUserSeq(userSeq).get();
+		User inputU = userRepository.findUserByUserSeq(updatedUserSeq).get();
+		Patient inputP = patientRepository.findPatientByPatientUserSeq(updatedPatientUserSeq).get();
 
 		PatientInfo patientInfo = new PatientInfo(
 				inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserName(),
@@ -114,33 +122,6 @@ public class PatientServiceImpl implements PatientService {
 		patientRepository.delete(patientRepository.findPatientByPatientUserSeq(userSeq).get());
 	}
 
-
-	//	@Override
-//	public User getUserByUserId(String userId) {
-//		// 디비에 유저 정보 조회 (userId 를 통한 조회).
-//		User user = userRepository.findByUserId(userId).get();
-//		return user;
-//	}
-//
-//	// userID 중복 체크
-//	@Override
-//	public boolean checkIdDuplicated(String userId) {
-//		if (userRepository.countByUserId(userId) == 0) {
-//			return true;
-//		}
-//		return false;
-//	}
-//
-//	// userRRN 중복 체크
-//	@Override
-//	public boolean checkRRNDuplicated(String userRRN) {
-//		if (userRepository.countByUserRRN(userRRN) == 0) {
-//			return true;
-//		}
-//		return false;
-//	}
-//
-//
 	@Override
 	public PatientInfo searchPatient(String patientName, String patientRRN) {
 
@@ -152,7 +133,6 @@ public class PatientServiceImpl implements PatientService {
 		if (patientName.equals(inputU.getUserName())) {
 
 			// patientInfo
-
 			PatientInfo patientInfo = new PatientInfo(
 					inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserName(),
 					inputU.getUserEmail(), inputU.getUserIdx(), inputU.getUserWalletAddress(), inputU.getREG_DTM(), inputU.getMOD_DTM(),

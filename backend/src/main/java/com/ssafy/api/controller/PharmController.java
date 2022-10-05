@@ -1,15 +1,12 @@
 package com.ssafy.api.controller;
 
-import com.ssafy.api.request.CreateHospitalPostReq;
 import com.ssafy.api.request.CreatePharmPostReq;
 import com.ssafy.api.request.UserLoginPostReq;
-import com.ssafy.api.request.UserRegisterPostReq;
 import com.ssafy.api.response.UserLoginPostRes;
 import com.ssafy.api.service.PharmService;
 import com.ssafy.api.service.PrescriptionService;
 import com.ssafy.api.service.UserService;
 import com.ssafy.common.auth.SsafyUserDetails;
-import com.ssafy.common.customObject.HospitalInfo;
 import com.ssafy.common.customObject.PharmInfo;
 import com.ssafy.common.customObject.PrescriptionInfo;
 import com.ssafy.common.model.response.BaseResponseBody;
@@ -18,7 +15,6 @@ import com.ssafy.db.entity.Pharm;
 import com.ssafy.db.entity.Prescription;
 import com.ssafy.db.entity.User;
 import io.swagger.annotations.*;
-import org.apache.commons.collections4.bag.SynchronizedSortedBag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,15 +34,13 @@ import java.util.List;
 @RequestMapping("/pharms")
 public class PharmController {
 
-	@Autowired  // 의존성 주입
+	// 의존성 주입
+	@Autowired
 	UserService userService;
-
 	@Autowired
 	PharmService pharmService;
-
 	@Autowired
 	PrescriptionService prescriptionService;
-
 	@Autowired
 	PasswordEncoder passwordEncoder;
 
@@ -56,28 +50,32 @@ public class PharmController {
 	@PostMapping("/regist")
 	@ApiOperation(value = "회원 가입", notes = "<strong>아이디, 비밀번호, 이메일, 면허 번호, 이름, 주소, 전화번호, 사업자등록번호</strong>을 통해 회원가입 한다.")
 	@ApiResponses({
-			@ApiResponse(code = 200, message = "성공"),
-			@ApiResponse(code = 401, message = "아이디 중복"),
-			@ApiResponse(code = 402, message = "사업자등록번호 중복")
+			@ApiResponse(code = 200, message = "성공", response = UserLoginPostRes.class),
+			@ApiResponse(code = 400, message = "가입 실패", response = BaseResponseBody.class),
+			@ApiResponse(code = 402, message = "등록된 아이디", response = BaseResponseBody.class),
+			@ApiResponse(code = 403, message = "등록된 CRN", response = BaseResponseBody.class),
+			@ApiResponse(code = 500, message = "서버 오류")
 	})
 	public ResponseEntity<?> register(
 			@RequestBody @ApiParam(value="회원가입 정보", required = true) CreatePharmPostReq createPharmPostReq) {
 
+		String pharmId = createPharmPostReq.getPharmId();
+		String pharmCRN = createPharmPostReq.getPharmCRN();
+
+		// Id와 CRN 중복 체크
+		if (userService.existsByUserId(pharmId)) {
+			return new ResponseEntity<>(pharmId + " 은/는 등록된 아이디입니다.", HttpStatus.valueOf(402));
+		} else if (pharmService.existsByPharmCRN(pharmCRN)) {
+			return new ResponseEntity<>(pharmCRN + " 은/는 등록된 CRN입니다.", HttpStatus.valueOf(403));
+		}
+
+		// 등록된 Id와 CRN이 없는 경우 가입 진행
 		pharmService.createPharm(createPharmPostReq);
 
-		return new ResponseEntity<>(createPharmPostReq.getPharmId() + "의 회원가입이 완료되었습니다", HttpStatus.valueOf(200));
-//
-//		String hospitalId = createHospitalPostReq.getHospitalId();
-//		String hospitalCRN = createHospitalPostReq.getHospitalCRN();
-//
-////		 아이디와 사업자등록번호 중복 체크 후 회원가입 진행
-//		if (!hospitalService.checkIdDuplicated(hospitalId) && !hospitalService.checkCRNDuplicated(hospitalCRN)) {
-//			Hospital hospital = hospitalService.createHospital(createHospitalPostReq);
-//
-//			return new ResponseEntity<>(hospital.getHospitalId() + "의 회원가입이 완료되었습니다", HttpStatus.valueOf(200));
-//		}
-//
-//		return new ResponseEntity<>("잘못된 요청입니다", HttpStatus.valueOf(400));
+		if (userService.existsByUserId(pharmId)) {
+			return new ResponseEntity<>(createPharmPostReq.getPharmId() + "의 회원가입이 완료되었습니다", HttpStatus.valueOf(200));
+		}
+		return new ResponseEntity<>("가입에 실패하였습니다.", HttpStatus.valueOf(400));
 	}
 
 
@@ -106,32 +104,35 @@ public class PharmController {
 		return ResponseEntity.status(401).body(UserLoginPostRes.of(401, "Invalid Password", null));
 	}
 
+	/**
+	 * 약국 정보 조회
+	 */
 	@GetMapping("/me")
 	@ApiOperation(value = "약국 정보 조회", notes = "로그인한 약국의 정보를 응답한다.")
 	@ApiResponses({
 			@ApiResponse(code = 200, message = "성공"),
-			@ApiResponse(code = 401, message = "인증 실패"),
+			@ApiResponse(code = 401, message = "인증 실패(토큰 없음)"),
 			@ApiResponse(code = 404, message = "사용자 없음"),
 			@ApiResponse(code = 500, message = "서버 오류")
 	})
 	public ResponseEntity<?> getPatientInfo(@ApiIgnore Authentication authentication) {
-		/**
-		 * 요청 헤더 액세스 토큰이 포함된 경우에만 실행되는 인증 처리이후, 리턴되는 인증 정보 객체(authentication) 통해서 요청한 유저 식별.
-		 * 액세스 토큰이 없이 요청하는 경우, 403 에러({"error": "Forbidden", "message": "Access Denied"}) 발생.
-		 */
+
+		// 토큰 확인
 		if (authentication == null) {
 			return new ResponseEntity<>("토큰이 없습니다", HttpStatus.valueOf(403));
 		}
-		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
-		String userId = userDetails.getUsername();
-		long userSeq = userService.getUserByUserId(userId).getUserSeq();
 
-		PharmInfo pharmInfo = pharmService.getPharmInfo(userSeq);
+		// jwt 토큰에서 user 가져오기
+		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
+		User user = userDetails.getUser();
+
+		// 약국 정보 가져오기
+		PharmInfo pharmInfo = pharmService.getPharmInfo(user.getUserSeq());
 
 		if (pharmInfo != null) {
 			return new ResponseEntity<PharmInfo>(pharmInfo, HttpStatus.valueOf(200));
 		}
-		return new ResponseEntity<>("잘못된 요청입니다", HttpStatus.valueOf(400));
+		return new ResponseEntity<>("등록된 약국이 없습니다", HttpStatus.valueOf(404));
 	}
 
 
@@ -143,27 +144,44 @@ public class PharmController {
 	@ApiResponses({
 			@ApiResponse(code = 200, message = "성공"),
 			@ApiResponse(code = 400, message = "잘못된 요청"),
-			@ApiResponse(code = 401, message = "인증 실패"),
-			@ApiResponse(code = 403, message = "토큰 없음"),
-			@ApiResponse(code = 404, message = "바디 정보 오류"),
-			@ApiResponse(code = 405, message = "무결성 오류"),
+			@ApiResponse(code = 401, message = "인증 실패(토큰 없음)"),
+			@ApiResponse(code = 402, message = "등록된 아이디"),
+			@ApiResponse(code = 403, message = "등록된 CRN"),
+			@ApiResponse(code = 404, message = "약국 정보 없음"),
 			@ApiResponse(code = 500, message = "서버 오류")
 	})
 	public ResponseEntity<?> updatePatientInfo(@ApiIgnore Authentication authentication,
-											   @RequestBody @ApiParam(value="약국 정보 수정", required = true) CreatePharmPostReq updatePharmPostReq) {
+											   @RequestBody @ApiParam(value="약국 정보 수정", required = true) CreatePharmPostReq updatePharmInfo) {
 
+		// 토큰 확인
 		if (authentication == null) {
-			return new ResponseEntity<>("토큰이 없습니다", HttpStatus.valueOf(403));
+			return new ResponseEntity<>("토큰이 없습니다", HttpStatus.valueOf(401));
 		}
-		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
-		String userId = userDetails.getUsername();
-		long userSeq = userDetails.getUser().getUserSeq();
 
-		// id 변경 금지
-		if (userId.equals(updatePharmPostReq.getPharmId())) {
-			PharmInfo pharmInfo = pharmService.updatePharm(userSeq, updatePharmPostReq);
-			if (pharmInfo == null)
-				return new ResponseEntity<>("무결성 오류입니다", HttpStatus.valueOf(405));
+		// 토큰에 저장된 정보
+		SsafyUserDetails userDetails = (SsafyUserDetails) authentication.getDetails();
+		User user = userDetails.getUser();
+		Pharm pharm = pharmService.getPharm(user.getUserSeq());
+
+		// 약국 없음
+		if (!userService.existsByUserId(user.getUserId())) { // 등록된 약국이 없습니다.
+			return new ResponseEntity<>("등록된 약국이 없습니다.", HttpStatus.valueOf(404));
+		}
+
+		String updatePharmId = updatePharmInfo.getPharmId();
+		String updatePharmCRN = updatePharmInfo.getPharmCRN();
+
+		// Id와 CRN 중복 불가
+		if (!user.getUserId().equals(updatePharmId) && userService.existsByUserId(updatePharmId)) { // 아이디가 현재와 다를시 중복 조회
+			return new ResponseEntity<>(updatePharmId + "은/는 등록된 아이디입니다.", HttpStatus.valueOf(402));
+		} else if (!pharm.getPharmCRN().equals(updatePharmCRN) && pharmService.existsByPharmCRN(updatePharmCRN)) { // CRN이 현재와 다를시 중복 조회
+			return new ResponseEntity<>(updatePharmCRN + "은/는 등록된 CRN입니다.", HttpStatus.valueOf(403));
+		}
+
+		// 약국 정보 업데이트
+		PharmInfo pharmInfo = pharmService.updatePharm(user.getUserSeq(), updatePharmInfo);
+
+		if (pharmInfo != null) {
 			return new ResponseEntity<>(pharmInfo, HttpStatus.valueOf(200));
 		}
 		return new ResponseEntity<>("잘못된 요청입니다", HttpStatus.valueOf(400));
@@ -176,52 +194,57 @@ public class PharmController {
 	@ApiOperation(value = "약국 탈퇴", notes = "로그인한 약국의 탈퇴를 처리한다")
 	@ApiResponses({
 			@ApiResponse(code = 200, message = "성공"),
-			@ApiResponse(code = 401, message = "인증 실패"),
-			@ApiResponse(code = 403, message = "토큰 없음"),
+			@ApiResponse(code = 401, message = "인증 실패(토큰 없음)"),
 			@ApiResponse(code = 404, message = "사용자 없음"),
 			@ApiResponse(code = 500, message = "서버 오류")
 	})
 	public ResponseEntity<?> deletePharm(@ApiIgnore Authentication authentication) {
 
+		// 토큰 확인
 		if (authentication == null) {
-			return new ResponseEntity<>("토큰이 없습니다", HttpStatus.valueOf(403));
+			return new ResponseEntity<>("토큰이 없습니다", HttpStatus.valueOf(401));
 		}
 
+		// 토큰에 저장된 정보
 		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
-		String userId = userDetails.getUsername();
-		User user = userService.getUserByUserId(userId);
-		long userSeq = userService.getUserByUserId(userId).getUserSeq();
+		User user = userDetails.getUser();
 
 		if (user == null) {
-			return new ResponseEntity<>(userId + "의 약국 정보가 없습니다", HttpStatus.valueOf(404));
+			return new ResponseEntity<>(user.getUserId() + "의 약국 정보가 없습니다", HttpStatus.valueOf(404));
 		}
-		pharmService.deletePharm(userSeq);
-		return new ResponseEntity<>(userId + "의 약국 정보가 삭제되었습니다", HttpStatus.valueOf(200));
+
+		// 약국 삭제
+		pharmService.deletePharm(user.getUserSeq());
+		return new ResponseEntity<>(user.getUserId() + "의 약국 정보가 삭제되었습니다", HttpStatus.valueOf(200));
 	}
 
-
+	/**
+	 * 환자 처방전 조회
+	 */
 	@GetMapping("/prescriptionList")
 	@ApiOperation(value = "환자 처방전 조회", notes = "로그인한 환자의 처방전 정보를 응답한다.")
 	@ApiResponses({
 			@ApiResponse(code = 200, message = "성공"),
-			@ApiResponse(code = 401, message = "인증 실패"),
-			@ApiResponse(code = 404, message = "사용자 없음"),
+			@ApiResponse(code = 401, message = "인증 실패(토큰 없음)"),
+			@ApiResponse(code = 404, message = "처방전 없음"),
 			@ApiResponse(code = 500, message = "서버 오류")
 	})
 	public ResponseEntity<?> getPrescriptionList(@ApiIgnore Authentication authentication) {
-		/**
-		 * 요청 헤더 액세스 토큰이 포함된 경우에만 실행되는 인증 처리이후, 리턴되는 인증 정보 객체(authentication) 통해서 요청한 유저 식별.
-		 * 액세스 토큰이 없이 요청하는 경우, 403 에러({"error": "Forbidden", "message": "Access Denied"}) 발생.
-		 */
 
+		// 토큰 확인
+		if (authentication == null) {
+			return new ResponseEntity<>("토큰이 없습니다", HttpStatus.valueOf(401));
+		}
+
+		// 토큰에 저장된 정보
 		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
-		String userId = userDetails.getUsername();
-		long pharmUserSeq = userService.getUserByUserId(userId).getUserSeq();
+		User user = userDetails.getUser();
 
 		// 처방전 리스트 목록
 		ArrayList<Prescription> prescriptions = new ArrayList<>();
-		prescriptions.addAll(prescriptionService.getPharmPrescriptionList(pharmUserSeq));
+		prescriptions.addAll(prescriptionService.getPharmPrescriptionList(user.getUserSeq()));
 
+		// 처방전 없음
 		if (prescriptions.isEmpty()) {
 			return new ResponseEntity<>("처방전 없음", HttpStatus.valueOf(400));
 		}
@@ -243,8 +266,7 @@ public class PharmController {
 	@ApiOperation(value = "약국 리스트 조회", notes = "약국의 리스트를 조회한다.")
 	@ApiResponses({
 			@ApiResponse(code = 200, message = "성공"),
-			@ApiResponse(code = 401, message = "인증 실패"),
-			@ApiResponse(code = 404, message = "사용자 없음"),
+			@ApiResponse(code = 404, message = "약국 없음"),
 			@ApiResponse(code = 500, message = "서버 오류")
 	})	public ResponseEntity<?> getPharmList() {
 
@@ -253,10 +275,9 @@ public class PharmController {
 		pharms.addAll(pharmService.getPharmList());
 
 		if (pharms.isEmpty()) {
-			return new ResponseEntity<>("약국 없음", HttpStatus.valueOf(400));
+			return new ResponseEntity<>("약국 없음", HttpStatus.valueOf(404));
 		}
 
-		// 처방전 내용 복원
 		ArrayList<PharmInfo> pharmInfos = new ArrayList<>();
 		for ( Pharm p: pharms ) {
 			// 약국 정보

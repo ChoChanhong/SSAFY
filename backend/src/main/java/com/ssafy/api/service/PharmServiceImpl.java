@@ -1,13 +1,8 @@
 package com.ssafy.api.service;
 
 import com.ssafy.api.request.CreatePharmPostReq;
-import com.ssafy.common.customObject.HospitalInfo;
-import com.ssafy.common.customObject.PatientInfo;
 import com.ssafy.common.customObject.PharmInfo;
-import com.ssafy.common.customObject.PrescriptionInfo;
-import com.ssafy.db.entity.Hospital;
 import com.ssafy.db.entity.Pharm;
-import com.ssafy.db.entity.Prescription;
 import com.ssafy.db.entity.User;
 import com.ssafy.db.repository.PharmRepository;
 import com.ssafy.db.repository.UserRepository;
@@ -53,11 +48,11 @@ public class PharmServiceImpl implements PharmService {
 		pharm.setPharmTel(createPharmPostReq.getPharmTel());
 		pharm.setPharmCRN(createPharmPostReq.getPharmCRN());
 
-		long pharmSeq = pharmRepository.save(pharm).getPharmSeq();
+		long pharmUserSeq = pharmRepository.save(pharm).getPharmUserSeq();
 
 		// pharmInfo
 		User inputU = userRepository.findUserByUserSeq(userSeq).get();
-		Pharm inputM = pharmRepository.findPharmByPharmUserSeq(userSeq).get();
+		Pharm inputM = pharmRepository.findPharmByPharmUserSeq(pharmUserSeq).get();
 
 		PharmInfo pharmInfo = new PharmInfo(
 				inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserName(),
@@ -66,6 +61,20 @@ public class PharmServiceImpl implements PharmService {
 				inputM.getPharmTel(), inputM.getPharmCRN(), inputM.getREG_DTM(), inputM.getMOD_DTM());
 
 		return pharmInfo;
+	}
+
+	@Override
+	public Pharm getPharm(long pharmUserSeq) {
+		return pharmRepository.findPharmByPharmUserSeq(pharmUserSeq).get();
+	}
+
+	// CRN 중복 검사
+	@Override
+	public boolean existsByPharmCRN(String pharmCRN) {
+		if (pharmRepository.existsByPharmCRN(pharmCRN)) {
+			return true; // 존재
+		}
+		return false;
 	}
 
 	@Override
@@ -82,34 +91,8 @@ public class PharmServiceImpl implements PharmService {
 
 		return pharmInfo;
 	}
-//
-//	// 아이디 중복 검사
-//	@Override
-//	public boolean checkIdDuplicated(String hospitalId) {
-//		if (hospitalRepository.existsByHospitalId(hospitalId)) {
-//			return true; // 존재
-//		}
-//		return false; // 존재X
-//	}
-//
-//	// CRN 중복 검사
-//	@Override
-//	public boolean checkCRNDuplicated(String hospitalCRN) {
-//		if (hospitalRepository.existsByHospitalCRN(hospitalCRN)) {
-//			return true; // 존재
-//		}
-//		return false;
-//	}
 
-	//	// hospitalId를 통해 디비에서 약국 정보 조회
-//	@Override
-//	public Hospital getHospitalByHospitalId(String hospitalId) {
-//		Hospital hospital = hospitalRepository.findByHospitalId(hospitalId).get();
-//
-//		return hospital;
-//	}
-//
-// 회원 정보 수정
+	// 회원 정보 수정
 	@Override
 	public PharmInfo updatePharm(long userSeq, CreatePharmPostReq updatePharmPostReq) {
 		Optional<User> updatedUser = userRepository.findUserByUserSeq(userSeq);
@@ -119,7 +102,6 @@ public class PharmServiceImpl implements PharmService {
 		updatedUser.get().setUserName(updatePharmPostReq.getPharmName());
 		updatedUser.get().setUserEmail(updatePharmPostReq.getPharmEmail());
 		updatedUser.get().setUserWalletAddress(updatePharmPostReq.getPharmWalletAddr());
-//		updatedUser.get().setUserIdx(1);
 
 		long updatedUserSeq = userRepository.save(updatedUser.get()).getUserSeq();
 
@@ -129,11 +111,11 @@ public class PharmServiceImpl implements PharmService {
 		updatedPharm.get().setPharmTel(updatePharmPostReq.getPharmTel());
 		updatedPharm.get().setPharmCRN(updatePharmPostReq.getPharmCRN());
 
-		long updatedPharmSeq = pharmRepository.save(updatedPharm.get()).getPharmSeq();
+		long updatedPharmUserSeq = pharmRepository.save(updatedPharm.get()).getPharmUserSeq();
 
 		// pharmInfo
-		User inputU = userRepository.findUserByUserSeq(userSeq).get();
-		Pharm inputM = pharmRepository.findPharmByPharmUserSeq(userSeq).get();
+		User inputU = userRepository.findUserByUserSeq(updatedUserSeq).get();
+		Pharm inputM = pharmRepository.findPharmByPharmUserSeq(updatedPharmUserSeq).get();
 
 		PharmInfo pharmInfo = new PharmInfo(
 				inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserName(),

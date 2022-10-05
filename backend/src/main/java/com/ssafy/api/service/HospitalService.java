@@ -12,14 +12,11 @@ public interface HospitalService {
 
 	HospitalInfo getHospitalInfo(long userSeq);
 
-	//	// hospitalId를 통해 디비에서 약국 정보 조회
-	//	@Override
-	//	public Hospital getHospitalByHospitalId(String hospitalId) {
-	//		Hospital hospital = hospitalRepository.findByHospitalId(hospitalId).get();
-	//
-	//		return hospital;
-	//	}
-	//
+	Hospital getHospital(long hospitalUserSeq);
+
+	// CRN 중복 검사
+	boolean existsByHospitalCRN(String hospitalCRN);
+
 	// 회원 정보 수정
 	HospitalInfo updateHospital(long userSeq, CreateHospitalPostReq updateHospitalPostReq);
 
@@ -27,14 +24,4 @@ public interface HospitalService {
 
     // 아이디로 seq 검색
     long findSeqbyId(String hospitalId);
-
-//	boolean checkIdDuplicated(String hospitalId); // 아이디 중복검사
-//
-//	boolean checkCRNDuplicated(String hospitalCRN); // 사업자등록번호 중복검사
-//
-//	Hospital getHospitalByHospitalId(String hospitalId); // hospitalId를 통해 디비에서 약국 정보 조회
-//
-//	Hospital updateHospitalInfo(String hospitalId, CreateHospitalPostReq hospitalUpdatePostReq); // 약국 정보 수정
-//
-//	void deleteHospital(Hospital hospital);
 }
