@@ -1,7 +1,6 @@
 package com.ssafy.api.controller;
 
 import com.ssafy.api.request.CreateHospitalPostReq;
-import com.ssafy.api.request.CreatePatientPostReq;
 import com.ssafy.api.request.SearchPatientPostReq;
 import com.ssafy.api.request.UserLoginPostReq;
 import com.ssafy.api.response.UserLoginPostRes;
@@ -38,20 +37,15 @@ import java.util.List;
 @RequestMapping("/hospitals")
 public class HospitalController {
 
-	@Autowired  // 의존성 주입
+	// 의존성 주입
+	@Autowired
 	UserService userService;
-
 	@Autowired
 	HospitalService hospitalService;
-
 	@Autowired
 	PatientService patientService;
-
 	@Autowired
 	PrescriptionService prescriptionService;
-
-
-
 	@Autowired
 	PasswordEncoder passwordEncoder;
 
@@ -59,30 +53,34 @@ public class HospitalController {
 	 * 병원 회원가입
 	 */
 	@PostMapping("/regist")
-	@ApiOperation(value = "회원 가입", notes = "<strong>아이디, 비밀번호, 이메일, 면허 번호, 이름, 주소, 전화번호, 사업자등록번호</strong>을 통해 회원가입 한다.")
+	@ApiOperation(value = "회원 가입", notes = "병원 회원가입")
 	@ApiResponses({
-			@ApiResponse(code = 200, message = "성공"),
-			@ApiResponse(code = 401, message = "아이디 중복"),
-			@ApiResponse(code = 402, message = "사업자등록번호 중복")
+			@ApiResponse(code = 200, message = "성공", response = UserLoginPostRes.class),
+			@ApiResponse(code = 400, message = "가입 실패", response = BaseResponseBody.class),
+			@ApiResponse(code = 402, message = "등록된 아이디", response = BaseResponseBody.class),
+			@ApiResponse(code = 403, message = "등록된 CRN", response = BaseResponseBody.class),
+			@ApiResponse(code = 500, message = "서버 오류")
 	})
 	public ResponseEntity<?> register(
 			@RequestBody @ApiParam(value="회원가입 정보", required = true) CreateHospitalPostReq createHospitalPostReq) {
 
+		String hospitalId = createHospitalPostReq.getHospitalId();
+		String hospitalCRN = createHospitalPostReq.getHospitalCRN();
+
+		// Id와 CRN 중복 체크
+		if (userService.existsByUserId(hospitalId)) {
+			return new ResponseEntity<>(hospitalId + " 은/는 등록된 아이디입니다.", HttpStatus.valueOf(402));
+		} else if (hospitalService.existsByHospitalCRN(hospitalCRN)) {
+			return new ResponseEntity<>(hospitalCRN + " 은/는 등록된 CRN입니다.", HttpStatus.valueOf(403));
+		}
+
+		// 등록된 Id와 CRN이 없는 경우 가입 진행
 		hospitalService.createHospital(createHospitalPostReq);
 
-		return new ResponseEntity<>(createHospitalPostReq.getHospitalId() + "의 회원가입이 완료되었습니다", HttpStatus.valueOf(200));
-//
-//		String hospitalId = createHospitalPostReq.getHospitalId();
-//		String hospitalCRN = createHospitalPostReq.getHospitalCRN();
-//
-////		 아이디와 사업자등록번호 중복 체크 후 회원가입 진행
-//		if (!hospitalService.checkIdDuplicated(hospitalId) && !hospitalService.checkCRNDuplicated(hospitalCRN)) {
-//			Hospital hospital = hospitalService.createHospital(createHospitalPostReq);
-//
-//			return new ResponseEntity<>(hospital.getHospitalId() + "의 회원가입이 완료되었습니다", HttpStatus.valueOf(200));
-//		}
-//
-//		return new ResponseEntity<>("잘못된 요청입니다", HttpStatus.valueOf(400));
+		if (userService.existsByUserId(hospitalId)) {
+			return new ResponseEntity<>(createHospitalPostReq.getHospitalId() + "의 회원가입이 완료되었습니다", HttpStatus.valueOf(200));
+		}
+		return new ResponseEntity<>("가입에 실패하였습니다.", HttpStatus.valueOf(400));
 	}
 
 	/**
@@ -97,6 +95,7 @@ public class HospitalController {
 			@ApiResponse(code = 500, message = "서버 오류", response = BaseResponseBody.class)
 	})
 	public ResponseEntity<UserLoginPostRes> login(@RequestBody @ApiParam(value="로그인 정보", required = true) UserLoginPostReq loginInfo) {
+
 		String hospitalId = loginInfo.getUserId();
 		String hospitalPassword = loginInfo.getUserPassword();
 
@@ -110,32 +109,36 @@ public class HospitalController {
 		return ResponseEntity.status(401).body(UserLoginPostRes.of(401, "Invalid Password", null));
 	}
 
+	/**
+	 * 병원 정보 조회
+	 */
 	@GetMapping("/me")
 	@ApiOperation(value = "병원 정보 조회", notes = "로그인한 병원의 정보를 응답한다.")
 	@ApiResponses({
 			@ApiResponse(code = 200, message = "성공"),
-			@ApiResponse(code = 401, message = "인증 실패"),
+			@ApiResponse(code = 401, message = "인증 실패(토큰 없음)"),
 			@ApiResponse(code = 404, message = "사용자 없음"),
 			@ApiResponse(code = 500, message = "서버 오류")
 	})
 	public ResponseEntity<?> getPatientInfo(@ApiIgnore Authentication authentication) {
-		/**
-		 * 요청 헤더 액세스 토큰이 포함된 경우에만 실행되는 인증 처리이후, 리턴되는 인증 정보 객체(authentication) 통해서 요청한 유저 식별.
-		 * 액세스 토큰이 없이 요청하는 경우, 403 에러({"error": "Forbidden", "message": "Access Denied"}) 발생.
-		 */
+
+		// 토큰 확인
 		if (authentication == null) {
-			return new ResponseEntity<>("토큰이 없습니다", HttpStatus.valueOf(403));
+			return new ResponseEntity<>("토큰이 없습니다", HttpStatus.valueOf(401));
 		}
+
+		// jwt 토큰에서 user 가져오기
 		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
-		String userId = userDetails.getUsername();
-		long userSeq = userService.getUserByUserId(userId).getUserSeq();
+		User user = userDetails.getUser();
 
-		HospitalInfo hospitalInfo = hospitalService.getHospitalInfo(userSeq);
+		// 병원 정보 가져오기
+		HospitalInfo hospitalInfo = hospitalService.getHospitalInfo(user.getUserSeq());
 
+		// 병원 정보 반환
 		if (hospitalInfo != null) {
 			return new ResponseEntity<HospitalInfo>(hospitalInfo, HttpStatus.valueOf(200));
 		}
-		return new ResponseEntity<>("잘못된 요청입니다", HttpStatus.valueOf(400));
+		return new ResponseEntity<>("등록된 병원이 없습니다", HttpStatus.valueOf(404));
 	}
 
 
@@ -147,28 +150,44 @@ public class HospitalController {
 	@ApiResponses({
 			@ApiResponse(code = 200, message = "성공"),
 			@ApiResponse(code = 400, message = "잘못된 요청"),
-			@ApiResponse(code = 401, message = "인증 실패"),
-			@ApiResponse(code = 403, message = "토큰 없음"),
-			@ApiResponse(code = 404, message = "바디 정보 오류"),
-			@ApiResponse(code = 405, message = "무결성 오류"),
+			@ApiResponse(code = 401, message = "인증 실패(토큰 없음)"),
+			@ApiResponse(code = 402, message = "등록된 아이디"),
+			@ApiResponse(code = 403, message = "등록된 CRN"),
+			@ApiResponse(code = 404, message = "병원 정보 없음"),
 			@ApiResponse(code = 500, message = "서버 오류")
 	})
 	public ResponseEntity<?> updatePatientInfo(@ApiIgnore Authentication authentication,
 											   @RequestBody @ApiParam(value="병원 정보 수정", required = true) CreateHospitalPostReq updateHospitalInfo) {
 
+		// 토큰 확인
 		if (authentication == null) {
-			return new ResponseEntity<>("토큰이 없습니다", HttpStatus.valueOf(403));
+			return new ResponseEntity<>("토큰이 없습니다", HttpStatus.valueOf(401));
 		}
-		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
-		String userId = userDetails.getUsername();
-		long userSeq = userDetails.getUser().getUserSeq();
 
-		// id 변경 금지
-		if (userId.equals(updateHospitalInfo.getHospitalId())) {
-			HospitalInfo hospitalInfo = hospitalService.updateHospital(userSeq, updateHospitalInfo);
-//			PatientInfo patientInfo = patientService.updatePatient(userSeq, updatePatientInfo);
-			if (hospitalInfo == null)
-				return new ResponseEntity<>("무결성 오류입니다", HttpStatus.valueOf(405));
+		// 토큰에 저장된 정보
+		SsafyUserDetails userDetails = (SsafyUserDetails) authentication.getDetails();
+		User user = userDetails.getUser();
+		Hospital hospital = hospitalService.getHospital(user.getUserSeq());
+
+		// 병원 없음
+		if (!userService.existsByUserId(user.getUserId())) { // 등록된 병원이 없습니다.
+			return new ResponseEntity<>("등록된 병원이 없습니다.", HttpStatus.valueOf(404));
+		}
+
+		String updateHospitalId = updateHospitalInfo.getHospitalId();
+		String updateHospitalCRN = updateHospitalInfo.getHospitalCRN();
+
+		// Id와 CRN 중복 불가
+		if (!user.getUserId().equals(updateHospitalId) && userService.existsByUserId(updateHospitalId)) { // 아이디가 현재와 다를시 중복 조회
+			return new ResponseEntity<>(updateHospitalId + "은/는 등록된 아이디입니다.", HttpStatus.valueOf(402));
+		} else if (!hospital.getHospitalCRN().equals(updateHospitalCRN) && hospitalService.existsByHospitalCRN(updateHospitalCRN)) { // CRN이 현재와 다를시 중복 조회
+			return new ResponseEntity<>(updateHospitalCRN + "은/는 등록된 CRN입니다.", HttpStatus.valueOf(403));
+		}
+
+		// 병원 정보 업데이트
+		HospitalInfo hospitalInfo = hospitalService.updateHospital(user.getUserSeq(), updateHospitalInfo);
+
+		if (hospitalInfo != null) {
 			return new ResponseEntity<>(hospitalInfo, HttpStatus.valueOf(200));
 		}
 		return new ResponseEntity<>("잘못된 요청입니다", HttpStatus.valueOf(400));
@@ -181,53 +200,60 @@ public class HospitalController {
 	@ApiOperation(value = "병원 탈퇴", notes = "로그인한 병원의 탈퇴를 처리한다")
 	@ApiResponses({
 			@ApiResponse(code = 200, message = "성공"),
-			@ApiResponse(code = 401, message = "인증 실패"),
-			@ApiResponse(code = 403, message = "토큰 없음"),
+			@ApiResponse(code = 401, message = "인증 실패(토큰 없음)"),
 			@ApiResponse(code = 404, message = "사용자 없음"),
 			@ApiResponse(code = 500, message = "서버 오류")
 	})
 	public ResponseEntity<?> deleteHospital(@ApiIgnore Authentication authentication) {
 
+		// 토큰 확인
 		if (authentication == null) {
-			return new ResponseEntity<>("토큰이 없습니다", HttpStatus.valueOf(403));
+			return new ResponseEntity<>("토큰이 없습니다", HttpStatus.valueOf(401));
 		}
 
+		// 토큰에 저장된 정보
 		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
-		String userId = userDetails.getUsername();
-		User user = userService.getUserByUserId(userId);
-		long userSeq = userService.getUserByUserId(userId).getUserSeq();
+		User user = userDetails.getUser();
 
 		if (user == null) {
-			return new ResponseEntity<>(userId + "의 병원 정보가 없습니다", HttpStatus.valueOf(404));
+			return new ResponseEntity<>(user.getUserId() + "의 병원 정보가 없습니다", HttpStatus.valueOf(404));
 		}
-		hospitalService.deleteHospital(userSeq);
-		return new ResponseEntity<>(userId + "의 병원 정보가 삭제되었습니다", HttpStatus.valueOf(200));
+
+		// 병원 삭제
+		hospitalService.deleteHospital(user.getUserSeq());
+		return new ResponseEntity<>(user.getUserId() + "의 병원 정보가 삭제되었습니다", HttpStatus.valueOf(200));
 	}
 
+
+	/**
+	 * 환자 처방전 조회
+	 */
 	@GetMapping("/prescriptionList")
 	@ApiOperation(value = "환자 처방전 조회", notes = "로그인한 환자의 처방전 정보를 응답한다.")
 	@ApiResponses({
 			@ApiResponse(code = 200, message = "성공"),
-			@ApiResponse(code = 401, message = "인증 실패"),
-			@ApiResponse(code = 404, message = "사용자 없음"),
+			@ApiResponse(code = 401, message = "인증 실패(토큰 없음)"),
+			@ApiResponse(code = 404, message = "처방전 없음"),
 			@ApiResponse(code = 500, message = "서버 오류")
 	})
 	public ResponseEntity<?> getPrescriptionList(@ApiIgnore Authentication authentication) {
-		/**
-		 * 요청 헤더 액세스 토큰이 포함된 경우에만 실행되는 인증 처리이후, 리턴되는 인증 정보 객체(authentication) 통해서 요청한 유저 식별.
-		 * 액세스 토큰이 없이 요청하는 경우, 403 에러({"error": "Forbidden", "message": "Access Denied"}) 발생.
-		 */
 
+		// 토큰 확인
+		if (authentication == null) {
+			return new ResponseEntity<>("토큰이 없습니다", HttpStatus.valueOf(401));
+		}
+
+		// 토큰에 저장된 정보
 		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
-		String userId = userDetails.getUsername();
-		long hospitalUserSeq = userService.getUserByUserId(userId).getUserSeq();
+		User user = userDetails.getUser();
 
 		// 처방전 리스트 목록
 		ArrayList<Prescription> prescriptions = new ArrayList<>();
-		prescriptions.addAll(prescriptionService.getHospitalPrescriptionList(hospitalUserSeq));
+		prescriptions.addAll(prescriptionService.getHospitalPrescriptionList(user.getUserSeq()));
 
+		// 처방전 없음
 		if (prescriptions.isEmpty()) {
-			return new ResponseEntity<>("처방전 없음", HttpStatus.valueOf(400));
+			return new ResponseEntity<>("처방전 없음", HttpStatus.valueOf(404));
 		}
 
 		// 처방전 내용 복원
@@ -238,8 +264,8 @@ public class HospitalController {
 			prescriptionInfos.add(prescriptionInfo);
 		}
 
+		// 처방전 정보 리턴
 		return new ResponseEntity<List<PrescriptionInfo>>(prescriptionInfos, HttpStatus.valueOf(200));
-
 	}
 
 

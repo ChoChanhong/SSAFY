@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import com.ssafy.db.entity.User;
 import com.ssafy.db.repository.UserRepository;
-//import com.ssafy.db.repository.UserRepositorySupport;
 
 /**
  *	유저 관련 비즈니스 로직 처리를 위한 서비스 구현 정의.
@@ -39,6 +38,16 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findUserByUserSeq(userSeq).get();
 	}
 
+	/**
+	 * 아이디 중복 검사
+	 */
+	@Override
+	public boolean existsByUserId(String userId) {
+		if (userRepository.existsByUserId(userId)) {
+			return true; // 존재
+		}
+		return false; // 존재X
+	}
 
 
 

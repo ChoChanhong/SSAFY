@@ -12,14 +12,8 @@ import java.util.Optional;
  */
 @Repository
 public interface HospitalRepository extends JpaRepository<Hospital, Long> {
-    // 아래와 같이, Query Method 인터페이스(반환값, 메소드명, 인자) 정의를 하면 자동으로 Query Method 구현됨.
 
-//    Optional<Hospital> findHospitalByHospitalSeq(long hospitalSeq);
     Optional<Hospital> findHospitalByHospitalUserSeq(long hospitalUserSeq);
 
-//    Optional<Hospital> findByHospitalId(String hospitalId);
-//
-//    boolean existsByHospitalId(String hospitalId); // 중복 체크를 위해 hospitalId가 존재하는지 확인
-//
-//    boolean existsByHospitalCRN(String hospitalCRN); // 중복 체크를 위해 hospitalCRN가 존재하는지 확인
+    boolean existsByHospitalCRN(String hospitalCRN); // 중복 체크를 위해 hospitalCRN가 존재하는지 확인
 }

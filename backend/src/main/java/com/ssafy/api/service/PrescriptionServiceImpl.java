@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-//import com.ssafy.db.repository.UserRepositorySupport;
 
 /**
  *	처방전 관련 비즈니스 로직 처리를 위한 서비스 구현 정의.
@@ -34,11 +33,12 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 	PharmRepository pharmRepository;
 
 	@Override
-	public Prescription createPrescription(CreatePrescriptionPostReq createPrescriptionPostReq) {
+	public Prescription createPrescription(long hospitalUserSeq, CreatePrescriptionPostReq createPrescriptionPostReq) {
 		Prescription prescription = new Prescription();
 
 		prescription.setPatientUserSeq(createPrescriptionPostReq.getPatientUserSeq());
-		prescription.setHospitalUserSeq(createPrescriptionPostReq.getHospitalUserSeq());
+//		prescription.setHospitalUserSeq(createPrescriptionPostReq.getHospitalUserSeq());
+		prescription.setHospitalUserSeq(hospitalUserSeq);
 		prescription.setTokenId(createPrescriptionPostReq.getTokenId());
 		prescription.setCompletion(false);
 
@@ -50,11 +50,6 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
 	@Override
 	public PrescriptionInfo getPrescriptionInfo(Prescription prescription) {
-//					// 환자 정보
-//			PatientInfo patientInfo = new PatientInfo(
-//					userRepository.findUserByUserSeq(prescription.getPatientUserSeq()).get(),
-//					patientRepository.findPatientByPatientUserSeq(prescription.getPatientUserSeq()).get()
-//					);
 
 			// patientInfo
 			User inputPU = userRepository.findUserByUserSeq(prescription.getPatientUserSeq()).get();
@@ -65,11 +60,6 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 					inputPU.getUserEmail(), inputPU.getUserIdx(), inputPU.getUserWalletAddress(), inputPU.getREG_DTM(), inputPU.getMOD_DTM(),
 					inputP.getPatientSeq(), inputP.getPatientUserSeq(), inputP.getPatientRRN(), inputP.getREG_DTM(), inputP.getMOD_DTM());
 
-//			// 병원 정보
-//			HospitalInfo hospitalInfo = new HospitalInfo(
-//					userRepository.findUserByUserSeq(prescription.getHospitalUserSeq()).get(),
-//					hospitalRepository.findHospitalByHospitalUserSeq(prescription.getHospitalUserSeq()).get()
-//			);
 			// hospitalInfo
 			User inputU = userRepository.findUserByUserSeq(prescription.getHospitalUserSeq()).get();
 			Hospital inputH = hospitalRepository.findHospitalByHospitalUserSeq(prescription.getHospitalUserSeq()).get();
@@ -80,17 +70,14 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 					inputH.getHospitalSeq(), inputH.getHospitalUserSeq(), inputH.getHospitalLicense(), inputH.getHospitalAddr(),
 					inputH.getHospitalTel(), inputH.getHospitalCRN(), inputH.getREG_DTM(), inputH.getMOD_DTM());
 
-			// 약국정보
+
+			// pharmInfo
 			if (prescription.getPharmUserSeq() == 0) {
 				PrescriptionInfo prescriptionInfo = new PrescriptionInfo(patientInfo, hospitalInfo, null, prescription);
 				return prescriptionInfo;
 			}
+
 			// 약국이 있으면 약국정보까지
-//			PharmInfo pharmInfo = new PharmInfo(
-//					userRepository.findUserByUserSeq(prescription.getPharmUserSeq()).get(),
-//					pharmRepository.findPharmByPharmUserSeq(prescription.getPharmUserSeq()).get()
-//			);
-			// pharmInfo
 			User inputMU = userRepository.findUserByUserSeq(prescription.getPharmUserSeq()).get();
 			Pharm inputM = pharmRepository.findPharmByPharmUserSeq(prescription.getPharmUserSeq()).get();
 
