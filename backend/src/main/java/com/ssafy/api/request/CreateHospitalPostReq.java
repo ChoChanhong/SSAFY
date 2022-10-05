@@ -22,8 +22,14 @@ public class CreateHospitalPostReq {
 	@ApiModelProperty(name = "병원 이름", example = "철이 정형외과")
 	String hospitalName;
 
+	@ApiModelProperty(name = "병원 대표 의사", example = "김철민")
+	String hospitalDoctor;
+
 	@ApiModelProperty(name = "병원 이메일", example = "hosfy@ssafy.com")
 	String hospitalEmail;
+
+	@ApiModelProperty(name = "병원 요양 기관 코드", example = "0000")
+	String hospitalCode;
 
 	@ApiModelProperty(name = "병원 면허 번호", example = "00000")
 	String hospitalLicense;

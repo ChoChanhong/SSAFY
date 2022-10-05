@@ -32,8 +32,14 @@ public class Hospital {
     @Column(name = "userSeq", nullable = false)
     private long hospitalUserSeq;
 
+    @Column(name = "doctor", nullable = false)
+    private String hospitalDoctor;
+
     @Column(name = "license", nullable = false)
     private String hospitalLicense;
+
+    @Column(name = "code", nullable = false) // 요양 기관 코드
+    private String hospitalCode;
 
     @Column(name = "addr", nullable = false)
     private String hospitalAddr;
