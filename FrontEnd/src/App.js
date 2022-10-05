@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React } from "react";
 import { Route, Routes } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
 import "./App.css";
@@ -21,8 +21,8 @@ import Generate from "./pages/Doc/Generate";
 import { Mypage as DocMypage } from "./pages/Doc/Mypage";
 import { ServiceInfo as DocInfo } from "./pages/Doc/ServiceInfo";
 //약사
-import { Mypage as PhMypage } from "./pages/Ph/Mypage";
 import { Login as PhLogin } from "./pages/Ph/Login";
+import { Mypage as PhMypage } from "./pages/Ph/Mypage";
 import { Signup as PhSignup } from "./pages/Ph/Signup";
 import { Log as PhLog } from "./pages/Ph/Log";
 import Order from "./pages/Ph/Order";
