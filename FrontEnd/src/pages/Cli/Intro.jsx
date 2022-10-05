@@ -1,9 +1,9 @@
 import { React, useState } from "react";
 import { useMediaQuery } from "react-responsive";
-import BackGround from "../Components/BackGround";
-import ServiceInfo from "../Components/ServiceInfo";
-import UserGuide from "../Components/UserGuide";
-import Logo from "../assets/images/001.png"
+import BackGround from "../../Components/BackGround"
+import ServiceInfo from "../../Components/Cli/ServiceInfo";
+import UserGuide from "../../Components/Cli/UserGuide";
+import Logo from "../../assets/images/001.png"
 import "./Intro.css";
 
 export function Intro() {
