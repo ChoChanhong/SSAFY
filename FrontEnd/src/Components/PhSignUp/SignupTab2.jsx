@@ -39,9 +39,6 @@ export default function Signup2(props) {
     <div className="signBox">
       <div className="titleBox">
         <h3 className="title">회원가입</h3>
-        {/* <div style={{ color: "red", marginTop: 15 }}>
-          ※<span style={{ color: "black" }}> 필수 입력 항목입니다.</span>
-        </div> */}
       </div>
       <div>
         <div
