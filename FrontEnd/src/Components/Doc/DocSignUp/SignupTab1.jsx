@@ -12,10 +12,7 @@ export default function Signup1(props) {
       alert("약관에 동의해 주세요");
     }
   }
-  function changeCheck(e) {
-    console.log(e.target.checked);
-    setCheck(e.target.checked);
-  }
+
   return (
     <div className="signBox">
       <div className="textBox">
@@ -31,7 +28,7 @@ export default function Signup1(props) {
           color="neutral"
           size="md"
           variant="outlined"
-          onChange={changeCheck}
+          onClick={()=>{setCheck(!check)}}
         />
       </div>
       <div className="buttonBox">

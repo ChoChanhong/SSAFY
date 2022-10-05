@@ -24,6 +24,7 @@ export default function PerInfo(props) {
   let day = year + "-" + month + "-" + date;
 
   useEffect(() => {
+
     const token = localStorage.getItem("login-token");
     setAuthorizationToken(token);
     axios
@@ -221,7 +222,9 @@ export default function PerInfo(props) {
             <button id="Genbutton" onClick={submit}>
               처방하기
             </button>
-            <div>{/* <button onClick={Mint}> 민팅테스트</button> */}</div>
+            <div>
+                {/* <button onClick={Mint}> 민팅테스트</button> */}
+            </div>
           </div>
         </div>
       </div>
