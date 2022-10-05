@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +15,7 @@ export default function PhLoginForm() {
   const URL = "https://j7e205.p.ssafy.io/api/pharms/login";
   const onKeyPress = (e) => {
     if (e.key === "Enter") {
-      Send();
+      PhSend();
     }
   };
 
@@ -26,7 +26,7 @@ export default function PhLoginForm() {
     setPass(e.target.value);
   }
 
-  function Send() {
+  function PhSend() {
     console.log(id, password);
     axios
       .post(URL, { userId: id, userPassword: password })
@@ -68,7 +68,7 @@ export default function PhLoginForm() {
             onKeyPress={onKeyPress}
           />
         </div>
-        <button onClick={Send} id="phloginbutton">
+        <button onClick={PhSend} id="phloginbutton">
           로그인
         </button>
         <Link to="/" className="phlink">

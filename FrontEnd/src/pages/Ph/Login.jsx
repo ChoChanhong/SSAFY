@@ -1,28 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { injected } from "../../lib/Connectors";
-import { useWeb3React } from "@web3-react/core";
-import { useNavigate } from "react-router-dom";
 import PhMainNav from "../../Components/PhMainNav";
 import PhLoginForm from "../../Components/PhLoginForm";
 
-export function Login() {
-  const navigate = useNavigate();
-  const {
-    connector,
-    library,
-    chainId,
-    account,
-    active,
-    error,
-    activate,
-    deactivate,
-  } = useWeb3React();
+import "../Doc/Login.css";
 
+export function Login() {
   return (
-    <div>
+    <div id="login">
       <PhMainNav />
-      <PhLoginForm />
+      <PhLoginForm id="LoginForm"/>
     </div>
   );
 }
