@@ -47,16 +47,16 @@ contract PreScription is ERC721Connector {
     mapping(string => bool) _preScriptionsExists;
 
     
-    mapping (uint256 => uint ) _blockTotokenid;
+    // mapping (uint256 => uint ) _blockTotokenid;
 
-    mapping (address => uint[]) _addToblock;
+    // mapping (address => uint[]) _addToblock;
     //의사 계정주소 => 환자 계정주소 => 환자 토큰ID
     mapping (address => mapping (address => uint[])) _patientListFromAccount2;
 
     mapping (address => mapping (address => preScription[])) _patientListFromAccount;
 
     // 정기처방전 리스트
-    mapping (address => preScription[]) _regularPrescription;
+    // mapping (address => preScription[]) _regularPrescription;
 
      
     // // 의사 계정 -> 담당한 환자 계정 리스트
@@ -85,7 +85,7 @@ contract PreScription is ERC721Connector {
         function getOfferCountOfToken(uint _tokenId) public view returns(uint){
             return _offerCountOfTokenId[_tokenId];
         }
-
+        // 정기처방전 리스트
         // function getRegularPreScription(address _address) public view returns(preScription[] memory) {
         //     return _regularPrescription[_address];
         // }
@@ -109,26 +109,6 @@ contract PreScription is ERC721Connector {
         // function getAuthOfAccount(address _address) public view returns(uint){
         //     return _accountAuth[_address];
         // }
-        // function getAllPrescription(address _address) public view returns(preScription[] memory){
-        //     preScription[] memory prs;
-        //     for(uint i = 0; i < _allTokensOwned[_address].length; i++){
-        //         prs[i] = (preScriptions[_allTokensOwned[_address][i]]);
-        //     }
-        //     return prs;
-        // }
-
-  
-
-        // function getListOfPatient(address _from, address _to) public returns(preScription[] memory){
-        //     uint[] memory idList = _patientListFromAccount[_from][_to];
-        //     preScription[] memory  prsList;
-        //     for(uint i = 0; i < idList.length; i++){
-        //         prsList.push(idList[i]);
-        //     }
-        // }
-
-
-
 
 
     // 누가 민팅했는지 저장해야하나 ?
@@ -185,31 +165,7 @@ contract PreScription is ERC721Connector {
            require(!check, "Error : already exists preScription ");
            _;
         }
-        // // 약 종류, 처방일 같은지 체크
-        //  modifier prsnmExists(string[] memory _dName, uint256 _pubDate) {
-        //     bool check = false;
-        //    for (uint i = 0; i < preScriptions.length; i++){
-        //     uint cnt = 0; 
-        //         for(uint j = 0; j < preScriptions[i].dName.length; j++){
-        //             if(
-        //                  keccak256(bytes(preScriptions[i].dName[j])) == keccak256(bytes(_dName[j])) 
-                      
-        //             ){
-        //                    cnt++;
-        //             }
-        //         }
-         
-        //         if( preScriptions[i].dName.length == _dName.length && 
-        //             cnt == preScriptions[i].dName.length && 
-        //             preScriptions[i].pubDate == _pubDate )
-        //      {
-        //         check =true;
-        //     }
-        //    } 
-        //    require(!check, "Error : already exists preScription ");
-        //    _;
-        //  }
-        //  주소가 가진 토큰갯수 반환
+   
         function getBalanceOf(address _address) public view returns(uint256) {
             return balanceOf(_address);
         }
@@ -234,7 +190,7 @@ contract PreScription is ERC721Connector {
               transferPrs(_from, _to, _tokenId);
             _allTokensOwned[_to].push(_tokenId);
             _allListFromAccount[_to].push(preScriptions[_tokenId]);
-        //     preScription memory prs = preScriptions[_tokenId];
+            preScription memory prs = preScriptions[_tokenId];
 
         //     // 처방 횟수가 1보다 크면 정기처방처방전 리스트에 추가.
         //       if(prs.prescriptionCount > 1){
@@ -268,9 +224,10 @@ contract PreScription is ERC721Connector {
         uint _id = preScriptions.length - 1;
 
         _allListFromAccount[msg.sender].push(_preScription);
-        _blockTotokenid[block.number] = _id;
-        _addToblock[msg.sender].push(block.number);
+        // _blockTotokenid[block.number] = _id;
+        // _addToblock[msg.sender].push(block.number);
         // 제공 가능한 횟수  0 이되면 조제하면 안댐.
+      
         _offerCountOfTokenId[_id] = _preScription.prescriptionCount;
         // .push no longer returns the length but a ref to the added element
         _mint(msg.sender, _id);

@@ -125,11 +125,18 @@ export default function PerInfo(props) {
       .mint(prescription)
       .send({ from: myAccount });
     console.log(" 처방전 발급 됐음");
+    // 일케하면 월렛주소 가져와지나 ?
+    const asd = props.wallet;
+    let index = await contract.methods.totalSupply().call() - 1;
     // 전송 환자 주소 넣어줘야함
-    //  await contract.methods.transferDoctorToPatient(myAccount, "0x4feC718B4fB4931d645f2F3E144560e26c2980a7", 0)
-    //  .send({ from : myAccount})
-    // console.log("처방전 전송 완료")
     
+     await contract.methods.transferDoctorToPatient(myAccount, "환자 지갑주소 ", index)
+     .send({ from : myAccount})
+    console.log("처방전 전송 완료")
+
+    axios
+    .post("https://j7e205.p.ssafy.io/api/prescriptions/regist",{ patientUserSeq : "" , tokenId : index })
+    //then 하면 받아왔을때 ? catch
   }
 
   return (
