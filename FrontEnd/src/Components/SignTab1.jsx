@@ -142,13 +142,13 @@ export default function SignTab1(props) {
           </Typography>
         </AspectRatio>
       </div>
-      <div class="mt-3 d-flex justify-content-center">
+      <div className="mt-3 d-flex justify-content-center">
         <Checkbox size="sm" onChange={()=>{setCheck(!check)}} label="약관에 동의합니다." />
       </div>
-      <div class="mt-3 d-flex justify-content-center">
+      <div className="mt-3 d-flex justify-content-center">
         <button onClick={getAccount} style={greenStyle}>지갑연결</button>
       </div>
-      <div class="mt-3 d-flex justify-content-center">
+      <div className="mt-3 d-flex justify-content-center">
         <button onClick={Next} style={blueStyle}>
           다음 단계
         </button>

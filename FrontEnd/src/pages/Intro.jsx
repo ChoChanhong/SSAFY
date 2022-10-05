@@ -21,7 +21,7 @@ export function Intro() {
     <div id="webapp-containor">
       <div>{isPc ? <BackGround /> : null}</div>
       <div id="main">
-        <div class="mb-5">
+        <div className="mb-5">
           <img style={{ height: 100 }} src={Logo} alt="로고" />
         </div>
         <div id="introTabber" class="mt-5 d-flex justify-content-center">

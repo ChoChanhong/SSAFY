@@ -36,9 +36,9 @@ export default function CliMy() {
 
   return (
     <div style={{ width: 390, textAlign: "center" }}>
-      <div class="mt-3 d-flex justify-content-center">
+      <div className="mt-3 d-flex justify-content-center">
         <img src={Logo} alt="로고" width={50} />
-        <h2 class="fw-bold mt-3">마이페이지</h2>
+        <h2 className="fw-bold mt-3">마이페이지</h2>
       </div>
       <div style={{ fontWeight: "bold", marginTop: 60 }}>
         <span

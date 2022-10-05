@@ -72,7 +72,7 @@ export default function CliInfo(props) {
       <div>
         <div
           id="name"
-          class="mt-3"
+          className="mt-3"
           style={{ display: "flex", justifyContent: "space-around" }}
         >
           <p id="genLog">발급일자</p>

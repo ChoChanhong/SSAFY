@@ -75,7 +75,7 @@ export default function Login() {
             <img style={{ height: 180 }} src={Logo} alt="로고" />
           </Link>
         </div>
-        <p class="fw-bold mt-3">일반사용자 로그인</p>
+        <p className="fw-bold mt-3">일반사용자 로그인</p>
         <TextField
           onChange={(e) => {
             setId(e.target.value);
@@ -91,25 +91,20 @@ export default function Login() {
           placeholder="비밀번호를 입력해주세요."
           onKeyPress={onKeyPress}
         />
-        <div class="mt-5 d-flex justify-content-center">
+        <div className="mt-5 d-flex justify-content-center">
           <button onClick={send} style={greenStyle}>
             로그인
           </button>
         </div>
-        <div class="mt-2 d-flex justify-content-center">
+        <div className="mt-2 d-flex justify-content-center">
           <Link to="/signup">
             <button style={blueStyle}>회원가입</button>
           </Link>
         </div>
         <br />
-        <div class="text-center mt-5">
+        <div className="text-center mt-5">
           <span style={{ marginRight: 30 }}>아이디를 잊었다면?</span>
           <Link to="">아이디 찾기</Link>
-        </div>
-        <div class="mt-5 text-center">
-          <Link to="/doc/login">의사</Link>
-          <span>　/　</span>
-          <Link to="/ph/login">약사</Link>
         </div>
       </div>
     </div>
