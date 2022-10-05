@@ -15,12 +15,10 @@ module.exports = {
     // 싸피 네트워크 연결 
     ssafy : {
       provider: () => new PrivateKeyProvider(privateKey, `http://20.196.209.2:8545`),
-      host: "20.196.209.2",
-      port: 8545,
       network_id: "*",
       
     //얘는 패키지제이슨에 넣어야함
-/*"truffle-privatekey-provider": "^1.5.0", */
+    /*"truffle-privatekey-provider": "^1.5.0", */
     }
   },
 

@@ -4,6 +4,7 @@ pragma solidity ^0.8.0;
 import './ERC165.sol';
 import './interfaces/IERC721.sol';
 import './Libraries/Counters.sol';
+import './Libraries/SafeMath.sol';
 
     /*
     building out the minting function:

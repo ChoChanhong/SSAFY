@@ -31,7 +31,7 @@ export default function CliInfo(props) {
       setWallet(res.data.userWalletAddress)
       props.changeUserSeq(res.data.userSeq)
       props.changeName(name)
-      props.changeWallet(wallet)
+      props.changeWallet(res.data.userWalletAddress)
 
     })
     .catch(function(err){
