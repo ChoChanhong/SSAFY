@@ -10,46 +10,22 @@ import { abi, nftCA } from "../../../web3Config";
 
 export default function RecentPer() {
 
-  const [account, setAccount] = useState("");
   const [hosNamed, setHosName] = useState(""); // 병원이름
-
   const [pubDated, setPubDate] = useState(""); // 처방일
   const [dispensingCount, setDispensingCount] = useState("") // 처방횟수
-  const [list, setList] = useState([]);
-  const [accountList, setAccountList] = useState([]);
+  const [dNamed, setDName] = useState(""); //
 
   const web3 = new Web3(window.ethereum);
   const contract = new web3.eth.Contract(abi, nftCA);
 
-  useEffect(() => {
-    getAccount();
-    // checkList();
-  }, []);
-
-  const getAccount = async () => {
-    try {
-      if (window.ethereum) {
-        const accounts = await window.ethereum.request({
-          method: "eth_requestAccounts",
-        });
-
-        setAccount(accounts[0]);
-
-        const accountList = await contract.methods.getAllListFromAccount('0x8A63F16AcED00b39edb79c9bec9731abC9Bad61b').call();
-        console.log(accountList);
-      } else {
-        alert("Install Metamask!");
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  useEffect(()=>{
+    checkList();
+  },[]);
 
   // 눌렀을때 
   async function checkList(){
     const web3 = new Web3(window.ethereum);
     const contract = new web3.eth.Contract(abi, nftCA);
-
     const account = await web3.eth.requestAccounts();
     const myAccount = account[0];
 
@@ -59,9 +35,12 @@ export default function RecentPer() {
       // 처방전 형식의 배열 리턴
     const list = await contract.methods.getAllListFromAccount(myAccount).call();
   
-    setHosName(list[0].hosname);
+    setHosName(list[0].hosName);
+    setPubDate(list[0].pubDate);
+    setDispensingCount(list[0].dispensingCount);
 
-    console.log(list);
+    console.log(list[0]);
+    
 
   }
 
@@ -103,14 +82,15 @@ export default function RecentPer() {
   };
 
 
-  async function balanceOf(e) {
-    e.preventDefault();
+  async function balanceOf() {
 
     const web3 = new Web3(window.ethereum);
     const contract = new web3.eth.Contract(abi, nftCA);
+    const account = await web3.eth.requestAccounts();
+    const myAccount = account[0];
 
     const bof = await contract.methods
-      .balanceOf("0xC78Bf04D11874042A6fcfC2B8D66b297C24D5c4B")
+      .balanceOf(myAccount)
       .call();
     console.log(bof);
 
@@ -118,26 +98,26 @@ export default function RecentPer() {
     console.log(totalSupply);
 
     const toobi = await contract.methods
-      .tokenOfOwnerByIndex("0xC78Bf04D11874042A6fcfC2B8D66b297C24D5c4B", 0)
+      .tokenOfOwnerByIndex(myAccount, 0)
       .call();
     console.log(toobi);
 
   }
 
-  async function alltokenOfOwner(e) {
-    e.preventDefault();
+  async function alltokenOfOwner() {
 
     const web3 = new Web3(window.ethereum);
     const contract = new web3.eth.Contract(abi, nftCA);
+    const account = await web3.eth.requestAccounts();
+    const myAccount = account[0];
 
-    const alltoOwn = await contract.methods.alltokenOfOwner('0x8A63F16AcED00b39edb79c9bec9731abC9Bad61b')
+    const alltoOwn = await contract.methods.alltokenOfOwner(myAccount)
                                             .call();
     console.log(alltoOwn.length);
     console.log(alltoOwn);
   }
 
-  async function getBalanceOf(e) {
-    e.preventDefault();
+  async function getBalanceOf() {
 
     const web3 = new Web3(window.ethereum);
     const contract = new web3.eth.Contract(abi, nftCA);
@@ -153,7 +133,6 @@ export default function RecentPer() {
     <div>
       <div className="myBox">
         <div style={{ margin: 20 }}>
-        <input readOnly value={ account ? account : '...' } />
           <div>
             <span>병원명: {hosNamed}</span>
           </div>
@@ -161,10 +140,10 @@ export default function RecentPer() {
             <span>처방일: {pubDated}</span>            
           </div>
           <div>
-            <span>처방 횟수: {pubDated}</span>            
+            <span>처방 횟수: {dispensingCount}</span>            
           </div>
         </div>
-        <div style={{ border: "solid" }}>처방내역</div>
+        <div style={{ border: "solid" }}>처방내용</div>
         <div style={{ marginTop: 30 }}>
           <button id="bluebutton" style={{ height: "100" }}>
             조제접수
