@@ -56,7 +56,7 @@ export default function PhLoginForm() {
           <FormLabel style={{ marginBottom: 5, fontWeight: "bold" }}>
             아이디
           </FormLabel>
-          <TextField      
+          <TextField
             className="a phlogInput"
             placeholder="아이디를 입력해주세요."
             onChange={IdChange}
