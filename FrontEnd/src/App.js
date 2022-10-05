@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import "./App.css";
 //공통
 import Main from "./pages/Main";
@@ -28,32 +29,34 @@ import { ServiceInfo as PhInfo } from "./pages/Ph/ServiceInfo";
 
 function App() {
   return (
-    <Routes>
-      {/*공통*/}
-      <Route path="/" element={<Main />} />
-      <Route path="/serviceinfo" element={<ServiceInfo />} />
-      <Route path="/*" element={<NotFoundPage />} />
-      {/*환자*/}
-      <Route path="/my" element={<Mypage />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/perscription" element={<Perscription />} />
-      <Route path="/perdetail" element={<Perdetail />} />
-      {/*의사*/}
-      <Route path="/doc" element={<DocLogin />} />
-      <Route path="/doc/signup" element={<DocSignup />} />
-      <Route path="/doc/log" element={<DocLog />} />
-      <Route path="/doc/generate" element={<Generate />} />
-      <Route path="/doc/my" element={<DocMypage />} />
-      <Route path="/doc/serviceinfo" element={<DocInfo />} />
-      {/*약사*/}
-      <Route path="/ph" element={<PhLogin />} />
-      <Route path="/ph/signup" element={<PhSignup />} />
-      <Route path="/ph/log" element={<PhLog />} />
-      <Route path="/ph/order" element={<Order />} />
-      <Route path="/ph/my" element={<PhMypage />} />
-      <Route path="/ph/serviceinfo" element={<PhInfo />} />
-    </Routes>
+    <BrowserRouter>
+      <Routes>
+        {/*공통*/}
+        <Route path="/" element={<Main />} />
+        <Route path="/serviceinfo" element={<ServiceInfo />} />
+        <Route path="/*" element={<NotFoundPage />} />
+        {/*환자*/}
+        <Route path="/my" element={<Mypage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/perscription" element={<Perscription />} />
+        <Route path="/perdetail" element={<Perdetail />} />
+        {/*의사*/}
+        <Route path="/doc" element={<DocLogin />} />
+        <Route path="/doc/signup" element={<DocSignup />} />
+        <Route path="/doc/log" element={<DocLog />} />
+        <Route path="/doc/generate" element={<Generate />} />
+        <Route path="/doc/my" element={<DocMypage />} />
+        <Route path="/doc/serviceinfo" element={<DocInfo />} />
+        {/*약사*/}
+        <Route path="/ph" element={<PhLogin />} />
+        <Route path="/ph/signup" element={<PhSignup />} />
+        <Route path="/ph/log" element={<PhLog />} />
+        <Route path="/ph/order" element={<Order />} />
+        <Route path="/ph/my" element={<PhMypage />} />
+        <Route path="/ph/serviceinfo" element={<PhInfo />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
