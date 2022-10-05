@@ -34,7 +34,13 @@ export default function PhLoginForm() {
         localStorage.setItem("login-token", res.data.accessToken);
         navigate("my");
       })
-      .catch(function (err) {});
+      .catch(function (err) {
+        if (err.response.status === 401 || err.response.status === 404) {
+          alert("아이디 혹은 비밀번호가 틀렸습니다.");
+        } else {
+          alert(err);
+        }
+      });
   }
 
   return (
@@ -50,7 +56,13 @@ export default function PhLoginForm() {
           <FormLabel style={{ marginBottom: 5, fontWeight: "bold" }}>
             아이디
           </FormLabel>
-          <TextField
+          <TextField      .catch(function (err) {
+        if (err.response.status === 401 || err.response.status === 404) {
+          alert("아이디 혹은 비밀번호가 틀렸습니다.");
+        } else {
+          alert(err);
+        }
+      });
             className="a phlogInput"
             placeholder="아이디를 입력해주세요."
             onChange={IdChange}
