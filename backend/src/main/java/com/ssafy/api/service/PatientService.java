@@ -20,6 +20,8 @@ public interface PatientService {
     // RRN 중복 검사
     boolean existsByPatientRRN(String patientRRN);
 
+    boolean existsByPatientUserSeq(long patientUserSeq);
+
     PatientInfo updatePatient(long userSeq, CreatePatientPostReq updatePatientPostReq);
 
 	void deletePatient(long userSeq);

@@ -37,7 +37,7 @@ public class Prescription {
     @Column(name = "pharmUserSeq", nullable = true)
     private long pharmUserSeq;
 
-    @Column(name = "tokenId", nullable = false)
+    @Column(name = "tokenId", unique = true, nullable = false)
     private long tokenId;
 
     @Column(name = "completion", nullable = false)
