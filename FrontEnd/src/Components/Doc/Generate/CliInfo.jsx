@@ -9,7 +9,7 @@ export default function CliInfo(props) {
   const [email, setEmail] = useState(''); //환자주소
   const [wallet, setWallet] = useState(''); //환자주소
   
-  const URL = "https://j7e205.p.ssafy.io/api/hospitals/search";
+  const URL = "https://j7e205.p.ssafy.io/api/search";
   const token = localStorage.getItem("login-token")
   
   function numberCheck(e) {

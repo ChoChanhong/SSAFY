@@ -56,40 +56,8 @@ export default function ReceptionOrder() {
             </div>}
             { reserve ? 
                 <div>
-                    <div>원하시는 수령시간을 선택해 주세요 </div>
-                                       
+                    <div>조제를 신청하시겠습니까?</div> 
                     {/* 예약창 확인을 누르면 예약정보 전송*/}
-                    <div>
-                        <select>
-                            <option selected>오전</option>
-                            <option>오후</option>
-                        </select>
-                        <select>
-                            <option selected>00</option>
-                            <option>01</option>
-                            <option>02</option>
-                            <option>03</option>
-                            <option>04</option>
-                            <option>05</option>
-                            <option>06</option>
-                            <option>07</option>
-                            <option>08</option>
-                            <option>09</option>
-                            <option>10</option>
-                            <option>11</option>
-                            <option>12</option>
-                        </select>
-                        시
-                        <select>
-                            <option selected>00</option>
-                            <option>10</option>
-                            <option>20</option>
-                            <option>30</option>
-                            <option>40</option>
-                            <option>50</option>
-                        </select>
-                        분
-                    </div>
                     <button>확인</button>
                     <button onClick={()=>setReserve(false)}>취소</button>
                 </div>
