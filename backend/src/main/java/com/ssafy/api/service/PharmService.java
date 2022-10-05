@@ -11,9 +11,14 @@ import java.util.List;
 public interface PharmService {
     PharmInfo createPharm(CreatePharmPostReq createPharmPostReq);
 
+    Pharm getPharm(long pharmUserSeq);
+
+    // CRN 중복 검사
+    boolean existsByPharmCRN(String pharmCRN);
+
     PharmInfo getPharmInfo(long userSeq);
 
-// 회원 정보 수정
+    // 회원 정보 수정
     PharmInfo updatePharm(long userSeq, CreatePharmPostReq updatePharmPostReq);
 
     void deletePharm(long userSeq);

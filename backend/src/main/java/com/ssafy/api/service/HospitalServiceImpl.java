@@ -2,9 +2,7 @@ package com.ssafy.api.service;
 
 import com.ssafy.api.request.CreateHospitalPostReq;
 import com.ssafy.common.customObject.HospitalInfo;
-import com.ssafy.common.customObject.PatientInfo;
 import com.ssafy.db.entity.Hospital;
-import com.ssafy.db.entity.Patient;
 import com.ssafy.db.entity.User;
 import com.ssafy.db.repository.HospitalRepository;
 import com.ssafy.db.repository.UserRepository;
@@ -50,11 +48,11 @@ public class HospitalServiceImpl implements HospitalService {
 		hospital.setHospitalCRN(createHospitalPostReq.getHospitalCRN());
 
 
-		long hospitalSeq = hospitalRepository.save(hospital).getHospitalSeq();
+		long hospitalUserSeq = hospitalRepository.save(hospital).getHospitalUserSeq();
 
 		// hospitalInfo
 		User inputU = userRepository.findUserByUserSeq(userSeq).get();
-		Hospital inputH = hospitalRepository.findHospitalByHospitalUserSeq(userSeq).get();
+		Hospital inputH = hospitalRepository.findHospitalByHospitalUserSeq(hospitalUserSeq).get();
 
 		HospitalInfo hospitalInfo = new HospitalInfo(
 				inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserName(),
@@ -80,59 +78,45 @@ public class HospitalServiceImpl implements HospitalService {
 
 		return  hospitalInfo;
 	}
-//
-//	// 아이디 중복 검사
-//	@Override
-//	public boolean checkIdDuplicated(String hospitalId) {
-//		if (hospitalRepository.existsByHospitalId(hospitalId)) {
-//			return true; // 존재
-//		}
-//		return false; // 존재X
-//	}
-//
-//	// CRN 중복 검사
-//	@Override
-//	public boolean checkCRNDuplicated(String hospitalCRN) {
-//		if (hospitalRepository.existsByHospitalCRN(hospitalCRN)) {
-//			return true; // 존재
-//		}
-//		return false;
-//	}
 
-//	// hospitalId를 통해 디비에서 약국 정보 조회
-//	@Override
-//	public Hospital getHospitalByHospitalId(String hospitalId) {
-//		Hospital hospital = hospitalRepository.findByHospitalId(hospitalId).get();
-//
-//		return hospital;
-//	}
-//
+	@Override
+	public Hospital getHospital(long hospitalUserSeq) {
+		return hospitalRepository.findHospitalByHospitalUserSeq(hospitalUserSeq).get();
+	}
+
+
+	// CRN 중복 검사
+	@Override
+	public boolean existsByHospitalCRN(String hospitalCRN) {
+		if (hospitalRepository.existsByHospitalCRN(hospitalCRN)) {
+			return true; // 존재
+		}
+		return false;
+	}
+
 // 회원 정보 수정
 	@Override
 	public HospitalInfo updateHospital(long userSeq, CreateHospitalPostReq updateHospitalPostReq) {
 		Optional<User> updatedUser = userRepository.findUserByUserSeq(userSeq);
 		Optional<Hospital> updatedHospital = hospitalRepository.findHospitalByHospitalUserSeq(userSeq);
 
-//		updatedUser.get().setUserId(updateHospitalPostReq.getHospitalId());
+		updatedUser.get().setUserId(updateHospitalPostReq.getHospitalId());
 		updatedUser.get().setUserPassword(passwordEncoder.encode(updateHospitalPostReq.getHospitalPassword())); // 보안을 위해서 유저 패스워드 암호화 하여 디비에 저장
 		updatedUser.get().setUserName(updateHospitalPostReq.getHospitalName());
 		updatedUser.get().setUserEmail(updateHospitalPostReq.getHospitalEmail());
-//		updatedUser.get().setUserIdx(1);
 
 		long updatedUserSeq = userRepository.save(updatedUser.get()).getUserSeq();
 
-//		updatedHospital.get().setHospitalUserSeq(userSeq);
 		updatedHospital.get().setHospitalLicense(updateHospitalPostReq.getHospitalLicense());
 		updatedHospital.get().setHospitalAddr(updateHospitalPostReq.getHospitalAddr());
 		updatedHospital.get().setHospitalTel(updateHospitalPostReq.getHospitalTel());
 		updatedHospital.get().setHospitalCRN(updateHospitalPostReq.getHospitalCRN());
 
-		long updatedHospitalSeq = hospitalRepository.save(updatedHospital.get()).getHospitalSeq();
-//		long updatedPatientSeq = patientRepository.save(updatedPatient.get()).getPatientSeq();
+		long updatedHospitalUserSeq = hospitalRepository.save(updatedHospital.get()).getHospitalUserSeq();
 
 		// hospitalInfo
-		User inputU = userRepository.findUserByUserSeq(userSeq).get();
-		Hospital inputH = hospitalRepository.findHospitalByHospitalUserSeq(userSeq).get();
+		User inputU = userRepository.findUserByUserSeq(updatedUserSeq).get();
+		Hospital inputH = hospitalRepository.findHospitalByHospitalUserSeq(updatedHospitalUserSeq).get();
 
 		HospitalInfo hospitalInfo = new HospitalInfo(
 				inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserName(),
@@ -153,10 +137,6 @@ public class HospitalServiceImpl implements HospitalService {
 	// 아이디로 seq 검색
 	@Override
 	public long findSeqbyId(String hospitalId) {
-
-		long userSeq = userRepository.findByUserId(hospitalId).get().getUserSeq();
-
-
-		return userSeq;
+		return userRepository.findByUserId(hospitalId).get().getUserSeq();
 	}
 }
