@@ -70,7 +70,7 @@ export default function RecentPer() {
     setHowToTake(list[currentID].howtoTake);
 
 
-    console.log(list[0]);
+    console.log(list);
     
   }
 
@@ -159,6 +159,17 @@ export default function RecentPer() {
     console.log(getB);
   }
 
+  async function getRegularPreScription(){
+    const web3 = new Web3(window.ethereum);
+    const contract = new web3.eth.Contract(abi, nftCA);
+    const account = await web3.eth.requestAccounts();
+    const myAccount = account[0];
+
+    const regular = await contract.methods.getRegularPreScription(myAccount).call();
+
+    console.log(regular);
+  }
+
   return (
     <div>
       <div className="myBox">
@@ -200,6 +211,7 @@ export default function RecentPer() {
           <button onClick={allTokenCheck} > allTokenCheck </button>
           <button onClick={alltokenOfOwner} > alltokenOfOwner </button>
           <button onClick={getBalanceOf} > getBalanceOf </button>
+          <button onClick={getRegularPreScription} > getRegularPreScription </button>
     </div>
   );
 }
