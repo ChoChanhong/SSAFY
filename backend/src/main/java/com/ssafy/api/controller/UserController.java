@@ -1,24 +1,21 @@
 package com.ssafy.api.controller;
 
-
-//import com.ssafy.api.request.CreateUserWalletPostReq;
+import com.ssafy.api.request.SearchPatientPostReq;
+import com.ssafy.api.service.PatientService;
+import com.ssafy.common.customObject.PatientInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import com.ssafy.api.service.UserService;
-import com.ssafy.common.auth.SsafyUserDetails;
-import com.ssafy.db.entity.User;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import springfox.documentation.annotations.ApiIgnore;
 
 /**
  * 유저 관련 API 요청 처리를 위한 컨트롤러 정의.
@@ -28,43 +25,33 @@ import springfox.documentation.annotations.ApiIgnore;
 @RequestMapping("/")
 public class UserController {
 
-	@Autowired  // 의존성 주입
+	// 의존성 주입
+	@Autowired
 	UserService userService;
-
+	@Autowired
+	PatientService patientService;
 	@Autowired
 	PasswordEncoder passwordEncoder;
 
 	/**
-	 * 회원 지갑 등록
+	 *  이름과 주민등록번호를 통해 환자 검색
 	 */
+	@PostMapping("/search")
+	@ApiOperation(value = "환자 검색", notes = "로그인한 병원의 정보를 응답한다.")
+	@ApiResponses({
+			@ApiResponse(code = 200, message = "성공"),
+			@ApiResponse(code = 404, message = "환자 없음"),
+			@ApiResponse(code = 500, message = "서버 오류")
+	})
+	public ResponseEntity<?> searchPatient(
+			@RequestBody @ApiParam(value="병원 정보 수정", required = true) SearchPatientPostReq searchPatientPostReq) {
 
-//	@PutMapping(value="createWallet")
-//	@ApiOperation(value = "환자 지갑 등록", notes = "로그인한 환자의 지갑을 동록한다.")
-//	@ApiResponses({
-//			@ApiResponse(code = 200, message = "성공"),
-//			@ApiResponse(code = 400, message = "잘못된 요청"),
-//			@ApiResponse(code = 401, message = "인증 실패"),
-//			@ApiResponse(code = 403, message = "토큰 없음"),
-//			@ApiResponse(code = 404, message = "바디 정보 오류"),
-//			@ApiResponse(code = 405, message = "무결성 오류"),
-//			@ApiResponse(code = 500, message = "서버 오류")
-//	})
-//	public ResponseEntity<?> createWallet(@ApiIgnore Authentication authentication,
-//										  @RequestBody @ApiParam(value="환자 지갑 등록", required = true) CreateUserWalletPostReq createUserWalletPostReq) {
-//
-//		if (authentication == null) {
-//			return new ResponseEntity<>("토큰이 없습니다", HttpStatus.valueOf(403));
-//		}
-//		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
-//		String userId = userDetails.getUsername();
-//		long userSeq = userDetails.getUser().getUserSeq();
-//
-//		User user = userService.createWallet(userSeq, createUserWalletPostReq.getUserWalletAddr());
-//
-//		if ( user != null ) {
-//			return new ResponseEntity<>(user, HttpStatus.valueOf(200));
-//		}
-//		return new ResponseEntity<>("잘못된 요청입니다", HttpStatus.valueOf(400));
-//	}
+		PatientInfo patientInfo = patientService.searchPatient(searchPatientPostReq.getPatientName(), searchPatientPostReq.getPatientRRN());
 
+		if (patientInfo != null) {
+			return new ResponseEntity<PatientInfo>(patientInfo, HttpStatus.valueOf(200));
+		}
+
+		return new ResponseEntity<>("환자를 검색할 수 없습니다.", HttpStatus.valueOf(404));
+	}
 }
