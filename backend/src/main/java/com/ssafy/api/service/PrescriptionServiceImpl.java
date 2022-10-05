@@ -67,8 +67,8 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 			HospitalInfo hospitalInfo = new HospitalInfo(
 					inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserName(),
 					inputU.getUserEmail(), inputU.getUserIdx(), inputU.getUserWalletAddress(), inputU.getREG_DTM(), inputU.getMOD_DTM(),
-					inputH.getHospitalSeq(), inputH.getHospitalUserSeq(), inputH.getHospitalLicense(), inputH.getHospitalAddr(),
-					inputH.getHospitalTel(), inputH.getHospitalCRN(), inputH.getREG_DTM(), inputH.getMOD_DTM());
+					inputH.getHospitalSeq(), inputH.getHospitalUserSeq(), inputH.getHospitalDoctor(), inputH.getHospitalLicense(), inputH.getHospitalCode(),
+					inputH.getHospitalAddr(), inputH.getHospitalTel(), inputH.getHospitalCRN(), inputH.getREG_DTM(), inputH.getMOD_DTM());
 
 
 			// pharmInfo
@@ -84,8 +84,8 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 			PharmInfo pharmInfo = new PharmInfo(
 					inputMU.getUserSeq(), inputMU.getUserId(), inputMU.getUserPassword(), inputMU.getUserName(),
 					inputMU.getUserEmail(), inputMU.getUserIdx(), inputMU.getUserWalletAddress(), inputMU.getREG_DTM(), inputU.getMOD_DTM(),
-					inputM.getPharmSeq(), inputM.getPharmUserSeq(), inputM.getPharmLicense(), inputM.getPharmAddr(),
-					inputM.getPharmTel(), inputM.getPharmCRN(), inputM.getREG_DTM(), inputM.getMOD_DTM());
+					inputM.getPharmSeq(), inputM.getPharmUserSeq(), inputM.getPharmPharmacist(),inputM.getPharmLicense(), inputM.getPharmCode(),
+					inputM.getPharmAddr(), inputM.getPharmTel(), inputM.getPharmCRN(), inputM.getREG_DTM(), inputM.getMOD_DTM());
 
 			PrescriptionInfo prescriptionInfo = new PrescriptionInfo(patientInfo, hospitalInfo, pharmInfo, prescription);
 

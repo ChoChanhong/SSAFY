@@ -4,7 +4,6 @@ import { BrowserRouter } from "react-router-dom";
 import "./App.css";
 //공통
 import Main from "./pages/Main";
-import { Intro as ServiceInfo } from "./pages/Intro";
 import NotFoundPage from "./pages/NotFoundPage";
 //환자
 import Login from "./pages/Cli/Login";
@@ -12,6 +11,8 @@ import Mypage from "./pages/Cli/Mypage";
 import Perdetail from "./pages/Cli/Perdetail";
 import Perscription from "./pages/Cli/Perscription";
 import Signup from "./pages/Cli/Signup";
+import { Intro as ServiceInfo } from "./pages/Cli/Intro";
+
 //의사
 import { Login as DocLogin } from "./pages/Doc/Login";
 import { Signup as DocSignup } from "./pages/Doc/Signup";
@@ -33,7 +34,6 @@ function App() {
       <Routes>
         {/*공통*/}
         <Route path="/" element={<Main />} />
-        <Route path="/serviceinfo" element={<ServiceInfo />} />
         <Route path="/*" element={<NotFoundPage />} />
         {/*환자*/}
         <Route path="/my" element={<Mypage />} />
@@ -41,6 +41,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/perscription" element={<Perscription />} />
         <Route path="/perdetail" element={<Perdetail />} />
+        <Route path="/serviceinfo" element={<ServiceInfo />} />
         {/*의사*/}
         <Route path="/doc" element={<DocLogin />} />
         <Route path="/doc/signup" element={<DocSignup />} />

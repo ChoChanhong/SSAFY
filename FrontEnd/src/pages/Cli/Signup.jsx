@@ -1,8 +1,8 @@
 import { React, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import BackGround from "../../Components/BackGround";
-import SignTab1 from "../../Components/SignTab1";
-import SignTab2 from "../../Components/SignTab2";
+import SignTab1 from "../../Components/Cli/Signup/SignTab1";
+import SignTab2 from "../../Components/Cli/Signup/SignTab2";
 import Logo from "../../assets/images/002.png";
 import "./Signup.css";
 
@@ -21,11 +21,11 @@ export default function Signup() {
     <div id="webapp-containor">
       <div>{isPc ? <BackGround /> : null}</div>
       <div id="login">
-        <div class="mt-3 d-flex justify-content-center">
+        <div className="mt-3 d-flex justify-content-center">
           <img src={Logo} alt="로고" width={50} />
-          <h2 class="fw-bold mt-3">회원가입</h2>
+          <h2 className="fw-bold mt-3">회원가입</h2>
         </div>
-        <div id="clisignuptabber" class="mt-5 d-flex justify-content-center">
+        <div id="clisignuptabber" className="mt-5 d-flex justify-content-center">
           <div
             className={step === 1 ? "clisignuptabSelected" : "clisignuptab"}
             style={{ marginRight: 30 }}

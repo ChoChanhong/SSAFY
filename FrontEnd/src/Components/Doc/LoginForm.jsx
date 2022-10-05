@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { TextField, FormLabel } from "@mui/joy";
@@ -34,11 +34,18 @@ export default function LoginForm() {
         localStorage.setItem("login-token", res.data.accessToken);
         navigate("my");
       })
-      .catch(function (err) {});
+      .catch(function (err) {
+        if (err.response.status === 401 || err.response.status === 404) {
+          alert("아이디 혹은 비밀번호가 틀렸습니다.");
+        } else {
+          alert(err);
+        }
+      });
   }
+
   return (
     <div id="loginbox">
-      <div class="login">
+      <div className="login">
         <h1 className="docloginTitle" style={{ Color: "#5FD068" }}>
           병원로그인
         </h1>
@@ -50,8 +57,7 @@ export default function LoginForm() {
             아이디
           </FormLabel>
           <TextField
-            class="a"
-            className="logInput"
+            className="a logInput"
             placeholder="아이디를 입력해주세요."
             onChange={IdChange}
           />
@@ -61,7 +67,7 @@ export default function LoginForm() {
             비밀번호
           </FormLabel>
           <TextField
-            class="a"
+            className="a"
             type="password"
             placeholder="비밀번호를 입력해주세요."
             onChange={PasswordChange}
@@ -71,13 +77,13 @@ export default function LoginForm() {
         <button onClick={Send} id="docloginbutton" style={{ height: 50 }}>
           로그인
         </button>
-        <Link to="/" class="link">
+        <Link to="/" className="link">
           아이디/비밀번호 찾기
         </Link>
       </div>
-      <div class="info">
+      <div className="info">
         <img className="logoImg" src={IMG} alt="logo" />
-        <div class="buttonbox">
+        <div className="buttonbox">
           <Link to="/doc/signup">
             <button className="linkbutton">회원가입</button>
           </Link>

@@ -1,12 +1,12 @@
 import { React, useState } from "react";
 import Logo from "../../../assets/images/002.png";
-import ReceptionConfirm from './ReceptionConfirm';
-import ReceptionOrder from './ReceptionOrder';
+import ReceptionConfirm from "./ReceptionConfirm";
+import ReceptionOrder from "./ReceptionOrder";
 import "./Reception.css";
 
 export default function Reception() {
   const [tab, setTab] = useState("0");
-  const tabs = [<ReceptionOrder/>,<ReceptionConfirm/>];
+  const tabs = [<ReceptionOrder />, <ReceptionConfirm />];
   function move(e) {
     console.log(e.target.id);
     setTab(e.target.id);
@@ -14,9 +14,9 @@ export default function Reception() {
 
   return (
     <div style={{ width: 390, textAlign: "center" }}>
-      <div class="mt-3 d-flex justify-content-center">
+      <div className="mt-3 d-flex justify-content-center">
         <img src={Logo} alt="로고" width={50} />
-        <h2 class="fw-bold mt-3">조제 접수</h2>
+        <h2 className="fw-bold mt-3">조제 접수</h2>
       </div>
       <div
         id="receptiontabbar"

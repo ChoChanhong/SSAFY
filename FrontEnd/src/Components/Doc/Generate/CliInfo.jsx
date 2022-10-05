@@ -29,7 +29,9 @@ export default function CliInfo(props) {
       console.log(res.data)
       setEmail(res.data.userEmail)
       setWallet(res.data.userWalletAddress)
+      props.changeUserSeq(res.data.userSeq)
       props.changeName(name)
+      props.changeWallet(wallet)
 
     })
     .catch(function(err){
@@ -72,7 +74,7 @@ export default function CliInfo(props) {
       <div>
         <div
           id="name"
-          class="mt-3"
+          className="mt-3"
           style={{ display: "flex", justifyContent: "space-around" }}
         >
           <p id="genLog">발급일자</p>

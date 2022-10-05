@@ -29,7 +29,9 @@ public class PharmInfo {
 
     long pharmSeq;
     long pharmUserSeq;
+    String pharmPharmacist;
     String pharmLicense;
+    String pharmCode;
     String pharmAddr;
     String pharmTel;
     String pharmCRN;
