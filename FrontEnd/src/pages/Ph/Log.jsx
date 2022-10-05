@@ -1,7 +1,7 @@
 import React from "react";
 import PhNavbar from "../../Components/PhNavbar";
-import PhLogFind from "../../Components/PhLogFind";
-import PhLog from "../../Components/PhLog";
+import PhLogFind from "../../Components/PhLog/PhLogFind";
+import PhLog from "../../Components/PhLog/PhLog";
 
 export function Log() {
   return (
