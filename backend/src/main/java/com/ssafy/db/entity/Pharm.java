@@ -32,8 +32,14 @@ public class Pharm {
     @Column(name = "userSeq", nullable = false)
     private long pharmUserSeq;
 
+    @Column(name = "pharmacist", nullable = false)
+    private String pharmPharmacist;
+
     @Column(name = "license", nullable = false)
     private String pharmLicense;
+
+    @Column(name = "code", nullable = false) // 요양 기관 코드
+    private String pharmCode;
 
     @Column(name = "addr", nullable = false)
     private String pharmAddr;

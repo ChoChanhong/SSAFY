@@ -30,7 +30,9 @@ public class HospitalInfo {
 
     long hospitalSeq;
     long hospitalUserSeq;
+    String hospitalDoctor;
     String hospitalLicense;
+    String hospitalCode;
     String hospitalAddr;
     String hospitalTel;
     String hospitalCRN;

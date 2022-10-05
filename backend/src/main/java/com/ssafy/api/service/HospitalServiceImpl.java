@@ -42,7 +42,9 @@ public class HospitalServiceImpl implements HospitalService {
 		long userSeq = userRepository.save(user).getUserSeq();
 
 		hospital.setHospitalUserSeq(userSeq);
+		hospital.setHospitalDoctor(createHospitalPostReq.getHospitalDoctor());
 		hospital.setHospitalLicense(createHospitalPostReq.getHospitalLicense());
+		hospital.setHospitalCode(createHospitalPostReq.getHospitalCode());
 		hospital.setHospitalAddr(createHospitalPostReq.getHospitalAddr());
 		hospital.setHospitalTel(createHospitalPostReq.getHospitalTel());
 		hospital.setHospitalCRN(createHospitalPostReq.getHospitalCRN());
@@ -57,8 +59,8 @@ public class HospitalServiceImpl implements HospitalService {
 		HospitalInfo hospitalInfo = new HospitalInfo(
 				inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserName(),
 				inputU.getUserEmail(), inputU.getUserIdx(), inputU.getUserWalletAddress(), inputU.getREG_DTM(), inputU.getMOD_DTM(),
-				inputH.getHospitalSeq(), inputH.getHospitalUserSeq(), inputH.getHospitalLicense(), inputH.getHospitalAddr(),
-				inputH.getHospitalTel(), inputH.getHospitalCRN(), inputH.getREG_DTM(), inputH.getMOD_DTM());
+				inputH.getHospitalSeq(), inputH.getHospitalUserSeq(), inputH.getHospitalDoctor(), inputH.getHospitalLicense(), inputH.getHospitalCode(),
+				inputH.getHospitalAddr(), inputH.getHospitalTel(), inputH.getHospitalCRN(), inputH.getREG_DTM(), inputH.getMOD_DTM());
 
 		return hospitalInfo;
 	}
@@ -73,8 +75,8 @@ public class HospitalServiceImpl implements HospitalService {
 		HospitalInfo hospitalInfo = new HospitalInfo(
 				inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserName(),
 				inputU.getUserEmail(), inputU.getUserIdx(), inputU.getUserWalletAddress(), inputU.getREG_DTM(), inputU.getMOD_DTM(),
-				inputH.getHospitalSeq(), inputH.getHospitalUserSeq(), inputH.getHospitalLicense(), inputH.getHospitalAddr(),
-				inputH.getHospitalTel(), inputH.getHospitalCRN(), inputH.getREG_DTM(), inputH.getMOD_DTM());
+				inputH.getHospitalSeq(), inputH.getHospitalUserSeq(), inputH.getHospitalDoctor(), inputH.getHospitalLicense(), inputH.getHospitalCode(),
+				inputH.getHospitalAddr(), inputH.getHospitalTel(), inputH.getHospitalCRN(), inputH.getREG_DTM(), inputH.getMOD_DTM());
 
 		return  hospitalInfo;
 	}
@@ -107,7 +109,9 @@ public class HospitalServiceImpl implements HospitalService {
 
 		long updatedUserSeq = userRepository.save(updatedUser.get()).getUserSeq();
 
+		updatedHospital.get().setHospitalDoctor(updateHospitalPostReq.getHospitalDoctor());
 		updatedHospital.get().setHospitalLicense(updateHospitalPostReq.getHospitalLicense());
+		updatedHospital.get().setHospitalCode(updateHospitalPostReq.getHospitalCode());
 		updatedHospital.get().setHospitalAddr(updateHospitalPostReq.getHospitalAddr());
 		updatedHospital.get().setHospitalTel(updateHospitalPostReq.getHospitalTel());
 		updatedHospital.get().setHospitalCRN(updateHospitalPostReq.getHospitalCRN());
@@ -121,8 +125,8 @@ public class HospitalServiceImpl implements HospitalService {
 		HospitalInfo hospitalInfo = new HospitalInfo(
 				inputU.getUserSeq(), inputU.getUserId(), inputU.getUserPassword(), inputU.getUserName(),
 				inputU.getUserEmail(), inputU.getUserIdx(), inputU.getUserWalletAddress(), inputU.getREG_DTM(), inputU.getMOD_DTM(),
-				inputH.getHospitalSeq(), inputH.getHospitalUserSeq(), inputH.getHospitalLicense(), inputH.getHospitalAddr(),
-				inputH.getHospitalTel(), inputH.getHospitalCRN(), inputH.getREG_DTM(), inputH.getMOD_DTM());
+				inputH.getHospitalSeq(), inputH.getHospitalUserSeq(), inputH.getHospitalDoctor(), inputH.getHospitalLicense(), inputH.getHospitalCode(),
+				inputH.getHospitalAddr(), inputH.getHospitalTel(), inputH.getHospitalCRN(), inputH.getREG_DTM(), inputH.getMOD_DTM());
 
 		return hospitalInfo;
 	}
