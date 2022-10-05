@@ -568,6 +568,93 @@ const nftAbi =[
         "type": "address"
       }
     ],
+    "name": "getRegularPreScription",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "userName",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "hosName",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "pharName",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "dCode",
+            "type": "string"
+          },
+          {
+            "internalType": "string[]",
+            "name": "dName",
+            "type": "string[]"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "dosage",
+            "type": "uint256[]"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "doseNum",
+            "type": "uint256[]"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "dosePeriod",
+            "type": "uint256[]"
+          },
+          {
+            "internalType": "uint256",
+            "name": "dispensingCount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "prescriptionCount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string[]",
+            "name": "howtoTake",
+            "type": "string[]"
+          },
+          {
+            "internalType": "uint256",
+            "name": "pubDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "prepDate",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct PreScription.preScription[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_address",
+        "type": "address"
+      }
+    ],
     "name": "setPatientAuth",
     "outputs": [],
     "stateMutability": "nonpayable",
@@ -598,6 +685,26 @@ const nftAbi =[
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_address",
+        "type": "address"
+      }
+    ],
+    "name": "getAuthOfAccount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [
@@ -886,7 +993,7 @@ const nftAbi =[
 
 
 
-    export const nftCA = '0x0c324fD5727f71536f095a5f0A78fC72568865D2';
+    export const nftCA = '0x19BcfD0281CEDe0908CF435DFC4038e8f15f28Dd';
 
     // export const web3 = new Web3(window.ethereum);
     export const abi = nftAbi;
