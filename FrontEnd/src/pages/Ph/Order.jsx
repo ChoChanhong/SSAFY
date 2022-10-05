@@ -1,7 +1,7 @@
 import { React, useState } from "react";
-import PerDetail from "../../Components/Doc/Generate/PerDetail";
 import PhNavbar from "../../Components/PhNavbar";
 import OrderInfo from "../../Components/PhOrder/OrderInfo";
+import PhDetail from "../../Components/PhOrder/PhDetail";
 import OrderList from "../../Components/PhOrder/OrderList";
 
 export default function Order() {
@@ -21,7 +21,7 @@ export default function Order() {
         }}
       >
         <OrderList />
-        <PerDetail />
+        <PhDetail />
         <OrderInfo />
       </div>
     </div>
