@@ -124,7 +124,7 @@ export default function CliInfo(props) {
           <p id="genLog">발급일자</p>
           <p id="genLog">질병분류코드</p>
         </div>
-        <div id="line">{list}</div>
+        <div id="line"></div>
       </div>
     </div>
   );

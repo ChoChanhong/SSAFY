@@ -1,79 +1,61 @@
 import { React, useEffect, useState } from "react";
 import PhNavbar from "../../Components/PhNavbar";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import setAuthorizationToken from "../../utils/AuthorizationToken";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMortarPestle,
   faPrescriptionBottleMedical,
 } from "@fortawesome/free-solid-svg-icons";
 
+import "./MyPage.css";
+
 export function Mypage() {
-  const [account, setAccount] = useState("");
+  const navigate = useNavigate();
+  const URL = "https://j7e205.p.ssafy.io/api/pharms/me";
+  const localStorage = window.localStorage;
+  const [info, setInfo] = useState("");
 
-  const getAccount = async () => {
-    try {
-      if (window.ethereum) {
-        const accounts = await window.ethereum.request({
-          method: "eth_requestAccounts",
-        });
+  useEffect(() => {
+    const token = localStorage.getItem("login-token");
+    setAuthorizationToken(token);
+    axios
+      .get(URL)
+      .then(function (res) {
+        console.log(res.data);
+        setInfo(res.data);
+      })
+      .catch(function (err) {
+        alert("올바른 접근 방식이 아닙니다.");
+        navigate("/ph/");
+      });
+  }, []);
 
-        setAccount(accounts[0]);
-      } else {
-        alert("Install Metamask!");
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  // const navigate = useNavigate();
-  // const {
-  //     connector,
-  //     library,
-  //     chainId,
-  //     account,
-  //     active,
-  //     error,
-  //     activate,
-  //     deactivate,
-  //   } = useWeb3React();
-
-  // useEffect(()=>{
-  //     if(active){activate(injected)}
-  //     else{navigate('/login')}
-  // },[]);
-
-  //   return (
-  //     <div>
-  //       <PhNavbar />
-  //       <h1>약사 마이페이지</h1>
-  //       <div>
-  //         <div>{account}</div>
-  //         <button onClick={getAccount}>dd</button>
-  //         {/* <p>Account: {account}</p>
-  //                 <p>ChainId: {chainId}</p> */}
-  //       </div>
-  //     </div>
-  //   );
-  // }
+  function logout() {
+    localStorage.setItem("login-token", "");
+    alert("로그아웃 되었습니다.");
+    navigate("/ph/");
+  }
 
   return (
     <div>
       <PhNavbar />
       <div style={{ display: "flex" }}>
-        <h1 id="docmyTitle">
+        <h1 id="phmyTitle">
           <FontAwesomeIcon
             icon={faPrescriptionBottleMedical}
             style={{ color: "#00ADEF", marginRight: 30, height: 50 }}
           />
           <div style={{ color: "#00ADEF" }}>싸피약국</div>님, 안녕하세요!
         </h1>
-        <button id="docLogout" style={{ marginLeft: 850 }} onClick={""}>
+        <button id="phLogout" style={{ marginLeft: 850 }} onClick={""}>
           로그아웃
         </button>
       </div>
-      <div id="docmy">
-        <div id="docAccInfo">
-          <p id="docmyHead">
+      <div id="phmy">
+        <div id="phAccInfo">
+          <p id="phmyHead">
             {" "}
             <FontAwesomeIcon
               icon={faMortarPestle}
@@ -81,34 +63,30 @@ export function Mypage() {
             />
             계정 정보
           </p>
-          <div id="docmyBox">
+          <div id="phmyBox">
             <div style={{ display: "flex" }}>
-              <label id="docmyInfo">● 약국명 : </label>
-              <p id="docmyAns"></p>
+              <label id="phmyInfo">● 약국명 :　</label>
+              <p id="phmyAns">{info ? info.userName : ""}</p>
             </div>
             <div style={{ display: "flex" }}>
-              <label id="docmyInfo">● 요양기관번호 : </label>
-              {/* {info ? info.hospitalCRN : ""} */}
+              <label id="phmyInfo">● 면허번호 :　</label>{" "}
+              {info ? info.pharmLicense : ""}
             </div>
             <div style={{ display: "flex" }}>
-              <label id="docmyInfo">● 면허번호 :</label>{" "}
-              {/* {info ? info.hospitalLicense : ""} */}
+              <label id="phmyInfo">● 대표이메일 :　</label>
+              {info ? info.userEmail : ""}
             </div>
             <div style={{ display: "flex" }}>
-              <label id="docmyInfo">● 대표이메일 : </label>
-              {/* {info ? info.userEmail : ""} */}
+              <label id="phmyInfo">● 주소 :　</label>
+              {info ? info.pharmAddr : ""}
             </div>
             <div style={{ display: "flex" }}>
-              <label id="docmyInfo">● 주소 : </label>
-              {/* {info ? info.hospitalAddr : ""} */}
+              <label id="phmyInfo">● 연락처 :　</label>
+              {info ? info.pharmTel : ""}
             </div>
             <div style={{ display: "flex" }}>
-              <label id="docmyInfo">● 연락처 : </label>
-              {/* {info ? info.hospitalTel : ""} */}
-            </div>
-            <div style={{ display: "flex" }}>
-              <label id="docmyInfo">● 지갑 주소 : </label>
-              {/* {info ? info.userWalletAddress : ""} */}
+              <label id="phmyInfo">● 지갑 주소 :　</label>
+              {info ? info.userWalletAddress : ""}
             </div>
           </div>
         </div>
