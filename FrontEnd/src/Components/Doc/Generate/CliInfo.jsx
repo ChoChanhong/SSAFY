@@ -11,9 +11,7 @@ export default function CliInfo(props) {
   const [email, setEmail] = useState(""); //환자이메일
   const [wallet, setWallet] = useState(""); //환자지갑
 
-  const [pubDate, setPubDate] = useState(""); // 발급일자
-  const [dCode, setDCode] = useState(""); // 질병분류코드
-
+  const [userDataList, setUserDataList] = useState(null);
   const URL = "https://j7e205.p.ssafy.io/api/search";
   const token = localStorage.getItem("login-token");
 
@@ -31,7 +29,7 @@ export default function CliInfo(props) {
     axios
       .post(URL, { patientName: name, patientRRN: Snum })
       .then(function (res) {
-        console.log(res.data);
+        console.log("res", res.data);
         setEmail(res.data.userEmail);
         setWallet(res.data.userWalletAddress);
         props.changeUserSeq(res.data.userSeq);
@@ -52,16 +50,13 @@ export default function CliInfo(props) {
     const list = await contract.methods
       .getPatientListFromAccount(myAccount, wallet)
       .call();
+    setUserDataList(list);
     console.log(list);
   }
 
-  // const list = pops.list.map((yak) => (
-  //   <div>
-  //     <p></p>
-  //     <p></p>
-  //     <p></p>
-  //   </div>
-  // )
+  useEffect(() => {
+    searchList();
+  }, [wallet]);
 
   return (
     <div>
@@ -107,7 +102,6 @@ export default function CliInfo(props) {
             id="findButton"
             onClick={() => {
               search();
-              searchList();
             }}
           >
             조회
@@ -124,7 +118,23 @@ export default function CliInfo(props) {
           <p id="genLog">발급일자</p>
           <p id="genLog">질병분류코드</p>
         </div>
-        <div id="line"></div>
+        <div id="line">
+          {userDataList ? (
+            <>
+              {userDataList.map((v, i) => {
+                return (
+                  <span style={{ display: "flex", justifyContent: "space-around" }}>
+                    <p>{v.userName}</p>
+                    <p>{v.pubDate}</p>
+                    <p>{v.dCode}</p>
+                  </span>
+                );
+              })}
+            </>
+          ) : (
+            <>없쪄염</>
+          )}
+        </div>
       </div>
     </div>
   );
