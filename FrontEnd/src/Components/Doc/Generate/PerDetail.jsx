@@ -16,7 +16,7 @@ export default function PerDetail() {
       <div id="detailName">
         <p style={{ marginTop: 10, marginLeft: 10 }}>처방 정보</p>
         처방전 상세내역
-        <div>{window.localStorage.getItem("login-token")}</div>
+        {/* <div>{window.localStorage.getItem("login-token")}</div> */}
       </div>
     </div>
   );

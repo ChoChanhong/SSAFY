@@ -40,7 +40,7 @@ export function Mypage() {
     <div>
       <DocNavbar />
       <div style={{ display: "flex" }}>
-        <h1 id="docmyTitle">
+        <h1 id="docmyTitle" style={{width: "100%"}}>
           <FontAwesomeIcon
             icon={faUserDoctor}
             style={{ color: "#00ADEF", marginRight: 30 }}
