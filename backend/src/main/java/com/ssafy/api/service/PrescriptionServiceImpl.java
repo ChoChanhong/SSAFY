@@ -104,6 +104,11 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 	}
 
 	@Override
+	public Prescription getPrescription(long tokenId) {
+		return prescriptionRepository.findPrescriptionByTokenId(tokenId).get();
+	}
+
+	@Override
 	public Prescription updatePrescriptionCompletion(long prescriptionSeq) {
 		Prescription prescription = prescriptionRepository.findPrescriptionByPrescriptionSeq(prescriptionSeq).get();
 
