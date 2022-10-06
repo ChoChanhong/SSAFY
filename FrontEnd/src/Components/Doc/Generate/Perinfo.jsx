@@ -9,6 +9,7 @@ import Web3 from "web3";
 import axios from "axios";
 // import detectEthereumProvider from "@metamask/detect-provider";
 import "./Perinfo.css";
+import CliInfo from "./CliInfo";
 
 export default function PerInfo(props) {
   const navigate = useNavigate();
@@ -74,7 +75,6 @@ export default function PerInfo(props) {
     setPlog(tmp);
     setYaks(Perlog.map((log) => <Yak info={log} Delete={Delete} />));
   }
-  // const mint = web3.asdasd.contarc
 
   async function submit() {
     console.log(props.wallet);
@@ -243,7 +243,6 @@ export default function PerInfo(props) {
             <button id="Genbutton" onClick={submit}>
               처방하기
             </button>
-            <div>{/* <button onClick={Mint}> 민팅테스트</button> */}</div>
           </div>
         </div>
       </div>

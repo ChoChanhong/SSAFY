@@ -123,7 +123,9 @@ export default function CliInfo(props) {
             <>
               {userDataList.map((v, i) => {
                 return (
-                  <span style={{ display: "flex", justifyContent: "space-around" }}>
+                  <span
+                    style={{ display: "flex", justifyContent: "space-around" }}
+                  >
                     <p>{v.userName}</p>
                     <p>{v.pubDate}</p>
                     <p>{v.dCode}</p>
@@ -132,7 +134,7 @@ export default function CliInfo(props) {
               })}
             </>
           ) : (
-            <>없쪄염</>
+            <div style={{textAlign:"center"}}>환자 정보를 조회해주세요.</div>
           )}
         </div>
       </div>
