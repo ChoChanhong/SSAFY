@@ -11,7 +11,7 @@ contract Confirmation is ERC721Connector {
         string hosName;
         string pharName;
         
-        // string[] dName;
+        string[] dName;
         uint[] dosage; // 투약량
         uint[] doseNum; // 투약 횟수
         uint[] dosePeriod; //총 투약일

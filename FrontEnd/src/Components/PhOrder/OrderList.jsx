@@ -4,36 +4,21 @@ import "./OrderList.css";
 import { abi, nftCA } from "../../web3Config";
 
 
-export default function OrderList() {
+export default function OrderList(props) {
 
-  // const list = props.list.map((yak) => (
-  //   <div
-  //     style={{
-  //       borderBottom: "solid 2px #5681EF",
-  //       borderRadius: "20px",
-  //       display: "flex",
-  //       justifyContent: "space-between",
-  //     }}
-  //   >
-  //     <div style={{ margin: "10px 0px 10px 25px" }}>
-  //       <div
-  //         style={{ fontWeight: "bold", fontSize: "20px", marginBottom: "10px" }}
-  //       >
-  //         {yak[1]}
-  //       </div>
-  //       <div>발행일 :　{yak.pubDate}</div>
-        
-  //     </div>
-  //     <button id="bluebutton" style={{ margin: "40px 10px 10px 0px" }}>
-  //       상세내역
-  //     </button>
-  //   </div>
-  // ));
+  const [list,setList] = useState('') 
+  useEffect(()=>{
+    if(props.list){
+    const tmp = props.list.map((yak,idx)=>
+    <div onClick={()=>{props.changeState(idx)}}>
+      <span>{yak[1]}</span>
+      <span>{yak.userName}</span>
+      <span>{yak.pubDate}</span>
+    </div>)
+    setList(tmp)
+    }
 
-  // useEffect(() => {
-  //   console.log(props.list, "접수리스트");
-  //   console.log(props.list[0][1]);
-  // }, []);
+  },[props])
 
 
 
@@ -49,7 +34,7 @@ export default function OrderList() {
           <p id="orderLog">생년월일</p>
           <p id="orderLog">처방 발급일</p>
         </div>
-        {/* <div>{list}</div> */}
+        <div>{list}</div>
       </div>
     </div>
   );

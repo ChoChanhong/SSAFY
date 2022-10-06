@@ -1,7 +1,11 @@
 import React from "react";
 import "./PhDetail.css";
 
-export default function PhDetail() {
+export default function PhDetail(props) {
+
+  //props.list는 처방전 정보
+
+
   return (
     <div
       style={{
@@ -13,6 +17,9 @@ export default function PhDetail() {
     >
       <div id="phdetailName">
         <p style={{ marginTop: 10, marginLeft: 10 }}>처방 정보</p>
+      </div>
+      <div>
+        {props ? props.list : ''}
       </div>
     </div>
   );
