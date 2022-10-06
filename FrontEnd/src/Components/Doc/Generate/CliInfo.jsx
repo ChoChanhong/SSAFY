@@ -1,13 +1,21 @@
+import Web3 from "web3";
 import axios from "axios";
 import setAuthorizationToken from '../../../utils/AuthorizationToken'
 import { React, useEffect, useState } from "react";
 import "./Cliinfo.css";
+import { abi, nftCA } from "../../../web3Config";
+
 
 export default function CliInfo(props) {
   const [Snum, setSnum] = useState(""); //환자이름
   const [name, setName] = useState(''); //환자주소
-  const [email, setEmail] = useState(''); //환자주소
-  const [wallet, setWallet] = useState(''); //환자주소
+  const [email, setEmail] = useState(''); //환자이메일
+  const [wallet, setWallet] = useState(''); //환자지갑
+
+  const [pubDate, setPubDate] = useState(''); // 발급일자
+  const [dCode, setDCode] = useState(''); // 질병분류코드
+  const [getPh, setGetPh] = useState(''); // 수령여부
+
   
   const URL = "https://j7e205.p.ssafy.io/api/search";
   const token = localStorage.getItem("login-token")
@@ -20,7 +28,7 @@ export default function CliInfo(props) {
     }
   }
 
-  function search(){
+  async function search(){
     console.log(name,Snum)
     setAuthorizationToken(token)
     axios
@@ -38,6 +46,17 @@ export default function CliInfo(props) {
       alert('환자를 찾을 수 없습니다')
     }
   )
+  }
+
+  async function searchList(){
+    const web3 = new Web3(window.ethereum);
+    const contract = new web3.eth.Contract(abi, nftCA);
+    const account = await web3.eth.requestAccounts();
+    const myAccount = account[0];
+
+    const list = await contract.methods.getPatientListFromAccount(myAccount, wallet).call();
+    console.log(list);
+    
   }
 
   return (
@@ -68,7 +87,11 @@ export default function CliInfo(props) {
           />
         </div>
         <div>
-          <button onClick={search}>조회</button>
+          <button onClick={ () =>{
+            search()
+            searchList()
+          }}>
+            조회</button>
         </div>
       </div>
       <div>
@@ -78,8 +101,8 @@ export default function CliInfo(props) {
           style={{ display: "flex", justifyContent: "space-around" }}
         >
           <p id="genLog">발급일자</p>
+          <p id="genLog">질병분류</p>
           <p id="genLog">수령여부</p>
-          <p id="genLog">처방전 주소</p>
         </div>
         <div id="line"> 이전 처방내역 반복문으로</div>
       </div>
