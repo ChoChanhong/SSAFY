@@ -51,12 +51,22 @@ public class PatientController {
     @ApiResponses({
         @ApiResponse(code = 200, message = "성공"),
         @ApiResponse(code = 400, message = "인증 실패"),
+		@ApiResponse(code = 401, message = "가입 양식 오류"),
 		@ApiResponse(code = 402, message = "등록된 아이디", response = BaseResponseBody.class),
 		@ApiResponse(code = 403, message = "등록된 CRN", response = BaseResponseBody.class),
         @ApiResponse(code = 500, message = "서버 오류")
     })
 	public ResponseEntity<?> register(
 			@RequestBody @ApiParam(value="회원가입 정보", required = true) CreatePatientPostReq createPatientPostReq) {
+
+		if (createPatientPostReq.getPatientId() == null ||
+			createPatientPostReq.getPatientPassword() == null ||
+			createPatientPostReq.getPatientName() == null ||
+			createPatientPostReq.getPatientEmail() == null ||
+			createPatientPostReq.getPatientRRN() == null ||
+			createPatientPostReq.getPatientWalletAddr() == null) {
+			return new ResponseEntity<>("가입에 필요한 모든 데이터를 입력해주세요.", HttpStatus.valueOf(400));
+		}
 
 		String patientId = createPatientPostReq.getPatientId();
 		String patientRRN = createPatientPostReq.getPatientRRN();
@@ -72,7 +82,7 @@ public class PatientController {
 		if (userService.existsByUserId(patientId)) {
 			return new ResponseEntity<>(createPatientPostReq.getPatientId() + "의 회원가입이 완료되었습니다", HttpStatus.valueOf(200));
 		}
-		return new ResponseEntity<>("가입에 실패하였습니다.", HttpStatus.valueOf(400));
+		return new ResponseEntity<>("잘못된 요청입니다", HttpStatus.valueOf(400));
 	}
 
 	@PostMapping("/login")
