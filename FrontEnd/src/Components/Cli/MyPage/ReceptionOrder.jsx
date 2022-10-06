@@ -2,12 +2,11 @@ import { React, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Yakgook from "./Yakgook";
 import axios from "axios";
-import './ReceptionOrder.css'
+import "./ReceptionOrder.css";
 import Web3 from "web3";
 import { abi, nftCA } from "../../../web3Config";
 
 export default function ReceptionOrder() {
-
   const URL = "https://j7e205.p.ssafy.io/api/pharms/list";
   const navigate = useNavigate();
   const [list, setList] = useState(""); //약국들의 리스트
@@ -18,7 +17,7 @@ export default function ReceptionOrder() {
 
   useEffect(() => {
     axios.get(URL).then(function (res) {
-      console.log(res.data,'data');
+      console.log(res.data, "data");
       setList(
         res.data.map((x, idx) => (
           <div
@@ -41,7 +40,9 @@ export default function ReceptionOrder() {
                   </button>
                 </div>
               ) : (
-                <div style={{margin: "10px 0px ", marginLeft: "100px" }}>[ 처방전 목록 ]</div>
+                <div style={{ margin: "10px 0px ", marginLeft: "100px" }}>
+                  [ 처방전 목록 ]
+                </div>
               )}
             </div>
           </div>
@@ -50,31 +51,34 @@ export default function ReceptionOrder() {
     });
   }, [state]);
 
-  useEffect(()=>{
-    checkList()
-  },[selected])
+  useEffect(() => {
+    checkList();
+  }, [selected]);
 
-  async function checkList(){
+  async function checkList() {
     const web3 = new Web3(window.ethereum);
     const contract = new web3.eth.Contract(abi, nftCA);
     const account = await web3.eth.requestAccounts();
     const myAccount = account[0];
-      // 매개변수로 넘겨준 주소를 거쳐간 모든 처방전 조회
-      // 처방전 형식의 배열 리턴
+    // 매개변수로 넘겨준 주소를 거쳐간 모든 처방전 조회
+    // 처방전 형식의 배열 리턴
     const per = await contract.methods.getAllListFromAccount(myAccount).call();
-    const tmp = per.map((yak,idx)=>
-    <div onClick={()=>{setSelected(idx)}}>
-      <div>{idx===selected ? '----------------' : ''}</div>
-      <div>{yak[1]}</div>
-      <div>{yak.pubDate}</div>
-      <div>{yak.prescriptionCount === '1' ? '단기' : '정기' }</div>
-      <button>상세내역</button>
-      <div>{idx===selected ? '----------------' : ''}</div>
-    </div>)                                      
-    setPer(tmp)
-    
+    const tmp = per.map((yak, idx) => (
+      <div
+        onClick={() => {
+          setSelected(idx);
+        }}
+      >
+        <div>{idx === selected ? "----------------" : ""}</div>
+        <div>{yak[1]}</div>
+        <div>{yak.pubDate}</div>
+        <div>{yak.prescriptionCount === "1" ? "단기" : "정기"}</div>
+        <button>상세내역</button>
+        <div>{idx === selected ? "----------------" : ""}</div>
+      </div>
+    ));
+    setPer(tmp);
   }
-
 
   function click(x) {
     setState(x);
@@ -85,10 +89,12 @@ export default function ReceptionOrder() {
     setReserve(false);
   }
 
-
   function reservation() {
-    console.log(list[state].props.children[0].props.data.userWalletAddress,'약국지갑번호')
-    console.log(per.length-selected-1,'몇번째 처방전인지')
+    console.log(
+      list[state].props.children[0].props.data.userWalletAddress,
+      "약국지갑번호"
+    );
+    console.log(per.length - selected - 1, "몇번째 처방전인지");
   }
 
   return (
@@ -99,16 +105,62 @@ export default function ReceptionOrder() {
       ) : (
         <div>
           <div>{per}</div>
-          <button onClick={() => setReserve(true)}>예약</button>
-          <button onClick={close}>닫기</button>
+          <button
+            onClick={() => setReserve(true)}
+            style={{
+              color: "white",
+              backgroundColor: "#5681EF",
+              borderColor: "transparent",
+              borderRadius: "5px",
+              width: "80px",
+              marginRight: "30px",
+            }}
+          >
+            예약
+          </button>
+          <button
+            onClick={close}
+            style={{
+              color: "white",
+              backgroundColor: "red",
+              borderColor: "transparent",
+              borderRadius: "5px",
+              width: "80px",
+            }}
+          >
+            닫기
+          </button>
         </div>
       )}
       {reserve ? (
-        <div>
-          <div>조제를 신청하시겠습니까?</div>
+        <div style={{ marginTop: "30px" }}>
+          <div style={{ marginBottom: "20px" }}>조제를 신청하시겠습니까?</div>
           {/* 예약창 확인을 누르면 예약정보 전송*/}
-          <button onClick={reservation}>확인</button>
-          <button onClick={() => setReserve(false)}>취소</button>
+          <button
+            onClick={reservation}
+            style={{
+              color: "white",
+              backgroundColor: "#5681EF",
+              borderColor: "transparent",
+              borderRadius: "5px",
+              width: "80px",
+              marginRight: "30px",
+            }}
+          >
+            확인
+          </button>
+          <button
+            onClick={() => setReserve(false)}
+            style={{
+              color: "white",
+              backgroundColor: "red",
+              borderColor: "transparent",
+              borderRadius: "5px",
+              width: "80px",
+            }}
+          >
+            취소
+          </button>
         </div>
       ) : (
         ""
