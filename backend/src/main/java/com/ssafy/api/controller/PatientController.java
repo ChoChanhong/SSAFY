@@ -1,6 +1,7 @@
 package com.ssafy.api.controller;
 
 import com.ssafy.api.request.CreatePatientPostReq;
+import com.ssafy.api.request.SearchPatientPostReq;
 import com.ssafy.api.request.UserLoginPostReq;
 import com.ssafy.api.response.UserLoginPostRes;
 import com.ssafy.api.service.PatientService;

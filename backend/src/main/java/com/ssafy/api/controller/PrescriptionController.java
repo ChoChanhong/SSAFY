@@ -8,6 +8,7 @@ import com.ssafy.api.service.PrescriptionService;
 import com.ssafy.api.service.UserService;
 import com.ssafy.common.auth.SsafyUserDetails;
 import com.ssafy.common.customObject.HospitalInfo;
+import com.ssafy.common.customObject.PatientInfo;
 import com.ssafy.db.entity.Prescription;
 import com.ssafy.db.entity.User;
 import io.swagger.annotations.*;
@@ -152,5 +153,40 @@ public class PrescriptionController {
 		}
 
 		return new ResponseEntity<>("잘못된 요청입니다", HttpStatus.valueOf(400));
+	}
+
+
+	/**
+	 *  token Id를 통해 환자 지갑 주소 검색
+	 */
+	@PostMapping("/searchPatientWallet")
+	@ApiOperation(value = "환자 지갑 검색", notes = "token Id를 통해 환자 지갑 주소 검색")
+	@ApiResponses({
+			@ApiResponse(code = 200, message = "성공"),
+			@ApiResponse(code = 402, message = "환자 없음"),
+			@ApiResponse(code = 403, message = "토큰 없음"),
+			@ApiResponse(code = 500, message = "서버 오류")
+	})
+	public ResponseEntity<?> searchPatient(
+			@ApiIgnore Authentication authentication,
+			@RequestBody @ApiParam(value="환자 지갑 검색", required = true) SearchPatientByTokenPostReq searchPatientByTokenPostReq) {
+
+		// tokenId로 처방전 검색
+		String tokenId = searchPatientByTokenPostReq.getTokenId();
+		Prescription prescription;
+		try {
+			prescription = prescriptionService.getPrescription(Long.parseLong(tokenId));
+		} catch (Exception e) {
+			return new ResponseEntity<>("토큰 없음.", HttpStatus.valueOf(403));
+		}
+
+		// 처방전의 환자 seq
+		long patientUserSeq = prescription.getPatientUserSeq();
+		String addr = userService.getUserByUserSeq(patientUserSeq).getUserWalletAddress();
+
+		if (addr == null) {
+			return new ResponseEntity<>("환자를 검색할 수 없습니다.", HttpStatus.valueOf(402));
+		}
+		return new ResponseEntity<>(addr, HttpStatus.valueOf(200));
 	}
 }

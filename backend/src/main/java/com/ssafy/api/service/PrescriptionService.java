@@ -18,6 +18,8 @@ public interface PrescriptionService {
 
     Prescription updatePrescriptionPharm(long prescriptionSeq, long pharmUserSeq);
 
+    Prescription getPrescription(long tokenId);
+
     Prescription updatePrescriptionCompletion(long prescriptionSeq);
 
     // 환자가 처방전 리스트 조회

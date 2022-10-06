@@ -26,6 +26,12 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 
+	@Override
+	public User getUserByUserSeq(long userSeq) {
+
+		return userRepository.findUserByUserSeq(userSeq).get();
+	}
+
 
 	@Override
 	public User createWallet(long Seq, String walletAddr) {
