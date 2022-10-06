@@ -57,12 +57,27 @@ public class HospitalController {
 	@ApiResponses({
 			@ApiResponse(code = 200, message = "성공", response = UserLoginPostRes.class),
 			@ApiResponse(code = 400, message = "가입 실패", response = BaseResponseBody.class),
+			@ApiResponse(code = 401, message = "가입 양식 오류"),
 			@ApiResponse(code = 402, message = "등록된 아이디", response = BaseResponseBody.class),
 			@ApiResponse(code = 403, message = "등록된 CRN", response = BaseResponseBody.class),
 			@ApiResponse(code = 500, message = "서버 오류")
 	})
 	public ResponseEntity<?> register(
 			@RequestBody @ApiParam(value="회원가입 정보", required = true) CreateHospitalPostReq createHospitalPostReq) {
+
+		if (createHospitalPostReq.getHospitalId() == null ||
+			createHospitalPostReq.getHospitalPassword() == null ||
+			createHospitalPostReq.getHospitalName() == null ||
+			createHospitalPostReq.getHospitalDoctor() == null ||
+			createHospitalPostReq.getHospitalEmail() == null ||
+			createHospitalPostReq.getHospitalCode() == null ||
+			createHospitalPostReq.getHospitalLicense() == null ||
+			createHospitalPostReq.getHospitalAddr() == null ||
+			createHospitalPostReq.getHospitalTel() == null ||
+			createHospitalPostReq.getHospitalCRN() == null ||
+			createHospitalPostReq.getHospitalWalletAddr() == null) {
+				return new ResponseEntity<>("가입에 필요한 모든 데이터를 입력해주세요.", HttpStatus.valueOf(400));
+		}
 
 		String hospitalId = createHospitalPostReq.getHospitalId();
 		String hospitalCRN = createHospitalPostReq.getHospitalCRN();
