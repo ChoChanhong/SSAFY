@@ -20,5 +20,6 @@ public class CreatePrescriptionPostReq {
 //	long hospitalUserSeq;
 
 	@ApiModelProperty(name = "토큰 ID", example = "000000000")
-	long tokenId;
+//	long tokenId;
+	String tokenId;
 }

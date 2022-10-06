@@ -39,9 +39,6 @@ export default function Signup2(props) {
     <div className="signBox">
       <div className="titleBox">
         <h3 className="title">회원가입</h3>
-        {/* <div style={{ color: "red", marginTop: 15 }}>
-          ※<span style={{ color: "black" }}> 필수 입력 항목입니다.</span>
-        </div> */}
       </div>
       <div>
         <div
@@ -57,7 +54,7 @@ export default function Signup2(props) {
           style={{ borderBottom: "solid 2px lightgray" }}
         >
           <label className="infoLabel">비밀번호</label>
-          <input style={{ width: 500 }} />
+          <input style={{ width: "500px" }} />
           <label className="infoLabel" style={{ marginLeft: 20 }}>
             비밀번호 재확인
           </label>
