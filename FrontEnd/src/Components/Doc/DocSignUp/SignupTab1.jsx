@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import { Link } from "react-router-dom";
 import "./DocSignup.css";
-import { Checkbox } from "@mui/joy";
+import { Checkbox, Box } from "@mui/joy";
 
 export default function Signup1(props) {
   const [check, setCheck] = useState(false);
@@ -14,7 +14,7 @@ export default function Signup1(props) {
   }
 
   return (
-    <div className="signBox">
+    <div className="docsignBox">
       <div className="textBox">
         <h4 style={{ fontWeight: "bold" }}>[이용약관]</h4>
         <p style={{ marginTop: 8, marginLeft: 10 }}>
@@ -22,15 +22,19 @@ export default function Signup1(props) {
         </p>
       </div>
       <div className="termsBox">이용약관 내용</div>
-      <div className="checkBox">
+      {/* <div className="checkBox"> */}
+      <Box mt={3} ml={70}>
         <Checkbox
-          label="이용약관에 동의하면 여기를 <클릭>해주세요."
+          label="이용약관에 동의하다면 체크해주세요."
           color="neutral"
-          size="md"
+          size="lg"
           variant="outlined"
-          onClick={()=>{setCheck(!check)}}
+          onClick={() => {
+            setCheck(!check);
+          }}
         />
-      </div>
+      </Box>
+      {/* </div> */}
       <div className="buttonBox">
         <Link to="/">
           <button

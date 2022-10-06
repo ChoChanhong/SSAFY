@@ -89,9 +89,6 @@ export default function Signup2(props) {
     <div className="signBox" style={{ marginTop: 25 }}>
       <div className="titleBox">
         <h3 className="title">회원가입</h3>
-        {/* <div style={{ color: "red", marginTop: 15 }}>
-          ※<span style={{ color: "black" }}> 필수 입력 항목입니다.</span>
-        </div> */}
       </div>
       <div>
         <div
@@ -225,13 +222,6 @@ export default function Signup2(props) {
           가입신청
         </button>
       </div>
-      {/* <div className="adressBox">
-        {show ? (
-          <DaumPostCode onComplete={handleComplete} className="post-code" />
-        ) : (
-          ""
-        )}
-      </div> */}
     </div>
   );
 }
