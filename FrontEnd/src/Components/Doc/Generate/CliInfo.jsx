@@ -48,6 +48,7 @@ export default function CliInfo(props) {
           <label id="genLabel">환자명</label>
           <input
             id="genInput"
+            placeholder="환자명을 입력해주세요."
             value={name}
             onChange={(e) => {
               setName(e.target.value);
@@ -56,7 +57,12 @@ export default function CliInfo(props) {
         </div>
         <div id="genBox">
           <label id="genLabel">주민번호</label>
-          <input style={{ width: 200 }} value={Snum} onChange={numberCheck} />
+          <input
+            style={{ width: 200 }}
+            placeholder="000000-0000000"
+            value={Snum}
+            onChange={numberCheck}
+          />
         </div>
         <div id="genBox">
           <label id="genLabel">이메일</label>
@@ -66,7 +72,7 @@ export default function CliInfo(props) {
           <label id="genLabel">지갑</label>
           <input id="genInput" style={{ width: 215 }} value={wallet} readOnly />
         </div>
-        <div style={{textAlign:"center"}}>
+        <div style={{ textAlign: "center" }}>
           <button id="findButton" onClick={search}>
             조회
           </button>
