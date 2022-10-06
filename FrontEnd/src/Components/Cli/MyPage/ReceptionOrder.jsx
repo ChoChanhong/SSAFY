@@ -61,7 +61,14 @@ export default function ReceptionOrder() {
     const myAccount = account[0];
       // 매개변수로 넘겨준 주소를 거쳐간 모든 처방전 조회
       // 처방전 형식의 배열 리턴
-    const per = await contract.methods.getAllListFromAccount(myAccount).call();
+    //const per = await contract.methods.getAllListFromAccount(myAccount).call();
+    const tokenId = await contract.methods.alltokenOfOwner(myAccount).call();
+    console.log(tokenId,'token')
+    const per = []
+    for(let i=0; i<tokenId.length; i++ ){
+      per.push( await contract.methods.getPreScriptionByIndex(tokenId[i]).call())
+      }
+    console.log(per,'per')
     const tmp = per.map((yak,idx)=>
     <div onClick={()=>{setSelected(idx)}}>
       <div>{idx===selected ? '----------------' : ''}</div>
@@ -86,8 +93,20 @@ export default function ReceptionOrder() {
   }
 
 
-  function reservation() {
-    console.log(list[state].props.children[0].props.data.userWalletAddress,'약국지갑번호')
+  async function reservation() {
+    const web3 = new Web3(window.ethereum);
+    const contract = new web3.eth.Contract(abi, nftCA);
+    const account = await web3.eth.requestAccounts();
+    const myAccount = account[0];
+
+    const tokenId = await contract.methods.alltokenOfOwner(myAccount).call();
+    await contract.methods.transferPreScription(myAccount,list[state].props.children.props.children[0].props.data.userWalletAddress, tokenId[per.length-selected-1]).send({ from : myAccount });
+
+
+
+
+    console.log(state)
+    console.log(list[state].props.children.props.children[0].props.data.userWalletAddress,'약국지갑번호')
     console.log(per.length-selected-1,'몇번째 처방전인지')
   }
 

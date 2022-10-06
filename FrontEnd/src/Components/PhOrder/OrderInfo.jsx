@@ -1,89 +1,132 @@
-import React from "react";
+import {React,useState,useEffect} from "react";
 import "./OrderInfo.css";
 import Web3 from "web3";
 import { cfmabi, cfmCA , nftCA, abi } from "../../web3Config";
-export default function OrderInfo() {
+import axios from "axios";
+
+
+export default function OrderInfo(props) {
+
+  const [info,setInfo] = useState('')
+  const [list,setList] = useState('')
+  const [state,setState] = useState('')
+  const [how,setHow] = useState('')
+  const [token,setToken] = useState('')
+  const [confirm,setConfirm] = useState('')
+
+  useEffect(()=>{
+    setInfo(props.info)
+    setList(props.list)
+    setState(props.state)
+  },[props])
+
+  useEffect(()=>{
+    if(list[state]){
+      if(info){
+        Mint()
+      }
+    }
+  },[info,list,state])
+
+  //날짜 계산용
+  let now = new Date();
+  let year = now.getFullYear();
+  let month = now.getMonth() + 1;
+  let date = now.getDate();
+  let day = year * 10000  + month * 100  +date;
+
 
   const Mint = async (e) => {
-    e.preventDefault();
-    console.log(1111);
-    const conf = { 
-      No :0, userName: "Test", hosName: "Test", pharName: "Test", dName: ["bb"],dosage:[1],doseNum:[2],dosePeriod:[2], prescriptionCount:5,dispensingCount:0, prepData :0, howtoTake: "asddasda"};
-    console.log(conf);
-    const test = {
-      id : 2,
-      userName : "test",
-      hosName : "test",
-      pharName : "test2",
-      dosage : [1],
-      doseNum : [2],
-      dosePeriod : [3],
-      prescriptionCount : 3,
-      dispensingCount : 0,
-      prepDate : 2022,
-      howtoTake : "aa"
-    };
+    console.log(info)
+    console.log(list)
+    console.log('Mint')
+    // e.preventDefault();
     const web3 = new Web3(window.ethereum);
-    const contract = new web3.eth.Contract(cfmabi, cfmCA);
-    console.log(cfmCA);
-    console.log(contract);
-    console.log(test)
+    const contract = new web3.eth.Contract(cfmabi, cfmCA); //확인서
+    const contract2 = new web3.eth.Contract(abi, nftCA); // 처방전
     const account = await web3.eth.requestAccounts();
     const myAccount = account[0];
-    console.log(myAccount);
-    const a = await contract.methods.totalSupply().call();
-    console.log(a);
-    await contract.methods
-      .mint(test)
-      .send({ from: myAccount });
-    console.log(" 처방전 발급 11111111");
-    const totalSupply = await contract.methods.totalSupply().call();
-    console.log("총 발행 수 " + totalSupply);
-    await contract.methods
-          .transferconfirmation(myAccount, )
-    console.log("전송 완료");
-    console.log(conf);
-    
-    async function submit(){
-      const web3 = new Web3(window.ethereum);
-      const contract = new web3.eth.Contract(cfmabi, cfmCA);
-      console.log(cfmCA);
-      console.log(contract);
+    const tokenId = await contract2.methods.alltokenOfOwner(myAccount).call();
+    let pertime = ''
+    try{
+      pertime = await contract.mathods.getcountOfprs(tokenId[state]).call();
+      pertime ++
+    } catch (err) {
+      pertime = 1
+    }
+    const AA = async () => {
+      try{
+        const res = await axios
+        .post("https://j7e205.p.ssafy.io/api/prescriptions/searchPatientWallet", { tokenId : tokenId[state]});
+        setToken(res.data)
+      }
+      catch(err){
+        console.log(err)
+      }    
+    }
+    AA()
+        const confirmation = {
+          id : parseInt(tokenId[state]),
+          userName : String(list[state].userName),
+          hosName : String(list[state].hosName),
+          pharName : String(info.userName),
+          dName : list[state].dName.map((x)=>String(x)),
+          dosage :  list[state].dosage.map((x)=>parseInt(x)),
+          doseNum : list[state].doseNum.map((x)=>parseInt(x)),
+          dosePeriod : list[state].dosePeriod.map((x)=>parseInt(x)),
+          prescriptionCount : parseInt(list[state].prescriptionCount),
+          dispensingCount : parseInt(pertime),
+          prepDate : parseInt(day),
+          howtoTake : String(how)
+        }
+        // const confirmation = {
+        //   id : tokenId[state],
+        //   userName : list[state].userName,
+        //   hosName : list[state].hosName,
+        //   pharName : info.userName,
+        //   dName : list[state].dName,
+        //   dosage :  list[state].dosage,
+        //   doseNum : list[state].doseNum,
+        //   dosePeriod : list[state].dosePeriod,
+        //   prescriptionCount : list[state].prescriptionCount,
+        //   dispensingCount : pertime,
+        //   prepDate : day,
+        //   howtoTake : how
+        // }
+        console.log(confirmation,'confirmation')
+        setConfirm(confirmation)
+        console.log(confirm,'confirm')
+      }
   
+    async function Send(){
+      console.log(confirm,'확인')
+      const web3 = new Web3(window.ethereum);
+      const contract = new web3.eth.Contract(cfmabi, cfmCA); //확인서
+      const contract2 = new web3.eth.Contract(abi, nftCA); // 처방전
       const account = await web3.eth.requestAccounts();
       const myAccount = account[0];
+      let text = await contract.methods.totalSupply().call() - 1;
+      console.log(text,'index')
 
-      const cnt = contract.methods.getcountOfprs("처방전 id").call() + 1;
-
-      const confirmation = {
-        id : "처방전 Id",
-        userName : "처방전에 있는 userName",
-        hosName : " 처방전에 있는 hosName",
-        pharName : "로그인되어있는 pharName",
-        dosage :  "처방전에 있는거",
-        doseNum : "처방전에 있는거",
-        dosePeriod : "처방전에 있는거",
-        prescriptionCount : "처방전에 있는거",
-        dispensingCount : "contract로 가져올거임 (처방전 tokenId 필요)",
-        prepDate : "날짜지정",
-        howtoTake : "이 부분만 입력받을듯 ?"
-      }
-
-    console.log(myAccount);
-    
-    // 확인서 발급
-    await contract.methods
-      .mint(confirmation)
+      await contract.methods
+        .mint(confirm)
+        .send({ from: myAccount });
+      let index = await contract.methods.totalSupply().call() - 1;
+      console.log(index,'index')
+          //확인서 전달
+      await contract.methods
+        .transferconfirmation(myAccount, token, index)
+        .send({ from : myAccount })
+      await contract2.methods
+      .setPharmacyAuth(myAccount)
       .send({ from: myAccount });
-    let index = await contract.methods.totalSupply().call() - 1;
-    // 확인서 전달
-    await contract.methods
-          .transferconfirmation(myAccount, "환자의 주소", index)
-          .send({ from : myAccount })
-    // 처방전 전달
+      await contract2.methods.transferPharmacyToPatient(myAccount, token, confirm.id)
+        .send({ from : myAccount})
     }
-    // console.log(prsList);
-  }
+    
+
+  
+
   return (
     <div>
       <div id="orderinfoline">
@@ -92,30 +135,22 @@ export default function OrderInfo() {
         </div>
         <div id="orderinfoBox">
           <label id="orderinfoLabel">조제기관명</label>
-          <input id="orderinfoInput" readOnly />
-        </div>
-        <div id="orderinfoBox">
-          <label id="orderinfoLabel">조제약사</label>
-          <input id="orderinfoInput" readOnly />
-        </div>
-        <div id="orderinfoBox">
-          <label id="orderinfoLabel">조제량</label>
-          <input id="orderinfoInput" readOnly />
+          <input id="orderinfoInput" value={ info ? info.userName : ''} readOnly />
         </div>
         <div id="ordeinforBox">
           <label id="orderinfoLabel">조제횟수</label>
-          <input id="orderinfoInput" readOnly />
+          <input id="orderinfoInput" readOnly value={confirm ? `${confirm.dispensingCount-1}/${confirm.prescriptionCount}`: ''}/>
         </div>
         <div id="orderinfoBox">
           <label id="orderinfoLabel">조제일</label>
-          <input id="orderinfoInput" readOnly />
+          <input id="orderinfoInput" value={day} readOnly />
         </div>
         <div>
           <label id="orderinfoLabel">처방 변경/수정/대체내용</label>
-          <textarea name="" id="orderinfoText" cols="35" rows="8"></textarea>
+          <textarea onChange={(e)=>{setHow(e.target.value)}} name="" id="orderinfoText" cols="35" rows="8"></textarea>
         </div>
         <div className="mt-3 text-center">
-          <button id="orderinfoButton" onClick = {Mint}>조제 등록</button>
+          <button id="orderinfoButton" onClick = { Send }>조제 등록</button>
         </div>
       </div>
     </div>

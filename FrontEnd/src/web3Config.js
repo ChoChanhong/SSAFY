@@ -432,26 +432,6 @@ const nftAbi =[
     "inputs": [
       {
         "internalType": "address",
-        "name": "_address",
-        "type": "address"
-      }
-    ],
-    "name": "getAllTokensOwned",
-    "outputs": [
-      {
-        "internalType": "uint256[]",
-        "name": "",
-        "type": "uint256[]"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function",
-    "constant": true
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
         "name": "_from",
         "type": "address"
       },
@@ -554,93 +534,6 @@ const nftAbi =[
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function",
-    "constant": true
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_address",
-        "type": "address"
-      }
-    ],
-    "name": "getRegularPreScription",
-    "outputs": [
-      {
-        "components": [
-          {
-            "internalType": "string",
-            "name": "userName",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "hosName",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "pharName",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "dCode",
-            "type": "string"
-          },
-          {
-            "internalType": "string[]",
-            "name": "dName",
-            "type": "string[]"
-          },
-          {
-            "internalType": "uint256[]",
-            "name": "dosage",
-            "type": "uint256[]"
-          },
-          {
-            "internalType": "uint256[]",
-            "name": "doseNum",
-            "type": "uint256[]"
-          },
-          {
-            "internalType": "uint256[]",
-            "name": "dosePeriod",
-            "type": "uint256[]"
-          },
-          {
-            "internalType": "uint256",
-            "name": "dispensingCount",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "prescriptionCount",
-            "type": "uint256"
-          },
-          {
-            "internalType": "string[]",
-            "name": "howtoTake",
-            "type": "string[]"
-          },
-          {
-            "internalType": "uint256",
-            "name": "pubDate",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "prepDate",
-            "type": "uint256"
-          }
-        ],
-        "internalType": "struct PreScription.preScription[]",
-        "name": "",
-        "type": "tuple[]"
       }
     ],
     "stateMutability": "view",
@@ -1358,6 +1251,11 @@ const cfmAbi = [
             "type": "string"
           },
           {
+            "internalType": "string[]",
+            "name": "dName",
+            "type": "string[]"
+          },
+          {
             "internalType": "uint256[]",
             "name": "dosage",
             "type": "uint256[]"
@@ -1459,6 +1357,11 @@ const cfmAbi = [
             "type": "string"
           },
           {
+            "internalType": "string[]",
+            "name": "dName",
+            "type": "string[]"
+          },
+          {
             "internalType": "uint256[]",
             "name": "dosage",
             "type": "uint256[]"
@@ -1541,6 +1444,11 @@ const cfmAbi = [
             "type": "string"
           },
           {
+            "internalType": "string[]",
+            "name": "dName",
+            "type": "string[]"
+          },
+          {
             "internalType": "uint256[]",
             "name": "dosage",
             "type": "uint256[]"
@@ -1607,9 +1515,9 @@ const cfmAbi = [
   }
 ];
 
-    export const nftCA = '0x5F15B156550d4Ad84aeEa9C831197254E102033D';
+    export const nftCA = '0x08eCD3E2D43Eb37F9Ef3c8cD7ddaaCadFdBD5c55';
 
-    export const cfmCA = '0x4c5ec8f69d704A5270047c58Bd56aa81180fc900';
+    export const cfmCA = '0x4cCAe130B18a7bD7240913B47C59Bc72765E3855';
     // export const web3 = new Web3(window.ethereum);
     export const abi = nftAbi;
     export const cfmabi = cfmAbi;

@@ -10,6 +10,8 @@ public interface UserService {
 
     User getUserByUserId(String userId);
 
+    User getUserByUserSeq(long userSeq);
+
     User createWallet(long Seq, String walletAddr);
 
 

@@ -1,6 +1,7 @@
 import { TextField, AspectRatio, Typography, Checkbox } from "@mui/joy";
 import { React, useState } from "react";
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
 export default function SignTab1(props) {
@@ -59,9 +60,20 @@ export default function SignTab1(props) {
             patientRRN: rrn,
             patientWalletAddr: account,
           })
-          .then(props.setStep(2))
+          .then((response) => {
+            if (response.status === 200) {
+              alert("회원가입이 완료 되었습니다!");
+              props.setStep(2);
+            } else {
+              alert("회원가입에 실패하였습니다.");
+              Navigate("/login");
+            }
+          })
           .catch(function (err) {
-            alert(err);
+            if (err) {
+              alert("회원가입에 실패하였습니다.");
+              Navigate("/login");
+            }
           });
       } else {
         alert("약관에 동의해 주세요");
@@ -83,7 +95,9 @@ export default function SignTab1(props) {
         alert("Install Metamask!");
       }
     } catch (error) {
-      console.error(error);
+      if (error) {
+        console.error(error);
+      }
     }
   };
 
