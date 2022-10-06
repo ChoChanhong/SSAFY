@@ -32,7 +32,7 @@ export default function CliInfo(props) {
       props.changeUserSeq(res.data.userSeq)
       props.changeName(name)
       props.changeWallet(res.data.userWalletAddress)
-
+      
     })
     .catch(function(err){
       alert('환자를 찾을 수 없습니다')

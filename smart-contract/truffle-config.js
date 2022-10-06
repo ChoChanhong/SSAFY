@@ -14,7 +14,7 @@ module.exports = {
   // },
     // 싸피 네트워크 연결 
     ssafy : {
-      provider: () => new PrivateKeyProvider(privateKey, `http://20.196.209.2:8545`),
+      provider: () => new PrivateKeyProvider(privateKey, `http://52.141.42.92:8545`),
       network_id: "*",
       
     //얘는 패키지제이슨에 넣어야함
