@@ -16,6 +16,7 @@ export default function PerInfo(props) {
   const URL = "https://j7e205.p.ssafy.io/api/hospitals/me";
   const localStorage = window.localStorage;
   const [info, setInfo] = useState("");
+  console.log(props,'props')
 
   //날짜 계산용
   let now = new Date();
@@ -119,7 +120,7 @@ export default function PerInfo(props) {
     await contract.methods
       .transferDoctorToPatient(
         myAccount,
-        "0x4feC718B4fB4931d645f2F3E144560e26c2980a7",
+        props.wallet,
         index
       )
       .send({ from: myAccount });

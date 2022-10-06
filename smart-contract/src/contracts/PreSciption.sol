@@ -56,7 +56,7 @@ contract PreScription is ERC721Connector {
     mapping (address => mapping (address => preScription[])) _patientListFromAccount;
 
     // 정기처방전 리스트
-    mapping (address => preScription[]) _regularPrescription;
+    //mapping (address => preScription[]) _regularPrescription;
 
      
     // // 의사 계정 -> 담당한 환자 계정 리스트
@@ -75,9 +75,9 @@ contract PreScription is ERC721Connector {
         }
 
          // 해당 주소에서 전송한 모든 토큰
-        function getAllTokensOwned(address _address) public view returns(uint[] memory){
-            return _allTokensOwned[_address];
-        }
+        // function getAllTokensOwned(address _address) public view returns(uint[] memory){
+        //     return _allTokensOwned[_address];
+        // }
         // _from에서 _to 로 전송된  처방전 리스트
         function getPatientListFromAccount(address _from, address _to) public view returns(preScription[] memory) {
             return _patientListFromAccount[_from][_to];
@@ -86,9 +86,9 @@ contract PreScription is ERC721Connector {
             return _offerCountOfTokenId[_tokenId];
         }
         // 정기처방전 리스트
-        function getRegularPreScription(address _address) public view returns(preScription[] memory) {
-            return _regularPrescription[_address];
-        }
+        // function getRegularPreScription(address _address) public view returns(preScription[] memory) {
+        //     return _regularPrescription[_address];
+        // }
        
 
 
@@ -195,9 +195,9 @@ contract PreScription is ERC721Connector {
             preScription memory prs = preScriptions[_tokenId];
 
         //     // 처방 횟수가 1보다 크면 정기처방처방전 리스트에 추가.
-              if(prs.prescriptionCount > 1){
-            _regularPrescription[_to].push(prs);
-        }
+        //       if(prs.prescriptionCount > 1){
+        //     _regularPrescription[_to].push(prs);
+        // }
         //     // _patientListFromAccount[_from][_to].push(_tokenId);
             _patientListFromAccount[_from][_to].push(preScriptions[_tokenId]);
 
