@@ -1,0 +1,49 @@
+#logline {
+    background-color: #f5f5f5;
+    width: 600px;
+    height: 230px;
+  }
+  
+  #logname {
+    border-top: solid 5px #5FD068;
+    background-color: #e0e0e0;
+    height: 50px;
+    font-weight: bold;
+  }
+  
+  #logBox {
+    display: flex;
+    margin-top: 20px;
+  }
+  
+  #logLabel {
+    font-weight: bold;
+    margin-top: 13px;
+    margin-left: 30px;
+    margin-right: 10px;
+    margin-bottom: 15px;
+  }
+  
+  #logInput {
+    margin-left: 15px;
+    width: 180px;
+  }
+  
+  #logLog {
+    margin-top: 10px;
+  }
+  
+  #logButton {
+    color: white;
+    border-radius: 10px;
+    border-color: transparent;
+    background-color: #5FD068;
+    width: 200px;
+    height: 40px;
+    font-weight: bold;
+  }
+  
+  #phlogText {
+    margin-top: 10px;
+    margin-left: 30px;
+  }

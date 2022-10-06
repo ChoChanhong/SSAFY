@@ -21,9 +21,7 @@ export default function PerInfo(props) {
   let year = now.getFullYear();
   let month = now.getMonth() + 1;
   let date = now.getDate();
-  let day = year*10000 + month*100  + date;
-
-
+  let day = year * 10000 + month * 100 + date;
 
   useEffect(() => {
     const token = localStorage.getItem("login-token");
@@ -39,11 +37,6 @@ export default function PerInfo(props) {
         navigate("/doc/");
       });
   }, []);
-
-
-  
-
-  
 
   const [docname, setDocname] = useState(""); //의사이름
   const [dname, setDname] = useState(""); //질병분류기호
@@ -83,33 +76,30 @@ export default function PerInfo(props) {
   }
   // const mint = web3.asdasd.contarc
 
- async function submit() {
-
+  async function submit() {
     console.log(props.wallet);
     console.log(props.userSeq);
     const prescription = {
-      userName : String(props.name),
-      hosName : String(info.userName),
+      userName: String(props.name),
+      hosName: String(info.userName),
       pharName: "",
-      dCode : String(dCode.current.value),
-      dName : Perlog.map((x) => String(x.dName)),
-      dosage : Perlog.map(((x) => parseInt(x.dosage))),
-      doseNum : Perlog.map((x) => parseInt(x.doseNum)),
-      dosePeriod : Perlog.map((x) => parseInt(x.dosePeriod)),
-      dispensingCount : Perlog.map((x) => 0),
-      prescriptionCount : parseInt(prescriptionCount.current.value),
+      dCode: String(dCode.current.value),
+      dName: Perlog.map((x) => String(x.dName)),
+      dosage: Perlog.map((x) => parseInt(x.dosage)),
+      doseNum: Perlog.map((x) => parseInt(x.doseNum)),
+      dosePeriod: Perlog.map((x) => parseInt(x.dosePeriod)),
+      dispensingCount: Perlog.map((x) => 0),
+      prescriptionCount: parseInt(prescriptionCount.current.value),
       // howtoTake : Perlog.map((x) => String(x.howtoTake)),
-      howtoTake : Perlog.map((x) => String(x.howtoTake)),
-      pubDate : day,
-      prepDate : 0,
+      howtoTake: Perlog.map((x) => String(x.howtoTake)),
+      pubDate: day,
+      prepDate: 0,
+    };
 
-    }
-    
-   
-    console.log('--------------------------------')
+    console.log("--------------------------------");
     console.log(prescription);
     // console.log(ss);
-   
+
     // e.preventDefault();
     const web3 = new Web3(window.ethereum);
     const contract = new web3.eth.Contract(abi, nftCA);
@@ -118,32 +108,35 @@ export default function PerInfo(props) {
     // let d = prescription;
     console.log(contract);
     console.log(myAccount);
-    await contract.methods
-      .setDoctorAuth(myAccount)
-      .send({ from: myAccount });
+    await contract.methods.setDoctorAuth(myAccount).send({ from: myAccount });
     console.log("222222222222222222222222222222222");
-     await contract.methods
-      .mint(prescription)
-      .send({ from: myAccount });
+    await contract.methods.mint(prescription).send({ from: myAccount });
     console.log(" 처방전 발급 됐음");
     let us = parseFloat(props.userSeq);
     const wa = String(props.wallet);
-    let index = await contract.methods.totalSupply().call() - 1;
+    let index = (await contract.methods.totalSupply().call()) - 1;
     // 전송 환자 주소 넣어줘야함
-     await contract.methods.transferDoctorToPatient(myAccount, "0x4feC718B4fB4931d645f2F3E144560e26c2980a7", index)
-     .send({ from : myAccount})
-    console.log("처방전 전송 완료")
-    
-    axios
-    .post("https://j7e205.p.ssafy.io/api/prescriptions/regist",{ patientUserSeq : us, tokenId : index })
-    .then(function(res){
-      console.log(res.data)
+    await contract.methods
+      .transferDoctorToPatient(
+        myAccount,
+        "0x4feC718B4fB4931d645f2F3E144560e26c2980a7",
+        index
+      )
+      .send({ from: myAccount });
+    console.log("처방전 전송 완료");
 
-    })
-    .catch(function(err){
-      alert('전송불가')
-    })
- }
+    axios
+      .post("https://j7e205.p.ssafy.io/api/prescriptions/regist", {
+        patientUserSeq: us,
+        tokenId: index,
+      })
+      .then(function (res) {
+        console.log(res.data);
+      })
+      .catch(function (err) {
+        alert("전송불가");
+      });
+  }
 
   return (
     <div id="Per">
@@ -166,7 +159,11 @@ export default function PerInfo(props) {
           </div>
           <div>
             <label id="PerLabel">질병분류기호</label>
-            <input id="PerInput" ref={dCode} style={{ width: 170, marginLeft: 10 }} />
+            <input
+              id="PerInput"
+              ref={dCode}
+              style={{ width: 170, marginLeft: 10 }}
+            />
           </div>
           <div>
             <div>
@@ -234,22 +231,19 @@ export default function PerInfo(props) {
         </div>
         <div id="Perline">
           <div>
-            <label id="PerLabel">처방내역</label>
+            <p style={{ textAlign: "center" }}>
+              처방 정보를 확인 후 처방하기를 통해 <br /> 처방전을 생성하세요.
+            </p>
             <div>
               {Perlog}
-              <div>--------</div>
               {yaks}
-              <div>--------</div>
             </div>
           </div>
           <div style={{ textAlign: "center", marginTop: 20 }}>
             <button id="Genbutton" onClick={submit}>
               처방하기
             </button>
-            <div>
-              {/* <button onClick={Mint}> 민팅테스트</button> */}
-            </div>
-          
+            <div>{/* <button onClick={Mint}> 민팅테스트</button> */}</div>
           </div>
         </div>
       </div>

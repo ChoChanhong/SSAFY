@@ -31,3 +31,12 @@
 #genLog {
   margin-top: 10px;
 }
+
+#findButton {
+  color: white;
+  border-color: transparent;
+  border-radius: 10px;
+  background-color: #5FD068;
+  margin-top: 20px;
+  width: 150px;
+}

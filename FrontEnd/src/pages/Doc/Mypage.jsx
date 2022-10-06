@@ -15,20 +15,20 @@ export function Mypage() {
   const localStorage = window.localStorage;
   const [info, setInfo] = useState("");
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem("login-token");
-  //   setAuthorizationToken(token);
-  //   axios
-  //     .get(URL)
-  //     .then(function (res) {
-  //       console.log(res.data);
-  //       setInfo(res.data);
-  //     })
-  //     .catch(function (err) {
-  //       alert("올바른 접근 방식이 아닙니다.");
-  //       navigate("/doc/");
-  //     });
-  // }, []);
+  useEffect(() => {
+    const token = localStorage.getItem("login-token");
+    setAuthorizationToken(token);
+    axios
+      .get(URL)
+      .then(function (res) {
+        console.log(res.data);
+        setInfo(res.data);
+      })
+      .catch(function (err) {
+        alert("올바른 접근 방식이 아닙니다.");
+        navigate("/doc/");
+      });
+  }, []);
 
   function logout() {
     localStorage.setItem("login-token", "");
@@ -62,7 +62,7 @@ export function Mypage() {
           <div id="docmyBox">
             <div style={{ display: "flex" }}>
               <label id="docmyInfo">● 병원명 : </label>
-              <p id="docmyAns">싸피내과{info ? info.userName : ""}</p>
+              <p id="docmyAns">{info ? info.userName : ""}</p>
             </div>
             <div style={{ display: "flex" }}>
               <label id="docmyInfo">● 요양기관번호 : </label>
