@@ -1,25 +1,23 @@
 import Web3 from "web3";
 import axios from "axios";
-import setAuthorizationToken from '../../../utils/AuthorizationToken'
+import setAuthorizationToken from "../../../utils/AuthorizationToken";
 import { React, useEffect, useState } from "react";
 import "./Cliinfo.css";
 import { abi, nftCA } from "../../../web3Config";
 
-
 export default function CliInfo(props) {
   const [Snum, setSnum] = useState(""); //환자이름
-  const [name, setName] = useState(''); //환자주소
-  const [email, setEmail] = useState(''); //환자이메일
-  const [wallet, setWallet] = useState(''); //환자지갑
+  const [name, setName] = useState(""); //환자주소
+  const [email, setEmail] = useState(""); //환자이메일
+  const [wallet, setWallet] = useState(""); //환자지갑
 
-  const [pubDate, setPubDate] = useState(''); // 발급일자
-  const [dCode, setDCode] = useState(''); // 질병분류코드
-  const [getPh, setGetPh] = useState(''); // 수령여부
+  const [pubDate, setPubDate] = useState(""); // 발급일자
+  const [dCode, setDCode] = useState(""); // 질병분류코드
+  const [getPh, setGetPh] = useState(""); // 수령여부
 
-  
   const URL = "https://j7e205.p.ssafy.io/api/search";
-  const token = localStorage.getItem("login-token")
-  
+  const token = localStorage.getItem("login-token");
+
   function numberCheck(e) {
     const a = e.target.value.replace(/^(\d{6})(\d{7})$/, `$1-$2`);
     setSnum(a);
@@ -28,35 +26,34 @@ export default function CliInfo(props) {
     }
   }
 
-  async function search(){
-    console.log(name,Snum)
-    setAuthorizationToken(token)
+  async function search() {
+    console.log(name, Snum);
+    setAuthorizationToken(token);
     axios
-    .post(URL,{ patientName : name, patientRRN : Snum })
-    .then(function(res){
-      console.log(res.data)
-      setEmail(res.data.userEmail)
-      setWallet(res.data.userWalletAddress)
-      props.changeUserSeq(res.data.userSeq)
-      props.changeName(name)
-      props.changeWallet(res.data.userWalletAddress)
-
-    })
-    .catch(function(err){
-      alert('환자를 찾을 수 없습니다')
-    }
-  )
+      .post(URL, { patientName: name, patientRRN: Snum })
+      .then(function (res) {
+        console.log(res.data);
+        setEmail(res.data.userEmail);
+        setWallet(res.data.userWalletAddress);
+        props.changeUserSeq(res.data.userSeq);
+        props.changeName(name);
+        props.changeWallet(res.data.userWalletAddress);
+      })
+      .catch(function (err) {
+        alert("환자를 찾을 수 없습니다");
+      });
   }
 
-  async function searchList(){
+  async function searchList() {
     const web3 = new Web3(window.ethereum);
     const contract = new web3.eth.Contract(abi, nftCA);
     const account = await web3.eth.requestAccounts();
     const myAccount = account[0];
 
-    const list = await contract.methods.getPatientListFromAccount(myAccount, wallet).call();
+    const list = await contract.methods
+      .getPatientListFromAccount(myAccount, wallet)
+      .call();
     console.log(list);
-    
   }
 
   return (
@@ -67,11 +64,23 @@ export default function CliInfo(props) {
         </div>
         <div id="genBox">
           <label id="genLabel">환자명</label>
-          <input id="genInput" value = {name} onChange={(e)=>{setName(e.target.value)}}/>
+          <input
+            id="genInput"
+            placeholder="환자명을 입력해주세요."
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+          />
         </div>
         <div id="genBox">
           <label id="genLabel">주민번호</label>
-          <input style={{ width: 200 }} value={Snum} onChange={numberCheck} />
+          <input
+            style={{ width: 200 }}
+            placeholder="000000-0000000"
+            value={Snum}
+            onChange={numberCheck}
+          />
         </div>
         <div id="genBox">
           <label id="genLabel">이메일</label>
@@ -86,12 +95,16 @@ export default function CliInfo(props) {
             readOnly
           />
         </div>
-        <div>
-          <button onClick={ () =>{
-            search()
-            searchList()
-          }}>
-            조회</button>
+        <div style={{ textAlign: "center" }}>
+          <button
+            id="findButton"
+            onClick={() => {
+              search();
+              searchList();
+            }}
+          >
+            조회
+          </button>
         </div>
       </div>
       <div>

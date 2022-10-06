@@ -230,15 +230,13 @@ export default function PerInfo(props) {
           <p style={{ marginTop: 10, marginLeft: 10 }}>처방 내역</p>
         </div>
         <div id="Perline">
-          <div style={{marginTop: 20}}>
+          <div>
             <p style={{ textAlign: "center" }}>
               처방 정보를 확인 후 처방하기를 통해 <br /> 처방전을 생성하세요.
             </p>
             <div>
               {Perlog}
-              <div>--------</div>
               {yaks}
-              <div>--------</div>
             </div>
           </div>
           <div style={{ textAlign: "center", marginTop: 20 }}>
