@@ -59,6 +59,20 @@ public class PharmController {
 	public ResponseEntity<?> register(
 			@RequestBody @ApiParam(value="회원가입 정보", required = true) CreatePharmPostReq createPharmPostReq) {
 
+		if (createPharmPostReq.getPharmEmail() == null ||
+				createPharmPostReq.getPharmPassword() == null ||
+				createPharmPostReq.getPharmName() == null ||
+				createPharmPostReq.getPharmPharmacist() == null ||
+				createPharmPostReq.getPharmEmail() == null ||
+				createPharmPostReq.getPharmCode() == null ||
+				createPharmPostReq.getPharmLicense() == null ||
+				createPharmPostReq.getPharmAddr() == null ||
+				createPharmPostReq.getPharmTel() == null ||
+				createPharmPostReq.getPharmCRN() == null ||
+				createPharmPostReq.getPharmWalletAddr() == null) {
+			return new ResponseEntity<>("가입에 필요한 모든 데이터를 입력해주세요.", HttpStatus.valueOf(400));
+		}
+
 		String pharmId = createPharmPostReq.getPharmId();
 		String pharmCRN = createPharmPostReq.getPharmCRN();
 
