@@ -13,7 +13,6 @@ export default function CliInfo(props) {
 
   const [pubDate, setPubDate] = useState(""); // 발급일자
   const [dCode, setDCode] = useState(""); // 질병분류코드
-  const [getPh, setGetPh] = useState(""); // 수령여부
 
   const URL = "https://j7e205.p.ssafy.io/api/search";
   const token = localStorage.getItem("login-token");
@@ -55,6 +54,14 @@ export default function CliInfo(props) {
       .call();
     console.log(list);
   }
+
+  // const list = pops.list.map((yak) => (
+  //   <div>
+  //     <p></p>
+  //     <p></p>
+  //     <p></p>
+  //   </div>
+  // )
 
   return (
     <div>
@@ -113,11 +120,11 @@ export default function CliInfo(props) {
           className="mt-3"
           style={{ display: "flex", justifyContent: "space-around" }}
         >
+          <p id="genLog">성명</p>
           <p id="genLog">발급일자</p>
-          <p id="genLog">질병분류</p>
-          <p id="genLog">수령여부</p>
+          <p id="genLog">질병분류코드</p>
         </div>
-        <div id="line"> 이전 처방내역 반복문으로</div>
+        <div id="line">{list}</div>
       </div>
     </div>
   );
