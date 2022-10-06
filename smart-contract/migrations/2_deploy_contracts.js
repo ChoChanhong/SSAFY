@@ -1,5 +1,11 @@
-const PreScription = artifacts.require("PreScription");
+const Confirmation = artifacts.require("Confirmation");
+// const PreScription = artifacts.require("PreScription");
 
 module.exports = function(deployer) {
-    deployer.deploy(PreScription);
+    deployer.deploy(Confirmation);
+    // deployer.deploy(PreScription);
 };
+
+
+
+
