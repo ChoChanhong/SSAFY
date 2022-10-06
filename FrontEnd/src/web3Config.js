@@ -1117,7 +1117,7 @@ const cfmAbi = [
     "outputs": [
       {
         "internalType": "uint256",
-        "name": "No",
+        "name": "id",
         "type": "uint256"
       },
       {
@@ -1339,7 +1339,7 @@ const cfmAbi = [
         "components": [
           {
             "internalType": "uint256",
-            "name": "No",
+            "name": "id",
             "type": "uint256"
           },
           {
@@ -1356,11 +1356,6 @@ const cfmAbi = [
             "internalType": "string",
             "name": "pharName",
             "type": "string"
-          },
-          {
-            "internalType": "string[]",
-            "name": "dName",
-            "type": "string[]"
           },
           {
             "internalType": "uint256[]",
@@ -1445,7 +1440,7 @@ const cfmAbi = [
         "components": [
           {
             "internalType": "uint256",
-            "name": "No",
+            "name": "id",
             "type": "uint256"
           },
           {
@@ -1462,11 +1457,6 @@ const cfmAbi = [
             "internalType": "string",
             "name": "pharName",
             "type": "string"
-          },
-          {
-            "internalType": "string[]",
-            "name": "dName",
-            "type": "string[]"
           },
           {
             "internalType": "uint256[]",
@@ -1532,7 +1522,7 @@ const cfmAbi = [
         "components": [
           {
             "internalType": "uint256",
-            "name": "No",
+            "name": "id",
             "type": "uint256"
           },
           {
@@ -1549,11 +1539,6 @@ const cfmAbi = [
             "internalType": "string",
             "name": "pharName",
             "type": "string"
-          },
-          {
-            "internalType": "string[]",
-            "name": "dName",
-            "type": "string[]"
           },
           {
             "internalType": "uint256[]",
@@ -1624,7 +1609,7 @@ const cfmAbi = [
 
     export const nftCA = '0x5F15B156550d4Ad84aeEa9C831197254E102033D';
 
-    export const cfmCA = '0x796548990D615EF094C5c32Ed2c101FbD34F743B';
+    export const cfmCA = '0x4c5ec8f69d704A5270047c58Bd56aa81180fc900';
     // export const web3 = new Web3(window.ethereum);
     export const abi = nftAbi;
     export const cfmabi = cfmAbi;

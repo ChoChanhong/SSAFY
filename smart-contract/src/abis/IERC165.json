@@ -35,15 +35,15 @@
     "absolutePath": "project:/src/contracts/interfaces/IERC165.sol",
     "exportedSymbols": {
       "IERC165": [
-        1887
+        1873
       ]
     },
-    "id": 1888,
+    "id": 1874,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1878,
+        "id": 1864,
         "literals": [
           "solidity",
           "^",
@@ -60,9 +60,9 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "fullyImplemented": false,
-        "id": 1887,
+        "id": 1873,
         "linearizedBaseContracts": [
-          1887
+          1873
         ],
         "name": "IERC165",
         "nameLocation": "70:7:10",
@@ -70,13 +70,13 @@
         "nodes": [
           {
             "documentation": {
-              "id": 1879,
+              "id": 1865,
               "nodeType": "StructuredDocumentation",
               "src": "85:378:10",
               "text": "@notice Query if a contract implements an interface\n @param interfaceID The interface identifier, as specified in ERC-165\n @dev Interface identification is specified in ERC-165. This function\n  uses less than 30,000 gas.\n @return `true` if the contract implements `interfaceID` and\n  `interfaceID` is not 0xffffffff, `false` otherwise"
             },
             "functionSelector": "01ffc9a7",
-            "id": 1886,
+            "id": 1872,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -84,17 +84,17 @@
             "nameLocation": "478:17:10",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1882,
+              "id": 1868,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1881,
+                  "id": 1867,
                   "mutability": "mutable",
                   "name": "interfaceID",
                   "nameLocation": "503:11:10",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1886,
+                  "scope": 1872,
                   "src": "496:18:10",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -103,7 +103,7 @@
                     "typeString": "bytes4"
                   },
                   "typeName": {
-                    "id": 1880,
+                    "id": 1866,
                     "name": "bytes4",
                     "nodeType": "ElementaryTypeName",
                     "src": "496:6:10",
@@ -118,17 +118,17 @@
               "src": "495:20:10"
             },
             "returnParameters": {
-              "id": 1885,
+              "id": 1871,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1884,
+                  "id": 1870,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1886,
+                  "scope": 1872,
                   "src": "539:4:10",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -137,7 +137,7 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 1883,
+                    "id": 1869,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
                     "src": "539:4:10",
@@ -151,14 +151,14 @@
               ],
               "src": "538:6:10"
             },
-            "scope": 1887,
+            "scope": 1873,
             "src": "469:76:10",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 1888,
+        "scope": 1874,
         "src": "60:488:10",
         "usedErrors": []
       }
@@ -171,7 +171,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.9",
-  "updatedAt": "2022-10-06T01:04:49.932Z",
+  "updatedAt": "2022-10-06T06:01:19.285Z",
   "devdoc": {
     "kind": "dev",
     "methods": {
