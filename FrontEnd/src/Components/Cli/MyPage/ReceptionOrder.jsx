@@ -82,7 +82,7 @@ export default function ReceptionOrder() {
         <div>{yak[1]}</div>
         <div>{yak.pubDate}</div>
         <div>{yak.prescriptionCount === "1" ? "단기" : "정기"}</div>
-        <button>상세내역</button>
+        <button style={{ marginBottom: "10px" }}>상세내역</button>
         <div>{idx === selected ? "----------------" : ""}</div>
       </div>
     ));
