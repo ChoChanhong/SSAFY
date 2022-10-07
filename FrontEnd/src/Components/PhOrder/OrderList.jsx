@@ -3,24 +3,29 @@ import React, { useState, useEffect } from "react";
 import "./OrderList.css";
 import { abi, nftCA } from "../../web3Config";
 
-
 export default function OrderList(props) {
-
-  const [list,setList] = useState('') 
-  useEffect(()=>{
-    if(props.list){
-    const tmp = props.list.map((yak,idx)=>
-    <div onClick={()=>{props.changeState(idx)}}>
-      <span>{yak[1]}</span>
-      <span>{yak.userName}</span>
-      <span>{yak.pubDate}</span>
-    </div>)
-    setList(tmp)
+  const [list, setList] = useState("");
+  useEffect(() => {
+    if (props.list) {
+      const tmp = props.list.map((yak, idx) => (
+        <div
+          onClick={() => {
+            props.changeState(idx);
+          }}
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            marginTop: "10px",
+          }}
+        >
+          <p>{yak[1]}</p>
+          <p>{yak.userName}</p>
+          <p>{yak.pubDate}</p>
+        </div>
+      ));
+      setList(tmp);
     }
-
-  },[props])
-
-
+  }, [props]);
 
   return (
     <div>
