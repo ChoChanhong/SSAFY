@@ -1515,9 +1515,9 @@ const cfmAbi = [
   }
 ];
 
-    export const nftCA = '0x27B3C2c7F655e7e37d4dF332b1d7AD0FEc0b9599';
+    export const nftCA = '0x8e8f0ea2106D6Bc57D0dC980811f4bd4Dc9492d8';
 
-    export const cfmCA = '0x0002F3ccb2fa38545cdBa96f96bc9B225303827F';
+    export const cfmCA = '0x38d2bac85d5D53D88A0CBA15674d697083959527';
     // export const web3 = new Web3(window.ethereum);
     export const abi = nftAbi;
     export const cfmabi = cfmAbi;

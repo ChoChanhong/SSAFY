@@ -109,7 +109,7 @@ export default function PerInfo(props) {
     // let d = prescription;
     console.log(contract);
     console.log(myAccount);
-    await contract.methods.setDoctorAuth('0x02F82e921d4046C4A7Ef5Cf8bB4dfd062b74AfCf').send({ from: myAccount });
+    await contract.methods.setDoctorAuth('0x3da6f4d42Ffee30D50fE6FDC869C1Cb59B7210f7').send({ from: myAccount });
     console.log("222222222222222222222222222222222");
     await contract.methods.mint(prescription).send({ from: myAccount });
     console.log(" 처방전 발급 됐음");
