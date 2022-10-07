@@ -67,7 +67,7 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\ninterface IERC721Enumerable {\r\n   \r\n    function totalSupply() external view returns (uint256);\r\n\r\n    function tokenByIndex(uint256 _index) external view returns (uint256);\r\n\r\n    function tokenOfOwnerByIndex(address _owner, uint256 _index) external view returns (uint256);\r\n}\r\n",
-  "sourcePath": "C:\\Users\\SSAFY\\Documents\\GitHub\\S07P22E205\\smart-contract\\src\\contracts\\interfaces\\IERC721Enumerable.sol",
+  "sourcePath": "C:\\Users\\SSAFY\\Desktop\\gc\\S07P22E205\\smart-contract\\src\\contracts\\interfaces\\IERC721Enumerable.sol",
   "ast": {
     "absolutePath": "project:/src/contracts/interfaces/IERC721Enumerable.sol",
     "exportedSymbols": {
@@ -367,8 +367,8 @@
     "version": "0.8.17+commit.8df45f5f.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.4.10",
-  "updatedAt": "2022-10-06T19:09:21.436Z",
+  "schemaVersion": "3.4.9",
+  "updatedAt": "2022-10-07T02:43:53.601Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

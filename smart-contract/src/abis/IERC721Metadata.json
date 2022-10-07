@@ -37,7 +37,7 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\ninterface IERC721Metadata {\r\n\r\n    function name() external view returns (string memory _name);\r\n\r\n    function symbol() external view returns (string memory _symbol);\r\n\r\n    // function tokenURI(uint256 _tokenId) external view returns (string memory);\r\n}",
-  "sourcePath": "C:\\Users\\SSAFY\\Documents\\GitHub\\S07P22E205\\smart-contract\\src\\contracts\\interfaces\\IERC721Metadata.sol",
+  "sourcePath": "C:\\Users\\SSAFY\\Desktop\\gc\\S07P22E205\\smart-contract\\src\\contracts\\interfaces\\IERC721Metadata.sol",
   "ast": {
     "absolutePath": "project:/src/contracts/interfaces/IERC721Metadata.sol",
     "exportedSymbols": {
@@ -198,8 +198,8 @@
     "version": "0.8.17+commit.8df45f5f.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.4.10",
-  "updatedAt": "2022-10-06T19:09:21.438Z",
+  "schemaVersion": "3.4.9",
+  "updatedAt": "2022-10-07T02:43:53.603Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

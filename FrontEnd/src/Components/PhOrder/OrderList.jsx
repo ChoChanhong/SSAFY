@@ -36,7 +36,7 @@ export default function OrderList(props) {
         >
           <p id="orderLog">병원</p>
           <p id="orderLog">성명</p>
-          <p id="orderLog">생년월일</p>
+          {/* <p id="orderLog">생년월일</p> */}
           <p id="orderLog">처방 발급일</p>
         </div>
         <div>{list}</div>
