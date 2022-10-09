@@ -139,59 +139,7 @@
 |:-------:|
 | 80.0.30 |
 
----
 
-a.     OS: Windows 10
-
-b.     IDE
-
-    i.    IntelliJ 2022.2.1
-
-    ii.    VisualStudio Code 1.70.1
-
-    iii.    UI/UX: Figma
-
-c.     DataBase
-
-    i.    MySQL 8.0.30
-
-d.     Server
-
-    i.    AWS EC2 Ubuntu 20.04 LTS
-
-e.     Dev-Ops
-
-    i.    Docker 20.10.17
-
-    ii.    Jenkins 2.60.3
-
-f.      상세 사용
-
-      i. **FrontEnd**
-
-            1. HTML5,CSS3, JavaScript(ES6)
-
-            2. React 18
-
-            3. Node.js 16.16.0
-
-            4. Web3.js v1.7.4
-
-      ii. **BackEnd**
-
-            1. Springboot 2.7.2
-
-            2. OpenJDK 8
-
-            3. Gradle 6.7
-
-       **iii.**    **BlockChain**
-
-            1. Truffle v5.5.29
-
-            2. Ganache v7.4.0
-
-            3. Solidity v0.5.16
 
 ## ✔ 주요기능
 
