@@ -139,8 +139,6 @@
 |:-------:|
 | 80.0.30 |
 
-
-
 ## ✔ 주요기능
 
 --- 
@@ -165,7 +163,9 @@
 
 ---
 
-![serviceArchitecture.png](README.assets/50e02fe3c3cc21e4b7fd19d3b5f6539e559b89d0.png)
+![seviceArchitecture.jpg](README.assets/f2775b64d7323c504b71f81388c4b689c9ad08aa.jpg)
+
+
 
 ## ✔ 서비스 흐름도
 
