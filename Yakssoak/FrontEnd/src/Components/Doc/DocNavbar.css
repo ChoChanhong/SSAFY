@@ -1,0 +1,33 @@
+#docnav{
+    background-color: #5FD068 !important;
+    text-align: center;
+    border: solid 1px balck;
+    height: 100px !important;
+}
+
+#doclogo{
+    width : 100px;
+    height: 100px;
+    margin-top: start;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#doclogoImg {
+    height: 100px;
+}
+
+#docmenu {
+    width: 700px;
+    color: white;
+    margin-left: 55%;
+    margin-top: 30px;
+    margin-right: 10px;
+}
+
+#doctext {
+    margin-right: 20px;
+    color: white;
+    font-size: 25px;
+}

@@ -1,0 +1,27 @@
+#introTabbar{
+  display : flex;
+  flex-direction: row;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.introTabSelected{
+  color : #5681EF !important;
+  background-color: white !important;
+  font-weight: bold; 
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.introTab{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.introbutton{
+  background-color: #5681EF;
+  color:white;
+  text-align: center;
+}

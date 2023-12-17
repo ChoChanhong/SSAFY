@@ -1,0 +1,58 @@
+#phmy {
+    display: flex;
+    margin-top: 50px;
+    margin-left: 250px;
+}
+
+#phmyTitle {
+    display: flex;
+    margin-top: 40px;
+    margin-left: 250px;
+}
+
+#phAccInfo{
+    background-color: #F5F5F5;
+    width: 1500px;
+    height: 600px;
+}
+
+#phmyHead{
+    text-align: center;
+    margin-top: 30px;
+    font-weight: bold;
+    font-size: 30px;
+    border-bottom: solid 2px darkgray;
+}
+
+#phmyBox{
+    margin-top: 40px;
+    margin-left: 30px;
+    font-size: 20px;
+}
+
+#phmyInfo{
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 20px;
+    margin-bottom: 30px;
+    color: #616161;
+    margin-bottom: 50px;
+}
+
+#phmyAns{
+    margin-top: 5px;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+#phLogout{
+    margin-top: 40px;
+    margin-left: 1000px;
+    width: 150px;
+    height: 50px;
+    border-radius: 50px;
+    color: red;
+    border: solid red;
+    background-color: transparent;
+    font-weight: bold;
+}

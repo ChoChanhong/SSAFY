@@ -1,0 +1,106 @@
+#loginbox {
+    border: solid 2px #EEEE;
+    width: 1100px;
+    height: 500px;
+    margin-top: 150px;
+    margin-bottom: 100px;
+    display: grid;
+    margin-left: auto;
+    margin-right: auto;
+    grid-template-columns: 1fr 1fr
+}
+
+.login{
+    width : 80%;
+    margin-top : 10px;
+    margin-bottom: 10px;
+    margin-left : auto; 
+    margin-right : auto; 
+    padding-top : 10px;
+    padding-bottom: 10px;
+    padding-left : 10px; 
+    padding-right : 10px; 
+    display: flex;
+    flex-direction: column;
+    
+}
+.info{
+    width : 100%;
+    margin-top : 10px;
+    margin-left : auto; 
+    margin-right : auto; 
+    margin-bottom: 10px;
+    border-left : solid 1px #EEEEEE;
+    display: flex;
+    flex-direction: column;
+}
+
+.logInput{
+    width : 100%;
+    height : px;
+    font-size : 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#docloginbutton{
+    border-color: transparent;
+    border-radius: 10px;
+    background-color : #5FD068;
+    color: white;
+    width: 100%;
+    height: 40px;
+    margin-top: 40px;
+    margin-bottom: 10px;
+    margin-left : auto;
+    margin-right : auto;
+    font-weight: bold;
+    font-size: large;
+}
+
+.docloginTitle{
+    color : #5FD068 !important;
+    margin-top: 10px;
+}
+
+.link{
+    margin-top: 15px;
+    margin-bottom: 10px;
+    margin-left : auto;
+    margin-right : auto;
+    font-size: 15px;
+    color:darkgray;
+    font-weight: bold;
+}
+
+.logoImg{
+    /* border: solid 1px #EEEEEE; */
+    width : 400px;
+    height: 350px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.buttonbox{
+    margin-top: 5px;
+    display: flex;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.linkbutton{
+    border: solid #5FD068 !important;
+    border-width: 2px;
+    background-color: transparent;
+    color: #5FD068 !important;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 15px;
+    padding: 5px 50px;
+}
+
+h1 {
+    font-weight: bold;
+}

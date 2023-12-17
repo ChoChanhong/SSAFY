@@ -1,0 +1,12 @@
+#logLine{
+  width: 700px;
+  height: 750px;
+  border: solid 1px black;
+}
+
+#phlogName {
+  border-top: solid 5px #00ADEF;
+  background-color: #e0e0e0;
+  height: 50px;
+  font-weight: bold;
+}

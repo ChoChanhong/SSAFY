@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/static/css/main.52e4af99.css",
+    "main.js": "/static/js/main.55db8c51.js",
+    "static/js/787.41cd1ab1.chunk.js": "/static/js/787.41cd1ab1.chunk.js",
+    "static/media/004.jpg": "/static/media/004.1a298558ed332e27148b.jpg",
+    "static/media/005.jpg": "/static/media/005.129117ba4c3b925042ec.jpg",
+    "static/media/generate.JPG": "/static/media/generate.862f31ca94668eaf219e.JPG",
+    "static/media/jojae.JPG": "/static/media/jojae.f394c20c38d22ea8a1e4.JPG",
+    "static/media/find.JPG": "/static/media/find.bda80a2ca517e42630c0.JPG",
+    "static/media/jojaelog.JPG": "/static/media/jojaelog.28bb3772bdb6c72a69a2.JPG",
+    "static/media/order.JPG": "/static/media/order.813c6eb8687ca3349e6a.JPG",
+    "static/media/001.png": "/static/media/001.80c1c0c5a80a6f5b8fb9.png",
+    "static/media/002.png": "/static/media/002.f810ed21010ecb2f437c.png",
+    "static/media/wallet.JPG": "/static/media/wallet.e5389017346f6505cedc.JPG",
+    "static/media/My.JPG": "/static/media/My.6e6d640772d3a4062f7d.JPG",
+    "static/media/003.png": "/static/media/003.4506c55484b7ba18f097.png",
+    "index.html": "/index.html",
+    "main.52e4af99.css.map": "/static/css/main.52e4af99.css.map",
+    "main.55db8c51.js.map": "/static/js/main.55db8c51.js.map",
+    "787.41cd1ab1.chunk.js.map": "/static/js/787.41cd1ab1.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.52e4af99.css",
+    "static/js/main.55db8c51.js"
+  ]
+}

@@ -1,0 +1,33 @@
+#orderline {
+  background-color: #f5f5f5;
+  width: 350px;
+  height: 750px;
+}
+
+#ordername {
+  border-top: solid 5px #00ADEF;
+  background-color: #e0e0e0;
+  height: 50px;
+  font-weight: bold;
+}
+
+#orderBox {
+  display: flex;
+  margin-top: 20px;
+}
+
+#orderLabel {
+  font-weight: bold;
+  margin-top: 13px;
+  margin-left: 30px;
+  margin-right: 10px;
+}
+
+#orderInput {
+  margin-left: 25px;
+  width: 200px;
+}
+
+#orderLog {
+  margin-top: 10px;
+}

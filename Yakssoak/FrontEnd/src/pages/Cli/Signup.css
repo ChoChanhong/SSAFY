@@ -1,0 +1,23 @@
+#clisignuptabbar{
+  display : flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.clisignuptabSelected{
+  color : #5681EF !important;
+  background-color: white !important;
+  font-weight: bold; 
+  display: flex;
+  flex-direction: column;
+}
+
+.clisignuptab{
+  display: flex;
+  flex-direction: column;
+}
+
+.clibutton{
+  background-color: #5681EF;
+  color:white;
+}

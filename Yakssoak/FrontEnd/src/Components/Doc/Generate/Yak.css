@@ -1,0 +1,22 @@
+#yakdiv {
+    margin-top: 20px;
+    border-bottom: solid 1px black;
+}
+
+#yakLabel {
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 13px;
+    margin-left: 30px;
+    margin-right: 10px;
+}
+
+#yakButton {
+    color:white;
+    background-color: red;
+    border-radius: 20px;
+    border-color: transparent;
+    width: 80px;
+    height: 30px;
+    margin: 15px 20px 10px 250px;
+}

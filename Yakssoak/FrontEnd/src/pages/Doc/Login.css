@@ -1,0 +1,9 @@
+#login{
+    display: flex;
+    flex-direction: column;
+}
+
+#LoginForm{
+    margin-top: auto;
+    margin-bottom: auto;
+}
